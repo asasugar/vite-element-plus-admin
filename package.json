@@ -14,8 +14,8 @@
     }
   },
   "lint-staged": {
-    "src/**": [
-      "yarn lint",
+    "src/**/*.{js,ts,vue}": [
+      "eslint --fix",
       "git add"
     ]
   },
