@@ -1,0 +1,221 @@
+// font-size
+each(range(8, 70, 1), {
+  .f@{value} {
+    font-size: (@value * 1px);
+  }
+});
+
+// font-weight
+each(range(200, 700, 100), {
+  .fw@{value} {
+    font-weight: (@value);
+  }
+});
+
+// margin、padding
+each(range(0, 100, 5), {
+  .p@{value} {
+    padding: (@value * 1px);
+  }
+  .pt@{value} {
+    padding-top: (@value * 1px);
+  }
+  .pr@{value} {
+    padding-right: (@value * 1px);
+  }
+  .pb@{value} {
+    padding-bottom: (@value * 1px);
+  }
+  .pl@{value} {
+    padding-left: (@value * 1px);
+  }
+  .m@{value} {
+    margin: (@value * 1px);
+  }
+  .mt@{value} {
+    margin-top: (@value * 1px);
+  }
+  .mr@{value} {
+    margin-right: (@value * 1px);
+  }
+  .mb@{value} {
+    margin-bottom: (@value * 1px);
+  }
+  .ml@{value} {
+    margin-left: (@value * 1px);
+  }
+});
+
+.fontbold {
+  font-weight: bold;
+}
+
+.color-blue {
+  color: @color-primary;
+}
+
+.bg-blue {
+  background: @color-primary;
+}
+
+.bg-weixin-green {
+  background: @weixin-green;
+}
+
+.bg-alipay-blue {
+  background: @alipay-blue;
+}
+
+.color-black {
+  color: @text-color;
+}
+
+.color-gray3 {
+  color: @text-color-grey3;
+}
+.color-gray6 {
+  color: @text-color-grey6;
+}
+
+.color-gray9 {
+  color: @text-color-grey9;
+}
+
+.color-white {
+  color: @text-color-inverse;
+}
+
+.border {
+  border: 1px solid @border-color;
+}
+
+.border-top {
+  border-top: 1px solid @border-color;
+}
+
+.border-bottom {
+  border-bottom: 1px solid @border-color;
+}
+
+.border-left {
+  border-left: 1px solid @border-color;
+}
+
+.border-right {
+  border-right: 1px solid @border-color;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-underline {
+  text-decoration: underline;
+}
+
+.text-through {
+  text-decoration: line-through;
+}
+
+.text-oblique {
+  font-style: oblique;
+}
+
+.text-wrap {
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.text-overflow {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-twoOverflow {
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.flex {
+  display: flex;
+
+  &.rowreverse {
+    flex-direction: row-reverse;
+  }
+
+  &.columnreverse {
+    flex-direction: column-reverse;
+  }
+}
+
+.flex.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.flex.verticalcenter {
+  align-items: center;
+}
+
+.flex.hoscenter {
+  justify-content: center;
+}
+
+.flex.column {
+  flex-direction: column;
+}
+
+.flex.between {
+  justify-content: space-between;
+}
+
+.flex.around {
+  justify-content: space-around;
+}
+
+.flex.wrap {
+  flex-wrap: wrap;
+}
+
+.flex__item {
+  flex: 1;
+}
+
+.box-shadow {
+  box-shadow: 3px 3px 22px @box-shadow-color;
+}
+
+.btn-white {
+  background: @bg-color;
+  border: 1px solid @border-color;
+  color: @text-color-grey6;
+}
+
+.btn-blue {
+  border: 1px solid @color-primary;
+  color: @color-primary;
+  background: @bg-color;
+}
+
+.btn-fill-blue {
+  background-color: @color-primary;
+  color: @text-color-inverse;
+}
