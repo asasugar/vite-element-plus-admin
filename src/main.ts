@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import { setupGlobDirectives } from './directives'
-import './style/default.css'
+import '@/style/common.less';
 
 const app = createApp(App);
 setupGlobDirectives(app) // 注册自定义指令
