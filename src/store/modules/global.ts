@@ -11,11 +11,11 @@ const global = {
     }
   },
   actions: {
-    asyncIncrement({ commit }) {
-      commit('INCREMENT');
+    asyncIncrement(content: { commit: (arg0: string) => void }) {
+      content.commit('INCREMENT');
     },
-    asyncDecrement({ commit }) {
-      commit('DECREMENT');
+    asyncDecrement(content: { commit: (arg0: string) => void }) {
+      content.commit('DECREMENT');
     }
   }
 };

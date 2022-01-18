@@ -38,7 +38,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import { useStore } from 'vuex'
+import { useStore } from 'vuex';
 import type { ElForm } from 'element-plus';
 const ruleFormRef = ref<InstanceType<typeof ElForm>>();
 const ruleForm = reactive({
@@ -50,7 +50,7 @@ const rules: any = reactive({
   password: [{ required: 'true', message: '密码不能为空', trigger: 'blur' }]
 });
 const store = useStore();
-console.log(1111, store.state)
+console.log(1111, store.state);
 const submitForm = async () => {
   ruleFormRef?.value?.validate(valid => {
     if (valid) {
