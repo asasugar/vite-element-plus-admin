@@ -12,17 +12,17 @@
         <div class="container-header__title">Vue3.0 后台管理系统</div>
       </div>
       <el-form
+        ref="ruleFormRef"
         class="container-form"
         label-position="top"
         :model="ruleForm"
         :rules="rules"
-        ref="ruleFormRef"
       >
         <el-form-item label="账号" prop="username">
-          <el-input type="text" v-model.trim="ruleForm.username" autocomplete="off"></el-input>
+          <el-input v-model.trim="ruleForm.username" type="text" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model.trim="ruleForm.password" autocomplete="off"></el-input>
+          <el-input v-model.trim="ruleForm.password" type="password" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item>
           <div style="color: #333">
@@ -36,30 +36,29 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import type { ElForm } from 'element-plus'
-const ruleFormRef = ref<InstanceType<typeof ElForm>>()
+import { reactive, ref } from 'vue';
+import type { ElForm } from 'element-plus';
+const ruleFormRef = ref<InstanceType<typeof ElForm>>();
 const ruleForm = reactive({
   username: '',
   password: ''
-})
+});
 const rules: any = reactive({
   username: [{ required: 'true', message: '账户不能为空', trigger: 'blur' }],
-  password: [{ required: 'true', message: '密码不能为空', trigger: 'blur' }],
-})
+  password: [{ required: 'true', message: '密码不能为空', trigger: 'blur' }]
+});
 
 const submitForm = async () => {
-  ruleFormRef?.value?.validate((valid) => {
+  ruleFormRef?.value?.validate(valid => {
     if (valid) {
-      console.log(valid)
+      console.log(valid);
     } else {
-      console.log('error submit!!')
+      console.log('error submit!!');
       return false;
     }
-  })
-}
+  });
+};
 </script>
 
 <style lang="less" scoped>
