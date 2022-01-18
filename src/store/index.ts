@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-18 19:44:48
+ * @LastEditTime: 2022-01-18 20:10:49
  */
 import { createStore } from 'vuex';
 import global from './modules/global';

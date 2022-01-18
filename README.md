@@ -7,8 +7,22 @@
 - 推荐 `vscode` + `volar` , 禁用 `vuter`
 
 
-# 运行
+# Run Project
+## 安装依赖
+```bish
+yarn
+```
+
+## 添加husky hooks
 
 ```bish
-yarn => yarn dev
+Add a hook:
+npx husky add .husky/pre-commit "lint-staged"
+git add .husky/pre-commit
+```
+
+## 运行
+
+```bish
+yarn dev
 ```
