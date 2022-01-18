@@ -7,7 +7,7 @@
  */
 import { createStore } from 'vuex';
 import global from './modules/global';
-var a = 11111;
+const a = 11111;
 const handleStore = (store: {
   replaceState: (arg0: object) => void;
   subscribe: (arg0: (mutation: any, state: any) => void) => void;
