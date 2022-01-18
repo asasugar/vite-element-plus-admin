@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-18 19:19:19
+ * @LastEditTime: 2022-01-18 20:25:00
  */
 
 // 使用方法
@@ -36,7 +36,7 @@ interface Response {
 }
 // 返回结果处理
 // 自定义约定接口返回{error_code: xxx, result: xxx, reason:'err message'},根据聚合api模拟，具体可根据业务调整
-const responseHandle: { [x: number | string]: Function } = {
+const responseHandle: { [x: number | string]: (arg0: any) => void } = {
   0: (response: Response) => {
     return response.data.result;
   },

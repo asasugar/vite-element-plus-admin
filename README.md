@@ -17,7 +17,7 @@ yarn
 
 ```bish
 Add a hook:
-npx husky add .husky/pre-commit "lint-staged"
+npx husky add .husky/pre-commit "yarn lint-staged"
 git add .husky/pre-commit
 ```
 
