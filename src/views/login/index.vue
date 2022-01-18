@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:26:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-18 11:32:26
+ * @LastEditTime: 2022-01-18 17:29:02
 -->
 <template>
   <div class="login">
@@ -38,6 +38,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
+import { useStore } from 'vuex'
 import type { ElForm } from 'element-plus';
 const ruleFormRef = ref<InstanceType<typeof ElForm>>();
 const ruleForm = reactive({
@@ -48,7 +49,8 @@ const rules: any = reactive({
   username: [{ required: 'true', message: '账户不能为空', trigger: 'blur' }],
   password: [{ required: 'true', message: '密码不能为空', trigger: 'blur' }]
 });
-
+const store = useStore();
+console.log(1111, store.state)
 const submitForm = async () => {
   ruleFormRef?.value?.validate(valid => {
     if (valid) {
