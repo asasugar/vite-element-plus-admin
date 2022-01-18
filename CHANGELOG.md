@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.3...v0.0.4) (2022-01-18)
+
+
+### Styling
+
+* 💄 less structural adjustment ([d94c1f1](https://github.com/asasugar/vite-element-plus-admin/commit/d94c1f1ae906bf23d29d6324d93d5e50299abd67))
+
+
+### Others
+
+* 🤖 add eslint husky lint-staged prettier ([0e0df7b](https://github.com/asasugar/vite-element-plus-admin/commit/0e0df7b4cf048c14120d572180026660fddd2179))
+
 ### [0.0.3](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.2...v0.0.3) (2022-01-18)
 
 
