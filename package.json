@@ -14,8 +14,8 @@
     }
   },
   "lint-staged": {
-    "*": [
-      "yarn lint",
+    "src/**/*.{js,ts,vue}": [
+      "eslint --fix",
       "git add"
     ]
   },
@@ -37,7 +37,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.3.0",
-    "husky": "^7.0.4",
+    "husky": "^4.2.5",
     "less": "^4.1.2",
     "lint-staged": "^12.1.7",
     "prettier": "^2.5.1",
