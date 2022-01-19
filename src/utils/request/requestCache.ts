@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-18 19:12:51
+ * @LastEditTime: 2022-01-19 14:51:17
  */
 import { generateReqKey } from '../commonFuns';
 
@@ -91,10 +91,10 @@ export function requestInterceptor(
 
 export function responseInterceptor(response: {
   config: { [x: string]: string | object; cache?: any };
-  data: { error_code: number };
+  data: { code: number };
 }) {
-  // 返回的error_code === 0 时候才会缓存下来,可根据实际业务配置
-  if (response && response.config.cache && response.data.error_code === 0) {
+  // 返回的code === 0 时候才会缓存下来,可根据实际业务配置
+  if (response && response.config.cache && response.data.code === 0) {
     const data = {
       expire: getNowTime(),
       data: response

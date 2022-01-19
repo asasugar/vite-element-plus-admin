@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-18 20:23:22
+ * @LastEditTime: 2022-01-19 15:45:24
  */
 import { createStore } from 'vuex';
 import global from './modules/global';
@@ -11,7 +11,6 @@ const handleStore = (store: {
   replaceState: (arg0: object) => void;
   subscribe: (arg0: (mutation: any, state: any) => void) => void;
 }) => {
-  console.log(store);
   // 当 store 初始化后调用
   if (window.localStorage.StoreDefaults)
     store.replaceState(JSON.parse(window.localStorage.StoreDefaults));

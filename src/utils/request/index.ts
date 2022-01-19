@@ -3,20 +3,8 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-18 20:25:00
+ * @LastEditTime: 2022-01-19 16:27:08
  */
-
-// 使用方法
-// import { getCurrentInstance } from 'vue';
-// const { proxy } = getCurrentInstance();=
-// 伪代码
-// methods = {
-//   middleViewData: proxy.$http.get("/api/simpleWeather/query", { data: { city: 481, key: "55333d85ca99360f79d67b452b51e277" } }), // 正常请求
-//   cancelReq: proxy.$http.get('/api/simpleWeather/query', { data: { city: 481, key: "55333d85ca99360f79d67b452b51e277" }, cancelRequest: true }), // 取消请求
-//   reqAgainSend: proxy.$http.get('/api/simpleWeather/query', { data: { city: 481, key: "55333d85ca99360f79d67b452b51e277" }, retry: 3, retryDelay: 1000 }), // 请求失败重发，除了原请求外还会重发3次
-//   cacheEquListParams: proxy.$http.get('/api/simpleWeather/query', { data: { city: 481, key: "55333d85ca99360f79d67b452b51e277" }, cache: true }) // 缓存请求，参数值一样则取消请求
-//   cacheEquList: proxy.$http.get('/api/simpleWeather/query', { data: { city: 481, key: "55333d85ca99360f79d67b452b51e277" }, cache: true, setExpireTime: 30000 }), // 缓存请求，setExpireTime 为缓存有效时间ms
-// },
 import Axios from 'axios';
 // import { clearToken, getToken } from '../cookiesStorage.js';
 import { addPendingRequest, removePendingRequest } from './cancelRepeatRquest'; // 取消重复请求
@@ -25,51 +13,46 @@ import {
   requestInterceptor as cacheReqInterceptor,
   responseInterceptor as cacheResInterceptor
 } from './requestCache';
-
+import { ElMessage } from 'element-plus';
 interface Response {
   data: {
-    error_code: number;
+    code: number;
     result: any;
-    reason?: string;
+    message?: string;
   };
   config: { [x: string]: string | object; cancelRequest?: any };
 }
 // 返回结果处理
-// 自定义约定接口返回{error_code: xxx, result: xxx, reason:'err message'},根据聚合api模拟，具体可根据业务调整
+// 自定义约定接口返回{code: xxx, result: xxx, message:'err message'},根据api模拟，具体可根据业务调整
 const responseHandle: { [x: number | string]: (arg0: any) => void } = {
-  0: (response: Response) => {
-    return response.data.result;
+  200: (response: Response) => {
+    return Promise.resolve(response.data);
   },
   201: (response: Response) => {
-    alert(response.data.reason);
-    console.log(`参数异常:${response.data.reason}`);
+    ElMessage({ message: `参数异常:${response.data.message}`, type: 'warning' });
+    return Promise.resolve(response.data);
   },
-  10012: (response: Response) => {
-    alert(response.data.reason);
-    console.log(response.data.reason);
-  },
-  10022: (response: Response) => {
-    alert(response.data.reason);
-    console.log(response.data.reason);
-    // clearToken();
+  404: (response: Response) => {
+    ElMessage({ message: '接口地址不存在', type: 'error' });
+    return Promise.reject(response);
   },
   default: (response: Response) => {
-    alert('操作失败');
+    ElMessage({ message: response.data.message || '操作失败', type: 'error' });
     return Promise.reject(response);
   }
 };
 
 const axios: any = Axios.create({
-  baseURL: import.meta.env.BASE_URL || '',
+  baseURL: (import.meta as any).env.VITE_BASE_URL || '',
   timeout: 50000
 });
+axios.defaults.headers['content-type'] = 'application/json';
 
 // 添加请求拦截器
 axios.interceptors.request.use(
   function (config: any) {
     // 请求头用于接口token 认证
     // getToken() && (config.headers['Authorization'] = getToken());
-
     if (
       config?.method?.toLocaleLowerCase() === 'post' ||
       config?.method?.toLocaleLowerCase() === 'put'
@@ -102,7 +85,7 @@ axios.interceptors.response.use(
     // 响应正常时候就从pendingRequest对象中移除请求
     removePendingRequest(response);
     cacheResInterceptor(response);
-    return (responseHandle[response.data.error_code] || responseHandle['default'])(response);
+    return (responseHandle[response.data.code] || responseHandle['default'])(response);
   },
   (error: { config: any; message?: any }) => {
     // 从pending 列表中移除请求

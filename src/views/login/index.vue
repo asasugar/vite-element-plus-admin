@@ -3,13 +3,14 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:26:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-18 17:29:02
+ * @LastEditTime: 2022-01-19 16:40:03
 -->
 <template>
   <div class="login">
     <div class="login-container">
       <div class="container-header">
         <div class="container-header__title">Vue3.0 后台管理系统</div>
+        <div class="f16 color-gray6">账号：admin;密码：123456</div>
       </div>
       <el-form
         ref="ruleFormRef"
@@ -29,7 +30,9 @@
             登录表示您已同意
             <a>《服务条款》</a>
           </div>
-          <el-button style="width: 100%" type="primary" @click="submitForm">立即登录</el-button>
+          <el-button style="width: 100%" type="primary" :loading="isLoading" @click="submitForm"
+            >立即登录</el-button
+          >
         </el-form-item>
       </el-form>
     </div>
@@ -38,24 +41,38 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import { useStore } from 'vuex';
 import type { ElForm } from 'element-plus';
+import { ElMessage } from 'element-plus';
+import { userService } from '@/services';
+
 const ruleFormRef = ref<InstanceType<typeof ElForm>>();
 const ruleForm = reactive({
-  username: '',
-  password: ''
+  username: 'admin',
+  password: '123456'
 });
+
 const rules: any = reactive({
   username: [{ required: 'true', message: '账户不能为空', trigger: 'blur' }],
   password: [{ required: 'true', message: '密码不能为空', trigger: 'blur' }]
 });
-const store = useStore();
-console.log(1111, store.state);
-const submitForm = async () => {
-  ruleFormRef?.value?.validate(valid => {
+const isLoading = ref<boolean>(false);
+
+// 登录
+const submitForm = () => {
+  isLoading.value = true;
+  ruleFormRef?.value?.validate(async valid => {
     if (valid) {
-      console.log(valid);
+      const { username, password } = ruleForm;
+      const content = await userService.loginAction({
+        username,
+        password
+      });
+      isLoading.value = false;
+      if (content) {
+        ElMessage({ message: '登录成功，请尽情享受～', type: 'success' });
+      }
     } else {
+      isLoading.value = false;
       console.log('error submit!!');
       return false;
     }
@@ -70,22 +87,23 @@ const submitForm = async () => {
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: #fff;
+  background-color: @bg-color;
   background-image: linear-gradient(25deg, #077f7c, #3aa693, #5ecfaa, #7ffac2);
   .login-container {
     width: 420px;
     padding-bottom: 80px;
-    background-color: #fff;
+    background-color: @bg-color;
     border-radius: 4px;
     box-shadow: 0px 21px 41px 0px rgba(0, 0, 0, 0.2);
     .container-header {
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       padding: 40px 0 20px 0;
       &__title {
         font-size: 28px;
-        color: #1baeae;
+        color: @theme-color;
         font-weight: bold;
       }
     }
