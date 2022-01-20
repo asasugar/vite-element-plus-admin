@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.5...v0.0.6) (2022-01-20)
+
+
+### Features
+
+* 🎸 add vuex-composition-helpers ([0ad4c57](https://github.com/asasugar/vite-element-plus-admin/commit/0ad4c5771e3ed89c6800f1553dbea9261c7d8921))
+
 ### [0.0.5](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.4...v0.0.5) (2022-01-19)
 
 
