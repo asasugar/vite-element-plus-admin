@@ -3,10 +3,12 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-19 15:45:24
+ * @LastEditTime: 2022-01-20 15:47:53
  */
 import { createStore } from 'vuex';
 import global from './modules/global';
+import user from './modules/user';
+
 const handleStore = (store: {
   replaceState: (arg0: object) => void;
   subscribe: (arg0: (mutation: any, state: any) => void) => void;
@@ -34,7 +36,8 @@ const store = createStore({
     }
   },
   modules: {
-    global
+    global,
+    user
   },
   plugins: [handleStore]
 });

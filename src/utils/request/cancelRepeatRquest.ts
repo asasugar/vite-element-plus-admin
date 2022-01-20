@@ -3,10 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-19 14:46:09
+ * @LastEditTime: 2022-01-20 17:22:10
  */
 import Axios from 'axios';
-import { generateReqKey } from '../commonFuns';
+import { generateReqKey } from '@/utils';
 // TODO: 用于把当前请求信息添加到pendingRequest对象 中；
 const pendingRequest = new Map(); // Map对象保存键值对。任何值(对象或者原始值) 都可以作为一个键或一个值。
 export function addPendingRequest(config: {

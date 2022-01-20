@@ -3,9 +3,9 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-18 18:57:02
+ * @LastEditTime: 2022-01-20 17:22:21
  */
-import { isJsonStr } from '../commonFuns';
+import { isJsonStr } from '@/utils';
 /**
  * @param {失败信息} err
  * @param {实例化的单例} axios

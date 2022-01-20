@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:26:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-19 16:40:03
+ * @LastEditTime: 2022-01-20 20:30:03
 -->
 <template>
   <div class="login">
@@ -39,11 +39,13 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { reactive, ref } from 'vue';
+import { ElNotification } from 'element-plus';
 import type { ElForm } from 'element-plus';
-import { ElMessage } from 'element-plus';
+import { useRouter } from 'vue-router';
 import { userService } from '@/services';
+import { useActions } from '@/hooks/vuex-composition-helpers';
 
 const ruleFormRef = ref<InstanceType<typeof ElForm>>();
 const ruleForm = reactive({
@@ -56,7 +58,9 @@ const rules: any = reactive({
   password: [{ required: 'true', message: '密码不能为空', trigger: 'blur' }]
 });
 const isLoading = ref<boolean>(false);
+const router = useRouter();
 
+const { asyncSetUserinfo } = useActions('user', ['asyncSetUserinfo']);
 // 登录
 const submitForm = () => {
   isLoading.value = true;
@@ -69,7 +73,16 @@ const submitForm = () => {
       });
       isLoading.value = false;
       if (content) {
-        ElMessage({ message: '登录成功，请尽情享受～', type: 'success' });
+        ElNotification({
+          title: '登录成功',
+          message: `欢迎回来：${content.username}`,
+          type: 'success'
+        });
+        asyncSetUserinfo(content);
+
+        router.push({
+          name: 'home'
+        });
       }
     } else {
       isLoading.value = false;

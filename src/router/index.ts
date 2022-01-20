@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:12:02
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-19 15:09:33
+ * @LastEditTime: 2022-01-20 11:25:50
  */
 
 import { DefineComponent } from 'vue';
@@ -16,6 +16,11 @@ interface Routers {
 }
 
 const routes: Routers[] = [
+  {
+    name: 'home',
+    path: '/',
+    component: () => import(/* webpackChunkName: "home" */ '../views/home/index.vue')
+  },
   {
     name: 'login',
     path: '/login',

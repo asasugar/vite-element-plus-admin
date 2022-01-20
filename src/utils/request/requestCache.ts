@@ -3,9 +3,9 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-19 14:51:17
+ * @LastEditTime: 2022-01-20 17:22:27
  */
-import { generateReqKey } from '../commonFuns';
+import { generateReqKey } from '@/utils';
 
 const options = {
   storage: true, // 是否开启loclastorage缓存
