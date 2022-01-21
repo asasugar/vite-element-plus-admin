@@ -49,3 +49,58 @@ const asyncSetUserinfo = mapActions('user',['asyncSetUserinfo']).asyncSetUserinf
 
 为了简便写法，通过hooks去包装（偷懒），修改`尤大大` 的[helper](https://github.com/vuejs/vuex/blob/main/src/helpers.js) ,等Vuex官方如果更新该hooks的支持，在升级vuex版本
 
+useActions
+- `namespace` 参数非必填，如果 `modules` 设置 `namespaced: true` 时必填
+- `actions` 可选类型：数组 ｜ 对象 （支持自定义action方法名）
+
+```vue
+<script setup lang="ts">
+// use array parameters
+import { useActions } from '@/hooks/vuex-composition-helpers';
+
+// A模块go方法、B模块back方法 
+
+// 场景一： A、B模块不设置命明空间时
+const { go, back } = useActions(['go','back']); // use array parameters
+
+// 场景二：A模块设置命明空间，B模块不设置命明空间
+const { go, back } = useActions(['A/go', 'back']);
+// or
+const { go } = useActions('A', ['go']);
+const { back } = useActions(['back']);
+
+// 场景三：A、B模块都设置命明空间
+const { go, back } = useActions(['A/go', 'B/back']);
+// or
+const { go } = useActions('A', ['go']);
+const { back } = useActions('B', ['back']);
+</script>
+
+```vue
+<script setup lang="ts">
+// use object parameters
+import { useActions } from '@/hooks/vuex-composition-helpers';
+
+// A模块go方法、B模块back方法 
+
+// 场景一： A、B模块不设置命明空间时
+const { d, e } = useActions({ go: 'd', back: 'e' }); // use object parameters to customize methods
+
+// 场景二：A模块设置命明空间，B模块不设置命明空间
+const { d, e } = useActions({ 'A/go': 'd', back: 'e' });
+// or
+const { d } = useActions({ 'A/go': 'd' }); 
+const { e } = useActions({ back: 'd' });
+
+
+
+// 场景三：A、B模块都设置命明空间
+const { d, e } = useActions({ 'A/go': 'd', 'B/back': 'e' });
+// or
+const { d } = useActions({ 'A/go': 'd' }); 
+const { e } = useActions({ 'B/back': 'e' });
+
+</script>
+
+```
+我个人更倾向于各个模块都设置namespace

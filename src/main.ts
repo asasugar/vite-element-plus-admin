@@ -10,5 +10,6 @@ import 'element-plus/es/components/notification/style/css';
 
 mockXHR(); // mock接口
 const app = createApp(App);
+
 setupGlobDirectives(app); // 注册自定义指令
 app.use(router).use(store).mount('#app');

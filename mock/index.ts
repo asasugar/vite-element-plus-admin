@@ -22,7 +22,7 @@ export function mockXHR() {
     return function (options: options) {
       let result = null;
       if (response instanceof Function) {
-        let { body, type, url } = options;
+        const { body, type, url } = options;
         result = response({
           body: typeof body == 'string' ? JSON.parse(body) : body,
           method: type,

@@ -3,51 +3,48 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 17:01:13
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-20 21:11:43
+ * @LastEditTime: 2022-01-21 19:35:07
  */
 import { Store, useStore } from 'vuex';
 import { isObject } from '@/utils';
 
 const __DEV__ = import.meta.env.NODE_ENV === 'development';
 
-type Actions = Array<string> | { [x: string]: any };
-
+type INamespace = string | undefined | IActions;
+type IActions = Array<string> | { [x: string]: any };
 /**
  * Reduce the code which written in Vue.js for getting the state.
  * @param {String} [namespace] - Module's namespace
  * @param {Object|Array} states # Object's item can be a function which accept state and getters for param, you can do something for state and getters in it.
  * @param {Object}
  */
-export const useState = normalizeNamespace(
-  (namespace: string | undefined, states: Actions): object => {
-    const res: any = {};
-    const store: Store<any> = useStore();
+// export const useState = normalizeNamespace((namespace?: INamespace, states?: IActions): object => {
+//   const res: any = {};
+//   const store: Store<any> = useStore();
 
-    console.log(5, namespace, states);
-    if (__DEV__ && !isValidMap(states)) {
-      console.error('[vuex] mapState: mapper parameter must be either an Array or an Object');
-    }
-    normalizeMap(states).forEach(({ key, val }) => {
-      res[key] = function mappedState() {
-        let state = store.state;
-        let getters = store.getters;
-        if (namespace) {
-          const module = getModuleByNamespace(store, 'mapState', namespace);
-          if (!module) {
-            return;
-          }
-          state = module.context.state;
-          getters = module.context.getters;
-        }
-        return typeof val === 'function' ? val.call(this, state, getters) : state[val];
-      };
-      // res[key].vuex = true;
+//   if (__DEV__ && !isValidMap(states)) {
+//     console.error('[vuex] mapState: mapper parameter must be either an Array or an Object');
+//   }
+//   normalizeMap(states).forEach(({ key, val }) => {
+//     res[key] = function mappedState() {
+//       let state = store.state;
+//       let getters = store.getters;
+//       if (namespace) {
+//         const module = getModuleByNamespace(store, 'mapState', namespace);
+//         if (!module) {
+//           return;
+//         }
+//         state = module.context.state;
+//         getters = module.context.getters;
+//       }
+//       return typeof val === 'function' ? val.call(this, state, getters) : state[val];
+//     };
+//     // res[key].vuex = true;
 
-      // mark vuex getter for devtools
-    });
-    return res;
-  }
-);
+//     // mark vuex getter for devtools
+//   });
+//   return res;
+// });
 
 /**
  * Reduce the code which written in Vue.js for dispatch the action
@@ -55,19 +52,19 @@ export const useState = normalizeNamespace(
  * @param {Object|Array} actions # Object's item can be a function which accept `dispatch` function as the first param, it can accept anthor params. You can dispatch action and do any other things in this function. specially, You need to pass anthor params from the mapped function.
  * @return {Object}
  */
-export const useActions = normalizeNamespace(
-  (namespace: string | undefined, actions: Actions): object => {
-    const res: any = {};
-    if (__DEV__ && !isValidMap(actions)) {
-      console.error('[vuex] useActions: mapper parameter must be an Array');
-    }
-    const store: Store<any> = useStore();
+export const useActions = normalizeNamespace((namespace?: INamespace, actions?: IActions): any => {
+  const res: { [x: string]: () => void } = {};
+  if (__DEV__ && actions && !isValidMap(actions)) {
+    console.error('[vuex] useActions: mapper parameter must be an Array');
+  }
+  const store: Store<any> = useStore();
 
-    normalizeMap(actions).forEach(({ key, val }) => {
+  actions &&
+    normalizeMap(actions).forEach(({ key, val }: { key: string; val: any }) => {
       res[key] = function mappedAction(...args: Array<string>) {
         // get dispatch function from store
         let dispatch: any = store.dispatch;
-        if (namespace) {
+        if (typeof namespace === 'string' && namespace) {
           const module = getModuleByNamespace(store, 'mapActions', namespace);
 
           if (!module) {
@@ -75,15 +72,13 @@ export const useActions = normalizeNamespace(
           }
           dispatch = module.context.dispatch;
         }
-
         return typeof val === 'function'
           ? val.apply(this, [dispatch].concat(args))
           : dispatch.apply(store, [val].concat(args));
       };
     });
-    return res;
-  }
-);
+  return res;
+});
 
 /**
  * Normalize the map
@@ -92,21 +87,25 @@ export const useActions = normalizeNamespace(
  * @param {Array|Object} map
  * @return {Object}
  */
-function normalizeMap(map: Actions) {
+function normalizeMap(map: IActions) {
   if (!isValidMap(map)) {
     return [];
   }
+
   return Array.isArray(map)
-    ? map.map(key => ({ key, val: key }))
-    : Object.keys(map).map(key => ({ key, val: map.key }));
+    ? map.map(key => ({ key: normalizeKey(key), val: key }))
+    : Object.keys(map).map(key => ({ key: map[key], val: key }));
 }
 
+function normalizeKey(key: string): string {
+  return key.includes('/') ? key.split('/')[1] : key;
+}
 /**
  * Validate whether given map is valid or not
  * @param {*} map
  * @return {Boolean}
  */
-function isValidMap(map: Actions) {
+function isValidMap(map: IActions) {
   return Array.isArray(map) || isObject(map);
 }
 
@@ -116,10 +115,10 @@ function isValidMap(map: Actions) {
  * @return {Function}
  */
 function normalizeNamespace(fn: {
-  (namespace: string | undefined, actions: Actions): object;
-  (arg0: any, arg1: any): any;
+  (namespace?: INamespace, actions?: IActions | undefined): any;
+  (arg0: string, arg1: IActions | undefined): any;
 }) {
-  return (namespace: string, map: any) => {
+  return (namespace?: INamespace, map?: IActions) => {
     if (typeof namespace !== 'string') {
       map = namespace;
       namespace = '';

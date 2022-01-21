@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-20 21:00:03
+ * @LastEditTime: 2022-01-21 18:36:02
 -->
 <template>
   <el-container class="layout-container">
@@ -11,9 +11,7 @@
       <el-scrollbar>
         <el-menu :default-openeds="['1', '3']">
           <el-sub-menu index="1">
-            <template #title>
-              <el-icon> <message /> </el-icon>Navigator One
-            </template>
+            <template #title>Navigator One</template>
             <el-menu-item-group>
               <template #title>Group 1</template>
               <el-menu-item index="1-1">Option 1</el-menu-item>
@@ -28,9 +26,7 @@
             </el-sub-menu>
           </el-sub-menu>
           <el-sub-menu index="2">
-            <template #title>
-              <el-icon> <icon-menu /> </el-icon>Navigator Two
-            </template>
+            <template #title>Navigator Two</template>
             <el-menu-item-group>
               <template #title>Group 1</template>
               <el-menu-item index="2-1">Option 1</el-menu-item>
@@ -45,9 +41,7 @@
             </el-sub-menu>
           </el-sub-menu>
           <el-sub-menu index="3">
-            <template #title>
-              <el-icon> <setting /> </el-icon>Navigator Three
-            </template>
+            <template #title>Navigator Three</template>
             <el-menu-item-group>
               <template #title>Group 1</template>
               <el-menu-item index="3-1">Option 1</el-menu-item>
@@ -69,12 +63,10 @@
       <el-header class="pos-r text-right f12 bg-theme color-white">
         <div class="toolbar">
           <el-dropdown>
-            <el-icon color="#fff" class="mr10">
-              <setting />
-            </el-icon>
+            <setting color="#fff" class="mr10" />
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item>注销</el-dropdown-item>
+                <el-dropdown-item @click="handleLogout">注销</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
@@ -84,11 +76,7 @@
 
       <el-main>
         <el-scrollbar>
-          <el-table :data="tableData">
-            <el-table-column prop="date" label="Date" width="140"></el-table-column>
-            <el-table-column prop="name" label="Name" width="120"></el-table-column>
-            <el-table-column prop="address" label="Address"></el-table-column>
-          </el-table>
+          <router-view></router-view>
         </el-scrollbar>
       </el-main>
     </el-container>
@@ -97,8 +85,15 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
-import { Message, Menu as IconMenu, Setting } from '@element-plus/icons-vue';
-import { useStore } from 'vuex';
+// import { ElNotification } from 'element-plus';
+// import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+import { Setting } from '@element-plus/icons-vue';
+import { useActions } from '@/hooks/vuex-composition-helpers';
+import { userService } from '@/services';
+
+// const store = useStore();
+const router = useRouter();
 
 const item = {
   date: '2016-05-02',
@@ -106,10 +101,13 @@ const item = {
   address: 'No. 189, Grove St, Los Angeles'
 };
 const tableData = ref(Array(20).fill(item));
-const store = useStore();
-
 // const r = computed(user)
-console.log(123, store.state.user.userinfo);
+const handleLogout = async () => {
+  const content = await userService.logoutAction();
+  if (content) {
+    router.replace({ name: 'Login' });
+  }
+};
 </script>
 <style lang="less" scoped>
 .layout-container {

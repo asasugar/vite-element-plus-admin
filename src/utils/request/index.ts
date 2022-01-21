@@ -3,10 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-19 16:27:08
+ * @LastEditTime: 2022-01-21 17:40:04
  */
 import Axios from 'axios';
-// import { clearToken, getToken } from '../cookiesStorage.js';
+import { getToken } from '@/utils/token';
 import { addPendingRequest, removePendingRequest } from './cancelRepeatRquest'; // 取消重复请求
 import { againRequest } from './requestAgainSend'; // 请求重发
 import {
@@ -51,14 +51,14 @@ axios.defaults.headers['content-type'] = 'application/json';
 // 添加请求拦截器
 axios.interceptors.request.use(
   function (config: any) {
-    // 请求头用于接口token 认证
-    // getToken() && (config.headers['Authorization'] = getToken());
+    // 请求头用于接口token 认证(简，详细根据后端规则适配)
+    getToken() && (config.headers['Authorization'] = getToken());
     if (
       config?.method?.toLocaleLowerCase() === 'post' ||
       config?.method?.toLocaleLowerCase() === 'put'
     ) {
       // 参数统一处理，请求都使用data传参
-      config.data = config.data.data;
+      config.data = config.data?.data || {};
     } else if (
       config?.method?.toLocaleLowerCase() === 'get' ||
       config?.method?.toLocaleLowerCase() === 'delete'

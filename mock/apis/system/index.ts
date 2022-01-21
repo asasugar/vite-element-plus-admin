@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-21 17:42:05
+ * @LastEditTime: 2022-01-21 19:20:59
  */
 
 type userType = {
@@ -22,9 +22,9 @@ const users: userType = {
 };
 
 export default [
-  // 登录
+  // 看板数据
   {
-    url: 'user/login',
+    url: 'sys/getAnalysis',
     type: 'post',
     response: (config: config) => {
       const index = Object.keys(users).indexOf(config.body.username);

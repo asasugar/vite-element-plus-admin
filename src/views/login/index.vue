@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:26:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-20 20:30:03
+ * @LastEditTime: 2022-01-21 17:50:52
 -->
 <template>
   <div class="login">
@@ -46,6 +46,9 @@ import type { ElForm } from 'element-plus';
 import { useRouter } from 'vue-router';
 import { userService } from '@/services';
 import { useActions } from '@/hooks/vuex-composition-helpers';
+import { setToken } from '@/utils/token';
+
+const router = useRouter();
 
 const ruleFormRef = ref<InstanceType<typeof ElForm>>();
 const ruleForm = reactive({
@@ -58,9 +61,7 @@ const rules: any = reactive({
   password: [{ required: 'true', message: '密码不能为空', trigger: 'blur' }]
 });
 const isLoading = ref<boolean>(false);
-const router = useRouter();
-
-const { asyncSetUserinfo } = useActions('user', ['asyncSetUserinfo']);
+const { asyncSetUserinfo } = useActions(['user/asyncSetUserinfo']);
 // 登录
 const submitForm = () => {
   isLoading.value = true;
@@ -78,10 +79,10 @@ const submitForm = () => {
           message: `欢迎回来：${content.username}`,
           type: 'success'
         });
+        setToken(content.token);
         asyncSetUserinfo(content);
-
-        router.push({
-          name: 'home'
+        router.replace({
+          name: 'Home'
         });
       }
     } else {

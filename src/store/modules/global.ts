@@ -1,4 +1,5 @@
 const global = {
+  // namespaced: true,
   state: {
     count: 0
   },
