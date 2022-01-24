@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:46:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-19 16:41:48
+ * @LastEditTime: 2022-01-24 11:19:04
  */
 import * as Mock from 'mockjs';
 
@@ -11,7 +11,7 @@ import apis from './apis';
 
 // import { param2Obj } from './utils';
 
-interface options {
+interface IOptions {
   body: string;
   type: string;
   url: string;
@@ -19,7 +19,7 @@ interface options {
 
 export function mockXHR() {
   function XHRreq(response: any) {
-    return function (options: options) {
+    return function (options: IOptions) {
       let result = null;
       if (response instanceof Function) {
         const { body, type, url } = options;

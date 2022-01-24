@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-21 17:40:04
+ * @LastEditTime: 2022-01-24 11:29:50
  */
 import Axios from 'axios';
 import { getToken } from '@/utils/token';
@@ -14,7 +14,7 @@ import {
   responseInterceptor as cacheResInterceptor
 } from './requestCache';
 import { ElMessage } from 'element-plus';
-interface Response {
+interface IResponse {
   data: {
     code: number;
     result: any;
@@ -25,18 +25,18 @@ interface Response {
 // 返回结果处理
 // 自定义约定接口返回{code: xxx, result: xxx, message:'err message'},根据api模拟，具体可根据业务调整
 const responseHandle: { [x: number | string]: (arg0: any) => void } = {
-  200: (response: Response) => {
+  200: (response: IResponse) => {
     return Promise.resolve(response.data);
   },
-  201: (response: Response) => {
+  201: (response: IResponse) => {
     ElMessage({ message: `参数异常:${response.data.message}`, type: 'warning' });
     return Promise.resolve(response.data);
   },
-  404: (response: Response) => {
+  404: (response: IResponse) => {
     ElMessage({ message: '接口地址不存在', type: 'error' });
     return Promise.reject(response);
   },
-  default: (response: Response) => {
+  default: (response: IResponse) => {
     ElMessage({ message: response.data.message || '操作失败', type: 'error' });
     return Promise.reject(response);
   }
@@ -58,7 +58,7 @@ axios.interceptors.request.use(
       config?.method?.toLocaleLowerCase() === 'put'
     ) {
       // 参数统一处理，请求都使用data传参
-      config.data = config.data?.data || {};
+      config.data = config.data?.data;
     } else if (
       config?.method?.toLocaleLowerCase() === 'get' ||
       config?.method?.toLocaleLowerCase() === 'delete'
@@ -81,7 +81,7 @@ axios.interceptors.request.use(
 
 // 添加响应拦截器
 axios.interceptors.response.use(
-  (response: Response) => {
+  (response: IResponse) => {
     // 响应正常时候就从pendingRequest对象中移除请求
     removePendingRequest(response);
     cacheResInterceptor(response);

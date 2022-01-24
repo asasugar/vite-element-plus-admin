@@ -3,18 +3,18 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-21 17:42:05
+ * @LastEditTime: 2022-01-24 11:19:50
  */
 
-type userType = {
+type IUserType = {
   [x: string]: { password: number | string; token: string };
 };
-interface config {
+interface IConfig {
   body: any;
   method: string;
   url: string;
 }
-const users: userType = {
+const users: IUserType = {
   admin: {
     password: 123456,
     token: 'admin-token'
@@ -26,7 +26,7 @@ export default [
   {
     url: 'user/login',
     type: 'post',
-    response: (config: config) => {
+    response: (config: IConfig) => {
       const index = Object.keys(users).indexOf(config.body.username);
       if (index !== -1) {
         if (config.body.password == 123456) {

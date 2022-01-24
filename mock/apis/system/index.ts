@@ -1,70 +1,81 @@
 /*
- * @Description: 用户接口【登录、退出】
+ * @Description: 系统接口【看板数据】
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-21 19:20:59
+ * @LastEditTime: 2022-01-24 17:34:56
  */
-
-type userType = {
-  [x: string]: { password: number | string; token: string };
-};
-interface config {
+interface IConfig {
   body: any;
   method: string;
   url: string;
 }
-const users: userType = {
-  admin: {
-    password: 123456,
-    token: 'admin-token'
-  }
-};
 
 export default [
   // 看板数据
   {
     url: 'sys/getAnalysis',
-    type: 'post',
-    response: (config: config) => {
-      const index = Object.keys(users).indexOf(config.body.username);
-      if (index !== -1) {
-        if (config.body.password == 123456) {
-          return {
-            success: true,
-            result: {
-              token: users[config.body.username].token,
-              username: config.body.username
-            },
-            code: 200
-          };
-        } else {
-          return {
-            success: false,
-            code: 201,
-            message: '密码错误'
-          };
-        }
-      } else {
-        return {
-          success: false,
-          code: 201,
-          message: '用户名错误'
-        };
-      }
-    }
-  },
-  // 注销
-  {
-    url: 'user/logout',
-    type: 'post',
+    type: 'get',
     response: () => {
       return {
         success: true,
-        code: 200,
         result: {
-          msg: '退出成功'
-        }
+          visit: {
+            title: '访问数',
+            value: 2000,
+            total: 120000,
+            color: 'green',
+            action: '月',
+            tagType: 'success'
+          },
+          total: {
+            title: '成交额',
+            value: 20000,
+            total: 500000,
+            color: 'blue',
+            action: '月',
+            tagType: 'info'
+          },
+          download: {
+            title: '下载数',
+            value: 8000,
+            total: 120000,
+            color: 'orange',
+            action: '周',
+            tagType: 'danger'
+          }
+        },
+        code: 200
+      };
+    }
+  },
+  // 获取前端路由
+  {
+    url: 'sys/getRoute',
+    type: 'post',
+    response: (config: IConfig) => {
+      return {
+        success: true,
+        result: {
+          name: 'Home',
+          path: '/',
+          component: 'home',
+          meta: {
+            title: '首页'
+          },
+          redirect: '/dashboard/analysis',
+          children: [
+            {
+              name: 'DashboardAnalysis',
+              path: '/dashboard/analysis',
+              component: 'dashboard/analysis',
+              meta: {
+                title: '分析页'
+              }
+            }
+          ]
+        },
+        code: 200
       };
     }
   }

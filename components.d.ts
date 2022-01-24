@@ -5,6 +5,8 @@
 declare module 'vue' {
   export interface GlobalComponents {
     ElAside: typeof import('element-plus/es')['ElAside'];
+    ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb'];
+    ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem'];
     ElButton: typeof import('element-plus/es')['ElButton'];
     ElCard: typeof import('element-plus/es')['ElCard'];
     ElContainer: typeof import('element-plus/es')['ElContainer'];
@@ -21,9 +23,9 @@ declare module 'vue' {
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem'];
     ElMenuItemGroup: typeof import('element-plus/es')['ElMenuItemGroup'];
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar'];
+    ElSkeleton: typeof import('element-plus/es')['ElSkeleton'];
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu'];
-    ElTable: typeof import('element-plus/es')['ElTable'];
-    ElTableColumn: typeof import('element-plus/es')['ElTableColumn'];
+    ElTag: typeof import('element-plus/es')['ElTag'];
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default'];
   }
 }
