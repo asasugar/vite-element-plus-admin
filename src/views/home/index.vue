@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-24 20:06:12
+ * @LastEditTime: 2022-01-25 17:08:45
 -->
 <template>
   <el-container class="layout-container">
@@ -75,7 +75,7 @@
         </div>
       </el-header>
 
-      <el-main>
+      <el-main class="bg-gray">
         <el-scrollbar>
           <router-view></router-view>
         </el-scrollbar>

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-24 14:37:57
+ * @LastEditTime: 2022-01-25 17:02:30
 -->
 <template>
   <div class="flex">
@@ -27,11 +27,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { Download } from '@element-plus/icons-vue';
-
-import { defineComponent, onMounted, useAttrs, useSlots } from 'vue';
-
-const props = defineProps({
+defineProps({
   data: {
     type: Object
   },
