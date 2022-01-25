@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-20 17:30:13
+ * @LastEditTime: 2022-01-25 14:45:42
  */
 import Qs from 'qs';
 
@@ -54,4 +54,25 @@ export function isJsonStr(str: string) {
  */
 export function isObject(obj?: object) {
   return typeof obj === 'object' && obj !== null;
+}
+
+/**
+ * @description 判断是否是复杂类型
+ * @export
+ * @param {*} map
+ * @returns {*}  {boolean}
+ */
+export function isValidMap(map: any) {
+  return Array.isArray(map) || isObject(map);
+}
+
+/**
+ * @description 动态import
+ * @param {string} component
+ * @returns {*}
+ */
+export function dynamicImport(component: string) {
+  const componentStr = component.replace(/^\/+/, ''), // 过滤字符串前面所有 '/' 字符
+    componentPath = componentStr.replace(/\.\w+$/, ''); // 过滤掉后缀名，为了让 import 加入 .vue
+  return () => import('../' + componentPath + '.vue');
 }

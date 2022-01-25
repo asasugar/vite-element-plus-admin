@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-24 17:34:56
+ * @LastEditTime: 2022-01-25 14:23:28
  */
 interface IConfig {
   body: any;
@@ -56,25 +56,27 @@ export default [
     response: (config: IConfig) => {
       return {
         success: true,
-        result: {
-          name: 'Home',
-          path: '/',
-          component: 'home',
-          meta: {
-            title: '首页'
-          },
-          redirect: '/dashboard/analysis',
-          children: [
-            {
-              name: 'DashboardAnalysis',
-              path: '/dashboard/analysis',
-              component: 'dashboard/analysis',
-              meta: {
-                title: '分析页'
+        result: [
+          {
+            name: 'Home',
+            path: '/',
+            component: '/views/home/index.vue',
+            meta: {
+              title: '首页'
+            },
+            redirect: '/dashboard/analysis',
+            children: [
+              {
+                name: 'DashboardAnalysis',
+                path: '/dashboard/analysis',
+                component: '/views/dashboard/analysis/index.vue',
+                meta: {
+                  title: '分析页'
+                }
               }
-            }
-          ]
-        },
+            ]
+          }
+        ],
         code: 200
       };
     }

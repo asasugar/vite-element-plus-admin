@@ -3,14 +3,22 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-24 19:53:32
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-24 19:58:12
+ * @LastEditTime: 2022-01-25 10:03:46
  */
-export function setSession(key: string, value: string) {
-  window.sessionStorage.setItem(key, value);
+import { isValidMap } from './index';
+
+export function setSession(key: string, value: any) {
+  if (isValidMap(value)) {
+    const str = JSON.stringify(value); //把对象转化为字符串
+    window.sessionStorage.setItem(key, str);
+  } else {
+    window.sessionStorage.setItem(key, value);
+  }
 }
 
 export function getSession(key: string) {
-  return window.sessionStorage.getItem(key);
+  const value = window.sessionStorage.getItem(key);
+  return value ? JSON.parse(value) : value;
 }
 export function removeSession(key: string) {
   window.sessionStorage.removeItem(key);

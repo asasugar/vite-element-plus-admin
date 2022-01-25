@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:12:02
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-24 20:05:03
+ * @LastEditTime: 2022-01-25 14:32:50
  */
 
 import {
@@ -24,11 +24,6 @@ const routes: RouteRecordRaw[] = [
     meta: {
       title: '登录'
     }
-  },
-  {
-    name: 'NotFound',
-    path: '/:pathMatch(.*)*',
-    component: () => import(/* webpackChunkName: "NotFound" */ '../views/error/error-404.vue')
   }
 ];
 
