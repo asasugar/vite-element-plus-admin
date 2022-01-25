@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.6...v0.0.7) (2022-01-25)
+
+
+### Bug Fixes
+
+* 🐛 fix useActions ([e437982](https://github.com/asasugar/vite-element-plus-admin/commit/e437982089114c663889ef15c35d7debf45ea434))
+
+
+### Code Refactoring
+
+* 💡 动态路由注册 ([c2612cb](https://github.com/asasugar/vite-element-plus-admin/commit/c2612cbc4fde8e84ff9e220642b186817ca1db08))
+* 💡 路由改造成动态路由 ([033d5e3](https://github.com/asasugar/vite-element-plus-admin/commit/033d5e312ce4abfa3bf51a4ca14d599d229f5e3b))
+
 ### [0.0.6](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.5...v0.0.6) (2022-01-20)
 
 
