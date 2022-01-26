@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-25 14:45:42
+ * @LastEditTime: 2022-01-26 10:41:22
  */
 import Qs from 'qs';
 
@@ -75,4 +75,67 @@ export function dynamicImport(component: string) {
   const componentStr = component.replace(/^\/+/, ''), // 过滤字符串前面所有 '/' 字符
     componentPath = componentStr.replace(/\.\w+$/, ''); // 过滤掉后缀名，为了让 import 加入 .vue
   return () => import('../' + componentPath + '.vue');
+}
+
+/**
+ * @description 对比数组是否相等
+ * @param {(string | any[])} arr1
+ * @param {(string | any[])} arr2
+ * @returns {*}
+ */
+export function equalArray(arr1: string | any[], arr2: string | any[]) {
+  if (arr1.length !== arr2.length) return false;
+  for (let i = 0, l = arr1.length; i < l; i++) {
+    if (arr1[i] instanceof Array && arr2[i] instanceof Array) {
+      if (!equalArray(arr1[i], arr2[i])) return false;
+    } else if (arr1[i] instanceof Object && arr2[i] instanceof Object) {
+      if (!equalObject(arr1[i], arr2[i])) return false;
+    } else if (arr1[i] !== arr2[i]) return false;
+  }
+  return true;
+}
+
+/**
+ * @description 对比对象是否相等
+ * @param {{ [x: string]: any; }} obj1
+ * @param {{ [x: string]: any; }} obj2
+ * @returns {*}
+ */
+export function equalObject(obj1: { [x: string]: any }, obj2: { [x: string]: any }) {
+  if (Object.keys(obj1).length !== Object.keys(obj2).length) return false;
+  for (const prop in obj1) {
+    if (
+      Object.prototype.hasOwnProperty.call(obj1, prop) !==
+      Object.prototype.hasOwnProperty.call(obj2, prop)
+    )
+      return false;
+    else if (typeof obj1[prop] !== typeof obj2[prop]) return false;
+
+    if (obj1[prop] instanceof Array && obj2[prop] instanceof Array) {
+      if (!equalArray(obj1[prop], obj2[prop])) return false;
+    } else if (obj1[prop] instanceof Object && obj2[prop] instanceof Object) {
+      if (!equalObject(obj1[prop], obj2[prop])) return false;
+    } else if (obj1[prop] !== obj2[prop]) return false;
+  }
+  return true;
+}
+
+/**
+ * @description 深度对比两个值是否相等
+ * @param {*} value
+ * @param {*} other
+ * @returns {*}  {boolean}
+ */
+export function isEqual(value: any, other: any) {
+  // 复杂类型
+  if (typeof value === 'object' && typeof other === 'object') {
+    if (value instanceof Array && other instanceof Array) {
+      return equalArray(value, other);
+    } else if (value instanceof Object && value instanceof Object) {
+      return equalObject(value, other);
+    }
+    return false;
+  }
+  // 简单类型
+  return value === other;
 }

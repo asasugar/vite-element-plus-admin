@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-25 17:42:54
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-25 17:44:34
+ * @LastEditTime: 2022-01-26 15:16:02
  */
 import * as echarts from 'echarts/core';
 

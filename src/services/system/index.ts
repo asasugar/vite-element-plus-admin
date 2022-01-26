@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 14:00:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-24 17:11:53
+ * @LastEditTime: 2022-01-26 11:23:30
  */
 import request from '@/utils/request';
 
@@ -24,6 +24,15 @@ class SystemService {
    */
   async getRoute() {
     const { success, result } = await request.post('/sys/getRoute');
+    if (success) return result;
+    return null;
+  }
+  /**
+   * 获取菜单页配置
+   * @returns {Array}
+   */
+  async getMenu() {
+    const { success, result } = await request.get('/sys/getMenu');
     if (success) return result;
     return null;
   }

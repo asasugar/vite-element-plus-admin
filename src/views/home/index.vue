@@ -3,49 +3,27 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-25 17:08:45
+ * @LastEditTime: 2022-01-26 15:32:25
 -->
 <template>
   <el-container class="layout-container">
     <el-aside width="200px">
       <el-scrollbar>
-        <el-menu :default-openeds="['1', '3']">
-          <el-sub-menu index="1">
-            <template #title>Dashboard</template>
-            <el-menu-item :route="{ name: 'DashboardAnalysis' }" @click="handleToAnalysis"
-              >分析</el-menu-item
-            >
-            <el-menu-item>工作台</el-menu-item>
-          </el-sub-menu>
-          <el-sub-menu index="2">
-            <template #title>Navigator Two</template>
-            <el-menu-item-group>
-              <template #title>Group 1</template>
-              <el-menu-item index="2-1">Option 1</el-menu-item>
-              <el-menu-item index="2-2">Option 2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="Group 2">
-              <el-menu-item index="2-3">Option 3</el-menu-item>
-            </el-menu-item-group>
-            <el-sub-menu index="2-4">
-              <template #title>Option 4</template>
-              <el-menu-item index="2-4-1">Option 4-1</el-menu-item>
-            </el-sub-menu>
-          </el-sub-menu>
-          <el-sub-menu index="3">
-            <template #title>Navigator Three</template>
-            <el-menu-item-group>
-              <template #title>Group 1</template>
-              <el-menu-item index="3-1">Option 1</el-menu-item>
-              <el-menu-item index="3-2">Option 2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="Group 2">
-              <el-menu-item index="3-3">Option 3</el-menu-item>
-            </el-menu-item-group>
-            <el-sub-menu index="3-4">
-              <template #title>Option 4</template>
-              <el-menu-item index="3-4-1">Option 4-1</el-menu-item>
-            </el-sub-menu>
+        <el-menu
+          :default-openeds="menuOption.defaultOpeneds"
+          :default-active="menuOption.defaultActive"
+        >
+          <el-sub-menu v-for="item in menuOption.menu" :key="item.sortId" :index="item.sortId">
+            <template #title>{{ item.title }}</template>
+            <template v-if="item.children">
+              <el-menu-item
+                v-for="subItem in item.children"
+                :key="subItem.sortId"
+                :index="subItem.sortId"
+                @click="handleToSubMenu(subItem)"
+                >{{ subItem.title }}</el-menu-item
+              >
+            </template>
           </el-sub-menu>
         </el-menu>
       </el-scrollbar>
@@ -54,13 +32,9 @@
     <el-container>
       <el-header class="flex center between pos-r f12 bg-theme color-white">
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item :to="{ path: '/' }" class="color-white">homepage</el-breadcrumb-item>
-          <!-- <el-breadcrumb-item v-for="bread in breadList" v-bind:key="bread">
-            {{ breadsName[bread] }}
-          </el-breadcrumb-item>-->
-          <el-breadcrumb-item>promotion management</el-breadcrumb-item>
-          <el-breadcrumb-item>promotion list</el-breadcrumb-item>
-          <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
+          <el-breadcrumb-item v-for="item in matched" :key="item.name">
+            <span class="color-white">{{ item.meta.title }}</span>
+          </el-breadcrumb-item>
         </el-breadcrumb>
         <div class="toolbar">
           <el-dropdown>
@@ -85,26 +59,81 @@
 </template>
 
 <script lang="ts" setup>
-// import { ElNotification } from 'element-plus';
 // import { useStore } from 'vuex';
-import { useRouter, useRoute } from 'vue-router';
+import { ref, reactive, watch, onMounted, nextTick } from 'vue';
+import { useRouter, useRoute, RouteLocationMatched, RouteRecordName } from 'vue-router';
 import { Setting } from '@element-plus/icons-vue';
 import { useActions } from '@/hooks/vuex-composition-helpers';
-import { userService } from '@/services';
+import { userService, systemService } from '@/services';
 
 // const store = useStore();
 const router = useRouter();
 const route = useRoute();
 
+const menuOption: {
+  defaultOpeneds: string[];
+  defaultActive: string;
+  menu: any;
+} = reactive({
+  defaultOpeneds: ['1'],
+  defaultActive: '1-1',
+  menu: []
+});
+
+const matched = ref<RouteLocationMatched[]>(route.matched);
+
+watch(
+  () => route.path,
+  (path: string) => {
+    if (path) {
+      matched.value = route.matched;
+    }
+  }
+);
+// 刷新时渲染选中的菜单项
+const _renderDefaultMenuActive = (
+  menu: { name: RouteRecordName | null | undefined; sortId: string; children?: [] }[],
+  sortId?: string
+) => {
+  if (route.name) {
+    menu.some(item => {
+      if (item.name === route.name) {
+        nextTick(() => {
+          menuOption.defaultOpeneds = [`${sortId ? sortId : item.sortId}`];
+          menuOption.defaultActive = item.sortId;
+        });
+        return true;
+      }
+      if (item.children?.length) {
+        _renderDefaultMenuActive(item.children, item.sortId);
+      }
+    });
+  }
+};
+// 获取菜单列表
+const getMenu = async () => {
+  const content = await systemService.getMenu();
+  menuOption.menu = content;
+  if (content) {
+    _renderDefaultMenuActive(content);
+  }
+};
+getMenu();
+
+// 注销
 const handleLogout = async () => {
   const content = await userService.logoutAction();
   if (content) {
     router.replace({ name: 'Login' });
   }
 };
-// const matched = route.matched;
-const handleToAnalysis = () => {
-  router.push({ name: 'DashboardAnalysis' });
+// 去二级菜单页
+const handleToSubMenu = (item: { name: string; path: string }) => {
+  if (item.name) {
+    router.push({ name: item.name });
+  } else if (item.path) {
+    router.push({ path: item.path });
+  }
 };
 </script>
 <style lang="less" scoped>
