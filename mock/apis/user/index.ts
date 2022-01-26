@@ -3,11 +3,17 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-24 11:19:50
+ * @LastEditTime: 2022-01-26 18:23:46
  */
 
+type IUserinfo = {
+  token: string;
+  password?: number | string;
+  username?: string;
+  avatar?: string;
+};
 type IUserType = {
-  [x: string]: { password: number | string; token: string };
+  [x: string]: IUserinfo;
 };
 interface IConfig {
   body: any;
@@ -21,6 +27,11 @@ const users: IUserType = {
   }
 };
 
+const userinfo: IUserinfo = {
+  token: users['admin'].token,
+  username: 'admin',
+  avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'
+};
 export default [
   // 登录
   {
@@ -32,10 +43,7 @@ export default [
         if (config.body.password == 123456) {
           return {
             success: true,
-            result: {
-              token: users[config.body.username].token,
-              username: config.body.username
-            },
+            result: userinfo,
             code: 200
           };
         } else {
@@ -66,6 +74,34 @@ export default [
           msg: '退出成功'
         }
       };
+    }
+  },
+  // 获取用户信息
+  {
+    url: 'user/getBaseUserInfo',
+    type: 'get',
+    response: (config: IConfig) => {
+      if (config.body) {
+        if (config.body.token === userinfo.token) {
+          return {
+            success: true,
+            code: 200,
+            result: userinfo
+          };
+        } else {
+          return {
+            success: false,
+            code: 201,
+            message: '未登录或者登录已超时'
+          };
+        }
+      } else {
+        return {
+          success: false,
+          code: 201,
+          message: '用户token不能为空'
+        };
+      }
     }
   }
 ];

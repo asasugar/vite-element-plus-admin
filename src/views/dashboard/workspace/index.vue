@@ -3,18 +3,20 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:14:27
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-26 10:34:54
+ * @LastEditTime: 2022-01-26 16:35:45
 -->
 <template>
-  <div class="p20">
-    <!-- <GrowCard :loading="loading" :data="data.analysis" />
-    <GrowChart />-->
-  </div>
+  <PageWrapper>
+    <template #headerContent>
+      <WorkSpaceHeader />
+    </template>
+  </PageWrapper>
 </template>
 <script lang="ts" setup>
 import { ref, reactive } from 'vue';
-import GrowCard from './components/GrowCard.vue';
-import GrowChart from './components/GrowChart.vue';
+import PageWrapper from '@/containers/PageWrapper.vue';
+import WorkSpaceHeader from './components/WorkSpaceHeader.vue';
+// import GrowChart from './components/GrowChart.vue';
 
 import { systemService } from '@/services';
 
@@ -24,9 +26,9 @@ const data = reactive({
   analysis: {}
 });
 
-const getAnalysis = async () => {
-  data.analysis = await systemService.getAnalysis();
-  loading.value = false;
-};
-getAnalysis();
+// const getAnalysis = async () => {
+//   data.analysis = await systemService.getAnalysis();
+//   loading.value = false;
+// };
+// getAnalysis();
 </script>

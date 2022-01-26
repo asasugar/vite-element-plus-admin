@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 17:01:13
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-21 19:35:07
+ * @LastEditTime: 2022-01-26 18:26:02
  */
 import { Store, useStore } from 'vuex';
 import { isObject } from '@/utils';
@@ -18,33 +18,34 @@ type IActions = Array<string> | { [x: string]: any };
  * @param {Object|Array} states # Object's item can be a function which accept state and getters for param, you can do something for state and getters in it.
  * @param {Object}
  */
-// export const useState = normalizeNamespace((namespace?: INamespace, states?: IActions): object => {
-//   const res: any = {};
-//   const store: Store<any> = useStore();
+export const useState = normalizeNamespace((namespace?: INamespace, states?: IActions): object => {
+  const res: any = {};
+  const store: Store<any> = useStore();
 
-//   if (__DEV__ && !isValidMap(states)) {
-//     console.error('[vuex] mapState: mapper parameter must be either an Array or an Object');
-//   }
-//   normalizeMap(states).forEach(({ key, val }) => {
-//     res[key] = function mappedState() {
-//       let state = store.state;
-//       let getters = store.getters;
-//       if (namespace) {
-//         const module = getModuleByNamespace(store, 'mapState', namespace);
-//         if (!module) {
-//           return;
-//         }
-//         state = module.context.state;
-//         getters = module.context.getters;
-//       }
-//       return typeof val === 'function' ? val.call(this, state, getters) : state[val];
-//     };
-//     // res[key].vuex = true;
+  if (__DEV__ && states && !isValidMap(states)) {
+    console.error('[vuex] mapState: mapper parameter must be either an Array or an Object');
+  }
+  states &&
+    normalizeMap(states).forEach(({ key, val }: { key: string; val: any }) => {
+      res[key] = function mappedState() {
+        let state = store.state;
+        let getters = store.getters;
+        if (typeof namespace === 'string' && namespace) {
+          const module = getModuleByNamespace(store, 'mapState', namespace);
+          if (!module) {
+            return;
+          }
+          state = module.context.state;
+          getters = module.context.getters;
+        }
+        return typeof val === 'function' ? val.call(this, state, getters) : state[val];
+      };
+      // res[key].vuex = true;
 
-//     // mark vuex getter for devtools
-//   });
-//   return res;
-// });
+      // mark vuex getter for devtools
+    });
+  return res;
+});
 
 /**
  * Reduce the code which written in Vue.js for dispatch the action
@@ -58,7 +59,6 @@ export const useActions = normalizeNamespace((namespace?: INamespace, actions?: 
     console.error('[vuex] useActions: mapper parameter must be an Array');
   }
   const store: Store<any> = useStore();
-
   actions &&
     normalizeMap(actions).forEach(({ key, val }: { key: string; val: any }) => {
       res[key] = function mappedAction(...args: Array<string>) {

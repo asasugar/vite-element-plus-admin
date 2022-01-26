@@ -49,6 +49,9 @@ each(range(0, 100, 5), {
   .wp@{value} {
     width: (@value * 1%)
   }
+  .w@{value} {
+    width: (@value * 1px)
+  }
 });
 
 .fontbold {
@@ -181,36 +184,49 @@ each(range(0, 100, 5), {
   &.columnreverse {
     flex-direction: column-reverse;
   }
+  &.center {
+    justify-content: center;
+    align-items: center;
+  }
+  
+  &.verticalstart {
+    align-items: flex-start;
+  }
+  &.verticalcenter {
+    align-items: center;
+  }
+  
+  &.verticalend {
+    align-items: flex-end;
+  }
+
+  &.hoscenter {
+    justify-content: center;
+  }
+  
+  &.column {
+    flex-direction: column;
+  }
+  
+  &.between {
+    justify-content: space-between;
+  }
+  
+  &.around {
+    justify-content: space-around;
+  }
+  &.start {
+    justify-content: start;
+  }
+  &.end {
+    justify-content: end;
+  }
+  &.wrap {
+    flex-wrap: wrap;
+  }
 }
 
-.flex.center {
-  justify-content: center;
-  align-items: center;
-}
 
-.flex.verticalcenter {
-  align-items: center;
-}
-
-.flex.hoscenter {
-  justify-content: center;
-}
-
-.flex.column {
-  flex-direction: column;
-}
-
-.flex.between {
-  justify-content: space-between;
-}
-
-.flex.around {
-  justify-content: space-around;
-}
-
-.flex.wrap {
-  flex-wrap: wrap;
-}
 
 .flex__item {
   flex: 1;
