@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-26 15:32:25
+ * @LastEditTime: 2022-01-27 11:15:26
 -->
 <template>
   <el-container class="layout-container">
@@ -20,7 +20,7 @@
                 v-for="subItem in item.children"
                 :key="subItem.sortId"
                 :index="subItem.sortId"
-                @click="handleToSubMenu(subItem)"
+                @click="handleToMenu(subItem, item.title, subItem.title)"
                 >{{ subItem.title }}</el-menu-item
               >
             </template>
@@ -32,8 +32,8 @@
     <el-container>
       <el-header class="flex center between pos-r f12 bg-theme color-white">
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item v-for="item in matched" :key="item.name">
-            <span class="color-white">{{ item.meta.title }}</span>
+          <el-breadcrumb-item v-for="item in breadcrumb" :key="item">
+            <span class="color-white">{{ item }}</span>
           </el-breadcrumb-item>
         </el-breadcrumb>
         <div class="toolbar">
@@ -59,9 +59,8 @@
 </template>
 
 <script lang="ts" setup>
-// import { useStore } from 'vuex';
-import { ref, reactive, watch, onMounted, nextTick } from 'vue';
-import { useRouter, useRoute, RouteLocationMatched, RouteRecordName } from 'vue-router';
+import { ref, reactive, nextTick } from 'vue';
+import { useRouter, useRoute, RouteRecordName } from 'vue-router';
 import { Setting } from '@element-plus/icons-vue';
 import { useActions } from '@/hooks/vuex-composition-helpers';
 import { userService, systemService } from '@/services';
@@ -79,21 +78,18 @@ const menuOption: {
   defaultActive: '1-1',
   menu: []
 });
+const breadcrumb = ref<string[]>([]);
 
-const matched = ref<RouteLocationMatched[]>(route.matched);
-
-watch(
-  () => route.path,
-  (path: string) => {
-    if (path) {
-      matched.value = route.matched;
-    }
-  }
-);
 // 刷新时渲染选中的菜单项
 const _renderDefaultMenuActive = (
-  menu: { name: RouteRecordName | null | undefined; sortId: string; children?: [] }[],
-  sortId?: string
+  menu: {
+    name: RouteRecordName | null | undefined;
+    sortId: string;
+    title: string;
+    children?: [];
+  }[],
+  sortId?: string,
+  title?: string
 ) => {
   if (route.name) {
     menu.some(item => {
@@ -101,11 +97,12 @@ const _renderDefaultMenuActive = (
         nextTick(() => {
           menuOption.defaultOpeneds = [`${sortId ? sortId : item.sortId}`];
           menuOption.defaultActive = item.sortId;
+          breadcrumb.value = title ? [title, item.title] : [item.title];
         });
         return true;
       }
       if (item.children?.length) {
-        _renderDefaultMenuActive(item.children, item.sortId);
+        _renderDefaultMenuActive(item.children, item.sortId, item.title);
       }
     });
   }
@@ -128,7 +125,8 @@ const handleLogout = async () => {
   }
 };
 // 去二级菜单页
-const handleToSubMenu = (item: { name: string; path: string }) => {
+const handleToMenu = (item: { name: string; path: string }, title: string, subTitle: string) => {
+  breadcrumb.value = [title, subTitle];
   if (item.name) {
     router.push({ name: item.name });
   } else if (item.path) {
