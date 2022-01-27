@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-27 11:15:26
+ * @LastEditTime: 2022-01-27 13:55:36
 -->
 <template>
   <el-container class="layout-container">
@@ -45,7 +45,7 @@
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-          <span>Tom</span>
+          <span>{{ user.username }}</span>
         </div>
       </el-header>
 
@@ -62,10 +62,9 @@
 import { ref, reactive, nextTick } from 'vue';
 import { useRouter, useRoute, RouteRecordName } from 'vue-router';
 import { Setting } from '@element-plus/icons-vue';
-import { useActions } from '@/hooks/vuex-composition-helpers';
+import { useState } from '@/hooks/vuex-composition-helpers';
 import { userService, systemService } from '@/services';
 
-// const store = useStore();
 const router = useRouter();
 const route = useRoute();
 
@@ -78,6 +77,8 @@ const menuOption: {
   defaultActive: '1-1',
   menu: []
 });
+const { userinfo } = useState('user', ['userinfo']);
+const user = ref(userinfo());
 const breadcrumb = ref<string[]>([]);
 
 // 刷新时渲染选中的菜单项

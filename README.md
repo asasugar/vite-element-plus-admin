@@ -102,5 +102,20 @@ const { e } = useActions({ 'B/back': 'e' });
 
 </script>
 
+useState
+- `namespace` 参数非必填，如果 `modules` 设置 `namespaced: true` 时必填
+- `actions` 可选类型：数组 ｜ 对象 （支持自定义action方法名）
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useState } from '@/hooks/vuex-composition-helpers';
+
+// use array parameters
+const { userinfo } = useState('A', ['userinfo']);
+const user = ref(userinfo());
+
+// use object parameters
+const { d } = useState('B', userinfo: 'd');
+const user = ref(d());
 ```
-我个人更倾向于各个模块都设置namespace

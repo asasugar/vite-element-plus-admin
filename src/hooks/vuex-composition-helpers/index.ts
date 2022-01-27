@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 17:01:13
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-26 18:26:02
+ * @LastEditTime: 2022-01-27 12:03:33
  */
 import { Store, useStore } from 'vuex';
 import { isObject } from '@/utils';
@@ -35,7 +35,7 @@ export const useState = normalizeNamespace((namespace?: INamespace, states?: IAc
           if (!module) {
             return;
           }
-          state = module.context.state;
+          state = module.state;
           getters = module.context.getters;
         }
         return typeof val === 'function' ? val.call(this, state, getters) : state[val];
