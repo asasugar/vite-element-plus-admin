@@ -3530,10 +3530,10 @@ vue@^3.2.25:
     "@vue/server-renderer" "3.2.27"
     "@vue/shared" "3.2.27"
 
-vuex-composition-maphooks@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmmirror.com/vuex-composition-maphooks/download/vuex-composition-maphooks-1.0.0.tgz#4dc4e534bfbda900c783fd7b61cd9d083008be0d"
-  integrity sha512-tCzATI8i46Sk1DQbriXkQgHX9sf7GN8LX3ida8BX1UOEhdr9TNA8dX2jgmj5ICf70ZaxejMQl4EZy15EeAqmcA==
+vuex-composition-maphooks@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vuex-composition-maphooks/-/vuex-composition-maphooks-1.0.1.tgz#6ff3d03c46fc7fc97aaa27d0361ed29c978b7dd7"
+  integrity sha512-VaDBCeZZQDvHDBkPxcBSWQiO8J5WK1lHV4+cTWQVCHp5ozDzq/xTCHYV9hSkw0ZBIo4k29FhFsKOtPkhrYfNAg==
 
 vuex@^4.0.2:
   version "4.0.2"
