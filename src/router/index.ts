@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:12:02
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-26 18:22:51
+ * @LastEditTime: 2022-01-27 10:55:27
  */
 
 import {
@@ -37,10 +37,13 @@ const router = createRouter({
 router.beforeEach(
   (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     document.title = `${to.meta.title} - Vite App`;
-    if (to.name !== 'Login' && !getToken()) {
+    if (to.name === 'Login') {
       // 到登录页，重置token凭证, 清除session里的动态路由
       clearToken();
       removeSession('routerMap');
+    }
+
+    if (to.name !== 'Login' && !getToken()) {
       next({ name: 'Login' });
     } else next();
   }

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-21 16:34:48
+ * @LastEditTime: 2022-01-27 10:54:19
  */
 
 export function setToken(token: string) {
