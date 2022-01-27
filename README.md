@@ -47,11 +47,87 @@ const asyncSetUserinfo = mapActions('user',['asyncSetUserinfo']).asyncSetUserinf
 </script>
 ```
 
-为了简便写法，通过hooks去包装（偷懒），修改`尤大大` 的[helper](https://github.com/vuejs/vuex/blob/main/src/helpers.js) ,等Vuex官方如果更新该hooks的支持，在升级vuex版本
+为了简便写法，通过hooks去包装（偷懒），修改`尤大大` 的[helper](https://github.com/vuejs/vuex/blob/main/src/helpers.js) 
+
+
+
+useState
+- `namespace` 参数非必填，如果 `modules` 设置 `namespaced: true` 时必填
+- `state` 可选类型：数组 ｜ 对象 （支持自定义state方法名）
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useState } from '@/hooks/vuex-composition-helpers';
+
+// use array parameters
+const { userinfo } = useState('A', ['userinfo']);
+const user = ref(userinfo());
+
+// use object parameters
+const { d } = useState('A', userinfo: 'd');
+const user = ref(d());
+</script>
+
+```
+
+useGetters
+
+- `namespace` 参数非必填，如果 `modules` 设置 `namespaced: true` 时必填
+- `getters` 可选类型：数组 ｜ 对象 （支持自定义getters方法名）
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useGetters } from '@/hooks/vuex-composition-helpers';
+
+// use array parameters
+const { unDoList, doList } = useGetters('A', ['unDoList', 'doList']);
+// or
+const { unDoList, doList } = useGetters(['A/unDoList', 'A/doList']);
+
+
+const a = ref(unDoList());
+const b = ref(doList());
+
+// use object parameters
+const { d, e } = useGetters('A',{ unDoList: 'd', doList: 'e'});
+// or
+const { d, e } = useGetters({ 'A/unDoList': 'd', 'A/doList': 'e'});
+
+const a = ref(d());
+const b = ref(e());
+</script>
+
+```
+
+
+useMutations
+
+- `namespace` 参数非必填，如果 `modules` 设置 `namespaced: true` 时必填
+- `mutations` 可选类型：数组 ｜ 对象 （支持自定义mutations方法名）
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useMutations } from '@/hooks/vuex-composition-helpers';
+
+// use array parameters
+const { INCREMENT } = useMutations('A', ['INCREMENT']);
+// or
+const { INCREMENT } = useMutations(['A/INCREMENT']);
+
+// use object parameters
+const { d } = useMutations('A', { 'INCREMENT': 'd'});
+// or
+const { d} = useMutations({ 'A/INCREMENT': 'd'});
+</script>
+
+```
 
 useActions
 - `namespace` 参数非必填，如果 `modules` 设置 `namespaced: true` 时必填
-- `actions` 可选类型：数组 ｜ 对象 （支持自定义action方法名）
+- `actions` 可选类型：数组 ｜ 对象 （支持自定义actions方法名）
 
 ```vue
 <script setup lang="ts">
@@ -101,21 +177,4 @@ const { d } = useActions({ 'A/go': 'd' });
 const { e } = useActions({ 'B/back': 'e' });
 
 </script>
-
-useState
-- `namespace` 参数非必填，如果 `modules` 设置 `namespaced: true` 时必填
-- `actions` 可选类型：数组 ｜ 对象 （支持自定义action方法名）
-
-```vue
-<script setup lang="ts">
-import { ref } from 'vue';
-import { useState } from '@/hooks/vuex-composition-helpers';
-
-// use array parameters
-const { userinfo } = useState('A', ['userinfo']);
-const user = ref(userinfo());
-
-// use object parameters
-const { d } = useState('B', userinfo: 'd');
-const user = ref(d());
 ```

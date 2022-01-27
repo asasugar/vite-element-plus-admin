@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-27 13:53:43
+ * @LastEditTime: 2022-01-27 14:59:49
 -->
 <template>
   <div class="flex verticalcenter">
@@ -33,7 +33,6 @@
 import { ref } from 'vue';
 import { useState } from '@/hooks/vuex-composition-helpers';
 import headerImg from '@/assets/g.jpeg';
-
 const { userinfo } = useState('user', ['userinfo']);
 const user = ref(userinfo());
 </script>

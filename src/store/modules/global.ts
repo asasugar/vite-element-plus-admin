@@ -1,10 +1,21 @@
 const global = {
-  // namespaced: true,
+  namespaced: true,
   state: {
-    count: 0
+    count: 0,
+    toDoList: [
+      { text: '吃饭', done: true },
+      { text: '睡觉', done: false },
+      { text: '打保罗', done: false }
+    ]
+  },
+  getters: {
+    unDoList(state: { toDoList: any[] }) {
+      return state.toDoList.filter(i => !i.done);
+    }
   },
   mutations: {
     INCREMENT(state: { count: number }) {
+      console.log(44);
       state.count++;
     },
     DECREMENT(state: { count: number }) {
