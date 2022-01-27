@@ -45,7 +45,7 @@ import { ElNotification } from 'element-plus';
 import type { ElForm } from 'element-plus';
 import { useRouter } from 'vue-router';
 import { userService } from '@/services';
-import { useActions } from '@/hooks/vuex-composition-helpers';
+import { useActions } from 'vuex-composition-maphooks';
 import { setToken } from '@/utils/token';
 
 const router = useRouter();

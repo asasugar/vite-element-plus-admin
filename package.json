@@ -25,7 +25,8 @@
     "qs": "^6.10.3",
     "vue": "^3.2.25",
     "vue-router": "4",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "vuex-composition-maphooks": "^1.0.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.16.7",
