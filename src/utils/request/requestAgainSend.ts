@@ -3,8 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-20 17:22:21
+ * @LastEditTime: 2022-02-07 18:21:50
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { isJsonStr } from '@/utils';
 /**
  * @param {失败信息} err

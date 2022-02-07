@@ -1,0 +1,81 @@
+<!--
+ * @Description: 工作台-body-快捷导航
+ * @Author: Xiongjie.Xue(xxj95719@gmail.com)
+ * @Date: 2022-01-21 18:27:06
+ * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
+ * @LastEditTime: 2022-02-07 18:54:52
+-->
+<template>
+  <el-card>
+    <template #header>
+      <div class="flex between verticalcenter">
+        <span>快捷导航</span>
+      </div>
+    </template>
+    <el-skeleton animated :loading="loading">
+      <grid>
+        <grid-item v-for="item in data" :key="item.name">
+          <div class="flex column center hp100 nav-card">
+            <HomeFilled
+              v-if="item.name === 'Home'"
+              color="rgb(31, 218, 202)"
+              size="20"
+              class="nav-icon"
+            />
+            <DataAnalysis
+              v-else-if="item.name === 'DashboardAnalysis'"
+              color="rgb(0, 216, 255)"
+              class="nav-icon"
+            />
+            <Menu
+              v-else-if="item.name === 'DashboardWorkspace'"
+              color="rgb(191, 12, 44)"
+              class="nav-icon"
+            />
+            <Setting
+              v-else-if="item.name === 'SystemSetting'"
+              color="rgb(63, 178, 127)"
+              class="nav-icon"
+            />
+            <Key
+              v-else-if="item.name === 'SystemAuth'"
+              color="rgba(77, 175, 27, 0.79)"
+              class="nav-icon"
+            />
+            <PieChart v-else color="rgb(225, 133, 37)" class="nav-icon" />
+
+            <div class="mt10 f14">{{ item.title }}</div>
+          </div>
+        </grid-item>
+      </grid>
+    </el-skeleton>
+  </el-card>
+</template>
+<script lang="ts" setup>
+import { HomeFilled, DataAnalysis, Setting, Key, PieChart, Menu } from '@element-plus/icons-vue';
+import Grid from '@/containers/Grid.vue';
+import GridItem from '@/containers/GridItem.vue';
+// types
+interface INavItem {
+  name: string;
+  title: string;
+}
+
+interface Props {
+  data?: INavItem[];
+  loading?: boolean;
+}
+
+defineProps<Props>();
+</script>
+
+<style lang="less" scoped>
+.nav-icon {
+  width: 20px;
+  height: 20px;
+}
+.nav-card:hover {
+  transition: var(--el-transition-duration);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
+</style>

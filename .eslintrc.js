@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-18 13:55:50
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-18 15:44:51
+ * @LastEditTime: 2022-02-07 17:42:30
  */
 module.exports = {
   parser: 'vue-eslint-parser',
@@ -39,6 +39,7 @@ module.exports = {
     withDefaults: 'readonly'
   },
   rules: {
-    'vue/script-setup-uses-vars': 'error'
+    'vue/script-setup-uses-vars': 'error',
+    '@typescript-eslint/no-unused-vars': 'error'
   }
 };

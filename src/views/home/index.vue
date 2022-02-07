@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-27 18:26:45
+ * @LastEditTime: 2022-02-07 18:09:34
 -->
 <template>
   <el-container class="layout-container">
@@ -63,8 +63,16 @@ import { ref, reactive, nextTick } from 'vue';
 import { useRouter, useRoute, RouteRecordName } from 'vue-router';
 import { Setting } from '@element-plus/icons-vue';
 import { useState } from 'vuex-composition-maphooks';
-
 import { userService, systemService } from '@/services';
+
+// types
+interface IMenuItem {
+  sortId: string;
+  title: string;
+  name: string;
+  path: string;
+  children?: IMenuItem[];
+}
 
 const router = useRouter();
 const route = useRoute();
@@ -72,14 +80,14 @@ const route = useRoute();
 const menuOption: {
   defaultOpeneds: string[];
   defaultActive: string;
-  menu: any;
+  menu: IMenuItem[];
 } = reactive({
   defaultOpeneds: ['1'],
   defaultActive: '1-1',
   menu: []
 });
 const { userinfo } = useState('user', ['userinfo']);
-const user = ref(userinfo());
+const user = ref<{ username: string }>(userinfo() || { username: '' });
 const breadcrumb = ref<string[]>([]);
 
 // 刷新时渲染选中的菜单项
@@ -154,7 +162,7 @@ const handleToMenu = (item: { name: string; path: string }, title: string, subTi
   }
   .toolbar {
     display: inline-flex;
-    align-items: center;
+    align-items: end;
   }
 }
 </style>

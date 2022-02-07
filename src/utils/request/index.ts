@@ -3,8 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-24 11:29:50
+ * @LastEditTime: 2022-02-07 18:21:55
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Axios from 'axios';
 import { getToken } from '@/utils/token';
 import { addPendingRequest, removePendingRequest } from './cancelRepeatRquest'; // 取消重复请求

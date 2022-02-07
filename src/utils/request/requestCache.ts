@@ -3,8 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-20 17:22:27
+ * @LastEditTime: 2022-02-07 18:21:16
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { generateReqKey } from '@/utils';
 
 const options = {

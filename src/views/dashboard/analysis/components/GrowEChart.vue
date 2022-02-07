@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-26 15:15:04
+ * @LastEditTime: 2022-02-07 18:13:31
 -->
 <template>
   <el-tabs v-model="tabPane" type="card" class="bg-white mt20" @tab-click="handleClickTab">
@@ -16,7 +16,7 @@
   </el-tabs>
 </template>
 <script lang="ts" setup>
-import { onMounted, ref, nextTick } from 'vue';
+import { ref, nextTick } from 'vue';
 import type { Ref } from 'vue';
 import { useECharts, isExist } from '@/hooks/useECharts';
 import echarts from '@/utils/echarts';
@@ -237,7 +237,7 @@ nextTick(() => {
   useECharts(chartRef1.value as unknown as Ref<HTMLDivElement>, option1 as EChartsOption);
 });
 // 点击切换图表为第二张的时候，渲染第二张图表
-const handleClickTab = async (e: { props: { name: any } }) => {
+const handleClickTab = async (e: { props: { name: string } }) => {
   const { name } = e.props;
   if (name === '2') {
     await nextTick();

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 14:00:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-26 11:23:30
+ * @LastEditTime: 2022-02-07 14:12:20
  */
 import request from '@/utils/request';
 
@@ -33,6 +33,15 @@ class SystemService {
    */
   async getMenu() {
     const { success, result } = await request.get('/sys/getMenu');
+    if (success) return result;
+    return null;
+  }
+  /**
+   * 获取快捷导航列表
+   * @returns {Array}
+   */
+  async getQuickNavList() {
+    const { success, result } = await request.get('/sys/getQuickNavList');
     if (success) return result;
     return null;
   }

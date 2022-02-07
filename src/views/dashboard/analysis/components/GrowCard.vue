@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-25 17:02:30
+ * @LastEditTime: 2022-02-07 18:12:47
 -->
 <template>
   <div class="flex">
@@ -29,10 +29,12 @@
 <script lang="ts" setup>
 defineProps({
   data: {
-    type: Object
+    type: Object,
+    default: () => ({})
   },
   loading: {
-    type: Boolean
+    type: Boolean,
+    default: true
   }
 });
 </script>

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 14:47:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-27 14:14:11
+ * @LastEditTime: 2022-02-07 18:29:32
  */
 interface IUserState {
   userinfo?: object;

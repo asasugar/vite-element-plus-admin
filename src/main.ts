@@ -9,7 +9,6 @@ import 'element-plus/es/components/message/style/css';
 import 'element-plus/es/components/notification/style/css';
 import { registerDynamicRoutes } from '@/router/dynamic';
 import SDK from '@/services';
-
 mockXHR(); // mock接口
 await registerDynamicRoutes(); // 初始化/刷新的时候注册动态路由
 const app = createApp(App);

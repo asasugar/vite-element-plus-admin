@@ -3,23 +3,15 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:46:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-24 11:19:04
+ * @LastEditTime: 2022-02-07 18:45:19
  */
 import * as Mock from 'mockjs';
-
+import { IConfig, IType } from './types';
 import apis from './apis';
-
-// import { param2Obj } from './utils';
-
-interface IOptions {
-  body: string;
-  type: string;
-  url: string;
-}
 
 export function mockXHR() {
   function XHRreq(response: any) {
-    return function (options: IOptions) {
+    return function (options: IConfig) {
       let result = null;
       if (response instanceof Function) {
         const { body, type, url } = options;
@@ -34,12 +26,8 @@ export function mockXHR() {
       return result;
     };
   }
-  type iType = {
-    url: string;
-    type?: string;
-    response: any;
-  };
-  let i: iType;
+
+  let i: IType;
   for (i of apis) {
     // 生成mock模拟api
     Mock.mock(

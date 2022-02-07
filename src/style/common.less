@@ -49,6 +49,9 @@ each(range(0, 100, 5), {
   .wp@{value} {
     width: (@value * 1%)
   }
+  .hp@{value} {
+    height: (@value * 1%)
+  }
   .w@{value} {
     width: (@value * 1px)
   }
@@ -90,9 +93,14 @@ each(range(0, 100, 5), {
   color: @text-color;
 }
 
+.color-desc {
+  color: @text-color-desc;
+}
+
 .color-gray3 {
   color: @text-color-grey3;
 }
+
 .color-gray6 {
   color: @text-color-grey6;
 }

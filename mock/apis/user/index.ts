@@ -3,23 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-26 18:23:46
+ * @LastEditTime: 2022-02-07 17:48:13
  */
+import { IConfig, IUserinfo, IUserType } from '../../types';
 
-type IUserinfo = {
-  token: string;
-  password?: number | string;
-  username?: string;
-  avatar?: string;
-};
-type IUserType = {
-  [x: string]: IUserinfo;
-};
-interface IConfig {
-  body: any;
-  method: string;
-  url: string;
-}
 const users: IUserType = {
   admin: {
     password: 123456,

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-26 16:06:39
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-26 16:38:22
+ * @LastEditTime: 2022-02-07 18:12:17
 -->
 <template>
   <div class="page-wrapper">
@@ -14,22 +14,28 @@
       </template>
       <slot v-else name="headerContent"></slot>
     </div>
-    <div class="page-wrapper-centent">
-      <slot></slot>
+
+    <div :style="{ backgroundColor: bodyBg }" class="page-wrapper-content">
+      <slot name="bodyContent"></slot>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { CSSProperties, PropType, provide, useAttrs, useSlots } from 'vue';
-import { computed } from 'vue';
+import { useSlots, computed } from 'vue';
 
 const props = defineProps({
   headerTitle: {
-    type: String
+    type: String,
+    default: ''
   },
   headerContent: {
-    type: String
+    type: String,
+    default: ''
+  },
+  bodyBg: {
+    type: String,
+    default: 'none'
   }
 });
 
@@ -46,7 +52,6 @@ const getShowHeader = computed(() => getShowDefaultHeader.value || slots?.header
     background-color: @bg-color;
   }
   &-content {
-    background-color: @bg-color;
     margin: 16px;
   }
 }

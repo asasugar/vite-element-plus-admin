@@ -3,8 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-20 17:22:10
+ * @LastEditTime: 2022-02-07 18:22:00
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Axios from 'axios';
 import { generateReqKey } from '@/utils';
 // TODO: 用于把当前请求信息添加到pendingRequest对象 中；

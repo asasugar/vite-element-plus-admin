@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:26:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-21 17:50:52
+ * @LastEditTime: 2022-02-07 17:59:53
 -->
 <template>
   <div class="login">
@@ -47,16 +47,23 @@ import { useRouter } from 'vue-router';
 import { userService } from '@/services';
 import { useActions } from 'vuex-composition-maphooks';
 import { setToken } from '@/utils/token';
+// types
+interface IRules {
+  [x: string]: [{ [x: string]: string }];
+}
+interface IForm {
+  username: string;
+  password: string;
+}
 
 const router = useRouter();
-
 const ruleFormRef = ref<InstanceType<typeof ElForm>>();
-const ruleForm = reactive({
+const ruleForm: IForm = reactive({
   username: 'admin',
   password: '123456'
 });
 
-const rules: any = reactive({
+const rules: IRules = reactive({
   username: [{ required: 'true', message: '账户不能为空', trigger: 'blur' }],
   password: [{ required: 'true', message: '密码不能为空', trigger: 'blur' }]
 });

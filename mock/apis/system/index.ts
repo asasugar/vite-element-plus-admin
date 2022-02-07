@@ -3,14 +3,8 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-26 14:05:58
+ * @LastEditTime: 2022-02-07 17:46:47
  */
-interface IConfig {
-  body: any;
-  method: string;
-  url: string;
-}
-
 export default [
   // 看板数据
   {
@@ -53,7 +47,7 @@ export default [
   {
     url: 'sys/getRoute',
     type: 'post',
-    response: (config: IConfig) => {
+    response: () => {
       return {
         success: true,
         result: [
@@ -93,7 +87,7 @@ export default [
   {
     url: 'sys/getMenu',
     type: 'get',
-    response: (config: IConfig) => {
+    response: () => {
       return {
         success: true,
         result: [
@@ -136,6 +130,49 @@ export default [
                 title: 'Two工作台'
               }
             ]
+          }
+        ],
+        code: 200
+      };
+    }
+  },
+  // 获取工作台快捷导航列表
+  {
+    url: 'sys/getQuickNavList',
+    type: 'get',
+    response: () => {
+      return {
+        success: true,
+        result: [
+          {
+            name: 'Home',
+            title: '首页',
+            path: '/'
+          },
+          {
+            name: 'DashboardAnalysis',
+            title: '分析页',
+            path: '/dashboard/analysis'
+          },
+          {
+            name: 'DashboardWorkspace',
+            title: '工作台',
+            path: '/dashboard/workspace'
+          },
+          {
+            name: 'SystemSetting',
+            title: '系统设置',
+            path: '/system/setting'
+          },
+          {
+            name: 'SystemAuth',
+            title: '权限管理',
+            path: '/system/auth'
+          },
+          {
+            name: 'SystemUsers',
+            title: '用户管理',
+            path: '/system/users'
           }
         ],
         code: 200

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-24 19:50:56
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-25 14:47:52
+ * @LastEditTime: 2022-02-07 18:31:14
  */
 
 import router from '@/router';
@@ -11,7 +11,7 @@ import { setSession, getSession } from '@/utils/session';
 import { ElLoading } from 'element-plus';
 import { systemService } from '@/services';
 import { dynamicImport } from '@/utils';
-import { IRoutes } from './type';
+import { IRoutes } from './types';
 
 /**
  * 注册路由
