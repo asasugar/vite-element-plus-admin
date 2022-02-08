@@ -44,4 +44,7 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()]
     })
   ]
+  // optimizeDeps: {
+  //   include: ['element-plus']
+  // }
 });

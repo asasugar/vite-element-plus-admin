@@ -3287,10 +3287,10 @@ unplugin-auto-import@^0.5.11:
     resolve "^1.21.0"
     unplugin "^0.3.0"
 
-unplugin-vue-components@^0.17.13:
-  version "0.17.13"
-  resolved "https://registry.npmmirror.com/unplugin-vue-components/download/unplugin-vue-components-0.17.13.tgz"
-  integrity sha512-WII6hAW+HSvlXDx4t0LqcAvLg4ESsoBz1nuUDMPx6ZGuKBPjSRP4Wmnk559nZ6qpaOW41iY48cBeUpWSPjH7WA==
+unplugin-vue-components@^0.17.17:
+  version "0.17.17"
+  resolved "https://registry.yarnpkg.com/unplugin-vue-components/-/unplugin-vue-components-0.17.17.tgz#360174a12aa28dac26bdb2310e248fca1999f9c8"
+  integrity sha512-XaaCbsdXGazTOl0nH4+PVsuGOXmYcrqLT8B8vO9Jzz9OaUq+S9Tz4KjzUNs7bhkp83SQWaKKF0+noAynYDa/Cg==
   dependencies:
     "@antfu/utils" "^0.4.0"
     "@rollup/pluginutils" "^4.1.2"
@@ -3530,10 +3530,10 @@ vue@^3.2.25:
     "@vue/server-renderer" "3.2.27"
     "@vue/shared" "3.2.27"
 
-vuex-composition-maphooks@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/vuex-composition-maphooks/-/vuex-composition-maphooks-1.0.1.tgz#6ff3d03c46fc7fc97aaa27d0361ed29c978b7dd7"
-  integrity sha512-VaDBCeZZQDvHDBkPxcBSWQiO8J5WK1lHV4+cTWQVCHp5ozDzq/xTCHYV9hSkw0ZBIo4k29FhFsKOtPkhrYfNAg==
+vuex-composition-maphooks@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/vuex-composition-maphooks/-/vuex-composition-maphooks-1.0.2.tgz#b36e619deba04a52b2083bf81b8ad6ff9032fdf8"
+  integrity sha512-Ld4EnfPUVqWREZf+S2boaD0K6LNOn66/03Q6H74cHp0tW4LfM5sbTWlCobbtbkdXIqAhe+NUhuyp4mwLXQZr8A==
 
 vuex@^4.0.2:
   version "4.0.2"

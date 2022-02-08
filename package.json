@@ -26,7 +26,7 @@
     "vue": "^3.2.25",
     "vue-router": "4",
     "vuex": "^4.0.2",
-    "vuex-composition-maphooks": "^1.0.1"
+    "vuex-composition-maphooks": "^1.0.2"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.16.7",
@@ -45,7 +45,7 @@
     "standard-version": "^9.3.2",
     "typescript": "^4.4.4",
     "unplugin-auto-import": "^0.5.11",
-    "unplugin-vue-components": "^0.17.13",
+    "unplugin-vue-components": "^0.17.17",
     "vite": "^2.7.13",
     "vue-eslint-parser": "^8.0.1",
     "vue-tsc": "^0.29.8"
