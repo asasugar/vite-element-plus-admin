@@ -3,7 +3,7 @@
 
 # 环境配置
 
-- Vite 需要 Node.js 版本 >= 12.0.0。
+- Vite 需要 Node.js 版本 >= 12.2.0。
 - 推荐 `vscode` + `volar` , 禁用 `vuter`
 
 
