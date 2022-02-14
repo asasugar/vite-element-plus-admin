@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-07 18:54:52
+ * @LastEditTime: 2022-02-14 22:29:35
 -->
 <template>
   <el-card>
@@ -13,8 +13,8 @@
       </div>
     </template>
     <el-skeleton animated :loading="loading">
-      <grid>
-        <grid-item v-for="item in data" :key="item.name">
+      <as-grid>
+        <as-grid-item v-for="item in data" :key="item.name">
           <div class="flex column center hp100 nav-card">
             <HomeFilled
               v-if="item.name === 'Home'"
@@ -46,15 +46,14 @@
 
             <div class="mt10 f14">{{ item.title }}</div>
           </div>
-        </grid-item>
-      </grid>
+        </as-grid-item>
+      </as-grid>
     </el-skeleton>
   </el-card>
 </template>
 <script lang="ts" setup>
 import { HomeFilled, DataAnalysis, Setting, Key, PieChart, Menu } from '@element-plus/icons-vue';
-import Grid from '@/containers/Grid.vue';
-import GridItem from '@/containers/GridItem.vue';
+import { AsGrid, AsGridItem } from '@/containers/grid';
 // types
 interface INavItem {
   name: string;

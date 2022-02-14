@@ -3,24 +3,24 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:14:27
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-07 19:00:52
+ * @LastEditTime: 2022-02-14 22:24:25
 -->
 <template>
-  <PageWrapper>
+  <as-page-wrapper>
     <template #headerContent>
-      <WorkSpaceHeader />
+      <work-space-header />
     </template>
     <template #bodyContent>
-      <WorkSpaceBody :project-list="projectList" :nav-list="navList" :loading="loading" />
+      <work-space-body :project-list="projectList" :nav-list="navList" :loading="loading" />
     </template>
-  </PageWrapper>
+  </as-page-wrapper>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { projectService, systemService } from '@/services';
-import PageWrapper from '@/containers/PageWrapper.vue';
-import WorkSpaceHeader from './components/WorkSpaceHeader.vue';
-import WorkSpaceBody from './components/WorkSpaceBody.vue';
+import { AsPageWrapper } from '@/containers/page-wrapper';
+import WorkSpaceHeader from './components/header';
+import WorkSpaceBody from './components/body';
 
 const projectList = ref([]);
 const navList = ref([]);

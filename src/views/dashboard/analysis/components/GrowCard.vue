@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-14 11:27:42
+ * @LastEditTime: 2022-02-14 22:43:19
 -->
 <template>
   <div class="flex">
@@ -16,7 +16,7 @@
               <el-tag class="ml-2" :type="item.tagType">{{ item.action }}</el-tag>
             </div>
           </template>
-          <CountTo
+          <as-count-to
             :prefix="key === 'total' ? '¥' : ''"
             :start-val="1"
             :end-val="item.value"
@@ -24,7 +24,7 @@
           />
           <div class="flex center beteen">
             <span class="wp50 text-left">总{{ item.title }}</span>
-            <CountTo
+            <as-count-to
               :prefix="key === 'total' ? '¥' : ''"
               :start-val="1"
               :end-val="item.total"
@@ -37,7 +37,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { CountTo } from '@/components/CountTo';
+import AsCountTo from '@/components/count-to';
 defineProps({
   data: {
     type: Object,
