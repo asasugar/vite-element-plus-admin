@@ -3,44 +3,33 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-14 23:50:57
+ * @LastEditTime: 2022-02-14 23:50:36
 -->
 <template>
   <el-card class="card-wrapper" :body-style="{ padding: '12px 12px 2px 12px' }">
     <template #header>
       <div class="flex between verticalcenter">
-        <span>项目</span>
+        <span>最新动态</span>
         <el-link href="https://github.com/asasugar?tab=repositories" :underline="false">
           <el-button class="button" type="text">更多</el-button>
         </el-link>
       </div>
     </template>
     <el-skeleton animated :loading="loading">
-      <el-row :gutter="10">
-        <el-col v-for="item in data" :key="item.sortId" :span="8">
-          <el-card shadow="hover" class="card-wrapper--item mb10">
-            <template #header>
-              <div class="flex verticalcenter">
-                <img :src="item.icon" class="mr5" />
-                <span class="fontbold">{{ item.name }}</span>
-              </div>
-            </template>
-            <div class="color-desc text-overflow f14">{{ item.desc }}</div>
-            <div class="flex between pt10 color-desc f14">
-              <span>{{ item.sortName }}</span>
-              <span>{{ item.editTime }}</span>
-            </div>
-          </el-card>
-        </el-col>
-      </el-row>
+      <as-list header="我怕老婆">
+        <!-- <template #header>
+          <div>123</div>
+        </template>-->
+      </as-list>
     </el-skeleton>
   </el-card>
 </template>
 <script lang="ts" setup>
-import type { IProjectItem } from '../../types';
+import { AsList } from '@/components/list';
+import type { INewsItem } from '../../types';
 
 interface Props {
-  data?: IProjectItem[];
+  data?: INewsItem[];
   loading?: boolean;
 }
 

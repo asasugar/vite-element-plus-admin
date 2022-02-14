@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 14:00:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-07 14:12:20
+ * @LastEditTime: 2022-02-14 23:42:02
  */
 import request from '@/utils/request';
 
@@ -42,6 +42,15 @@ class SystemService {
    */
   async getQuickNavList() {
     const { success, result } = await request.get('/sys/getQuickNavList');
+    if (success) return result;
+    return null;
+  }
+  /**
+   * 获取最新动态
+   * @returns {Array}
+   */
+  async getLatestNews() {
+    const { success, result } = await request.get('/sys/getLatestNews');
     if (success) return result;
     return null;
   }

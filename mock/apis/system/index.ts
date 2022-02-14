@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-07 17:46:47
+ * @LastEditTime: 2022-02-14 23:41:29
  */
 export default [
   // 看板数据
@@ -175,6 +175,31 @@ export default [
             path: '/system/users'
           }
         ],
+        code: 200
+      };
+    }
+  },
+  // 获取最新动态
+  {
+    url: 'sys/getLatestNews',
+    type: 'get',
+    response: () => {
+      const listData: Record<string, string>[] = [];
+
+      for (let i = 0; i < 23; i++) {
+        listData.push({
+          href: 'https://www.antdv.com/',
+          title: `ant design vue part ${i}`,
+          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+          description:
+            'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+          content:
+            'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.'
+        });
+      }
+      return {
+        success: true,
+        result: listData,
         code: 200
       };
     }
