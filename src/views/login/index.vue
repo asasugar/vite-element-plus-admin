@@ -3,10 +3,11 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:26:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-07 17:59:53
+ * @LastEditTime: 2022-02-15 17:27:39
 -->
 <template>
   <div class="login">
+    <AsMousemovePanel />
     <div class="login-container">
       <div class="container-header">
         <div class="container-header__title">Vue3.0 后台管理系统</div>
@@ -47,6 +48,7 @@ import { useRouter } from 'vue-router';
 import { userService } from '@/services';
 import { useActions } from 'vuex-composition-maphooks';
 import { setToken } from '@/utils/token';
+import AsMousemovePanel from '@/components/mousemove-panel';
 // types
 interface IRules {
   [x: string]: [{ [x: string]: string }];
@@ -110,6 +112,7 @@ const submitForm = () => {
   height: 100vh;
   background-color: @bg-color;
   background-image: linear-gradient(25deg, #077f7c, #3aa693, #5ecfaa, #7ffac2);
+
   .login-container {
     width: 420px;
     padding-bottom: 80px;
