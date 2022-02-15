@@ -3,10 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-14 23:50:36
+ * @LastEditTime: 2022-02-15 14:43:30
 -->
 <template>
-  <el-card class="card-wrapper" :body-style="{ padding: '12px 12px 2px 12px' }">
+  <el-card class="card-wrapper" :body-style="{ padding: '0' }">
     <template #header>
       <div class="flex between verticalcenter">
         <span>最新动态</span>
@@ -16,16 +16,63 @@
       </div>
     </template>
     <el-skeleton animated :loading="loading">
-      <as-list header="我怕老婆">
-        <!-- <template #header>
-          <div>123</div>
-        </template>-->
+      <as-list :data-source="data">
+        <template #header>
+          <div>
+            <b>as list vue</b>
+            header part
+          </div>
+        </template>
+        <template #renderItem="{ item }">
+          <as-list-item v-if="item">
+            <as-list-item-meta :description="item.description">
+              <template #title>
+                <el-link :href="item.href" :underline="false">{{ item.title }}</el-link>
+              </template>
+              <template #avatar>
+                <el-avatar :src="item.avatar" size="small" />
+              </template>
+            </as-list-item-meta>
+            {{ item.content }}
+            <template #extras>
+              <img
+                width="272"
+                alt="logo"
+                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+              />
+            </template>
+            <template #actions>
+              <span class="flex center color-inherit">
+                <star />
+                <span class="pl5">152</span>
+              </span>
+              <el-divider direction="vertical"></el-divider>
+              <span class="flex center color-inherit">
+                <camera />
+                <span class="pl5">152</span>
+              </span>
+
+              <el-divider direction="vertical"></el-divider>
+              <span class="flex center color-inherit">
+                <chat-dot-round />
+                <span class="pl5">2</span>
+              </span>
+            </template>
+          </as-list-item>
+        </template>
+        <template #footer>
+          <div>
+            <b>as list vue</b>
+            footer part
+          </div>
+        </template>
       </as-list>
     </el-skeleton>
   </el-card>
 </template>
 <script lang="ts" setup>
-import { AsList } from '@/components/list';
+import { Star, Camera, ChatDotRound } from '@element-plus/icons-vue';
+import { AsList, AsListItem, AsListItemMeta } from '@/components/list';
 import type { INewsItem } from '../../types';
 
 interface Props {

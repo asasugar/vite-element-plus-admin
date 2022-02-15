@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 22:49:02
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-15 00:26:00
+ * @LastEditTime: 2022-02-15 14:42:35
 -->
 <template>
   <div :class="classString">
@@ -11,15 +11,15 @@
       <template v-if="header">{{ header }}</template>
       <slot name="header" />
     </div>
-    <!-- {childrenContent}
-
-    {children}-->
-    <template v-if="dataSource.length">
-      <ul v-for="(item, index) in dataSource" :key="index" :class="`${prefixCls}-items`">
-        <slot name="renderItem" :item="item" :index="index" />
+    <template v-if="dataSource?.length">
+      <ul :class="`${prefixCls}-items`">
+        <!-- Record<string, string>[] -->
+        <li v-for="(item, index) in dataSource" :key="index">
+          <slot name="renderItem" :item="item" :index="index" />
+        </li>
       </ul>
     </template>
-    <el-empty v-else :description="empty.emptyText"></el-empty>
+    <el-empty v-else :description="emptyText"></el-empty>
     <div v-if="getShowFooter" :class="`${prefixCls}-footer`">
       <template v-if="footer">{{ footer }}</template>
       <slot name="footer" />
@@ -27,46 +27,39 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { useSlots, computed } from 'vue';
+import { useSlots, computed, provide } from 'vue';
 
-const props = defineProps({
-  header: {
-    type: String,
-    default: ''
-  },
-  footer: {
-    type: String,
-    default: ''
-  },
-  dataSource: {
-    type: Array,
-    default: () => []
-  },
-  empty: {
-    type: Object,
-    default: () => ({
-      emptyText: 'No Data'
-    })
-  }
+// types
+interface Props {
+  dataSource: any;
+  header?: string;
+  footer?: string;
+  emptyText: string;
+  split: boolean;
+  bordered: boolean;
+}
+// default props
+const props = withDefaults(defineProps<Props>(), {
+  dataSource: [],
+  emptyText: 'No Data',
+  split: true,
+  bordered: false
 });
 const slots = useSlots();
-const getShowHeader = computed(() => props.header || slots.header);
+const getShowHeader = computed(() => !!(props.header || slots.header));
 const getShowFooter = computed(() => props.footer || slots.footer);
 const prefixCls = 'as-list';
 const classObj = computed(() => ({
-  [`${prefixCls}`]: true
-  // [`${prefixCls}-vertical`]: props.itemLayout === 'vertical',
-  // [`${prefixCls}-${sizeCls.value}`]: sizeCls.value,
-  // [`${prefixCls}-split`]: props.split,
-  // [`${prefixCls}-bordered`]: props.bordered,
-  // [`${prefixCls}-loading`]: isLoading.value,
-  // [`${prefixCls}-grid`]: !!props.grid,
-  // [`${prefixCls}-rtl`]: direction.value === 'rtl',
+  [`${prefixCls}`]: true,
+  [`${prefixCls}-vertical`]: true,
+  [`${prefixCls}-split`]: props.split,
+  [`${prefixCls}-bordered`]: props.bordered
 }));
 const classString = {
   ...classObj.value,
   [`${prefixCls}-something-after-last-item`]: !!getShowFooter.value
 };
+provide('prefixCls', prefixCls);
 </script>
 <style lang="less" scoped>
 @list-prefix-cls: ~'as-list';

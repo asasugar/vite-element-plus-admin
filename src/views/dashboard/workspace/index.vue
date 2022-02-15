@@ -62,7 +62,7 @@ setTimeout(() => {
 }
 
 .text {
-  font-size: 14px;
+  font-size: @font-size-base;
 }
 
 .item {

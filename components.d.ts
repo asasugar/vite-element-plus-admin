@@ -12,14 +12,12 @@ declare module 'vue' {
     ElCard: typeof import('element-plus/es')['ElCard'];
     ElCol: typeof import('element-plus/es')['ElCol'];
     ElContainer: typeof import('element-plus/es')['ElContainer'];
+    ElDivider: typeof import('element-plus/es')['ElDivider'];
     ElDropdown: typeof import('element-plus/es')['ElDropdown'];
     ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem'];
     ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu'];
     ElEmpty: typeof import('element-plus/es')['ElEmpty'];
-    ElForm: typeof import('element-plus/es')['ElForm'];
-    ElFormItem: typeof import('element-plus/es')['ElFormItem'];
     ElHeader: typeof import('element-plus/es')['ElHeader'];
-    ElInput: typeof import('element-plus/es')['ElInput'];
     ElLink: typeof import('element-plus/es')['ElLink'];
     ElMain: typeof import('element-plus/es')['ElMain'];
     ElMenu: typeof import('element-plus/es')['ElMenu'];
@@ -28,13 +26,10 @@ declare module 'vue' {
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar'];
     ElSkeleton: typeof import('element-plus/es')['ElSkeleton'];
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu'];
-    ElTabPane: typeof import('element-plus/es')['ElTabPane'];
-    ElTabs: typeof import('element-plus/es')['ElTabs'];
-    ElTag: typeof import('element-plus/es')['ElTag'];
     List: typeof import('./src/components/list/src/list.vue')['default'];
     ListItem: typeof import('./src/components/list/src/list-item.vue')['default'];
     ListItemMeta: typeof import('./src/components/list/src/list-item-meta.vue')['default'];
-    AaCountTo: typeof import('./src/components/count-to/src/index.vue')['default'];
+    Src: typeof import('./src/components/count-to/src/index.vue')['default'];
   }
 }
 

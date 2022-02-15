@@ -3,32 +3,59 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 22:49:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-15 00:24:43
+ * @LastEditTime: 2022-02-15 13:58:57
 -->
 <template>
-  <div></div>
+  <div :class="classString">
+    <div v-if="getShowAvatar" :class="`${classString}-avatar`">
+      <template v-if="avatar">{{ avatar }}</template>
+      <slot v-else name="avatar" />
+    </div>
+    <div v-if="getShowTitle || getShowDescription" :class="`${classString}-content`">
+      <h4 v-if="getShowTitle" :class="`${classString}-title`">
+        <template v-if="title">{{ title }}</template>
+        <slot v-else name="title" />
+      </h4>
+      <div v-if="getShowDescription" :class="`${classString}-description`">
+        <template v-if="description">{{ description }}</template>
+        <slot v-else name="description" />
+      </div>
+    </div>
+  </div>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { inject, useSlots, computed } from 'vue';
+const prefixCls = inject('prefixCls');
+const classString = `${prefixCls}-item-meta`;
+const props = defineProps({
+  avatar: {
+    type: String,
+    default: ''
+  },
+  title: {
+    type: String,
+    default: ''
+  },
+  description: {
+    type: String,
+    default: ''
+  }
+});
+const slots = useSlots();
+
+const getShowAvatar = computed(() => props.avatar || slots.avatar);
+const getShowTitle = computed(() => props.title || slots.title);
+const getShowDescription = computed(() => props.description || slots.description);
+</script>
+//
 <style lang="less" scoped>
 @list-prefix-cls: ~'as-list';
 .@{list-prefix-cls} {
-  position: relative;
-
-  * {
-    outline: none;
-  }
-
-  &-items {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
   &-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: @list-item-padding;
+    padding: 16px;
     color: @text-color;
 
     &-meta {
@@ -38,7 +65,8 @@
       max-width: 100%;
 
       &-avatar {
-        margin-right: @list-item-meta-avatar-margin-right;
+        margin-top: 2px;
+        margin-right: 10px;
       }
       &-content {
         flex: 1 0;
@@ -50,160 +78,31 @@
         color: @text-color;
         font-size: @font-size-base;
         line-height: @line-height-base;
-        > a {
+        > :deep(a) {
           color: @text-color;
           transition: all 0.3s;
           &:hover {
-            color: @primary-color;
+            color: @color-primary;
           }
         }
       }
       &-description {
-        color: @text-color-secondary;
-        font-size: @list-item-meta-description-font-size;
-        line-height: @line-height-base;
-      }
-    }
-    &-action {
-      flex: 0 0 auto;
-      margin-left: 48px;
-      padding: 0;
-      font-size: 0;
-      list-style: none;
-
-      & > li {
-        position: relative;
-        display: inline-block;
-        padding: 0 @padding-xs;
-        color: @text-color-secondary;
+        color: @text-color-desc;
         font-size: @font-size-base;
         line-height: @line-height-base;
-        text-align: center;
-
-        &:first-child {
-          padding-left: 0;
-        }
-      }
-
-      &-split {
-        position: absolute;
-        top: 50%;
-        right: 0;
-        width: 1px;
-        height: 14px;
-        margin-top: -7px;
-        background-color: @border-color-split;
       }
     }
-  }
-
-  &-header {
-    background: @list-header-background;
-  }
-
-  &-footer {
-    background: @list-footer-background;
-  }
-
-  &-header,
-  &-footer {
-    padding-top: @padding-sm;
-    padding-bottom: @padding-sm;
-  }
-
-  &-empty {
-    padding: @padding-md 0;
-    color: @text-color-secondary;
-    font-size: 12px;
-    text-align: center;
-  }
-
-  &-split &-item {
-    border-bottom: 1px solid @border-color-split;
-    &:last-child {
-      border-bottom: none;
-    }
-  }
-
-  &-split &-header {
-    border-bottom: 1px solid @border-color-split;
-  }
-
-  &-split&-empty &-footer {
-    border-top: 1px solid @border-color-split;
-  }
-
-  &-loading &-spin-nested-loading {
-    min-height: 32px;
-  }
-
-  &-split&-something-after-last-item .@{ant-prefix}-spin-container > &-items > &-item:last-child {
-    border-bottom: 1px solid @border-color-split;
-  }
-
-  &-lg &-item {
-    padding: @list-item-padding-lg;
-  }
-
-  &-sm &-item {
-    padding: @list-item-padding-sm;
   }
 
   &-vertical &-item {
-    align-items: initial;
-
-    &-main {
-      display: block;
-      flex: 1;
-    }
-
-    &-extra {
-      margin-left: 40px;
-    }
-
     &-meta {
-      margin-bottom: @list-item-meta-margin-bottom;
+      // margin-bottom: 12px;
 
       &-title {
-        margin-bottom: @list-item-meta-title-margin-bottom;
-        color: @heading-color;
-        font-size: @font-size-lg;
+        margin-bottom: 4px;
+        color: @text-color;
+        font-size: 16px;
         line-height: 24px;
-      }
-    }
-
-    &-action {
-      margin-top: @padding-md;
-      margin-left: auto;
-
-      > li {
-        padding: 0 @padding-md;
-        &:first-child {
-          padding-left: 0;
-        }
-      }
-    }
-  }
-
-  &-grid .@{ant-prefix}-col > &-item {
-    display: block;
-    max-width: 100%;
-    margin-bottom: @margin-md;
-    padding-top: 0;
-    padding-bottom: 0;
-    border-bottom: none;
-  }
-
-  // ============================ without flex ============================
-  &-item-no-flex {
-    display: block;
-  }
-
-  // Horizontal
-  &:not(.@{list-prefix-cls}-vertical) {
-    .@{list-prefix-cls}-item-no-flex {
-      .@{list-prefix-cls}-item-action {
-        float: right;
       }
     }
   }

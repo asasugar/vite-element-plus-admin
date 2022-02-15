@@ -3,12 +3,54 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 22:49:18
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-15 00:24:12
+ * @LastEditTime: 2022-02-15 14:17:16
 -->
 <template>
-  <div></div>
+  <div v-bind="{ ...restAttrs }" :class="[`${pre}-item`, className]">
+    <div key="content" :class="`${pre}-item-main`">
+      <slot name="default" />
+      <template v-if="getShowExtra">
+        <ul key="actions" :class="`${pre}-item-action`">
+          <template v-if="actions?.length">
+            <li v-for="(action, i) in actions" :key="`${pre}-item-action-${i}`">
+              {{ action }}
+              <el-divider v-if="i !== actions.length - 1" direction="vertical"></el-divider>
+            </li>
+          </template>
+
+          <slot v-else name="actions" />
+        </ul>
+      </template>
+    </div>
+    <div v-if="extras?.length" key="extra" class="{`${pre}-item-extras`}">
+      <span v-for="(extra, i) in extras" :key="`${pre}-item-extea-${i}`">{{ extra }}</span>
+    </div>
+    <slot v-else name="extras" />
+  </div>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { inject, ref, useAttrs, useSlots, computed } from 'vue';
+
+const props = defineProps({
+  // 额外内容, 通常用在展示右侧内容
+  extras: {
+    type: Array,
+    default: () => []
+  },
+  // 列表操作组，位置在卡片底部或者最右侧
+  actions: {
+    type: Array,
+    default: () => []
+  }
+});
+const slots = useSlots();
+const prefixCls = inject('prefixCls');
+const pre = ref(prefixCls);
+const attrs = useAttrs();
+const { class: className, ...restAttrs } = attrs;
+const getShowExtra = computed(() => props.extras?.length || slots.extras);
+</script>
+
 <style lang="less" scoped>
 @list-prefix-cls: ~'as-list';
 .@{list-prefix-cls} {
@@ -48,7 +90,7 @@
       }
       &-description {
         color: @text-color-desc;
-        font-size: 14px;
+        font-size: @font-size-base;
         line-height: @line-height-base;
       }
     }
@@ -56,30 +98,15 @@
       flex: 0 0 auto;
       margin-left: 48px;
       padding: 0;
-      font-size: 0;
+      font-size: 14px;
       list-style: none;
 
-      & > li {
+      & > :deep(*) {
         position: relative;
         display: inline-block;
-        padding: 0 10px;
         font-size: @font-size-base;
         line-height: @line-height-base;
         text-align: center;
-
-        &:first-child {
-          padding-left: 0;
-        }
-      }
-
-      &-split {
-        position: absolute;
-        top: 50%;
-        right: 0;
-        width: 1px;
-        height: 14px;
-        margin-top: -7px;
-        background-color: @border-color-split;
       }
     }
   }
@@ -99,19 +126,17 @@
     border-top: 1px solid @border-color-split;
   }
 
-  &-loading &-spin-nested-loading {
-    min-height: 32px;
-  }
-
   &-vertical &-item {
     align-items: initial;
 
     &-main {
       display: block;
       flex: 1;
+      font-size: @font-size-base;
+      line-height: 22px;
     }
 
-    &-extra {
+    &-extras {
       margin-left: 40px;
     }
 
