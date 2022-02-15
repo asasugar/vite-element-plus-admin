@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 22:49:02
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-15 14:42:35
+ * @LastEditTime: 2022-02-15 14:57:44
 -->
 <template>
   <div :class="classString">
@@ -31,16 +31,15 @@ import { useSlots, computed, provide } from 'vue';
 
 // types
 interface Props {
-  dataSource: any;
+  dataSource?: any[];
   header?: string;
   footer?: string;
-  emptyText: string;
-  split: boolean;
-  bordered: boolean;
+  emptyText?: string;
+  split?: boolean;
+  bordered?: boolean;
 }
 // default props
 const props = withDefaults(defineProps<Props>(), {
-  dataSource: [],
   emptyText: 'No Data',
   split: true,
   bordered: false

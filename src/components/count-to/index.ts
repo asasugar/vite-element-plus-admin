@@ -1,3 +1,3 @@
-import AsCountTo from './src/index.vue';
+import AsCountTo from './src/count-to.vue';
 
 export default AsCountTo;

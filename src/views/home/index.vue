@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-07 18:09:34
+ * @LastEditTime: 2022-02-15 16:49:59
 -->
 <template>
   <el-container class="layout-container">
@@ -50,9 +50,10 @@
       </el-header>
 
       <el-main class="bg-gray">
-        <el-scrollbar>
-          <router-view></router-view>
-        </el-scrollbar>
+        <!-- <el-scrollbar> 跟 el-backtop冲突-->
+        <el-backtop target=".el-main"></el-backtop>
+        <router-view></router-view>
+        <!-- </el-scrollbar> -->
       </el-main>
     </el-container>
   </el-container>
@@ -64,7 +65,6 @@ import { useRouter, useRoute, RouteRecordName } from 'vue-router';
 import { Setting } from '@element-plus/icons-vue';
 import { useState } from 'vuex-composition-maphooks';
 import { userService, systemService } from '@/services';
-
 // types
 interface IMenuItem {
   sortId: string;

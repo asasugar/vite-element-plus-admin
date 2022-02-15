@@ -1,3 +1,5 @@
-<template lang="pug">
-router-view
+<template>
+  <router-view></router-view>
 </template>
+
+<script lang="ts" setup></script>

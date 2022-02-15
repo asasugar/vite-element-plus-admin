@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-07 11:18:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-07 17:45:51
+ * @LastEditTime: 2022-02-15 14:55:13
  */
 import * as Mock from 'mockjs';
 import { IConfig } from '../../types';
@@ -53,7 +53,6 @@ export default [
       });
       const { pageNum, pageSize } = config.body;
       const total = list.length;
-      console.log(222, pageNum, (pageNum - 1) * pageSize, pageNum * pageSize);
       const newDataList = list.slice((pageNum - 1) * pageSize, pageNum * pageSize);
       if (pageNum && pageSize) {
         return {
