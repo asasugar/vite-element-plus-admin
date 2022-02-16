@@ -27,14 +27,6 @@ git add .husky/pre-commit
 yarn dev
 ```
 
-## 🙏感谢
-
-- vue@3.2.25
-- vite@2.7.13
-- vuex@4.0.2
-- vue-router@4
-- element-plus@1.3.0-beta.5
-
 该版本的Vuex 在setup 中使用 map*辅助函数，用法，详见[#issues1725](https://github.com/vuejs/vuex/issues/1725)
 
 ```vue
@@ -208,4 +200,9 @@ const { e } = useActions({ 'B/back': 'e' });
 
 # 特别感谢
 
+ - vue@3.2.25
+ - vite@2.7.13
+ - vuex@4.0.2
+ - vue-router@4
+ - element-plus@1.3.0-beta.5
  - vue-vben-admin(Ui参考)
