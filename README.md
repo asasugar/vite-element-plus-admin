@@ -197,3 +197,11 @@ const { e } = useActions({ 'B/back': 'e' });
 `namespace` 非必填，但是设置 `namespaced: true` 必填，并且强烈推荐设置 `namespaced` !!!
 `useState` 第二个参数的 `key` 不能是拼接 `modules name` 的字符串，必须是指定的`state`
 `useGetters` 、`useMutations` 、 `useActions` 第二个参数的 `key` 可以拼接是 `modules name` 的字符串，如上示例
+
+# 部分页面效果
+
+![2022-02-15 18.28.45](https://raw.githubusercontent.com/asasugar/pic-bed/master/imgs/2022-02-15%2018.28.45.gif)
+
+![2022-02-16 10.18.58](https://raw.githubusercontent.com/asasugar/pic-bed/master/imgs/2022-02-16%2010.18.58.gif)
+
+![2022-02-16 10.22.42](https://raw.githubusercontent.com/asasugar/pic-bed/master/imgs/2022-02-16%2010.22.42.gif)
