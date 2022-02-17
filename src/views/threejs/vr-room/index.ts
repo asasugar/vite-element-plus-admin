@@ -1,0 +1,161 @@
+// 在THREEjs中，渲染一个3d世界的必要因素是场景（scene）、相机（camera）、渲染器（this.renderer）。渲染出一个3d世界后，可以往里面增加各种各样的物体、光源等，形成一个3d世界。
+
+import * as THREE from 'three';
+
+const sceneUrlList = [
+  'https://qhyxpicoss.kujiale.com/r/2019/07/01/L3D137S8ENDIADDWAYUI5L7GLUF3P3WS888_3000x4000.jpg?x-oss-process=image/resize,m_fill,w_1600,h_920/format,webp',
+  'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01dead58f03a61a8012049ef124133.jpg%403000w_1l_2o_100sh.jpg&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1636353181&t=8986b8074d4093d2fdc187ee5f562bd0'
+];
+
+export default class VRROOM {
+  sceneUrl: string = sceneUrlList[Math.round(Math.random())];
+  camera!: THREE.PerspectiveCamera;
+  scene!: THREE.Scene;
+  renderer!: THREE.WebGLRenderer;
+  isUserInteracting = true;
+  onPointerDownPointerX = 0;
+  onPointerDownPointerY = 0;
+  lon = 0;
+  onPointerDownLon = 0;
+  lat = 0;
+  onPointerDownLat = 0;
+  phi = 0;
+  theta = 0;
+  target = '';
+  refs: HTMLElement | undefined;
+
+  constructor(target: string, refs?: any) {
+    this.target = target;
+    this.refs = refs;
+    this.init();
+  }
+  init() {
+    const textureLoader = new THREE.TextureLoader();
+
+    textureLoader.load(this.sceneUrl, texture => {
+      texture.mapping = THREE.UVMapping;
+
+      this.initImg(texture);
+      this.render();
+    });
+  }
+  initImg(texture: THREE.Texture) {
+    let container;
+    // 容器宽度、高度
+    const containerWidth = this.refs?.offsetWidth || window.innerWidth;
+    const containerHeight = this.refs?.offsetHeight || window.innerHeight;
+    if (!this.target) {
+      throw new Error(`target is not existed: ${this.target}`);
+    } else {
+      container = document.querySelector<HTMLElement>(this.target);
+    }
+    this.renderer = new THREE.WebGLRenderer({ antialias: true });
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setSize(containerWidth, containerHeight);
+
+    if (container?.childNodes?.length) {
+      const childs = container?.childNodes;
+      container.removeChild(childs[0]);
+      container.appendChild(this.renderer.domElement);
+    } else {
+      container?.appendChild(this.renderer.domElement);
+    }
+
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(60, containerWidth / containerHeight, 1, 1000);
+    const mesh = new THREE.Mesh(
+      new THREE.SphereBufferGeometry(500, 32, 16),
+      new THREE.MeshBasicMaterial({ map: texture })
+    );
+    mesh.geometry.scale(-1, 1, 1);
+    this.scene.add(mesh);
+
+    container?.addEventListener('mousedown', this.onDocumentMouseDown.bind(this), false);
+    container?.addEventListener('mousemove', this.onDocumentMouseMove.bind(this), false);
+    container?.addEventListener('mouseup', this.onDocumentMouseUp.bind(this), false);
+    container?.addEventListener('mousewheel', this.onDocumentMouseWheel.bind(this), false);
+
+    container?.addEventListener('touchstart', this.onDocumentTouchStart.bind(this), false);
+    container?.addEventListener('touchmove', this.onDocumentTouchMove.bind(this), false);
+  }
+  onDocumentMouseDown(event: { preventDefault: () => void; clientX: number; clientY: number }) {
+    event.preventDefault();
+
+    this.isUserInteracting = true;
+
+    this.onPointerDownPointerX = event.clientX;
+    this.onPointerDownPointerY = event.clientY;
+
+    this.onPointerDownLon = this.lon;
+    this.onPointerDownLat = this.lat;
+  }
+
+  onDocumentMouseMove(event: { clientX: number; clientY: number }) {
+    if (this.isUserInteracting) {
+      this.lon = (this.onPointerDownPointerX - event.clientX) * 0.1 + this.onPointerDownLon;
+      this.lat = (event.clientY - this.onPointerDownPointerY) * 0.1 + this.onPointerDownLat;
+      this.render();
+    }
+  }
+
+  onDocumentMouseUp() {
+    this.isUserInteracting = false;
+    this.render();
+  }
+
+  onDocumentMouseWheel(event: any) {
+    this.camera.fov -= event.wheelDeltaY * 0.05;
+    this.camera.updateProjectionMatrix();
+    event = event || window.event;
+    if (event?.stopPropagation) {
+      // 这是取消冒泡
+      event.stopPropagation();
+    } else {
+      event.cancelBubble = true;
+    }
+    if (event?.preventDefault) {
+      // 这是取消默认行为
+      event.preventDefault();
+    } else {
+      event.returnValue = false;
+    }
+    this.render();
+  }
+
+  onDocumentTouchStart(event: any) {
+    if (event?.touches?.length === 1) {
+      event.preventDefault();
+
+      this.onPointerDownPointerX = event.touches[0].pageX;
+      this.onPointerDownPointerY = event.touches[0].pageY;
+
+      this.onPointerDownLon = this.lon;
+      this.onPointerDownLat = this.lat;
+    }
+  }
+
+  onDocumentTouchMove(event: any) {
+    if (event?.touches?.length === 1) {
+      event.preventDefault();
+      this.lon =
+        (this.onPointerDownPointerX - event.touches[0].pageX) * 0.1 + this.onPointerDownLon;
+      this.lat =
+        (event.touches[0].pageY - this.onPointerDownPointerY) * 0.1 + this.onPointerDownLat;
+
+      this.render();
+    }
+  }
+  render() {
+    this.lon += 0.15;
+
+    this.lat = Math.max(-85, Math.min(85, this.lat));
+    this.phi = THREE.MathUtils.degToRad(90 - this.lat);
+    this.theta = THREE.MathUtils.degToRad(this.lon);
+    this.camera.position.x = 100 * Math.sin(this.phi) * Math.cos(this.theta);
+    this.camera.position.y = 100 * Math.cos(this.phi);
+    this.camera.position.z = 100 * Math.sin(this.phi) * Math.sin(this.theta);
+
+    this.camera.lookAt(this.scene.position);
+    this.renderer.render(this.scene, this.camera);
+  }
+}

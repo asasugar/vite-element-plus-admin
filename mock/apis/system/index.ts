@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-14 23:41:29
+ * @LastEditTime: 2022-02-16 17:43:49
  */
 export default [
   // 看板数据
@@ -75,6 +75,15 @@ export default [
                 meta: {
                   title: '工作台'
                 }
+              },
+              {
+                name: 'ThreejsVrRoom',
+                path: '/threejs/vrRoom',
+                title: 'Threejs',
+                component: '/views/threejs/vr-room/index.vue',
+                meta: {
+                  title: 'VR看房'
+                }
               }
             ]
           }
@@ -128,6 +137,20 @@ export default [
                 name: 'TwoDashboardWorkspace',
                 path: '/dashboard/workspace',
                 title: 'Two工作台'
+              }
+            ]
+          },
+          {
+            sortId: '3',
+            name: 'Threejs',
+            path: '',
+            title: 'Threejs',
+            children: [
+              {
+                sortId: '3-1',
+                name: 'ThreejsVrRoom',
+                path: '/threejs/vrRoom',
+                title: 'VR看房'
               }
             ]
           }

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-15 15:26:56
+ * @LastEditTime: 2022-02-17 11:56:39
 -->
 <template>
   <el-card class="card-wrapper" :body-style="{ padding: '0' }">
@@ -16,6 +16,16 @@
       </div>
     </template>
     <el-skeleton animated :loading="loading">
+      <template #template>
+        <div class="flex center mt20 mb20">
+          <div class="flex column flex__item">
+            <el-skeleton-item variant="p" class="m10" />
+            <el-skeleton-item variant="p" class="m10" />
+            <el-skeleton-item variant="p" class="m10" />
+          </div>
+          <el-skeleton-item variant="image" style="width: 272px; height: 168px; margin: 0 20px" />
+        </div>
+      </template>
       <as-list :data-source="data">
         <template #header>
           <div>
