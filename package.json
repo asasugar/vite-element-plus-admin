@@ -11,7 +11,7 @@
     "prepare": "husky install",
     "lint-staged": "lint-staged",
     "predeploy": "cp CNAME ./dist",
-    "deploy": "gh-pages -d ./dist"
+    "deploy": "gh-pages -b 'vite-element-plus-admin' -d ./dist"
   },
   "lint-staged": {
     "src/**/*.{js,ts,vue}": "yarn lint"
