@@ -10,3 +10,8 @@ declare module '*.vue' {
 declare module 'qs';
 
 declare module 'mockjs';
+
+declare module '*.json' {
+  const value: any;
+  export default value;
+}
