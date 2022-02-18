@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:26:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-17 11:58:31
+ * @LastEditTime: 2022-02-18 18:22:24
 -->
 <template>
   <div class="login">
@@ -110,8 +110,7 @@ const submitForm = () => {
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: @bg-color;
-  background-image: linear-gradient(25deg, #077f7c, #3aa693, #5ecfaa, #7ffac2);
+  background-image: linear-gradient(25deg, @bg-color, @theme-color);
 
   .login-container {
     width: 420px;

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-16 17:43:49
+ * @LastEditTime: 2022-02-18 18:25:14
  */
 export default [
   // 看板数据
@@ -77,9 +77,24 @@ export default [
                 }
               },
               {
+                name: 'ComponentMarkdown',
+                path: '/component/markdown',
+                component: '/views/component/markdown/index.vue',
+                meta: {
+                  title: 'Markdown 演示'
+                }
+              },
+              {
+                name: 'ComponentJSON',
+                path: '/component/json',
+                component: '/views/component/json-edit/index.vue',
+                meta: {
+                  title: 'JSON编辑器 演示'
+                }
+              },
+              {
                 name: 'ThreejsVrRoom',
                 path: '/threejs/vrRoom',
-                title: 'Threejs',
                 component: '/views/threejs/vr-room/index.vue',
                 meta: {
                   title: 'VR看房'
@@ -122,21 +137,21 @@ export default [
           },
           {
             sortId: '2',
-            name: 'Two',
+            name: '组件演示',
             path: '',
-            title: 'Two',
+            title: 'Component',
             children: [
               {
                 sortId: '2-1',
-                name: 'TwoDashboardAnalysis',
-                path: '/dashboard/analysis',
-                title: 'Two分析页'
+                name: 'ComponentMarkdown',
+                path: '/component/markdown',
+                title: 'Markdown 演示'
               },
               {
                 sortId: '2-2',
-                name: 'TwoDashboardWorkspace',
-                path: '/dashboard/workspace',
-                title: 'Two工作台'
+                name: 'ComponentJSON',
+                path: '/component/json',
+                title: 'JSON编辑器 演示'
               }
             ]
           },

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-17 11:44:43
+ * @LastEditTime: 2022-02-18 18:30:59
 -->
 <template>
   <el-row :gutter="12">
@@ -13,6 +13,7 @@
     </el-col>
     <el-col :span="8">
       <quick-nav :data="navList" :loading="loading" />
+      <desk-top class="mt15" />
     </el-col>
   </el-row>
 </template>
@@ -20,6 +21,8 @@
 import Project from './components/project.vue';
 import QuickNav from './components/quick-nav.vue';
 import LatestNews from './components/latest-news.vue';
+import DeskTop from './components/desk-top.vue';
+
 import type { IProjectItem, INavItem, INewsItem } from '../types';
 
 // types

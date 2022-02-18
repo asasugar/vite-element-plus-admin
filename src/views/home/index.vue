@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-15 16:49:59
+ * @LastEditTime: 2022-02-18 18:20:08
 -->
 <template>
   <el-container class="layout-container">
@@ -30,15 +30,15 @@
     </el-aside>
 
     <el-container>
-      <el-header class="flex center between pos-r f12 bg-theme color-white">
+      <el-header class="home-header flex center between pos-r f12 color-black">
         <el-breadcrumb separator="/">
           <el-breadcrumb-item v-for="item in breadcrumb" :key="item">
-            <span class="color-white">{{ item }}</span>
+            <span class="color-gray3">{{ item }}</span>
           </el-breadcrumb-item>
         </el-breadcrumb>
-        <div class="toolbar">
+        <div class="home-toolbar color-gray3">
           <el-dropdown>
-            <setting color="#fff" class="mr10" />
+            <setting class="mr10 color-gray3" />
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item @click="handleLogout">注销</el-dropdown-item>
@@ -160,9 +160,12 @@ const handleToMenu = (item: { name: string; path: string }, title: string, subTi
   .el-main {
     padding: 0;
   }
-  .toolbar {
+  .home-toolbar {
     display: inline-flex;
     align-items: end;
+  }
+  .home-header {
+    background-image: linear-gradient(25deg, @bg-color, @theme-color);
   }
 }
 </style>
