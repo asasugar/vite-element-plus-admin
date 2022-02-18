@@ -43,7 +43,10 @@ export default defineConfig({
     Components({
       resolvers: [ElementPlusResolver()]
     })
-  ]
+  ],
+  build: {
+    target: 'esnext'
+  }
   // optimizeDeps: {
   //   include: ['element-plus']
   // }
