@@ -9,7 +9,9 @@
     "lint": "eslint . --fix --ext .js,.ts,.vue",
     "log": "standard-version",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "predeploy": "cp CNAME ./dist",
+    "deploy": "gh-pages -d ./dist"
   },
   "lint-staged": {
     "src/**/*.{js,ts,vue}": "yarn lint"
@@ -40,6 +42,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.3.0",
+    "gh-pages": "^3.2.3",
     "husky": "^7.0.4",
     "less": "^4.1.2",
     "lint-staged": "^12.1.7",
