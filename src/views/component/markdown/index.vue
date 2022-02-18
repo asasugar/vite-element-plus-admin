@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-18 14:59:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-18 18:34:46
+ * @LastEditTime: 2022-02-18 18:57:26
 -->
 <template>
   <as-page-wrapper header-title="Markdown 组件演示">
@@ -23,6 +23,7 @@
       />
       <el-input
         v-model="cardContent"
+        class="mt10"
         :rows="10"
         :autosize="{ minRows: 6, maxRows: 10 }"
         type="textarea"
