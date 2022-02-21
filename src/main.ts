@@ -1,18 +1,18 @@
 import { createApp } from 'vue';
 import App from '@/App.vue';
-import router from '@/router';
-import store from '@/store';
+import { setupRouter } from '@/router';
+import { setupStore, store } from '@/store';
 import { setupGlobDirectives } from '@/directives';
 import '@/style/common.less';
-import { mockXHR } from '../mock';
 import 'element-plus/es/components/message/style/css';
 import 'element-plus/es/components/notification/style/css';
-import { registerDynamicRoutes } from '@/router/dynamic';
 import SDK from '@/services';
-mockXHR(); // mock接口
-await registerDynamicRoutes(); // 初始化/刷新的时候注册动态路由
+
 const app = createApp(App);
+
 setupGlobDirectives(app); // 注册自定义指令
+setupRouter(app); // 注册路由（静态+动态）
+setupStore(app); // 注册Vuex
 
 const { user } = await SDK.init();
 if (user) {
@@ -20,4 +20,4 @@ if (user) {
   store.dispatch('user/asyncSetUserinfo', user);
 }
 
-app.use(router).use(store).mount('#app');
+app.mount('#app');

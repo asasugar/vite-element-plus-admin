@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-18 18:25:14
+ * @LastEditTime: 2022-02-21 18:29:46
  */
 export default [
   // 看板数据
@@ -54,7 +54,7 @@ export default [
           {
             name: 'Home',
             path: '/',
-            component: '/views/home/index.vue',
+            component: 'views/home/index',
             meta: {
               title: '首页'
             },
@@ -63,7 +63,7 @@ export default [
               {
                 name: 'DashboardAnalysis',
                 path: '/dashboard/analysis',
-                component: '/views/dashboard/analysis/index.vue',
+                component: 'views/dashboard/analysis/index',
                 meta: {
                   title: '分析页'
                 }
@@ -71,7 +71,7 @@ export default [
               {
                 name: 'DashboardWorkspace',
                 path: '/dashboard/workspace',
-                component: '/views/dashboard/workspace/index.vue',
+                component: 'views/dashboard/workspace/index',
                 meta: {
                   title: '工作台'
                 }
@@ -79,7 +79,7 @@ export default [
               {
                 name: 'ComponentMarkdown',
                 path: '/component/markdown',
-                component: '/views/component/markdown/index.vue',
+                component: 'views/component/markdown/index',
                 meta: {
                   title: 'Markdown 演示'
                 }
@@ -87,7 +87,7 @@ export default [
               {
                 name: 'ComponentJSON',
                 path: '/component/json',
-                component: '/views/component/json-edit/index.vue',
+                component: 'views/component/json-edit/index',
                 meta: {
                   title: 'JSON编辑器 演示'
                 }
@@ -95,7 +95,7 @@ export default [
               {
                 name: 'ThreejsVrRoom',
                 path: '/threejs/vrRoom',
-                component: '/views/threejs/vr-room/index.vue',
+                component: 'views/threejs/vr-room/index',
                 meta: {
                   title: 'VR看房'
                 }

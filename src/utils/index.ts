@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-07 18:28:20
+ * @LastEditTime: 2022-02-21 19:14:47
  */
 import Qs from 'qs';
 
@@ -74,7 +74,7 @@ export function isValidMap(map: any) {
 export function dynamicImport(component: string) {
   const componentStr = component.replace(/^\/+/, ''), // 过滤字符串前面所有 '/' 字符
     componentPath = componentStr.replace(/\.\w+$/, ''); // 过滤掉后缀名，为了让 import 加入 .vue
-  return () => import('../' + componentPath + '.vue');
+  return () => import(/* webpackChunkName: "NotFound" */ '../' + componentPath + '.vue');
 }
 
 /**
