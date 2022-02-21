@@ -1121,6 +1121,11 @@ detect-newline@^3.1.0:
   resolved "https://registry.npmmirror.com/detect-newline/download/detect-newline-3.1.0.tgz"
   integrity sha1-V29d/GOuGhkv8ZLYrTr2MImRtlE=
 
+diff-match-patch@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/diff-match-patch/-/diff-match-patch-1.0.5.tgz#abb584d5f10cd1196dfc55aa03701592ae3f7b37"
+  integrity sha512-IayShXAgj/QMXgB0IWmKx+rOPuGMhqm5w6jvFxmVenXKIzRqTAAsbBPT3kWQeGANj3jGgvcvv4yK6SxqYmikgw==
+
 dir-glob@^3.0.1:
   version "3.0.1"
   resolved "https://registry.nlark.com/dir-glob/download/dir-glob-3.0.1.tgz"
@@ -3521,6 +3526,13 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
+
+vditor@^3.8.11:
+  version "3.8.11"
+  resolved "https://registry.yarnpkg.com/vditor/-/vditor-3.8.11.tgz#cf0684446807a308eb53874a2647ba98927cd0dd"
+  integrity sha512-nwS2TLgu3DnHdfxcjnUESg/qbnYU0YR9YAvn2IKBK/F36h4k1BMqjsfEQqE4TL2RH5RGIapcQfAdJ9xF1iQNWw==
+  dependencies:
+    diff-match-patch "^1.0.5"
 
 vite@^2.7.13:
   version "2.7.13"

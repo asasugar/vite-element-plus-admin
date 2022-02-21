@@ -46,6 +46,9 @@ export default defineConfig({
   ],
   build: {
     target: 'esnext'
+  },
+  preview: {
+    host: true
   }
   // optimizeDeps: {
   //   include: ['element-plus']
