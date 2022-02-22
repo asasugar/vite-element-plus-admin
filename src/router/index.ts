@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:12:02
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-22 16:13:53
+ * @LastEditTime: 2022-02-22 17:42:57
  */
 
 import {
@@ -35,7 +35,10 @@ const routes: RouteRecordRaw[] = [
   {
     name: 'NotFound',
     path: '/:pathMatch(.*)*',
-    component: () => import(/* webpackChunkName: "NotFound" */ '../views/error/error-404.vue')
+    component: () => import(/* webpackChunkName: "NotFound" */ '../views/error/error-404.vue'),
+    meta: {
+      title: '404'
+    }
   }
 ];
 
