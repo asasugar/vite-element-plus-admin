@@ -6,6 +6,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "build:debug": "vue-tsc --noEmit && vite build --debug",
     "preview": "vite preview",
+    "analyzer": "vue-tsc --noEmit && vite build --mode analyzer",
     "lint": "eslint . --fix --ext .js,.ts,.vue",
     "log": "standard-version",
     "prepare": "husky install",

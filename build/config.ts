@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-22 14:56:12
+ * @LastEditTime: 2022-02-22 15:22:01
  */
 import vue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
@@ -45,16 +45,7 @@ const Config = {
     }),
     Components({
       resolvers: [ElementPlusResolver()]
-    }),
-    {
-      ...visualizer({
-        gzipSize: true,
-        json: true,
-        open: true
-      }),
-      enforce: 'post',
-      apply: 'build'
-    }
+    })
   ],
   build: {
     target: 'esnext',
@@ -74,4 +65,15 @@ const Config = {
     host: true
   }
 };
-export default Config;
+export function getConfig({ command, mode }) {
+  console.log(`vite command: ${command}, vite mode: ${mode}`);
+  if (mode === 'analyzer') {
+    Config.plugins.push({
+      ...visualizer({
+        gzipSize: true,
+        open: true
+      })
+    });
+  }
+  return Config;
+}
