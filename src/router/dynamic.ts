@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-24 19:50:56
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-22 12:01:28
+ * @LastEditTime: 2022-02-22 14:44:38
  */
 
 import { ElLoading } from 'element-plus';
@@ -13,9 +13,9 @@ import { IRoutes } from './types';
 import type { RouteRecordRaw } from 'vue-router';
 
 /**
- * 标准化动态路由
+ * 标准化动态路由[已弃用！！]
  */
-
+// dev可用，build之后报错（Error: Unknown variable dynamic import），改用import.meta.glob的方式
 export const normalizeaRoutes = (routes: IRoutes[] | RouteRecordRaw[]) => {
   return routes.map(item => {
     if (item.path && item.component) {
@@ -52,7 +52,7 @@ export const getViewComponent = () => {
   const COMPONENTS_KEY = 'components'; // 过滤views文件下components命名的文件夹
   const BEFOREFIX = '../';
   const AFTERFIX = '.vue';
-  const components: Record<string, () => Promise<{ [key: string]: any }>> = {};
+  const components: any = {};
 
   const viewKeys = Object.keys(modules).filter(key => !key.includes(COMPONENTS_KEY));
   viewKeys.forEach(key => {
@@ -70,8 +70,6 @@ export const registerDynamicRoutes = async () => {
     const loading = ElLoading.service();
     // mockjs模拟后端请求数据
     const routes = await systemService.getRoute();
-    console.log(1, routes);
-
     loading.close();
     return normalizeaRoutesUseGlob(routes);
     // return normalizeaRoutes(routes);

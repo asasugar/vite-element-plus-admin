@@ -15,7 +15,6 @@ const global = {
   },
   mutations: {
     INCREMENT(state: { count: number }) {
-      console.log(44);
       state.count++;
     },
     DECREMENT(state: { count: number }) {

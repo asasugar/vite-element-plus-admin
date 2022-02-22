@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:12:02
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-22 11:59:34
+ * @LastEditTime: 2022-02-22 14:43:51
  */
 
 import {
@@ -21,7 +21,7 @@ import { mockXHR } from '../../mock';
 mockXHR(); // mock接口
 
 // 基础路由
-const dynamicRoutes = (await registerDynamicRoutes()) as RouteRecordRaw[]; // dev可用，build之后报错（Error: Unknown variable dynamic import），后期用硬编码或import.meta.glob的方式去兼容
+const dynamicRoutes = (await registerDynamicRoutes()) as RouteRecordRaw[];
 const routes: RouteRecordRaw[] = [
   {
     name: 'Login',

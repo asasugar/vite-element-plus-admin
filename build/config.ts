@@ -3,12 +3,13 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-21 19:21:43
+ * @LastEditTime: 2022-02-22 14:56:12
  */
 import vue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import visualizer from 'rollup-plugin-visualizer';
 import { pathResolve } from './utils';
 
 const Config = {
@@ -44,10 +45,30 @@ const Config = {
     }),
     Components({
       resolvers: [ElementPlusResolver()]
-    })
+    }),
+    {
+      ...visualizer({
+        gzipSize: true,
+        json: true,
+        open: true
+      }),
+      enforce: 'post',
+      apply: 'build'
+    }
   ],
   build: {
-    target: 'esnext'
+    target: 'esnext',
+    cssTarget: 'chrome61',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'element-plus': ['element-plus'],
+          echarts: ['echarts'],
+          mockjs: ['mockjs'],
+          three: ['three']
+        }
+      }
+    }
   },
   preview: {
     host: true
