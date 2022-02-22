@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-24 19:50:56
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-21 19:09:33
+ * @LastEditTime: 2022-02-22 12:01:28
  */
 
 import { ElLoading } from 'element-plus';
@@ -16,7 +16,7 @@ import type { RouteRecordRaw } from 'vue-router';
  * 标准化动态路由
  */
 
-const normalizeaRoutes = (routes: IRoutes[] | RouteRecordRaw[]) => {
+export const normalizeaRoutes = (routes: IRoutes[] | RouteRecordRaw[]) => {
   return routes.map(item => {
     if (item.path && item.component) {
       if (typeof item.component === 'string') {
@@ -31,6 +31,37 @@ const normalizeaRoutes = (routes: IRoutes[] | RouteRecordRaw[]) => {
 };
 
 /**
+ * 标准化动态路由 [import.meta.glob]
+ */
+export const normalizeaRoutesUseGlob = (routes: IRoutes[] | RouteRecordRaw[]) => {
+  const components = getViewComponent();
+  return routes.map(item => {
+    if (item.path && item.component) {
+      if (typeof item.component === 'string') {
+        item.component = components[item.component];
+      }
+    }
+    if (item?.children?.length) {
+      normalizeaRoutesUseGlob(item.children);
+    }
+    return item;
+  });
+};
+export const getViewComponent = () => {
+  const modules = import.meta.glob('../views/**/*.vue');
+  const COMPONENTS_KEY = 'components'; // 过滤views文件下components命名的文件夹
+  const BEFOREFIX = '../';
+  const AFTERFIX = '.vue';
+  const components: Record<string, () => Promise<{ [key: string]: any }>> = {};
+
+  const viewKeys = Object.keys(modules).filter(key => !key.includes(COMPONENTS_KEY));
+  viewKeys.forEach(key => {
+    const routeKey = key.replace(BEFOREFIX, '').replace(AFTERFIX, '');
+    components[routeKey] = modules[key];
+  });
+  return components;
+};
+/**
  * 注册路由
  * 用户切换账号需移除 sessionStorage 中的 routerMap 数据
  */
@@ -39,8 +70,11 @@ export const registerDynamicRoutes = async () => {
     const loading = ElLoading.service();
     // mockjs模拟后端请求数据
     const routes = await systemService.getRoute();
+    console.log(1, routes);
+
     loading.close();
-    return normalizeaRoutes(routes);
+    return normalizeaRoutesUseGlob(routes);
+    // return normalizeaRoutes(routes);
   } catch (error) {
     return [];
   }
