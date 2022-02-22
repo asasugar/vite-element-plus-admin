@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:46:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-21 19:08:28
+ * @LastEditTime: 2022-02-22 16:02:03
  */
 import * as Mock from 'mockjs';
 import { IConfig, IType } from './types';
@@ -31,7 +31,7 @@ export function mockXHR() {
   for (i of apis) {
     // 生成mock模拟api
     Mock.mock(
-      new RegExp(import.meta.env.VITE_BASE_URL + i.url),
+      new RegExp(`${import.meta.env.VITE_BASE_URL}${import.meta.env.VITE_REPO_URL}${i.url}`),
       i.type || 'get',
       XHRreq(i.response)
     );

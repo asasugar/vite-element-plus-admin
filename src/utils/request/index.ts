@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-07 18:21:55
+ * @LastEditTime: 2022-02-22 16:04:41
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -45,7 +45,7 @@ const responseHandle: { [x: number | string]: (arg0: any) => void } = {
 };
 
 const axios: any = Axios.create({
-  baseURL: (import.meta as any).env.VITE_BASE_URL || '',
+  baseURL: `${import.meta.env.VITE_BASE_URL}${import.meta.env.VITE_REPO_URL}` || '',
   timeout: 50000
 });
 axios.defaults.headers['content-type'] = 'application/json';

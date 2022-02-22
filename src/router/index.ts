@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:12:02
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-22 14:43:51
+ * @LastEditTime: 2022-02-22 16:13:53
  */
 
 import {
@@ -40,7 +40,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(), // hash模式：createWebHashHistory，history模式：createWebHistory
+  history: createWebHistory((import.meta as any).env.VITE_REPO_URL), // hash模式：createWebHashHistory，history模式：createWebHistory
   routes
 });
 
