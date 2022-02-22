@@ -1,0 +1,31 @@
+<!--
+ * @Description: 由于项目部署github pages 并且使用了history路由，所以用于重定向
+ * @Author: Xiongjie.Xue(xxj95719@gmail.com)
+ * @Date: 2022-02-22 16:31:27
+ * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
+ * @LastEditTime: 2022-02-22 16:32:38
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Single Page Apps for GitHub Pages</title>
+  <script type="text/javascript">
+    var pathSegmentsToKeep = 0;
+
+    var l = window.location;
+    l.replace(
+      l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+      l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+      l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+      (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+      l.hash
+    );
+  </script>
+</head>
+
+<body>
+</body>
+
+</html>

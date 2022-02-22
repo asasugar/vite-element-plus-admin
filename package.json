@@ -11,7 +11,7 @@
     "log": "standard-version",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
-    "predeploy": "cp CNAME ./dist",
+    "predeploy": "cp CNAME 404.html ./dist",
     "deploy": "gh-pages -b 'vite-element-plus-admin' -d ./dist"
   },
   "lint-staged": {
