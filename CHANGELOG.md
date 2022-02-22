@@ -2,6 +2,76 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.7...v0.0.8) (2022-02-22)
+
+
+### Features
+
+* 🎸 add AsMousemovePanel comp ([c91fc19](https://github.com/asasugar/vite-element-plus-admin/commit/c91fc19502b75b6edb0807fd28968891d79ff2c4))
+* 🎸 add back-top ([133f89d](https://github.com/asasugar/vite-element-plus-admin/commit/133f89d050f654853eeb4f7aedb259844650f9a0))
+* 🎸 add breadcrumb ([3a80983](https://github.com/asasugar/vite-element-plus-admin/commit/3a8098332ead66e8382974ee38f59082b4af323d))
+* 🎸 Add CountTo comp ([d984f5d](https://github.com/asasugar/vite-element-plus-admin/commit/d984f5dea21011700bf734a9460c4fe96422736f))
+* 🎸 Add CountTo comp ([0ac8c7d](https://github.com/asasugar/vite-element-plus-admin/commit/0ac8c7d52d2c3f884a6fb9610b8917bf2dc52646))
+* 🎸 add List comp ([937fa7d](https://github.com/asasugar/vite-element-plus-admin/commit/937fa7d4d954072ad9413633abb3928b70458c0e))
+* 🎸 add ListItem / ListItemMeta ([5e3562d](https://github.com/asasugar/vite-element-plus-admin/commit/5e3562d26de335c38be893558a93a2d2978a07fa))
+* 🎸 add markdown component ([0d531ed](https://github.com/asasugar/vite-element-plus-admin/commit/0d531edf9b903862631b2a0f1f92a5338d30f54f))
+* 🎸 add rollup-plugin-visualizer ([c39ea5e](https://github.com/asasugar/vite-element-plus-admin/commit/c39ea5e26d1ac53a628ed17a08a1123bdb17c70d))
+* 🎸 add svg ([777b907](https://github.com/asasugar/vite-element-plus-admin/commit/777b9072019e01b01dc14b9193d9bf96108ae021))
+* 🎸 add useECharts ([f314f02](https://github.com/asasugar/vite-element-plus-admin/commit/f314f02728fceaa950a9b5cc1e574cfad1d0ddb4))
+* 🎸 add useGetters useMutations helper lib ([7210ed6](https://github.com/asasugar/vite-element-plus-admin/commit/7210ed66ea1ccfbc74be5a7a233c1143cfbdb39f))
+* 🎸 add useState ([e84ea17](https://github.com/asasugar/vite-element-plus-admin/commit/e84ea176c806899efc9713ce499dc005256046b3))
+* 🎸 add vditor ([466918a](https://github.com/asasugar/vite-element-plus-admin/commit/466918ad35b267280d119d814c18a2869b25fc5c))
+* 🎸 add VR Room ([21ec683](https://github.com/asasugar/vite-element-plus-admin/commit/21ec68397d92e212fd39be4d3c68b8bdd9f10415))
+* 🎸 Clear session on exit ([5eeeb59](https://github.com/asasugar/vite-element-plus-admin/commit/5eeeb5969952a15339b2570765c47b41b7778ef4))
+
+
+### Bug Fixes
+
+* 🐛 bug fix ([a14b53e](https://github.com/asasugar/vite-element-plus-admin/commit/a14b53eff4a6d4ec5e7013f61715264f4c5cf895))
+* 🐛 bug fix ([1d78d95](https://github.com/asasugar/vite-element-plus-admin/commit/1d78d95c0c92cb65087f144532898eba4bf77547))
+* 🐛 bug fix ([4c6ded4](https://github.com/asasugar/vite-element-plus-admin/commit/4c6ded45f1666651b9aae88d98e3bc3445fd7fbc))
+* 🐛 bug fix ([1acd714](https://github.com/asasugar/vite-element-plus-admin/commit/1acd714a8954ec8cf7b1d737b98af4de7b18a8aa))
+* 🐛 fix lint-staged options ([88bb40c](https://github.com/asasugar/vite-element-plus-admin/commit/88bb40c2220c2551533c5a22dffe64d75dbcf6eb))
+
+
+### Others
+
+* 🤖 add node version ([031ad67](https://github.com/asasugar/vite-element-plus-admin/commit/031ad67e62c250b5cce8f7cca5abfe77a8bcae96))
+* 🤖 update vuex-composition-maphooks@1.0.1 ([1ab3fdf](https://github.com/asasugar/vite-element-plus-admin/commit/1ab3fdf2c3439d177574518d66e9308da8136e58))
+* 🤖 vuex-composition-maphooks from 1.0.1 to 1.0.2 ([1cead46](https://github.com/asasugar/vite-element-plus-admin/commit/1cead466a623696519246a4446fcb6c073f80743))
+
+
+### Docs
+
+* ✏️ add preview pic ([7196526](https://github.com/asasugar/vite-element-plus-admin/commit/7196526328478e4df5c99eb80e904fde2d2ef462))
+
+
+### Code Refactoring
+
+* 💡 目录结构重构 ([4b88a1f](https://github.com/asasugar/vite-element-plus-admin/commit/4b88a1f8f481ec4abbcb5bcdb0c459572bce8b71))
+* 💡 组件结构重构 ([df6d040](https://github.com/asasugar/vite-element-plus-admin/commit/df6d0403d241c964eaab405f5c4d8d36d84c5f99))
+* 💡 add gh-pages ([7e16177](https://github.com/asasugar/vite-element-plus-admin/commit/7e161777bbc98bd5ac9932bab983e20f533f6c72))
+* 💡 add vite build --debug ([27c59d1](https://github.com/asasugar/vite-element-plus-admin/commit/27c59d1cb8cc083a39379cc90a5aed22cc55facf))
+* 💡 Extract vuex-hooks  package into npm plugin ([ec95ee6](https://github.com/asasugar/vite-element-plus-admin/commit/ec95ee67e85af4782965d442e34a09bf4028aea3))
+* 💡 refactor dynamicRoutes ([30bf5d1](https://github.com/asasugar/vite-element-plus-admin/commit/30bf5d12257f8215af2d8b29f4fbc72f48f39dcb))
+* 💡 rewrite breadcrumb ([609cabf](https://github.com/asasugar/vite-element-plus-admin/commit/609cabffa11b09235eebee7a28a527ff346e96e8))
+* 💡 use import.meta.glob ([2fcbe11](https://github.com/asasugar/vite-element-plus-admin/commit/2fcbe11054c25fdf9be56cb65cfa1221d2d3ca0c))
+* 💡 use import.meta.glob refactor dynamic routes ([eb862a8](https://github.com/asasugar/vite-element-plus-admin/commit/eb862a8eb026d2b5fc74565c2c4b0deeff035e27))
+* 💡 use lib fn ([f44e6e4](https://github.com/asasugar/vite-element-plus-admin/commit/f44e6e45488d121838b2dabb61861ac088bedaca))
+
+
+### Styling
+
+* 💄 add Gird\GridItem ([50911e2](https://github.com/asasugar/vite-element-plus-admin/commit/50911e258d2a15dc6e7fdc9d4ce68772b677a80b))
+* 💄 add page container ([e82cbd4](https://github.com/asasugar/vite-element-plus-admin/commit/e82cbd4b6d341183e337d2a997e381afab61e2e5))
+* 💄 eslint fix ([c741f88](https://github.com/asasugar/vite-element-plus-admin/commit/c741f88b8f0a1ac1b32d7f8c7f6eaeeb10f6fb10))
+
+
+### CI
+
+* 🎡 配置站点repo，部署静态页面 ([1408b02](https://github.com/asasugar/vite-element-plus-admin/commit/1408b02771b9b95cdde507d8dddf047a50bee131))
+* 🎡 add 404.html ([7190a36](https://github.com/asasugar/vite-element-plus-admin/commit/7190a361191bb609ad3a77bd0452cc530d92c898))
+
 ### [0.0.7](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.6...v0.0.7) (2022-01-25)
 
 
