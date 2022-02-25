@@ -28,6 +28,7 @@
     "three": "^0.137.5",
     "vditor": "^3.8.11",
     "vue": "^3.2.25",
+    "vue-json-pretty": "^2.0.6",
     "vue-router": "4",
     "vuex": "^4.0.2",
     "vuex-composition-maphooks": "^1.0.2"
