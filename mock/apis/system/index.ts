@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-21 18:29:46
+ * @LastEditTime: 2022-02-25 18:38:58
  */
 export default [
   // 看板数据
@@ -99,6 +99,30 @@ export default [
                 meta: {
                   title: 'VR看房'
                 }
+              },
+              {
+                name: 'SystemUser',
+                path: '/system/user',
+                component: 'views/system/user/index',
+                meta: {
+                  title: '用户管理'
+                }
+              },
+              {
+                name: 'SystemRole',
+                path: '/system/role',
+                component: 'views/system/role/index',
+                meta: {
+                  title: '角色管理'
+                }
+              },
+              {
+                name: 'SystemAuth',
+                path: '/system/auth',
+                component: 'views/system/auth/index',
+                meta: {
+                  title: '权限管理'
+                }
               }
             ]
           }
@@ -137,9 +161,9 @@ export default [
           },
           {
             sortId: '2',
-            name: '组件演示',
+            name: 'Component',
             path: '',
-            title: 'Component',
+            title: '组件演示',
             children: [
               {
                 sortId: '2-1',
@@ -159,13 +183,39 @@ export default [
             sortId: '3',
             name: 'Threejs',
             path: '',
-            title: 'Threejs',
+            title: 'three.js应用',
             children: [
               {
                 sortId: '3-1',
                 name: 'ThreejsVrRoom',
                 path: '/threejs/vrRoom',
                 title: 'VR看房'
+              }
+            ]
+          },
+          {
+            sortId: '4',
+            name: 'System',
+            path: '',
+            title: '系统管理',
+            children: [
+              {
+                sortId: '4-1',
+                name: 'SystemUser',
+                path: '/system/user',
+                title: '用户管理'
+              },
+              {
+                sortId: '4-2',
+                name: 'SystemRole',
+                path: '/system/role',
+                title: '角色管理'
+              },
+              {
+                sortId: '4-3',
+                name: 'SystemAuth',
+                path: '/system/auth',
+                title: '权限管理'
               }
             ]
           }
