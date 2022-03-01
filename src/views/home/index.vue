@@ -162,7 +162,7 @@ const handleToMenu = (item: { name: string; path: string }, title: string, subTi
   }
   .home-toolbar {
     display: inline-flex;
-    align-items: end;
+    align-items: flex-end;
   }
   .home-header {
     background-image: linear-gradient(25deg, @bg-color, @theme-color);

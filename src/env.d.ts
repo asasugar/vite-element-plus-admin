@@ -11,8 +11,6 @@ declare module 'qs';
 
 declare module 'mockjs';
 
-declare module 'vue-json-pretty';
-
 declare module '*.json' {
   const value: any;
   export default value;

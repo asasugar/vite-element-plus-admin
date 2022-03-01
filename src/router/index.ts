@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:12:02
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-22 17:42:57
+ * @LastEditTime: 2022-03-01 18:22:47
  */
 
 import {
@@ -49,7 +49,7 @@ const router = createRouter({
 
 // 路由守卫
 router.beforeEach(
-  (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+  (to: RouteLocationNormalized, _from: RouteLocationNormalized, next: NavigationGuardNext) => {
     document.title = `${to.meta.title} - Vite App`;
     if (to.name === 'Login') {
       // 到登录页，重置token凭证, 清除session里的动态路由

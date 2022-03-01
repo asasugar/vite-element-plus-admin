@@ -1,24 +1,33 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "useDefineForClassFields": true,
     "module": "esnext",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "useDefineForClassFields": true,
+    "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "strict": true,
+    "strictFunctionTypes": false,
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
     "lib": ["esnext", "dom"],
     "types": [
       "element-plus/global",
       "node"
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "_c": ["./src/components/*"]
     }
   },
   "include": ["src", "mock"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

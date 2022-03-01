@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-22 15:59:53
+ * @LastEditTime: 2022-03-01 17:12:29
  */
 import { loadEnv, UserConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
