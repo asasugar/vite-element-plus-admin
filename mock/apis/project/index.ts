@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-07 11:18:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-18 10:20:05
+ * @LastEditTime: 2022-03-08 15:37:01
  */
 import * as Mock from 'mockjs';
 import { IConfig } from '../../types';

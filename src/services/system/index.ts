@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 14:00:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-14 23:42:02
+ * @LastEditTime: 2022-03-08 15:43:06
  */
 import request from '@/utils/request';
 
@@ -51,6 +51,16 @@ class SystemService {
    */
   async getLatestNews() {
     const { success, result } = await request.get('/sys/getLatestNews');
+    if (success) return result;
+    return null;
+  }
+  /**
+   * 获取角色列表
+   * @param data
+   * @returns {Array}
+   */
+  async getRoleList(data) {
+    const { success, result } = await request.get('/sys/getRoleList', { data });
     if (success) return result;
     return null;
   }

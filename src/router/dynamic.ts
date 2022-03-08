@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-24 19:50:56
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-22 16:08:12
+ * @LastEditTime: 2022-03-08 16:49:37
  */
 
 import { ElLoading } from 'element-plus';
@@ -70,7 +70,6 @@ export const registerDynamicRoutes = async () => {
     const loading = ElLoading.service();
     // mockjs模拟后端请求数据
     const routes = await systemService.getRoute();
-    console.log(1, routes);
     loading.close();
     return normalizeaRoutesUseGlob(routes);
     // return normalizeaRoutes(routes);

@@ -3,8 +3,27 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-25 18:38:58
+ * @LastEditTime: 2022-03-08 17:04:22
  */
+import * as Mock from 'mockjs';
+import { IConfig } from '../../types';
+
+const Random = Mock.Random;
+
+Random.extend({
+  prole: function () {
+    const hashMap = [
+      { key: 'superAdmin', value: '超级管理员' },
+      { key: 'admin', value: '管理员' },
+      { key: 'operation', value: '运营人员' },
+      { key: 'test', value: '测试人员' },
+      { key: 'development', value: '研发人员' },
+      { key: 'boss', value: '老板' }
+    ];
+    return this.pick(hashMap);
+  }
+});
+
 export default [
   // 看板数据
   {
@@ -290,6 +309,52 @@ export default [
         result: listData,
         code: 200
       };
+    }
+  },
+  // 获取角色列表
+  {
+    url: 'sys/getRoleList',
+    type: 'get',
+    response: (config: IConfig) => {
+      const { pageNum, pageSize } = config.body;
+      const total = 200;
+
+      const { list } = Mock.mock({
+        [`list|${total}`]: [
+          {
+            role: '@prole',
+            'sortId|+1': 1,
+            status: Random.boolean(),
+            createTime: Random.datetime(),
+            remark: Random.city()
+          }
+        ]
+      });
+      const newDataList =
+        pageSize > 1 ? list.slice((pageNum - 1) * pageSize, pageNum * pageSize) : [...list];
+      if (pageNum && pageSize) {
+        return {
+          success: true,
+          result: {
+            pageNum,
+            pageSize,
+            content: newDataList,
+            total
+          },
+          code: 200
+        };
+      } else {
+        return {
+          success: true,
+          result: {
+            pageNum: 1,
+            pageSize: total,
+            content: list,
+            total
+          },
+          code: 200
+        };
+      }
     }
   }
 ];
