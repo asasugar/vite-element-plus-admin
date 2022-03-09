@@ -3,15 +3,20 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-08 17:28:20
+ * @LastEditTime: 2022-03-09 10:10:29
 -->
 <template>
-  <el-card class="card-wrapper" :body-style="{ padding: '12px 12px 2px 12px' }">
+  <el-card
+    v-if="route.name === 'SystemRole'"
+    class="card-wrapper"
+    :body-style="{ padding: '12px 12px 2px 12px' }"
+  >
     <template #header>
       <div class="flex between verticalcenter">
         <span>角色管理</span>
-        <div>
-          <el-input v-model="search" placeholder="Role to search" />
+        <div class="flex center">
+          <el-button type="primary" @click="handleInsert">新增角色</el-button>
+          <el-input v-model="search" class="ml10" placeholder="Role to search" />
         </div>
       </div>
     </template>
@@ -37,7 +42,7 @@
       <el-table-column prop="remark" label="备注" />
       <el-table-column label="操作">
         <template #default="scope">
-          <el-button size="small">编辑</el-button>
+          <el-button size="small" @click="handleEdit">编辑</el-button>
           <el-popconfirm
             title="确定删除该角色？"
             icon-color="red"
@@ -62,10 +67,16 @@
       @current-change="handleCurrentChange"
     ></el-pagination>
   </el-card>
+  <!-- 新增或者编辑用户角色子路由 -->
+  <router-view v-else></router-view>
 </template>
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import { systemService } from '@/services';
+
+const router = useRouter();
+const route = useRoute();
 
 interface Product {
   role: {
@@ -78,11 +89,11 @@ interface Product {
   remark: string;
 }
 const tableData = ref<Product[]>();
-const search = ref('');
-const currentPage = ref(1);
-const pageNum = ref(1);
-const pageSize = ref(10);
-const totalNum = ref(0);
+const search = ref<string>('');
+const currentPage = ref<number>(1);
+const pageNum = ref<number>(1);
+const pageSize = ref<number>(10);
+const totalNum = ref<number>(0);
 
 const getRoleList = async (pageNum, pageSize) => {
   const { total, content } = await systemService.getRoleList({
@@ -114,6 +125,14 @@ const handleCurrentChange = (val: number) => {
   pageNum.value = val;
   getRoleList(pageNum.value, pageSize.value);
   console.log(`current page: ${val}`);
+};
+
+const handleInsert = () => {
+  router.push({ name: 'SystemRoleInsert' });
+};
+
+const handleEdit = () => {
+  router.push({ name: 'SystemRoleEdit' });
 };
 
 const handleDel = sortId => {

@@ -3,14 +3,11 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 14:47:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-07 18:29:32
+ * @LastEditTime: 2022-03-08 18:34:15
  */
+import { IContent } from '../types';
 interface IUserState {
   userinfo?: object;
-}
-
-interface IContent {
-  commit: (arg0: string, arg1: any) => void;
 }
 
 const user = {

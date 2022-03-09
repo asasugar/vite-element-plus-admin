@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-25 18:36:52
+ * @LastEditTime: 2022-03-09 10:01:07
 -->
 <template>
   <el-container class="layout-container">
@@ -20,7 +20,7 @@
                 v-for="subItem in item.children"
                 :key="subItem.sortId"
                 :index="subItem.sortId"
-                @click="handleToMenu(subItem, item.title, subItem.title)"
+                @click="handleToMenu(subItem, item.title)"
                 >{{ subItem.title }}</el-menu-item
               >
             </template>
@@ -61,7 +61,7 @@
 
 <script lang="ts" setup>
 import { ref, reactive, nextTick } from 'vue';
-import { useRouter, useRoute, RouteRecordName } from 'vue-router';
+import { useRouter, useRoute, RouteRecordName, onBeforeRouteUpdate } from 'vue-router';
 import { Setting } from '@element-plus/icons-vue';
 import { useState } from 'vuex-composition-maphooks';
 import { userService, systemService } from '@/services';
@@ -89,6 +89,12 @@ const menuOption: {
 const { userinfo } = useState('user', ['userinfo']);
 const user = ref<{ username: string }>(userinfo() || { username: '' });
 const breadcrumb = ref<string[]>([]);
+
+onBeforeRouteUpdate(to => {
+  if (typeof to?.meta?.title === 'string') {
+    breadcrumb.value.push(to.meta.title);
+  }
+});
 
 // 刷新时渲染选中的菜单项
 const _renderDefaultMenuActive = (
@@ -135,8 +141,8 @@ const handleLogout = async () => {
   }
 };
 // 去二级菜单页
-const handleToMenu = (item: { name: string; path: string }, title: string, subTitle: string) => {
-  breadcrumb.value = [title, subTitle];
+const handleToMenu = (item: { name: string; path: string }, title: string) => {
+  breadcrumb.value = [title];
   if (item.name) {
     router.push({ name: item.name });
   } else if (item.path) {

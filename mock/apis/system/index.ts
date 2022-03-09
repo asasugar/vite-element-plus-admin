@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-08 17:04:22
+ * @LastEditTime: 2022-03-09 10:05:50
  */
 import * as Mock from 'mockjs';
 import { IConfig } from '../../types';
@@ -133,7 +133,25 @@ export default [
                 component: 'views/system/role/index',
                 meta: {
                   title: '角色管理'
-                }
+                },
+                children: [
+                  {
+                    name: 'SystemRoleInsert',
+                    path: 'insert',
+                    component: 'views/system/role/update',
+                    meta: {
+                      title: '新增角色'
+                    }
+                  },
+                  {
+                    name: 'SystemRoleEdit',
+                    path: 'edit',
+                    component: 'views/system/role/update',
+                    meta: {
+                      title: '编辑角色'
+                    }
+                  }
+                ]
               },
               {
                 name: 'SystemAuth',

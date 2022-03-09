@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:12:02
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-01 18:22:47
+ * @LastEditTime: 2022-03-08 18:44:43
  */
 
 import {
@@ -18,11 +18,12 @@ import { removeSession } from '@/utils/session';
 import { registerDynamicRoutes } from './dynamic';
 import { App } from 'vue';
 import { mockXHR } from '../../mock';
+
 mockXHR(); // mock接口
 
 // 基础路由
 const dynamicRoutes = (await registerDynamicRoutes()) as RouteRecordRaw[];
-const routes: RouteRecordRaw[] = [
+export const routes: RouteRecordRaw[] = [
   {
     name: 'Login',
     path: '/login',
