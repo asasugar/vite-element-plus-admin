@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-11 18:59:44
+ * @LastEditTime: 2022-03-11 19:17:37
  */
 import { loadEnv, UserConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -41,7 +41,8 @@ const Config: UserConfig = {
         find: '_c',
         replacement: pathResolve('src/components') + '/'
       }
-    ]
+    ],
+    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']
   },
   plugins: [
     vue(),
@@ -106,6 +107,7 @@ export function getConfig({ command, mode }: { command: string; mode: string }) 
   console.log(`vite command: ${command}, vite mode: ${mode}`);
   // 部署站点: 一级域名则使用 '/', 二级域名请设置 base 为 '/<REPO>/'，以此类推
   Config.base = loadEnv(mode, process.cwd()).VITE_REPO_URL;
+  Config.clearScreen = mode === 'production';
   if (mode === 'analyzer') {
     Config.plugins.push({
       ...visualizer({
