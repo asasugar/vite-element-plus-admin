@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-08 17:29:15
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-09 10:41:02
+ * @LastEditTime: 2022-03-09 16:07:06
 -->
 <template>
   <as-page-wrapper header-title="新增角色">
@@ -57,7 +57,7 @@ const rules = reactive({
     {
       required: true,
       message: '请输入角色值',
-      trigger: 'change'
+      trigger: 'blur'
     }
   ]
 });

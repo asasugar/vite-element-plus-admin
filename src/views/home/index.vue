@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-09 10:17:06
+ * @LastEditTime: 2022-03-10 09:44:46
 -->
 <template>
   <el-container class="layout-container">
@@ -65,6 +65,8 @@ import { useRouter, useRoute, RouteRecordName, onBeforeRouteUpdate } from 'vue-r
 import { Setting } from '@element-plus/icons-vue';
 import { useState } from 'vuex-composition-maphooks';
 import { userService, systemService } from '@/services';
+import { setStorage } from '@/utils/storage';
+
 // types
 interface IMenuItem {
   sortId: string;
@@ -93,6 +95,8 @@ const breadcrumb = ref<string[]>([]);
 onBeforeRouteUpdate(to => {
   if (typeof to?.meta?.title === 'string' && !breadcrumb.value.includes(to?.meta?.title)) {
     breadcrumb.value.push(to.meta.title);
+    // 存储最新面包屑，用于刷新时回显
+    setStorage('breadcrumb', breadcrumb.value);
   }
 });
 
