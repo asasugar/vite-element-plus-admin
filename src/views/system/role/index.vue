@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-09 10:10:29
+ * @LastEditTime: 2022-03-22 18:40:54
 -->
 <template>
   <el-card
@@ -42,7 +42,7 @@
       <el-table-column prop="remark" label="备注" />
       <el-table-column label="操作">
         <template #default="scope">
-          <el-button size="small" @click="handleEdit">编辑</el-button>
+          <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
           <el-popconfirm
             title="确定删除该角色？"
             icon-color="red"
@@ -74,20 +74,11 @@
 import { computed, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { systemService } from '@/services';
+import { Product } from './types';
 
 const router = useRouter();
 const route = useRoute();
 
-interface Product {
-  role: {
-    key: string;
-    value: string;
-  };
-  sortId: number;
-  status: boolean;
-  createTime: number;
-  remark: string;
-}
 const tableData = ref<Product[]>();
 const search = ref<string>('');
 const currentPage = ref<number>(1);
@@ -131,8 +122,9 @@ const handleInsert = () => {
   router.push({ name: 'SystemRoleInsert' });
 };
 
-const handleEdit = () => {
-  router.push({ name: 'SystemRoleEdit' });
+const handleEdit = item => {
+  if (!item) return;
+  router.push({ name: 'SystemRoleEdit', params: { data: JSON.stringify(item) } });
 };
 
 const handleDel = sortId => {

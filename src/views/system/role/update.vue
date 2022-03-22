@@ -3,17 +3,17 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-08 17:29:15
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-09 16:07:06
+ * @LastEditTime: 2022-03-22 18:43:10
 -->
 <template>
   <as-page-wrapper header-title="新增角色">
     <template #bodyContent>
       <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" class="rule-form">
         <el-form-item label="角色名称" prop="roleValue">
-          <el-input v-model="ruleForm.roleValue"></el-input>
+          <el-input v-model="ruleForm.role.value"></el-input>
         </el-form-item>
         <el-form-item label="角色值" prop="roleKey">
-          <el-input v-model="ruleForm.roleKey"></el-input>
+          <el-input v-model="ruleForm.role.key"></el-input>
         </el-form-item>
         <el-form-item label="状态" prop="status">
           <el-switch v-model="ruleForm.status"></el-switch>
@@ -34,16 +34,28 @@
 import { reactive, ref } from 'vue';
 import type { ElForm } from 'element-plus';
 import { AsPageWrapper } from '@/containers/page-wrapper';
+import { useRoute } from 'vue-router';
+import { Product } from './types';
+
+const route = useRoute();
 
 type FormInstance = InstanceType<typeof ElForm>;
-
 const ruleFormRef = ref<FormInstance>();
-const ruleForm = reactive({
-  roleValue: '',
-  roleKey: '',
+let ruleForm = reactive<Product>({
+  role: {
+    key: '',
+    value: ''
+  },
   status: true,
   remark: ''
 });
+if (
+  route.name === 'SystemRoleEdit' &&
+  route?.params?.data &&
+  typeof route.params.data === 'string'
+) {
+  ruleForm = JSON.parse(route.params.data) as unknown as Product;
+}
 
 const rules = reactive({
   roleValue: [
