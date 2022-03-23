@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-10 09:44:46
+ * @LastEditTime: 2022-03-23 11:37:25
 -->
 <template>
   <el-container class="layout-container">
@@ -61,11 +61,11 @@
 
 <script lang="ts" setup>
 import { ref, reactive, nextTick } from 'vue';
-import { useRouter, useRoute, RouteRecordName, onBeforeRouteUpdate } from 'vue-router';
+import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router';
 import { Setting } from '@element-plus/icons-vue';
 import { useState } from 'vuex-composition-maphooks';
 import { userService, systemService } from '@/services';
-import { setStorage } from '@/utils/storage';
+import { setStorage, getStorage } from '@/utils/storage';
 
 // types
 interface IMenuItem {
@@ -101,41 +101,40 @@ onBeforeRouteUpdate(to => {
 });
 
 // 刷新时渲染选中的菜单项
-const _renderDefaultMenuActive = (
-  menu: {
-    name: RouteRecordName | null | undefined;
-    sortId: string;
-    title: string;
-    children?: [];
-  }[],
-  sortId?: string,
-  title?: string
-) => {
+const _renderDefaultMenuActive = (menu: IMenuItem[], sortId?: string, title?: string) => {
   if (route.name) {
-    menu.some(item => {
-      if (item.name === route.name) {
-        nextTick(() => {
-          menuOption.defaultOpeneds = [`${sortId ? sortId : item.sortId}`];
-          menuOption.defaultActive = item.sortId;
-          breadcrumb.value = title ? [title, item.title] : [item.title];
-        });
-        return true;
-      }
-      if (item.children?.length) {
-        _renderDefaultMenuActive(item.children, item.sortId, item.title);
-      }
-    });
+    let isFindInMenu = false;
+    (function recursiveFn(list: IMenuItem[], id?: string, text?: string) {
+      list.some(item => {
+        if (item.name === route.name) {
+          nextTick(() => {
+            menuOption.defaultOpeneds = [`${id ? id : item.sortId}`];
+            menuOption.defaultActive = item.sortId;
+            breadcrumb.value = text ? [text, item.title] : [item.title];
+          });
+          isFindInMenu = true;
+          return true;
+        }
+        if (item.children?.length) {
+          recursiveFn(item.children, item.sortId, item.title);
+        }
+      });
+    })(menu, sortId, title);
+    if (!isFindInMenu) {
+      breadcrumb.value = getStorage('breadcrumb');
+    }
   }
 };
+// 当前路由在菜单中没有找到则取localStorage缓存
+
 // 获取菜单列表
-const getMenu = async () => {
+(async function getMenu() {
   const content = await systemService.getMenu();
   menuOption.menu = content;
   if (content) {
     _renderDefaultMenuActive(content);
   }
-};
-getMenu();
+})();
 
 // 注销
 const handleLogout = async () => {

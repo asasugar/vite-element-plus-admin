@@ -3,18 +3,45 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-08 17:29:15
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-22 18:43:10
+ * @LastEditTime: 2022-03-23 10:19:11
 -->
 <template>
   <as-page-wrapper header-title="新增角色">
     <template #bodyContent>
-      <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" class="rule-form">
-        <el-form-item label="角色名称" prop="roleValue">
-          <el-input v-model="ruleForm.role.value"></el-input>
-        </el-form-item>
-        <el-form-item label="角色值" prop="roleKey">
-          <el-input v-model="ruleForm.role.key"></el-input>
-        </el-form-item>
+      <div class="pb20">
+        <el-radio-group v-model="size" class="mr20">
+          <el-radio-button label="large">large</el-radio-button>
+          <el-radio-button label="default">default</el-radio-button>
+          <el-radio-button label="small">small</el-radio-button>
+        </el-radio-group>
+        <el-radio-group v-model="labelPosition">
+          <el-radio-button label="left">Left</el-radio-button>
+          <el-radio-button label="right">Right</el-radio-button>
+          <el-radio-button label="top">Top</el-radio-button>
+        </el-radio-group>
+      </div>
+      <el-form
+        ref="ruleFormRef"
+        :model="ruleForm"
+        :rules="rules"
+        :size="size"
+        label-width="auto"
+        :label-position="labelPosition"
+        class="rule-form"
+      >
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <el-form-item label="角色名称" prop="roleValue">
+              <el-input v-model="ruleForm.role.value"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="角色值" prop="roleKey">
+              <el-input v-model="ruleForm.role.key"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
         <el-form-item label="状态" prop="status">
           <el-switch v-model="ruleForm.status"></el-switch>
         </el-form-item>
@@ -36,10 +63,14 @@ import type { ElForm } from 'element-plus';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { useRoute } from 'vue-router';
 import { Product } from './types';
+import { ComponentSize } from 'element-plus/lib/utils/types';
 
 const route = useRoute();
 
 type FormInstance = InstanceType<typeof ElForm>;
+
+const size = ref<ComponentSize>('default');
+const labelPosition = ref('right');
 const ruleFormRef = ref<FormInstance>();
 let ruleForm = reactive<Product>({
   role: {
@@ -54,7 +85,7 @@ if (
   route?.params?.data &&
   typeof route.params.data === 'string'
 ) {
-  ruleForm = JSON.parse(route.params.data) as unknown as Product;
+  ruleForm = JSON.parse(route.params.data) as Product;
 }
 
 const rules = reactive({
@@ -91,4 +122,8 @@ const resetForm = (formEl: FormInstance | undefined) => {
   formEl.resetFields();
 };
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.rule-form {
+  max-width: 600px;
+}
+</style>
