@@ -195,12 +195,22 @@ const { e } = useActions({ 'B/back': 'e' });
 
 # 部分页面效果
 
-![2022-02-15 18.28.45](https://raw.githubusercontent.com/asasugar/pic-bed/master/imgs/2022-02-15%2018.28.45.gif)
+![2022-03-23 14.04.43](https://raw.githubusercontent.com/asasugar/pic-bed/master/imgs/2022-03-23%2014.04.43.gif)
 
-![2022-02-16 10.18.58](https://raw.githubusercontent.com/asasugar/pic-bed/master/imgs/2022-02-16%2010.18.58.gif)
 
-![2022-02-16 10.22.42](https://raw.githubusercontent.com/asasugar/pic-bed/master/imgs/2022-02-16%2010.22.42.gif)
+![2022-03-23 14.09.04](https://raw.githubusercontent.com/asasugar/pic-bed/master/imgs/2022-03-23%2014.09.04.gif)
 
+
+![2022-03-23 14.20.19](https://raw.githubusercontent.com/asasugar/pic-bed/master/imgs/2022-03-23%2014.20.19.gif)
+
+
+![2022-03-23 14.19.45](https://raw.githubusercontent.com/asasugar/pic-bed/master/imgs/2022-03-23%2014.19.45.gif)
+
+
+![2022-03-23 14.10.49](https://raw.githubusercontent.com/asasugar/pic-bed/master/imgs/2022-03-23%2014.10.49.gif)
+
+
+![2022-03-23 14.12.02](https://raw.githubusercontent.com/asasugar/pic-bed/master/imgs/2022-03-23%2014.12.02.gif)
 # 特别感谢
 
  - vue@3.2.25
@@ -208,4 +218,4 @@ const { e } = useActions({ 'B/back': 'e' });
  - vuex@4.0.2
  - vue-router@4
  - element-plus@1.3.0-beta.5
- - vue-vben-admin(Ui参考)
+ - vue-vben-admin(UI参考)
