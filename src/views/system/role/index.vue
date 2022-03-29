@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-22 18:40:54
+ * @LastEditTime: 2022-03-29 14:48:30
 -->
 <template>
   <el-card
@@ -74,7 +74,7 @@
 import { computed, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { systemService } from '@/services';
-import { Product } from './types';
+import { Product } from './typing';
 
 const router = useRouter();
 const route = useRoute();

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-14 23:50:57
+ * @LastEditTime: 2022-03-29 14:49:19
 -->
 <template>
   <el-card class="card-wrapper" :body-style="{ padding: '12px 12px 2px 12px' }">
@@ -37,7 +37,7 @@
   </el-card>
 </template>
 <script lang="ts" setup>
-import type { IProjectItem } from '../../types';
+import type { IProjectItem } from '../../typing';
 
 interface Props {
   data?: IProjectItem[];

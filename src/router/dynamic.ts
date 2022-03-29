@@ -3,13 +3,13 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-24 19:50:56
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-08 16:49:37
+ * @LastEditTime: 2022-03-29 14:47:44
  */
 
 import { ElLoading } from 'element-plus';
 import { systemService } from '@/services';
 import { dynamicImport } from '@/utils';
-import { IRoutes } from './types';
+import { IRoutes } from './typing';
 import type { RouteRecordRaw } from 'vue-router';
 
 /**

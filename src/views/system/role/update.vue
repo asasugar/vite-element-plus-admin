@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-08 17:29:15
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-23 10:19:11
+ * @LastEditTime: 2022-03-29 14:48:56
 -->
 <template>
   <as-page-wrapper header-title="新增角色">
@@ -62,7 +62,7 @@ import { reactive, ref } from 'vue';
 import type { ElForm } from 'element-plus';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { useRoute } from 'vue-router';
-import { Product } from './types';
+import { Product } from './typing';
 import { ComponentSize } from 'element-plus/lib/utils/types';
 
 const route = useRoute();

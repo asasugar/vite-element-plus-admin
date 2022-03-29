@@ -3,10 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-09 10:05:50
+ * @LastEditTime: 2022-03-29 14:47:18
  */
 import * as Mock from 'mockjs';
-import { IConfig } from '../../types';
+import { IConfig } from '../../typing';
 
 const Random = Mock.Random;
 

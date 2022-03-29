@@ -3,9 +3,9 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-07 17:48:13
+ * @LastEditTime: 2022-03-29 14:47:24
  */
-import { IConfig, IUserinfo, IUserType } from '../../types';
+import { IConfig, IUserinfo, IUserType } from '../../typing';
 
 const users: IUserType = {
   admin: {

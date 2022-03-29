@@ -3,10 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:46:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-22 16:02:03
+ * @LastEditTime: 2022-03-29 14:46:59
  */
 import * as Mock from 'mockjs';
-import { IConfig, IType } from './types';
+import { IConfig, IType } from './typing';
 import apis from './apis';
 
 export function mockXHR() {

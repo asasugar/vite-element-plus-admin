@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-23 11:37:25
+ * @LastEditTime: 2022-03-29 14:40:31
 -->
 <template>
   <el-container class="layout-container">
@@ -91,7 +91,6 @@ const menuOption: {
 const { userinfo } = useState('user', ['userinfo']);
 const user = ref<{ username: string }>(userinfo() || { username: '' });
 const breadcrumb = ref<string[]>([]);
-
 onBeforeRouteUpdate(to => {
   if (typeof to?.meta?.title === 'string' && !breadcrumb.value.includes(to?.meta?.title)) {
     breadcrumb.value.push(to.meta.title);

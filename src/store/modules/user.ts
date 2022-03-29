@@ -3,9 +3,9 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 14:47:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-08 18:34:15
+ * @LastEditTime: 2022-03-29 14:48:02
  */
-import { IContent } from '../types';
+import { IContent } from '../typing';
 interface IUserState {
   userinfo?: object;
 }
