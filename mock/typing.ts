@@ -13,7 +13,6 @@ export interface IType {
   response: any;
 }
 
-
 export type IUserType = {
   [x: string]: IUserInfo;
 };
