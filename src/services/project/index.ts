@@ -3,18 +3,17 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 14:00:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-18 10:21:07
+ * @LastEditTime: 2022-03-31 10:14:53
  */
-import request from '@/utils/request';
-
+import { apiGetProjectList, apiGetRepositoryList } from '@/apis/project';
 class ProjectService {
   /**
    * 看板数据
    * @param data
    * @returns {Object}
    */
-  async getProjectList(data: object) {
-    const { success, result } = await request.get('/project/getProjectList', { data });
+  async getProjectList<T>(data: T) {
+    const { success, result } = await apiGetProjectList(data);
     if (success) return result;
     return null;
   }
@@ -23,8 +22,8 @@ class ProjectService {
    * @param data
    * @returns {Object}
    */
-  async getRepositoryList(data: object) {
-    const { success, result } = await request.get('/project/getRepositoryList', { data });
+  async getRepositoryList<T>(data: T) {
+    const { success, result } = await apiGetRepositoryList(data);
     if (success) return result;
     return null;
   }

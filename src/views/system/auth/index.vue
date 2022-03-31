@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:37
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-25 18:37:40
+ * @LastEditTime: 2022-03-31 11:04:34
 -->
 <template>
   <el-card class="card-wrapper" :body-style="{ padding: '12px 12px 2px 12px' }">
@@ -37,15 +37,9 @@
   </el-card>
 </template>
 <script lang="ts" setup>
-interface Product {
-  roleName: string;
-  roleValue: string;
-  sortId: number;
-  status: boolean;
-  createTime: number;
-  remark: string;
-}
-const tableData: Product[] = [
+import { IProduct } from './typing';
+
+const tableData: IProduct[] = [
   {
     roleName: '超级管理员',
     roleValue: 'superAdmin',

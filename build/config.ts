@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-11 19:17:37
+ * @LastEditTime: 2022-03-29 14:58:01
  */
 import { loadEnv, UserConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -33,13 +33,15 @@ const Config: UserConfig = {
   },
   resolve: {
     alias: [
+      // @/xxxx => src/xxxx
       {
         find: '@',
         replacement: pathResolve('src') + '/'
       },
+      // #/xxxx => types/xxxx
       {
-        find: '_c',
-        replacement: pathResolve('src/components') + '/'
+        find: '#',
+        replacement: pathResolve('types') + '/'
       }
     ],
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:26:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-18 18:22:24
+ * @LastEditTime: 2022-03-31 11:02:45
 -->
 <template>
   <div class="login">
@@ -49,14 +49,8 @@ import { userService } from '@/services';
 import { useActions } from 'vuex-composition-maphooks';
 import { setToken } from '@/utils/token';
 import AsMousemovePanel from '@/components/mousemove-panel';
-// types
-interface IRules {
-  [x: string]: [{ [x: string]: string }];
-}
-interface IForm {
-  username: string;
-  password: string;
-}
+import { FormItemRule } from 'element-plus/es/components/form/src/form.type';
+import { IForm } from './typing';
 
 const router = useRouter();
 const ruleFormRef = ref<InstanceType<typeof ElForm>>();
@@ -65,10 +59,11 @@ const ruleForm: IForm = reactive({
   password: '123456'
 });
 
-const rules: IRules = reactive({
+const rules = reactive({
   username: [{ required: 'true', message: '账户不能为空', trigger: 'blur' }],
   password: [{ required: 'true', message: '密码不能为空', trigger: 'blur' }]
-});
+}) as Partial<Record<string, FormItemRule | FormItemRule[]>>;
+
 const isLoading = ref<boolean>(false);
 const { asyncSetUserinfo } = useActions(['user/asyncSetUserinfo']);
 // 登录

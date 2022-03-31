@@ -6,12 +6,3 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>;
   export default component;
 }
-
-declare module 'qs';
-
-declare module 'mockjs';
-
-declare module '*.json' {
-  const value: any;
-  export default value;
-}

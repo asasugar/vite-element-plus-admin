@@ -3,30 +3,23 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 14:47:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-29 14:48:02
+ * @LastEditTime: 2022-03-31 11:23:25
  */
 import { IContent } from '../typing';
-interface IUserState {
-  userinfo?: object;
+import type { IUserInfo } from '#/store';
+
+interface UserState {
+  userinfo: IUserInfo;
 }
 
 const user = {
   namespaced: true,
   state: {
-    userinfo: {},
-    toDoList: [
-      { text: '吃饭', done: true },
-      { text: '睡觉', done: true },
-      { text: '打保罗', done: false }
-    ]
+    userinfo: {}
   },
-  getters: {
-    unDoList(state: { toDoList: any[] }) {
-      return state.toDoList.filter(i => !i.done);
-    }
-  },
+  getters: {},
   mutations: {
-    setUserinfo(state: IUserState, value?: object) {
+    setUserinfo(state: UserState, value: IUserInfo) {
       state.userinfo = value;
     }
   },

@@ -237,6 +237,11 @@
   resolved "https://registry.npmmirror.com/@types/minimist/download/@types/minimist-1.2.2.tgz?cache=0&sync_timestamp=1637267478331&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40types%2Fminimist%2Fdownload%2F%40types%2Fminimist-1.2.2.tgz"
   integrity sha1-7nceK6Sz3Fs3KTXVSf2WF780W4w=
 
+"@types/mockjs@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@types/mockjs/-/mockjs-1.0.6.tgz#dafdd5de65156f7aa63eab4e29fa3d532cd95609"
+  integrity sha512-Yu5YlqbYZyqsd6LjO4e8ONJDN9pTSnciHDcRP4teNOh/au2b8helFhgRx+3w8xsTFEnwr9jtfTVJbAx+eYmlHA==
+
 "@types/node@^17.0.11":
   version "17.0.11"
   resolved "https://registry.npmmirror.com/@types/node/download/@types/node-17.0.11.tgz"
@@ -246,6 +251,11 @@
   version "2.4.1"
   resolved "https://registry.npmmirror.com/@types/normalize-package-data/download/@types/normalize-package-data-2.4.1.tgz"
   integrity sha1-0zV0eaD9/dWQf+Z+F+CoXJBuEwE=
+
+"@types/qs@^6.9.7":
+  version "6.9.7"
+  resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.7.tgz#63bb7d067db107cc1e457c303bc25d511febf6cb"
+  integrity sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==
 
 "@types/three@^0.137.0":
   version "0.137.0"

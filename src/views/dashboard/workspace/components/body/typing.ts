@@ -1,5 +1,9 @@
 // types
-interface IProjectItem {
+interface TLoading {
+  loading?: boolean;
+}
+
+interface IProject {
   sortId: string;
   sortName: string;
   icon: string;
@@ -7,15 +11,27 @@ interface IProjectItem {
   desc: string;
   editTime: string;
 }
-interface INavItem {
+
+interface INav {
   name: string;
   title: string;
 }
-interface INewsItem {
+
+interface INews {
   href: string;
   title: string;
   avatar: string;
   description: string;
   content: string;
 }
-export type { IProjectItem, INavItem, INewsItem };
+interface IProjectProps extends TLoading {
+  data?: IProject[];
+}
+interface INavProps extends TLoading {
+  data?: INav[];
+}
+interface INewsProps extends TLoading {
+  data?: INews[];
+}
+
+export type { IProjectProps, INavProps, INewsProps, TLoading, IProject, INav, INews };

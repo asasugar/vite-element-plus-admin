@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-29 14:49:10
+ * @LastEditTime: 2022-03-31 10:46:27
 -->
 <template>
   <el-card class="card-wrapper" :body-style="{ padding: '0' }">
@@ -83,14 +83,9 @@
 <script lang="ts" setup>
 import { Star, Camera, ChatDotRound } from '@element-plus/icons-vue';
 import { AsList, AsListItem, AsListItemMeta } from '@/components/list';
-import type { INewsItem } from '../../typing';
+import type { INewsProps } from '../../typing';
 
-interface Props {
-  data?: INewsItem[];
-  loading?: boolean;
-}
-
-defineProps<Props>();
+defineProps<INewsProps>();
 </script>
 
 <style lang="less" scoped>

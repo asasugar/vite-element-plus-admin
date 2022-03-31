@@ -5,7 +5,8 @@
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
  * @LastEditTime: 2022-03-29 14:47:24
  */
-import { IConfig, IUserinfo, IUserType } from '../../typing';
+import { IConfig, IUserType } from '../../typing';
+import type { IUserInfo } from '#/store';
 
 const users: IUserType = {
   admin: {
@@ -14,7 +15,7 @@ const users: IUserType = {
   }
 };
 
-const userinfo: IUserinfo = {
+const userinfo: IUserInfo = {
   token: users['admin'].token,
   username: 'admin',
   avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'

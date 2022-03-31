@@ -3,38 +3,18 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-24 19:50:56
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-29 14:47:44
+ * @LastEditTime: 2022-03-31 11:26:59
  */
 
 import { ElLoading } from 'element-plus';
 import { systemService } from '@/services';
-import { dynamicImport } from '@/utils';
-import { IRoutes } from './typing';
-import type { RouteRecordRaw } from 'vue-router';
-
-/**
- * 标准化动态路由[已弃用！！]
- */
-// dev可用，build之后报错（Error: Unknown variable dynamic import），改用import.meta.glob的方式
-export const normalizeaRoutes = (routes: IRoutes[] | RouteRecordRaw[]) => {
-  return routes.map(item => {
-    if (item.path && item.component) {
-      if (typeof item.component === 'string') {
-        item.component = dynamicImport(item.component);
-      }
-    }
-    if (item?.children?.length) {
-      normalizeaRoutes(item.children);
-    }
-    return item;
-  });
-};
+import { TComponent, IRoutes } from '#/vue-router';
 
 /**
  * 标准化动态路由 [import.meta.glob]
  */
-export const normalizeaRoutesUseGlob = (routes: IRoutes[] | RouteRecordRaw[]) => {
-  const components = getViewComponent();
+export const normalizeaRoutesUseGlob = (routes: IRoutes[]): IRoutes[] => {
+  const components: TComponent = getViewComponent();
   return routes.map(item => {
     if (item.path && item.component) {
       if (typeof item.component === 'string') {
@@ -47,12 +27,12 @@ export const normalizeaRoutesUseGlob = (routes: IRoutes[] | RouteRecordRaw[]) =>
     return item;
   });
 };
-export const getViewComponent = () => {
+export const getViewComponent = (): TComponent => {
   const modules = import.meta.glob('../views/**/*.vue');
   const COMPONENTS_KEY = 'components'; // 过滤views文件下components命名的文件夹
   const BEFOREFIX = '../';
   const AFTERFIX = '.vue';
-  const components: any = {};
+  const components: TComponent = {};
 
   const viewKeys = Object.keys(modules).filter(key => !key.includes(COMPONENTS_KEY));
   viewKeys.forEach(key => {
@@ -72,7 +52,6 @@ export const registerDynamicRoutes = async () => {
     const routes = await systemService.getRoute();
     loading.close();
     return normalizeaRoutesUseGlob(routes);
-    // return normalizeaRoutes(routes);
   } catch (error) {
     return [];
   }

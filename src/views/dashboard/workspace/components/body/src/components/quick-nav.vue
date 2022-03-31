@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-29 14:49:14
+ * @LastEditTime: 2022-03-31 10:46:58
 -->
 <template>
   <el-card>
@@ -54,14 +54,9 @@
 <script lang="ts" setup>
 import { HomeFilled, DataAnalysis, Setting, Key, PieChart, Menu } from '@element-plus/icons-vue';
 import { AsGrid, AsGridItem } from '@/containers/grid';
-import type { INavItem } from '../../typing';
+import type { INavProps } from '../../typing';
 
-interface Props {
-  data?: INavItem[];
-  loading?: boolean;
-}
-
-defineProps<Props>();
+defineProps<INavProps>();
 </script>
 
 <style lang="less" scoped>

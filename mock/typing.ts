@@ -1,3 +1,5 @@
+import type { IUserInfo } from '#/store';
+
 export interface IConfig {
   body: any;
   method: string;
@@ -11,12 +13,7 @@ export interface IType {
   response: any;
 }
 
-export type IUserinfo = {
-  token: string;
-  password?: number | string;
-  username?: string;
-  avatar?: string;
-};
+
 export type IUserType = {
-  [x: string]: IUserinfo;
+  [x: string]: IUserInfo;
 };

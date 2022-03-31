@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-29 14:48:30
+ * @LastEditTime: 2022-03-31 11:05:02
 -->
 <template>
   <el-card
@@ -74,19 +74,19 @@
 import { computed, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { systemService } from '@/services';
-import { Product } from './typing';
+import { IProduct } from './typing';
 
 const router = useRouter();
 const route = useRoute();
 
-const tableData = ref<Product[]>();
+const tableData = ref<IProduct[]>();
 const search = ref<string>('');
 const currentPage = ref<number>(1);
 const pageNum = ref<number>(1);
 const pageSize = ref<number>(10);
 const totalNum = ref<number>(0);
 
-const getRoleList = async (pageNum, pageSize) => {
+const getRoleList = async (pageNum: number, pageSize: number) => {
   const { total, content } = await systemService.getRoleList({
     pageNum,
     pageSize
@@ -122,12 +122,12 @@ const handleInsert = () => {
   router.push({ name: 'SystemRoleInsert' });
 };
 
-const handleEdit = item => {
+const handleEdit = (item: IProduct) => {
   if (!item) return;
   router.push({ name: 'SystemRoleEdit', params: { data: JSON.stringify(item) } });
 };
 
-const handleDel = sortId => {
+const handleDel = (sortId: number | undefined) => {
   tableData.value = filterTableData.value?.filter(data => data.sortId !== sortId);
   return true;
 };

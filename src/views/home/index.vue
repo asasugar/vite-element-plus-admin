@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-29 14:40:31
+ * @LastEditTime: 2022-03-31 10:59:16
 -->
 <template>
   <el-container class="layout-container">
@@ -66,15 +66,7 @@ import { Setting } from '@element-plus/icons-vue';
 import { useState } from 'vuex-composition-maphooks';
 import { userService, systemService } from '@/services';
 import { setStorage, getStorage } from '@/utils/storage';
-
-// types
-interface IMenuItem {
-  sortId: string;
-  title: string;
-  name: string;
-  path: string;
-  children?: IMenuItem[];
-}
+import { IMenuItem } from './typing';
 
 const router = useRouter();
 const route = useRoute();

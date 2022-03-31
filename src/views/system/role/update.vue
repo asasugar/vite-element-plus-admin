@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-08 17:29:15
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-29 14:48:56
+ * @LastEditTime: 2022-03-31 11:07:06
 -->
 <template>
   <as-page-wrapper header-title="新增角色">
@@ -59,20 +59,17 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
-import type { ElForm } from 'element-plus';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { useRoute } from 'vue-router';
-import { Product } from './typing';
 import { ComponentSize } from 'element-plus/lib/utils/types';
+import { IProduct, FormInstance } from './typing';
 
 const route = useRoute();
-
-type FormInstance = InstanceType<typeof ElForm>;
 
 const size = ref<ComponentSize>('default');
 const labelPosition = ref('right');
 const ruleFormRef = ref<FormInstance>();
-let ruleForm = reactive<Product>({
+let ruleForm = reactive<IProduct>({
   role: {
     key: '',
     value: ''
@@ -85,7 +82,7 @@ if (
   route?.params?.data &&
   typeof route.params.data === 'string'
 ) {
-  ruleForm = JSON.parse(route.params.data) as Product;
+  ruleForm = JSON.parse(route.params.data) as IProduct;
 }
 
 const rules = reactive({

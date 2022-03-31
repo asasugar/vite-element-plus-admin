@@ -3,9 +3,16 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 14:00:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-08 15:43:06
+ * @LastEditTime: 2022-03-31 10:12:49
  */
-import request from '@/utils/request';
+import {
+  apiGetAnalysis,
+  apiGetRoute,
+  apiGetMenu,
+  apiGetLatestNews,
+  apiGetQuickNavList,
+  apiGetRoleList
+} from '@/apis/system';
 
 class SystemService {
   /**
@@ -14,7 +21,7 @@ class SystemService {
    * @returns
    */
   async getAnalysis() {
-    const { success, result } = await request.get('/sys/getAnalysis');
+    const { success, result } = await apiGetAnalysis();
     if (success) return result;
     return null;
   }
@@ -23,7 +30,7 @@ class SystemService {
    * @returns {Array}
    */
   async getRoute() {
-    const { success, result } = await request.post('/sys/getRoute');
+    const { success, result } = await apiGetRoute();
     if (success) return result;
     return null;
   }
@@ -32,7 +39,7 @@ class SystemService {
    * @returns {Array}
    */
   async getMenu() {
-    const { success, result } = await request.get('/sys/getMenu');
+    const { success, result } = await apiGetMenu();
     if (success) return result;
     return null;
   }
@@ -41,7 +48,7 @@ class SystemService {
    * @returns {Array}
    */
   async getQuickNavList() {
-    const { success, result } = await request.get('/sys/getQuickNavList');
+    const { success, result } = await apiGetQuickNavList();
     if (success) return result;
     return null;
   }
@@ -50,7 +57,7 @@ class SystemService {
    * @returns {Array}
    */
   async getLatestNews() {
-    const { success, result } = await request.get('/sys/getLatestNews');
+    const { success, result } = await apiGetLatestNews();
     if (success) return result;
     return null;
   }
@@ -59,8 +66,8 @@ class SystemService {
    * @param data
    * @returns {Array}
    */
-  async getRoleList(data) {
-    const { success, result } = await request.get('/sys/getRoleList', { data });
+  async getRoleList<T>(data: T) {
+    const { success, result } = await apiGetRoleList(data);
     if (success) return result;
     return null;
   }

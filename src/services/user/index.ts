@@ -3,10 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 14:00:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-27 10:57:42
+ * @LastEditTime: 2022-03-30 18:35:47
  */
-import request from '@/utils/request';
 import { getToken } from '@/utils/token';
+import { apiLogin, apiLogout, apiGetBaseUserInfo } from '@/apis/user';
 class UserService {
   // 初始化返回用户信息
   init() {
@@ -20,8 +20,8 @@ class UserService {
    * @returns
    */
   async loginAction(data: object) {
-    const { success, result } = await request.post('/user/login', {
-      data
+    const { success, result } = await apiLogin(data, {
+      cache: true
     });
     if (success) return result;
     return null;
@@ -31,7 +31,7 @@ class UserService {
    * @returns {Boolean}
    */
   async logoutAction() {
-    const { success, result } = await request.post('/user/logout');
+    const { success, result } = await apiLogout();
     if (success) return result;
     return null;
   }
@@ -40,10 +40,8 @@ class UserService {
    * @returns {Boolean}
    */
   async getBaseUserInfo() {
-    const { success, result } = await request.get('/user/getBaseUserInfo', {
-      data: {
-        token: getToken()
-      }
+    const { success, result } = await apiGetBaseUserInfo({
+      token: getToken()
     });
     if (success) return result;
     return null;

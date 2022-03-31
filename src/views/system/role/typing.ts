@@ -1,4 +1,5 @@
-export interface Product {
+import type { ElForm } from 'element-plus';
+export interface IProduct {
   role: {
     key: string;
     value: string;
@@ -8,3 +9,5 @@ export interface Product {
   createTime?: number;
   sortId?: number;
 }
+
+export type FormInstance = InstanceType<typeof ElForm>;
