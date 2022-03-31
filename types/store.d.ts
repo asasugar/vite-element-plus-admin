@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-29 15:00:39
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-31 11:21:10
+ * @LastEditTime: 2022-03-31 11:41:03
  */
 import { Store } from 'vuex';
 
@@ -19,8 +19,8 @@ declare module '@vue/runtime-core' {
   }
 }
 
-export interface IContent {
-  commit: (arg0: string, arg1: any) => void;
+export interface IContent<T> {
+  commit: (arg0: string, arg1: T) => void;
 }
 
 export interface IUserInfo {
