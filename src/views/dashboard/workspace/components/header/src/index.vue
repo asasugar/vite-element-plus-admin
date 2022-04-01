@@ -3,13 +3,13 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-07 13:43:16
+ * @LastEditTime: 2022-04-01 11:30:54
 -->
 <template>
   <div class="flex verticalcenter">
-    <el-avatar :src="user.avatar || headerImg" :size="72" />
+    <el-avatar :src="userinfo?.avatar || headerImg" :size="72" />
     <div class="flex column hoscenter ml30">
-      <span class="f20 pb10">早安, {{ user.username }}, 开始您一天的工作吧！</span>
+      <span class="f20 pb10">早安, {{ userinfo?.username }}, 开始您一天的工作吧！</span>
       <span class="f14 color-gray6">今日晴，20℃ - 32℃！</span>
     </div>
     <div class="flex flex__item end">
@@ -30,11 +30,13 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { useState } from 'vuex-composition-maphooks';
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '@/pinia';
+
 import headerImg from '@/assets/g.jpeg';
-const { userinfo } = useState('user', ['userinfo']);
-const user = ref(userinfo());
+
+const useUser = useUserStore();
+const { userinfo } = storeToRefs(useUser);
 </script>
 
 <style lang="less" scoped></style>

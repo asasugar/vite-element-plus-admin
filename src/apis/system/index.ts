@@ -4,7 +4,7 @@ import inject from '../inject';
 export const apiGetAnalysis = inject('/sys/getAnalysis', 'get');
 
 // 获取前端动态路由配置接口
-export const apiGetRoute = inject('/sys/getRoute', 'get');
+export const apiGetRoute = inject('/sys/getRoute');
 
 // 获取菜单页配置接口
 export const apiGetMenu = inject('/sys/getMenu', 'get');

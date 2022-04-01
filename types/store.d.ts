@@ -3,26 +3,8 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-29 15:00:39
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-31 11:41:03
+ * @LastEditTime: 2022-04-01 11:42:16
  */
-import { Store } from 'vuex';
-
-declare module '@vue/runtime-core' {
-  // 声明自己的 store state
-  interface State {
-    count: number;
-  }
-
-  // 为 `this.$store` 提供类型声明
-  interface ComponentCustomProperties {
-    $store: Store<State>;
-  }
-}
-
-export interface IContent<T> {
-  commit: (arg0: string, arg1: T) => void;
-}
-
 export interface IUserInfo {
   token: string;
   password?: number | string;

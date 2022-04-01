@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:26:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-31 11:02:45
+ * @LastEditTime: 2022-04-01 11:17:14
 -->
 <template>
   <div class="login">
@@ -46,8 +46,9 @@ import { ElNotification } from 'element-plus';
 import type { ElForm } from 'element-plus';
 import { useRouter } from 'vue-router';
 import { userService } from '@/services';
-import { useActions } from 'vuex-composition-maphooks';
+// import { useActions } from 'vuex-composition-maphooks';
 import { setToken } from '@/utils/token';
+import { useUserStore } from '@/pinia';
 import AsMousemovePanel from '@/components/mousemove-panel';
 import { FormItemRule } from 'element-plus/es/components/form/src/form.type';
 import { IForm } from './typing';
@@ -65,7 +66,8 @@ const rules = reactive({
 }) as Partial<Record<string, FormItemRule | FormItemRule[]>>;
 
 const isLoading = ref<boolean>(false);
-const { asyncSetUserinfo } = useActions(['user/asyncSetUserinfo']);
+const useUser = useUserStore();
+
 // 登录
 const submitForm = () => {
   isLoading.value = true;
@@ -84,7 +86,7 @@ const submitForm = () => {
           type: 'success'
         });
         setToken(content.token);
-        asyncSetUserinfo(content);
+        useUser.updateUserinfo(content);
         router.replace({
           name: 'Home'
         });

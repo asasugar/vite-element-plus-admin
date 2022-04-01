@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-31 10:59:16
+ * @LastEditTime: 2022-04-01 11:30:36
 -->
 <template>
   <el-container class="layout-container">
@@ -45,7 +45,7 @@
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-          <span>{{ user.username }}</span>
+          <span>{{ userinfo?.username }}</span>
         </div>
       </el-header>
 
@@ -63,11 +63,13 @@
 import { ref, reactive, nextTick } from 'vue';
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router';
 import { Setting } from '@element-plus/icons-vue';
-import { useState } from 'vuex-composition-maphooks';
 import { userService, systemService } from '@/services';
 import { setStorage, getStorage } from '@/utils/storage';
 import { IMenuItem } from './typing';
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '@/pinia';
 
+const useUser = useUserStore();
 const router = useRouter();
 const route = useRoute();
 
@@ -80,8 +82,8 @@ const menuOption: {
   defaultActive: '1-1',
   menu: []
 });
-const { userinfo } = useState('user', ['userinfo']);
-const user = ref<{ username: string }>(userinfo() || { username: '' });
+
+const { userinfo } = storeToRefs(useUser);
 const breadcrumb = ref<string[]>([]);
 onBeforeRouteUpdate(to => {
   if (typeof to?.meta?.title === 'string' && !breadcrumb.value.includes(to?.meta?.title)) {
