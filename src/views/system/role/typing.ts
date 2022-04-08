@@ -1,5 +1,5 @@
 import type { ElForm } from 'element-plus';
-export interface IProduct {
+export interface IRole {
   role: {
     key: string;
     value: string;

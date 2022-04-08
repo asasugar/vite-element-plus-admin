@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-25 18:39:47
+ * @LastEditTime: 2022-04-08 23:02:01
 -->
 <template>
   <el-card class="card-wrapper" :body-style="{ padding: '12px 12px 2px 12px' }">
@@ -16,21 +16,23 @@
       </div>
     </template>
     <el-table :data="tableData" border highlight-current-row style="width: 100%">
-      <el-table-column prop="roleName" label="角色名称" width="180" />
-      <el-table-column prop="roleValue" label="角色值" />
-      <el-table-column prop="sortId" sortable label="排序" />
-      <el-table-column prop="status" label="状态">
-        <template #default="scope">
-          <el-switch v-model="scope.row.status"></el-switch>
-          <span class="pl10">{{ scope.row.status ? '已启用' : '已禁用' }}</span>
-        </template>
-      </el-table-column>
+      <el-table-column prop="sortId" label="序号" />
+      <el-table-column prop="userName" label="用户名" width="180" />
+      <el-table-column prop="email" sortable label="邮箱" />
       <el-table-column prop="createTime" sortable label="创建时间" />
-      <el-table-column prop="remark" label="备注" />
+      <el-table-column prop="roleName" label="角色" />
       <el-table-column label="操作">
-        <template>
-          <el-button size="small">Edit</el-button>
-          <el-button size="small" type="danger">Delete</el-button>
+        <template #default="scope">
+          <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
+          <el-popconfirm
+            title="确定删除该角色？"
+            icon-color="red"
+            @confirm="handleDel(scope.row.sortId)"
+          >
+            <template #reference>
+              <el-button size="small" type="danger">删除</el-button>
+            </template>
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
@@ -38,39 +40,48 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue';
+// import { useRouter } from 'vue-router';
 
-interface Product {
-  roleName: string;
-  roleValue: string;
+// const router = useRouter();
+
+interface IUser {
   sortId: number;
-  status: boolean;
+  userName: string;
+  email: string;
   createTime: number;
-  remark: string;
+  roleName: string;
 }
-const tableData = ref<Product[]>([
+const tableData = ref<IUser[]>([
   {
-    roleName: '超级管理员',
-    roleValue: 'superAdmin',
     sortId: 1,
-    status: true,
+    userName: 'superAdmin',
+    email: '1',
     createTime: 10,
-    remark: '我好着呢'
+    roleName: '我好着呢'
   },
   {
-    roleName: '管理员',
-    roleValue: 'admin',
     sortId: 2,
-    status: true,
-    createTime: 12,
-    remark: '我好着呢'
+    userName: 'superAdmin',
+    email: '1',
+    createTime: 10,
+    roleName: '我好着呢'
   },
   {
-    roleName: '运营人员',
-    roleValue: 'operation',
     sortId: 3,
-    status: false,
-    createTime: 9,
-    remark: '我好着呢'
+    userName: 'superAdmin',
+    email: '1',
+    createTime: 10,
+    roleName: '我好着呢'
   }
 ]);
+
+const handleEdit = (item: IUser) => {
+  if (!item) return;
+  // router.push({ name: 'SystemRoleEdit', params: { data: JSON.stringify(item) } });
+};
+
+const handleDel = (sortId: number | undefined) => {
+  tableData.value = tableData.value?.filter(data => data.sortId !== sortId);
+  return true;
+};
 </script>

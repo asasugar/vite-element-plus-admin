@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-31 11:05:02
+ * @LastEditTime: 2022-04-08 23:01:32
 -->
 <template>
   <el-card
@@ -74,12 +74,12 @@
 import { computed, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { systemService } from '@/services';
-import { IProduct } from './typing';
+import { IRole } from './typing';
 
 const router = useRouter();
 const route = useRoute();
 
-const tableData = ref<IProduct[]>();
+const tableData = ref<IRole[]>();
 const search = ref<string>('');
 const currentPage = ref<number>(1);
 const pageNum = ref<number>(1);
@@ -122,7 +122,7 @@ const handleInsert = () => {
   router.push({ name: 'SystemRoleInsert' });
 };
 
-const handleEdit = (item: IProduct) => {
+const handleEdit = (item: IRole) => {
   if (!item) return;
   router.push({ name: 'SystemRoleEdit', params: { data: JSON.stringify(item) } });
 };
