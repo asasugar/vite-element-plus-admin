@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-31 10:38:13
+ * @LastEditTime: 2022-04-08 18:39:39
  */
 
 /**
@@ -61,60 +61,59 @@ export function dynamicImport(component: string) {
 
 /**
  * @description 对比数组是否相等
- * @param {(string | any[])} arr1
- * @param {(string | any[])} arr2
- * @returns {*}
+ * @param {any[]} array
+ * @param {any[]} other
+ * @returns {boolean}
  */
-export function equalArray(arr1: string | any[], arr2: string | any[]) {
-  if (arr1.length !== arr2.length) return false;
-  for (let i = 0, l = arr1.length; i < l; i++) {
-    if (arr1[i] instanceof Array && arr2[i] instanceof Array) {
-      if (!equalArray(arr1[i], arr2[i])) return false;
-    } else if (arr1[i] instanceof Object && arr2[i] instanceof Object) {
-      if (!equalObject(arr1[i], arr2[i])) return false;
-    } else if (arr1[i] !== arr2[i]) return false;
+export function equalArrays(array: any[], other: any[]): boolean {
+  if (array.length !== other.length) return false;
+  for (let i = 0, l = array.length; i < l; i++) {
+    if (Array.isArray(array[i]) && Array.isArray(other[i])) {
+      if (!equalArrays(array[i], other[i])) return false;
+    } else if (isObject(array[i]) && isObject(other[i])) {
+      if (!equalObjects(array[i], other[i])) return false;
+    } else if (array[i] !== other[i]) return false;
   }
   return true;
 }
 
 /**
  * @description 对比对象是否相等
- * @param {{ [x: string]: any; }} obj1
- * @param {{ [x: string]: any; }} obj2
- * @returns {*}
+ * @param {{ [x: string]: any; }} object
+ * @param {{ [x: string]: any; }} other
+ * @returns {boolean}
  */
-export function equalObject(obj1: { [x: string]: any }, obj2: { [x: string]: any }) {
-  if (Object.keys(obj1).length !== Object.keys(obj2).length) return false;
-  for (const prop in obj1) {
+export function equalObjects(object: { [x: string]: any }, other: { [x: string]: any }): boolean {
+  if (Object.keys(object).length !== Object.keys(other).length) return false;
+  for (const prop in object) {
     if (
-      Object.prototype.hasOwnProperty.call(obj1, prop) !==
-      Object.prototype.hasOwnProperty.call(obj2, prop)
+      Object.prototype.hasOwnProperty.call(object, prop) !==
+      Object.prototype.hasOwnProperty.call(other, prop)
     )
       return false;
-    else if (typeof obj1[prop] !== typeof obj2[prop]) return false;
-
-    if (obj1[prop] instanceof Array && obj2[prop] instanceof Array) {
-      if (!equalArray(obj1[prop], obj2[prop])) return false;
-    } else if (obj1[prop] instanceof Object && obj2[prop] instanceof Object) {
-      if (!equalObject(obj1[prop], obj2[prop])) return false;
-    } else if (obj1[prop] !== obj2[prop]) return false;
+    else if (typeof object[prop] !== typeof other[prop]) return false;
+    if (Array.isArray(object[prop]) && Array.isArray(other[prop])) {
+      if (!equalArrays(object[prop], other[prop])) return false;
+    } else if (isObject(object[prop]) && isObject(other[prop])) {
+      if (!equalObjects(object[prop], other[prop])) return false;
+    } else if (object[prop] !== other[prop]) return false;
   }
   return true;
 }
 
 /**
  * @description 深度对比两个值是否相等
- * @param {*} value
- * @param {*} other
- * @returns {*}  {boolean}
+ * @param {any} value
+ * @param {any} other
+ * @returns {boolean}  {}
  */
-export function isEqual(value: any, other: any) {
+export function isEqual(value: any, other: any): boolean {
   // 复杂类型
-  if (typeof value === 'object' && typeof other === 'object') {
-    if (value instanceof Array && other instanceof Array) {
-      return equalArray(value, other);
-    } else if (value instanceof Object && value instanceof Object) {
-      return equalObject(value, other);
+  if (isValidMap(value) && isValidMap(other)) {
+    if (Array.isArray(value) && Array.isArray(other)) {
+      return equalArrays(value, other);
+    } else if (isObject(value) && isObject(other)) {
+      return equalObjects(value, other);
     }
     return false;
   }
