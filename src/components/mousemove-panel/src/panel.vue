@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-15 17:21:46
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-31 11:36:33
+ * @LastEditTime: 2022-04-08 22:47:09
 -->
 <template>
   <div ref="panel" class="as-panel"></div>
@@ -15,12 +15,12 @@ import { useEventListener, useThrottleFn, useMouse } from '@vueuse/core';
 interface Props {
   throttleTime?: number;
   bgColor?: string;
-  boxShadowColor: any;
+  boxShadowColor: string[];
 }
 const props = withDefaults(defineProps<Props>(), {
   throttleTime: 0,
   bgColor: '#55b9f3',
-  boxShadowColor: ['#489dcf', '#62d5ff']
+  boxShadowColor: () => ['#489dcf', '#62d5ff']
 });
 const { x, y } = useMouse();
 
