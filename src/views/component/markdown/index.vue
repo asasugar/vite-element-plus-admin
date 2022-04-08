@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-18 14:59:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-18 18:57:26
+ * @LastEditTime: 2022-04-08 22:36:40
 -->
 <template>
   <as-page-wrapper header-title="Markdown 组件演示">
@@ -35,7 +35,9 @@
 <script lang="ts" setup>
 import { ref, unref, watch } from 'vue';
 import { AsPageWrapper } from '@/containers/page-wrapper';
-import { AsMarkdown, MarkDownActionType, Nullable } from '@/components/markdown';
+import { AsMarkdown, MarkDownActionType } from '@/components/markdown';
+import type { Nullable } from '#/global';
+
 const markDownRef = ref<Nullable<MarkDownActionType>>(null);
 
 const markdownCache =
