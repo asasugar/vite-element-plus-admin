@@ -14,6 +14,3 @@ export const apiGetQuickNavList = inject('/sys/getQuickNavList', 'get');
 
 // 获取最新动态接口
 export const apiGetLatestNews = inject('/sys/getLatestNews', 'get');
-
-// 获取角色列表接口
-export const apiGetRoleList = inject('/sys/getRoleList', 'get');

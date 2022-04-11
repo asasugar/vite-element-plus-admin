@@ -8,3 +8,9 @@ export const apiLogout = inject('/user/logout');
 
 // 获取用户信息接口
 export const apiGetBaseUserInfo = inject('/user/getBaseUserInfo', 'get');
+
+// 获取角色列表接口
+export const apiGetRoleList = inject('/user/getRoleList', 'get');
+
+// 获取用户列表接口
+export const apiGetUserList = inject('/user/getUserList', 'get');

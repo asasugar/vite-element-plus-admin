@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-08 23:01:32
+ * @LastEditTime: 2022-04-11 17:19:57
 -->
 <template>
   <el-card
@@ -65,16 +65,17 @@
       :total="totalNum"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-    ></el-pagination>
+    />
   </el-card>
   <!-- 新增或者编辑用户角色子路由 -->
-  <router-view v-else></router-view>
+  <router-view v-else> </router-view>
 </template>
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { systemService } from '@/services';
+import { userService } from '@/services';
 import { IRole } from './typing';
+import { IPage } from '#/global';
 
 const router = useRouter();
 const route = useRoute();
@@ -87,7 +88,7 @@ const pageSize = ref<number>(10);
 const totalNum = ref<number>(0);
 
 const getRoleList = async (pageNum: number, pageSize: number) => {
-  const { total, content } = await systemService.getRoleList({
+  const { total, content } = await userService.getRoleList<IPage>({
     pageNum,
     pageSize
   });

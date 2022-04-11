@@ -3,10 +3,17 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 14:00:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-30 18:35:47
+ * @LastEditTime: 2022-04-11 17:28:57
  */
 import { getToken } from '@/utils/token';
-import { apiLogin, apiLogout, apiGetBaseUserInfo } from '@/apis/user';
+
+import {
+  apiLogin,
+  apiLogout,
+  apiGetBaseUserInfo,
+  apiGetRoleList,
+  apiGetUserList
+} from '@/apis/user';
 class UserService {
   // 初始化返回用户信息
   init() {
@@ -43,6 +50,26 @@ class UserService {
     const { success, result } = await apiGetBaseUserInfo({
       token: getToken()
     });
+    if (success) return result;
+    return null;
+  }
+  /**
+   * 获取角色列表
+   * @param data
+   * @returns {Array}
+   */
+  async getRoleList<T>(data: T) {
+    const { success, result } = await apiGetRoleList(data);
+    if (success) return result;
+    return null;
+  }
+  /**
+   * 获取用户列表
+   * @param data
+   * @returns {Array}
+   */
+  async getUserList<T>(data: T) {
+    const { success, result } = await apiGetUserList(data);
     if (success) return result;
     return null;
   }

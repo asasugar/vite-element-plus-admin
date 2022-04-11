@@ -3,15 +3,14 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 14:00:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-31 10:12:49
+ * @LastEditTime: 2022-04-11 18:34:39
  */
 import {
   apiGetAnalysis,
   apiGetRoute,
   apiGetMenu,
   apiGetLatestNews,
-  apiGetQuickNavList,
-  apiGetRoleList
+  apiGetQuickNavList
 } from '@/apis/system';
 
 class SystemService {
@@ -58,16 +57,6 @@ class SystemService {
    */
   async getLatestNews() {
     const { success, result } = await apiGetLatestNews();
-    if (success) return result;
-    return null;
-  }
-  /**
-   * 获取角色列表
-   * @param data
-   * @returns {Array}
-   */
-  async getRoleList<T>(data: T) {
-    const { success, result } = await apiGetRoleList(data);
     if (success) return result;
     return null;
   }

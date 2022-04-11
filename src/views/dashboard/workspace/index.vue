@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:14:27
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-15 15:02:23
+ * @LastEditTime: 2022-04-11 17:05:45
 -->
 <template>
   <as-page-wrapper>
@@ -26,13 +26,14 @@ import { projectService, systemService } from '@/services';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import WorkSpaceHeader from './components/header';
 import WorkSpaceBody from './components/body';
+import { IPage } from '#/global';
 
 const projectList = ref([]);
 const navList = ref([]);
 const newsList = ref([]);
 const loading = ref<boolean>(true);
 const getProjectList = async () => {
-  const { content } = await projectService.getProjectList({
+  const { content } = await projectService.getProjectList<IPage>({
     pageNum: 1,
     pageSize: 9
   });

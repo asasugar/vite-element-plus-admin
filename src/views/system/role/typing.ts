@@ -1,4 +1,3 @@
-import type { ElForm } from 'element-plus';
 export interface IRole {
   role: {
     key: string;
@@ -9,5 +8,3 @@ export interface IRole {
   createTime?: number;
   sortId?: number;
 }
-
-export type FormInstance = InstanceType<typeof ElForm>;

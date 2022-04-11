@@ -1,12 +1,12 @@
 <!--
- * @Description: 新增/编辑用户角色
+ * @Description: 新增/编辑用户
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
- * @Date: 2022-03-08 17:29:15
+ * @Date: 2022-04-11 17:22:54
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-11 18:23:08
+ * @LastEditTime: 2022-04-11 18:34:17
 -->
 <template>
-  <as-page-wrapper header-title="新增角色">
+  <as-page-wrapper header-title="新增用户">
     <template #bodyContent>
       <div class="pb20">
         <el-radio-group v-model="size" class="mr20">
@@ -25,28 +25,37 @@
         :model="ruleForm"
         :rules="rules"
         :size="size"
-        label-width="auto"
+        label-width="90px"
         :label-position="labelPosition"
         class="rule-form"
       >
         <el-row :gutter="10">
           <el-col :span="12">
-            <el-form-item label="角色名称" prop="roleValue">
-              <el-input v-model="ruleForm.role.value" placeholder="请输入角色名称"></el-input>
+            <el-form-item label="用户名称" prop="userName">
+              <el-input v-model="ruleForm.userName" placeholder="请输入用户名称"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="角色值" prop="roleKey">
-              <el-input v-model="ruleForm.role.key" placeholder="请输入角色值"></el-input>
+            <el-form-item label="角色" prop="role.value">
+              <el-select
+                v-model="ruleForm.role.value"
+                placeholder="请匹配角色"
+                :size="size"
+                filterable
+                clearable
+              >
+                <el-option
+                  v-for="item in roleList"
+                  :key="item.role.key"
+                  :label="item.role.value"
+                  :value="item.role.key"
+                />
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
-
-        <el-form-item label="状态" prop="status">
-          <el-switch v-model="ruleForm.status"></el-switch>
-        </el-form-item>
-        <el-form-item label="备注" prop="remark">
-          <el-input v-model="ruleForm.remark" type="textarea" placeholder="请输入..."></el-input>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="ruleForm.email" placeholder="请输入邮箱地址"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm(ruleFormRef)">保存</el-button>
@@ -61,47 +70,63 @@
 import { reactive, ref } from 'vue';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { useRoute } from 'vue-router';
+import { userService } from '@/services';
 import { ComponentSize } from 'element-plus/lib/utils/types';
-import { IRole } from './typing';
+import { IRole } from '../role/typing';
 import { FormInstance } from '#/global';
+import { IUserInsert } from './typing';
 
 const route = useRoute();
 
 const size = ref<ComponentSize>('default');
 const labelPosition = ref('right');
 const ruleFormRef = ref<FormInstance>();
-let ruleForm = reactive<IRole>({
+let ruleForm = reactive<IUserInsert>({
+  userName: '',
   role: {
     key: '',
     value: ''
   },
-  status: true,
-  remark: ''
+  email: ''
 });
 if (
-  route.name === 'SystemRoleEdit' &&
+  route.name === 'SystemUserEdit' &&
   route?.params?.data &&
   typeof route.params.data === 'string'
 ) {
-  ruleForm = JSON.parse(route.params.data) as IRole;
+  ruleForm = JSON.parse(route.params.data) as IUserInsert;
 }
 
 const rules = reactive({
-  roleValue: [
+  userName: [
     {
       required: true,
-      message: '请输入角色名称',
+      message: '请输入用户名称',
       trigger: 'blur'
     }
   ],
-  roleKey: [
+  'role.value': [
     {
       required: true,
-      message: '请输入角色值',
+      message: '请选择角色',
+      trigger: 'change'
+    }
+  ],
+  email: [
+    {
+      required: true,
+      message: '请输入邮箱地址',
       trigger: 'blur'
     }
   ]
 });
+const roleList = ref<IRole[]>([]);
+const getRoleList = async () => {
+  const { content } = await userService.getRoleList({});
+  // totalNum.value = total;
+  roleList.value = content;
+};
+getRoleList();
 
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
