@@ -3,13 +3,14 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-01 11:30:36
+ * @LastEditTime: 2022-04-12 11:12:34
 -->
 <template>
   <el-container class="layout-container">
     <el-aside width="200px">
       <el-scrollbar>
         <el-menu
+          unique-opened
           :default-openeds="menuOption.defaultOpeneds"
           :default-active="menuOption.defaultActive"
         >
@@ -20,7 +21,7 @@
                 v-for="subItem in item.children"
                 :key="subItem.sortId"
                 :index="subItem.sortId"
-                @click="handleToMenu(subItem, item.title)"
+                @click="handleToMenu(item, subItem)"
                 >{{ subItem.title }}</el-menu-item
               >
             </template>
@@ -60,12 +61,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, nextTick } from 'vue';
+import { ref, nextTick } from 'vue';
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router';
 import { Setting } from '@element-plus/icons-vue';
 import { userService, systemService } from '@/services';
 import { setStorage, getStorage } from '@/utils/storage';
-import { IMenuItem } from './typing';
+import { IMenu, IMenuItem } from './typing';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/pinia';
 
@@ -73,11 +74,7 @@ const useUser = useUserStore();
 const router = useRouter();
 const route = useRoute();
 
-const menuOption: {
-  defaultOpeneds: string[];
-  defaultActive: string;
-  menu: IMenuItem[];
-} = reactive({
+const menuOption = ref<IMenu>({
   defaultOpeneds: ['1'],
   defaultActive: '1-1',
   menu: []
@@ -88,8 +85,12 @@ const breadcrumb = ref<string[]>([]);
 onBeforeRouteUpdate(to => {
   if (typeof to?.meta?.title === 'string' && !breadcrumb.value.includes(to?.meta?.title)) {
     breadcrumb.value.push(to.meta.title);
-    // 存储最新面包屑，用于刷新时回显
+    // 存储最新面包屑，左侧菜单选中项，用于刷新时回显
     setStorage('breadcrumb', breadcrumb.value);
+    setStorage('menuOption', {
+      defaultOpeneds: menuOption.value.defaultOpeneds,
+      defaultActive: menuOption.value.defaultActive
+    });
   }
 });
 
@@ -101,8 +102,8 @@ const _renderDefaultMenuActive = (menu: IMenuItem[], sortId?: string, title?: st
       list.some(item => {
         if (item.name === route.name) {
           nextTick(() => {
-            menuOption.defaultOpeneds = [`${id ? id : item.sortId}`];
-            menuOption.defaultActive = item.sortId;
+            menuOption.value.defaultOpeneds = [`${id ? id : item.sortId}`];
+            menuOption.value.defaultActive = item.sortId;
             breadcrumb.value = text ? [text, item.title] : [item.title];
           });
           isFindInMenu = true;
@@ -114,7 +115,11 @@ const _renderDefaultMenuActive = (menu: IMenuItem[], sortId?: string, title?: st
       });
     })(menu, sortId, title);
     if (!isFindInMenu) {
-      breadcrumb.value = getStorage('breadcrumb');
+      nextTick(() => {
+        breadcrumb.value = getStorage('breadcrumb');
+        menuOption.value.defaultOpeneds = getStorage('menuOption')?.defaultOpeneds;
+        menuOption.value.defaultActive = getStorage('menuOption')?.defaultActive;
+      });
     }
   }
 };
@@ -123,7 +128,7 @@ const _renderDefaultMenuActive = (menu: IMenuItem[], sortId?: string, title?: st
 // 获取菜单列表
 (async function getMenu() {
   const content = await systemService.getMenu();
-  menuOption.menu = content;
+  menuOption.value.menu = content;
   if (content) {
     _renderDefaultMenuActive(content);
   }
@@ -137,18 +142,24 @@ const handleLogout = async () => {
   }
 };
 // 去二级菜单页
-const handleToMenu = (item: { name: string; path: string }, title: string) => {
-  breadcrumb.value = [title];
-  if (item.name) {
-    router.push({ name: item.name });
-  } else if (item.path) {
-    router.push({ path: item.path });
+const handleToMenu = (
+  item: { title: string; sortId: string },
+  subItem: { sortId: string; name: string; path: string }
+) => {
+  breadcrumb.value = [item.title];
+  menuOption.value.defaultOpeneds = [item.sortId];
+  menuOption.value.defaultActive = subItem.sortId;
+  if (subItem.name) {
+    router.push({ name: subItem.name });
+  } else if (subItem.path) {
+    router.push({ path: subItem.path });
   }
 };
 </script>
 <style lang="less" scoped>
 .layout-container {
   height: 100vh;
+
   .el-aside {
     width: 240px;
     color: var(--el-text-color-primary);
@@ -156,16 +167,20 @@ const handleToMenu = (item: { name: string; path: string }, title: string) => {
     border-right: solid 1px #e6e6e6;
     box-sizing: border-box;
   }
+
   .el-menu {
     border-right: none;
   }
+
   .el-main {
     padding: 0;
   }
+
   .home-toolbar {
     display: inline-flex;
     align-items: flex-end;
   }
+
   .home-header {
     background-image: linear-gradient(25deg, @bg-color, @theme-color);
   }

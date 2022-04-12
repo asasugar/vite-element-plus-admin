@@ -6,3 +6,9 @@ export interface IMenuItem {
   path: string;
   children?: IMenuItem[];
 }
+
+export interface IMenu {
+  defaultOpeneds: string[];
+  defaultActive: string;
+  menu: IMenuItem[];
+}
