@@ -3,17 +3,17 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-24 19:50:56
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-31 11:26:59
+ * @LastEditTime: 2022-04-12 14:59:21
  */
-
+import { RouteRecordRaw } from 'vue-router';
 import { ElLoading } from 'element-plus';
 import { systemService } from '@/services';
-import { TComponent, IRoutes } from '#/vue-router';
+import { TComponent } from '#/vue-router';
 
 /**
  * 标准化动态路由 [import.meta.glob]
  */
-export const normalizeaRoutesUseGlob = (routes: IRoutes[]): IRoutes[] => {
+export const normalizeaRoutesUseGlob = (routes: RouteRecordRaw[]): RouteRecordRaw[] => {
   const components: TComponent = getViewComponent();
   return routes.map(item => {
     if (item.path && item.component) {

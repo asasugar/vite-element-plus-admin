@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-18 14:02:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-01 11:32:33
+ * @LastEditTime: 2022-04-12 16:35:44
 -->
 <template>
   <div ref="wrapRef"></div>
@@ -81,7 +81,7 @@ function init() {
       });
     },
     cache: {
-      enable: true,
+      enable: false, // 是否缓存markdown至localStorage
       id: 'markdown'
     },
     ...bindValue

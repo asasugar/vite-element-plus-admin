@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-29 14:58:01
+ * @LastEditTime: 2022-04-12 16:06:06
  */
 import { loadEnv, UserConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -13,6 +13,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import visualizer from 'rollup-plugin-visualizer';
 import viteCompression from 'vite-plugin-compression';
 import postCssPurge from '@fullhuman/postcss-purgecss';
+import vueSetupExtend from 'vite-plugin-vue-setup-extend';
 import { pathResolve } from './utils';
 
 const vuePath = /\.vue(\?.+)?$/;
@@ -74,7 +75,8 @@ const Config: UserConfig = {
         /data-v-.*/,
         /^el-/
       ]
-    })
+    }),
+    vueSetupExtend()
   ],
   build: {
     target: 'esnext',
@@ -111,7 +113,7 @@ export function getConfig({ command, mode }: { command: string; mode: string }) 
   Config.base = loadEnv(mode, process.cwd()).VITE_REPO_URL;
   Config.clearScreen = mode === 'production';
   if (mode === 'analyzer') {
-    Config.plugins.push({
+    Config.plugins?.push({
       ...visualizer({
         gzipSize: true,
         open: true

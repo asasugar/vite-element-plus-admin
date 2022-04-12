@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-11 18:18:56
+ * @LastEditTime: 2022-04-12 13:51:20
  */
 export default [
   // 看板数据
@@ -81,7 +81,8 @@ export default [
                 path: '/component/markdown',
                 component: 'views/component/markdown/index',
                 meta: {
-                  title: 'Markdown 演示'
+                  title: 'Markdown 演示',
+                  keepAlive: true
                 }
               },
               {
@@ -89,7 +90,8 @@ export default [
                 path: '/component/json',
                 component: 'views/component/json-edit/index',
                 meta: {
-                  title: 'JSON编辑器 演示'
+                  title: 'JSON编辑器 演示',
+                  keepAlive: true
                 }
               },
               {
@@ -113,7 +115,8 @@ export default [
                     path: 'insert',
                     component: 'views/system/user/update',
                     meta: {
-                      title: '新增用户'
+                      title: '新增用户',
+                      keepAlive: true
                     }
                   },
                   {
@@ -121,7 +124,8 @@ export default [
                     path: 'edit',
                     component: 'views/system/user/update',
                     meta: {
-                      title: '编辑用户'
+                      title: '编辑用户',
+                      keepAlive: true
                     }
                   }
                 ]
@@ -139,7 +143,8 @@ export default [
                     path: 'insert',
                     component: 'views/system/role/update',
                     meta: {
-                      title: '新增角色'
+                      title: '新增角色',
+                      keepAlive: true
                     }
                   },
                   {
@@ -147,7 +152,8 @@ export default [
                     path: 'edit',
                     component: 'views/system/role/update',
                     meta: {
-                      title: '编辑角色'
+                      title: '编辑角色',
+                      keepAlive: true
                     }
                   }
                 ]

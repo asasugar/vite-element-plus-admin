@@ -61,6 +61,7 @@
     "unplugin-vue-components": "^0.17.17",
     "vite": "^2.7.13",
     "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-vue-setup-extend": "^0.4.0",
     "vue-eslint-parser": "^8.0.1",
     "vue-tsc": "^0.29.8"
   },

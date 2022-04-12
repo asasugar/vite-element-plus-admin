@@ -23,13 +23,24 @@
     "types": [
       "vite/client",
       "element-plus/global",
-      "node"
+      "node",
     ],
     "paths": {
       "@/*": ["./src/*"],
       "#/*": ["./types/*"]
     }
   },
-  "include": ["src", "mock"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "mock/**/*.ts",
+    "types/**/*.d.ts",
+    "types/**/*.ts",
+    "build/**/*.ts",
+    "build/**/*.d.ts",
+    "vite.config.ts"
+  ],
   "exclude": ["node_modules", "dist"]
 }

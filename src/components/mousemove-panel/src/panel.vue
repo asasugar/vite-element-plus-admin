@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-15 17:21:46
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-08 22:47:09
+ * @LastEditTime: 2022-04-12 18:08:18
 -->
 <template>
   <div ref="panel" class="as-panel"></div>
@@ -15,7 +15,7 @@ import { useEventListener, useThrottleFn, useMouse } from '@vueuse/core';
 interface Props {
   throttleTime?: number;
   bgColor?: string;
-  boxShadowColor: string[];
+  boxShadowColor?: string[];
 }
 const props = withDefaults(defineProps<Props>(), {
   throttleTime: 0,
@@ -35,7 +35,8 @@ const handleMousemove = () => {
     oSpan.style.width = 5 + size + `px`;
     oSpan.style.height = 5 + size + `px`;
     panel.value.appendChild(oSpan);
-    setTimeout(() => {
+    let t = setTimeout(() => {
+      if (t) clearTimeout(t);
       oSpan.remove();
     }, 1000);
   }
@@ -56,6 +57,7 @@ onMounted(() => {
   right: 0;
   bottom: 0;
   z-index: 0;
+
   :deep(span) {
     width: 10px;
     height: 10px;

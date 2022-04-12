@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-18 14:59:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-08 22:36:40
+ * @LastEditTime: 2022-04-12 16:36:36
 -->
 <template>
   <as-page-wrapper header-title="Markdown 组件演示">
@@ -32,7 +32,8 @@
     </template>
   </as-page-wrapper>
 </template>
-<script lang="ts" setup>
+
+<script lang="ts" setup name="ComponentMarkdown">
 import { ref, unref, watch } from 'vue';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { AsMarkdown, MarkDownActionType } from '@/components/markdown';
@@ -67,6 +68,7 @@ const onMd2html = async (mdtext: string) => {
   if (!instance) return;
   cardContent.value = await instance?.md2html(mdtext);
 };
+
 const handleClear = () => {
   valueRef.value = '';
 };

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:14:27
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-11 17:05:45
+ * @LastEditTime: 2022-04-12 18:05:11
 -->
 <template>
   <as-page-wrapper>
@@ -50,9 +50,7 @@ const getLatestNews = async () => {
 getProjectList();
 getQuickNavList();
 getLatestNews();
-setTimeout(() => {
-  loading.value = false;
-}, 1000);
+loading.value = false;
 </script>
 
 <style lang="less" scoped>

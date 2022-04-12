@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-12 11:12:34
+ * @LastEditTime: 2022-04-12 18:02:06
 -->
 <template>
   <el-container class="layout-container">
@@ -49,12 +49,32 @@
           <span>{{ userinfo?.username }}</span>
         </div>
       </el-header>
-
+      <el-tabs
+        v-if="editableTabs?.length"
+        v-model="editableTabsValue"
+        closable
+        type="card"
+        class="demo-tabs"
+        @tab-click="handleTabClick"
+        @tab-remove="handleTabRemove"
+      >
+        <el-tab-pane
+          v-for="item in editableTabs"
+          :key="item.path"
+          :label="item.title"
+          :name="item.path"
+        >
+        </el-tab-pane>
+      </el-tabs>
       <el-main class="bg-gray">
-        <!-- <el-scrollbar> 跟 el-backtop冲突-->
         <el-backtop target=".el-main"></el-backtop>
-        <router-view></router-view>
-        <!-- </el-scrollbar> -->
+        <router-view v-slot="{ Component }">
+          <transition name="fade" mode="out-in">
+            <keep-alive :include="keepAliveInclude">
+              <component :is="Component" :key="route.fullPath" />
+            </keep-alive>
+          </transition>
+        </router-view>
       </el-main>
     </el-container>
   </el-container>
@@ -66,14 +86,17 @@ import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router';
 import { Setting } from '@element-plus/icons-vue';
 import { userService, systemService } from '@/services';
 import { setStorage, getStorage } from '@/utils/storage';
-import { IMenu, IMenuItem } from './typing';
+import { ITab, IMenu, IMenuItem } from './typing';
 import { storeToRefs } from 'pinia';
-import { useUserStore } from '@/pinia';
+import { useGlobalStore, useUserStore } from '@/pinia';
+import { routes } from '@/router';
 
+const useGlobal = useGlobalStore();
 const useUser = useUserStore();
 const router = useRouter();
 const route = useRoute();
-
+useGlobal.keepAliveAction(routes);
+const { keepAliveInclude } = storeToRefs(useGlobal);
 const menuOption = ref<IMenu>({
   defaultOpeneds: ['1'],
   defaultActive: '1-1',
@@ -82,6 +105,8 @@ const menuOption = ref<IMenu>({
 
 const { userinfo } = storeToRefs(useUser);
 const breadcrumb = ref<string[]>([]);
+const editableTabsValue = ref(route.path);
+const editableTabs = ref<ITab[]>([]);
 onBeforeRouteUpdate(to => {
   if (typeof to?.meta?.title === 'string' && !breadcrumb.value.includes(to?.meta?.title)) {
     breadcrumb.value.push(to.meta.title);
@@ -93,6 +118,37 @@ onBeforeRouteUpdate(to => {
     });
   }
 });
+const handleTabClick = ({ index }: { index: string | undefined }) => {
+  if (!index) return;
+
+  const tab = editableTabs.value[~~index];
+  if (!tab) return;
+
+  editableTabsValue.value = tab.path;
+  menuOption.value.defaultOpeneds = tab.defaultOpeneds;
+  menuOption.value.defaultActive = tab.defaultActive;
+  breadcrumb.value = tab.breadcrumb;
+  router.push({ path: tab.path });
+};
+
+const handleTabRemove = (paneName: string) => {
+  const tabs = editableTabs.value;
+  editableTabs.value = tabs.filter(tab => tab.path !== paneName);
+  const length = editableTabs.value.length;
+  if (length) {
+    const prevTab = editableTabs.value[length - 1];
+    editableTabsValue.value = prevTab.path;
+    breadcrumb.value = prevTab.breadcrumb;
+    menuOption.value.defaultOpeneds = prevTab.defaultOpeneds;
+    menuOption.value.defaultActive = prevTab.defaultActive;
+  } else {
+    // 删除tabs为0时，重置跳回首页
+    menuOption.value.defaultOpeneds = ['1'];
+    menuOption.value.defaultActive = '1-1';
+    breadcrumb.value = ['Dashboard', '分析页'];
+    router.push({ path: '/dashboard/analysis' });
+  }
+};
 
 // 刷新时渲染选中的菜单项
 const _renderDefaultMenuActive = (menu: IMenuItem[], sortId?: string, title?: string) => {
@@ -105,6 +161,14 @@ const _renderDefaultMenuActive = (menu: IMenuItem[], sortId?: string, title?: st
             menuOption.value.defaultOpeneds = [`${id ? id : item.sortId}`];
             menuOption.value.defaultActive = item.sortId;
             breadcrumb.value = text ? [text, item.title] : [item.title];
+            // push tab分页栏
+            editableTabs.value.push({
+              title: route.meta.title as string,
+              path: route.path,
+              defaultOpeneds: menuOption.value.defaultOpeneds,
+              defaultActive: menuOption.value.defaultActive,
+              breadcrumb: breadcrumb.value
+            });
           });
           isFindInMenu = true;
           return true;
@@ -141,14 +205,28 @@ const handleLogout = async () => {
     router.replace({ name: 'Login' });
   }
 };
+
 // 去二级菜单页
 const handleToMenu = (
   item: { title: string; sortId: string },
-  subItem: { sortId: string; name: string; path: string }
+  subItem: { title: string; sortId: string; name: string; path: string }
 ) => {
   breadcrumb.value = [item.title];
   menuOption.value.defaultOpeneds = [item.sortId];
   menuOption.value.defaultActive = subItem.sortId;
+  if (subItem.title && subItem.path) {
+    let isExist = !!editableTabs.value.find(i => i.title === subItem.title);
+    editableTabsValue.value = subItem.path;
+    if (!isExist) {
+      editableTabs.value.push({
+        title: subItem.title,
+        defaultOpeneds: menuOption.value.defaultOpeneds,
+        defaultActive: menuOption.value.defaultActive,
+        breadcrumb: breadcrumb.value,
+        path: subItem.path
+      });
+    }
+  }
   if (subItem.name) {
     router.push({ name: subItem.name });
   } else if (subItem.path) {
@@ -183,6 +261,16 @@ const handleToMenu = (
 
   .home-header {
     background-image: linear-gradient(25deg, @bg-color, @theme-color);
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
   }
 }
 </style>
