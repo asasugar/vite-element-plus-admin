@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-11 17:15:08
+ * @LastEditTime: 2022-04-12 18:19:38
  */
 import * as Mock from 'mockjs';
 import { IConfig, IUserType } from '../../typing';
@@ -116,31 +116,40 @@ export default [
       const { pageNum, pageSize } = config.body;
       const total = 200;
 
-      const { list } = Mock.mock({
-        [`list|${total}`]: [
-          {
-            'sortId|+1': 1,
-            status: Random.boolean(),
-            role: '@prole',
-            createTime: Random.datetime(),
-            remark: Random.city()
-          }
-        ]
-      });
-      const newDataList =
-        pageSize > 1 ? list.slice((pageNum - 1) * pageSize, pageNum * pageSize) : [...list];
       if (pageNum && pageSize) {
+        const { list } = Mock.mock({
+          [`list|${pageSize}`]: [
+            {
+              'sortId|+1': (pageNum - 1) * pageSize + 1,
+              status: Random.boolean(),
+              role: '@prole',
+              createTime: Random.datetime(),
+              remark: Random.city()
+            }
+          ]
+        });
         return {
           success: true,
           result: {
             pageNum,
             pageSize,
-            content: newDataList,
+            content: list,
             total
           },
           code: 200
         };
       } else {
+        const { list } = Mock.mock({
+          [`list|${total}`]: [
+            {
+              'sortId|+1': 1,
+              status: Random.boolean(),
+              role: '@prole',
+              createTime: Random.datetime(),
+              remark: Random.city()
+            }
+          ]
+        });
         return {
           success: true,
           result: {
@@ -161,32 +170,40 @@ export default [
     response: (config: IConfig) => {
       const { pageNum, pageSize } = config.body;
       const total = 200;
-
-      const { list } = Mock.mock({
-        [`list|${total}`]: [
-          {
-            'id|+1': 1,
-            userName: '@name',
-            email: '@email',
-            role: '@prole',
-            createTime: Random.datetime()
-          }
-        ]
-      });
-      const newDataList =
-        pageSize > 1 ? list.slice((pageNum - 1) * pageSize, pageNum * pageSize) : [...list];
       if (pageNum && pageSize) {
+        const { list } = Mock.mock({
+          [`list|${pageSize}`]: [
+            {
+              'id|+1': (pageNum - 1) * pageSize + 1,
+              userName: '@name',
+              email: '@email',
+              role: '@prole',
+              createTime: Random.datetime()
+            }
+          ]
+        });
         return {
           success: true,
           result: {
             pageNum,
             pageSize,
-            content: newDataList,
+            content: list,
             total
           },
           code: 200
         };
       } else {
+        const { list } = Mock.mock({
+          [`list|${total}`]: [
+            {
+              'id|+1': 1,
+              userName: '@name',
+              email: '@email',
+              role: '@prole',
+              createTime: Random.datetime()
+            }
+          ]
+        });
         return {
           success: true,
           result: {

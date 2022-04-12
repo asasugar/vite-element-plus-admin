@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-11 17:19:57
+ * @LastEditTime: 2022-04-12 18:30:48
 -->
 <template>
   <el-card
@@ -20,7 +20,13 @@
         </div>
       </div>
     </template>
-    <el-table :data="filterTableData" border highlight-current-row style="width: 100%">
+    <el-table
+      v-loading="loading"
+      :data="filterTableData"
+      border
+      highlight-current-row
+      style="width: 100%"
+    >
       <el-table-column prop="role" label="角色名称">
         <template #default="scope">
           <span class="pl10">{{ scope.row.role.value }}</span>
@@ -86,12 +92,15 @@ const currentPage = ref<number>(1);
 const pageNum = ref<number>(1);
 const pageSize = ref<number>(10);
 const totalNum = ref<number>(0);
+const loading = ref(true);
 
 const getRoleList = async (pageNum: number, pageSize: number) => {
+  loading.value = true;
   const { total, content } = await userService.getRoleList<IPage>({
     pageNum,
     pageSize
   });
+  loading.value = false;
   totalNum.value = total;
   tableData.value = content;
 };
