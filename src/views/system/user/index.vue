@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-12 18:29:23
+ * @LastEditTime: 2022-04-14 10:00:27
 -->
 <template>
   <el-card
@@ -16,6 +16,9 @@
         <span>用户管理</span>
         <div class="flex center">
           <el-button type="primary" @click="handleInsert">新增用户</el-button>
+          <el-button v-if="filterTableData?.length" type="primary" @click="handleExportExcel"
+            >导出excel</el-button
+          >
           <el-input v-model="search" class="ml10" placeholder="User to search" />
         </div>
       </div>
@@ -72,6 +75,7 @@ import { useRouter, useRoute } from 'vue-router';
 import { userService } from '@/services';
 import { IPage } from '#/global';
 import { IUser } from './typing';
+import Json2excel from 'custom-json2excel';
 
 const router = useRouter();
 const route = useRoute();
@@ -96,14 +100,45 @@ const getUserList = async (pageNum: number, pageSize: number) => {
 };
 getUserList(pageNum.value, pageSize.value);
 
-const filterTableData = computed(() =>
-  tableData?.value?.filter(
-    data => !search.value || data.userName.toLowerCase().includes(search.value.toLowerCase())
-  )
+const filterTableData = computed(
+  () =>
+    tableData?.value?.filter(
+      data => !search.value || data.userName.toLowerCase().includes(search.value.toLowerCase())
+    ) ?? []
 );
 
 const handleInsert = () => {
   router.push({ name: 'SystemUserInsert' });
+};
+
+const handleExportExcel = () => {
+  const keyMap = {
+    userName: '用户名',
+    email: '邮箱',
+    role: '角色',
+    createTime: '创建时间'
+  };
+  const orderedKey = ['id', 'role', 'email', 'createTime'];
+  const scope = {
+    role: 'value'
+  };
+
+  const json2excel = new Json2excel({
+    data: filterTableData.value,
+    orderedKey,
+    keyMap,
+    scope,
+    onStart: () => {
+      console.log('开始');
+    },
+    onSuccess: () => {
+      console.log('成功');
+    },
+    onError: err => {
+      console.log(err);
+    }
+  });
+  json2excel.generate();
 };
 
 const handleEdit = (item: IUser) => {

@@ -1224,6 +1224,11 @@ csstype@^2.6.8:
   resolved "https://registry.npmmirror.com/csstype/download/csstype-2.6.19.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fcsstype%2Fdownload%2Fcsstype-2.6.19.tgz"
   integrity sha512-ZVxXaNy28/k3kJg0Fou5MiYpp88j7H9hLZp8PDC3jV0WFjfH5E9xHb56L0W59cPbKbcHXeP4qyT8PrHp8t6LcQ==
 
+custom-json2excel@^3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/custom-json2excel/-/custom-json2excel-3.1.4.tgz#14360f0bd7288e637a36fe06ea6a63ae16f74a7a"
+  integrity sha512-jb+bRtOS0TmZueoB+LVb40avpKuvduuL0QDoXN5eG8za7+9tkD93V5QUy3gvsaw451GWbuPc4TlulepQ1X/ADw==
+
 dargs@^7.0.0:
   version "7.0.0"
   resolved "https://registry.nlark.com/dargs/download/dargs-7.0.0.tgz?cache=0&sync_timestamp=1625033394899&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdargs%2Fdownload%2Fdargs-7.0.0.tgz"
