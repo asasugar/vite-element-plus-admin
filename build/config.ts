@@ -3,14 +3,15 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-14 10:01:05
+ * @LastEditTime: 2022-04-18 11:36:00
  */
-import { loadEnv, UserConfig } from 'vite';
+import { loadEnv, PluginOption, UserConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-import visualizer from 'rollup-plugin-visualizer';
+import OptimizationPersist from 'vite-plugin-optimize-persist';
+import PkgConfig from 'vite-plugin-package-config';
+import visualizer from 'rollup-plugin-visualizer'; // To fix 'dependencies updated, reloading page...'
 import viteCompression from 'vite-plugin-compression';
 import postCssPurge from '@fullhuman/postcss-purgecss';
 import vueSetupExtend from 'vite-plugin-vue-setup-extend';
@@ -52,11 +53,13 @@ const Config: UserConfig = {
   },
   plugins: [
     vue(),
-    AutoImport({
-      resolvers: [ElementPlusResolver()]
-    }),
+    PkgConfig(),
+    OptimizationPersist(),
     Components({
-      resolvers: [ElementPlusResolver()]
+      extensions: ['vue', 'md'],
+      include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+      resolvers: [ElementPlusResolver()],
+      dts: 'types/components.d.ts'
     }),
     viteCompression(), // gzip压缩
     postCssPurge({
@@ -78,7 +81,7 @@ const Config: UserConfig = {
         /data-v-.*/,
         /^el-/
       ]
-    }),
+    }) as unknown as PluginOption,
     vueSetupExtend()
   ],
   build: {
