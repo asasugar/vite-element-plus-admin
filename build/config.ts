@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-18 11:36:00
+ * @LastEditTime: 2022-04-18 11:43:17
  */
 import { loadEnv, PluginOption, UserConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -15,6 +15,7 @@ import visualizer from 'rollup-plugin-visualizer'; // To fix 'dependencies updat
 import viteCompression from 'vite-plugin-compression';
 import postCssPurge from '@fullhuman/postcss-purgecss';
 import vueSetupExtend from 'vite-plugin-vue-setup-extend';
+import legacy from '@vitejs/plugin-legacy'; // To supported IE11
 import { pathResolve } from './utils';
 
 const vuePath = /\.vue(\?.+)?$/;
@@ -82,7 +83,12 @@ const Config: UserConfig = {
         /^el-/
       ]
     }) as unknown as PluginOption,
-    vueSetupExtend()
+    vueSetupExtend(),
+    legacy({
+      // for ie11
+      targets: ['ie >= 11'],
+      additionalLegacyPolyfills: ['regenerator-runtime/runtime']
+    })
   ],
   build: {
     target: 'esnext',
