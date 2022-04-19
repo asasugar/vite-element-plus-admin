@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-14 10:00:27
+ * @LastEditTime: 2022-04-19 11:04:34
 -->
 <template>
   <el-card
@@ -24,13 +24,16 @@
       </div>
     </template>
     <el-table
+      ref="multipleTableRef"
       v-loading="loading"
       :data="filterTableData"
       border
       highlight-current-row
       style="width: 100%"
+      @selection-change="handleSelectionChange"
     >
-      <el-table-column prop="id" label="序号" />
+      <el-table-column type="selection" width="55" />
+      <el-table-column prop="id" label="序号" width="55" />
       <el-table-column prop="userName" label="用户名" width="180" />
       <el-table-column prop="email" sortable label="邮箱" />
       <el-table-column prop="createTime" sortable label="创建时间" />
@@ -73,7 +76,7 @@
 import { ref, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { userService } from '@/services';
-import { IPage } from '#/global';
+import { IPage, TableInstance } from '#/global';
 import { IUser } from './typing';
 import Json2excel from 'custom-json2excel';
 
@@ -87,6 +90,8 @@ const pageNum = ref<number>(1);
 const pageSize = ref<number>(10);
 const totalNum = ref<number>(0);
 const loading = ref(true);
+const multipleTableRef = ref<TableInstance>();
+const multipleSelection = ref<IUser[]>([]);
 
 const getUserList = async (pageNum: number, pageSize: number) => {
   loading.value = true;
@@ -111,6 +116,10 @@ const handleInsert = () => {
   router.push({ name: 'SystemUserInsert' });
 };
 
+const handleSelectionChange = (val: IUser[]) => {
+  multipleSelection.value = val;
+};
+
 const handleExportExcel = () => {
   const keyMap = {
     userName: '用户名',
@@ -124,7 +133,7 @@ const handleExportExcel = () => {
   };
 
   const json2excel = new Json2excel({
-    data: filterTableData.value,
+    data: multipleSelection.value,
     orderedKey,
     keyMap,
     scope,

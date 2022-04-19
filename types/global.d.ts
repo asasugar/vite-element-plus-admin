@@ -11,3 +11,5 @@ export interface IPage {
 }
 
 export type FormInstance = InstanceType<typeof ElForm>;
+
+export type TableInstance = InstanceType<typeof ElTable>;

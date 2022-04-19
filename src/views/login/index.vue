@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:26:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-01 11:17:14
+ * @LastEditTime: 2022-04-19 11:00:14
 -->
 <template>
   <div class="login">
@@ -43,18 +43,17 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
 import { ElNotification } from 'element-plus';
-import type { ElForm } from 'element-plus';
 import { useRouter } from 'vue-router';
 import { userService } from '@/services';
-// import { useActions } from 'vuex-composition-maphooks';
 import { setToken } from '@/utils/token';
 import { useUserStore } from '@/pinia';
 import AsMousemovePanel from '@/components/mousemove-panel';
 import { FormItemRule } from 'element-plus/es/components/form/src/form.type';
+import { FormInstance } from '#/global';
 import { IForm } from './typing';
 
 const router = useRouter();
-const ruleFormRef = ref<InstanceType<typeof ElForm>>();
+const ruleFormRef = ref<FormInstance>();
 const ruleForm: IForm = reactive({
   username: 'admin',
   password: '123456'
@@ -71,7 +70,7 @@ const useUser = useUserStore();
 // 登录
 const submitForm = () => {
   isLoading.value = true;
-  ruleFormRef?.value?.validate(async valid => {
+  ruleFormRef?.value?.validate(async (valid: any) => {
     if (valid) {
       const { username, password } = ruleForm;
       const content = await userService.loginAction({
@@ -115,18 +114,21 @@ const submitForm = () => {
     background-color: @bg-color;
     border-radius: 4px;
     box-shadow: 0px 21px 41px 0px rgba(0, 0, 0, 0.2);
+
     .container-header {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       padding: 40px 0 20px 0;
+
       &__title {
         font-size: 28px;
         color: @theme-color;
         font-weight: bold;
       }
     }
+
     .container-form {
       width: 70%;
       margin: 0 auto;
