@@ -57,8 +57,14 @@ yarn dev
 # 特别感谢
 
  - vue@^3.2.25
- - vite@^2.7.13
+ - vite@^2.9.5
  - pinia@^2.0.13
  - vue-router@4
  - element-plus@1.3.0-beta.5
  - vue-vben-admin(UI参考)
+
+# 注意事项
+
+- `Node` 版本 >= 12.2.0
+- `vite@2.9.0` 之前的版本，dev模式下识别到新的依赖会`reload page`, 可结合[vite-plugin-optimize-persist](https://github.com/antfu/vite-plugin-optimize-persist)插件解决，>= 2.9.0的不需要！
+- Vue 3 版本状态管理推荐使用 `pinia`，api友好许多, 非要用的话结合 [vuex-composition-maphooks](https://www.npmjs.com/package/vuex-composition-maphooks)

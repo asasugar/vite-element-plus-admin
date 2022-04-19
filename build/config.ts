@@ -3,14 +3,12 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-18 11:43:17
+ * @LastEditTime: 2022-04-19 16:23:39
  */
 import { loadEnv, PluginOption, UserConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-import OptimizationPersist from 'vite-plugin-optimize-persist';
-import PkgConfig from 'vite-plugin-package-config';
 import visualizer from 'rollup-plugin-visualizer'; // To fix 'dependencies updated, reloading page...'
 import viteCompression from 'vite-plugin-compression';
 import postCssPurge from '@fullhuman/postcss-purgecss';
@@ -54,8 +52,6 @@ const Config: UserConfig = {
   },
   plugins: [
     vue(),
-    PkgConfig(),
-    OptimizationPersist(),
     Components({
       extensions: ['vue', 'md'],
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
@@ -104,6 +100,7 @@ const Config: UserConfig = {
         }
       }
     },
+    minify: 'terser', // 默认为 Esbuild，它比 terser 快 20-40 倍，压缩率差 1%-2%
     terserOptions: {
       compress: {
         drop_console: true, //打包时删除console
