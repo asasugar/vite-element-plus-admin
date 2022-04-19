@@ -2,6 +2,7 @@
   "name": "vite-element-plus-admin",
   "version": "0.0.9",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "build:debug": "vue-tsc --noEmit && vite build --debug",
@@ -15,7 +16,7 @@
     "deploy": "gh-pages -b 'vite-element-plus-admin' -d ./dist"
   },
   "lint-staged": {
-    "src/**/*.{js,ts,vue}": "yarn lint"
+    "src/**/*.{js,ts,vue}": "pnpm lint"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^0.2.6",
@@ -66,7 +67,9 @@
     "vue-eslint-parser": "^8.0.1",
     "vue-tsc": "^0.29.8"
   },
+  "packageManager": "pnpm@6.30.0",
   "engines": {
-    "node": ">=12.2.0"
+    "node": ">=12.2.0",
+    "pnpm": ">=6"
   }
 }

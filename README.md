@@ -13,21 +13,21 @@
 # Run Project
 ## 安装依赖
 ```bish
-yarn
+pnpm install
 ```
 
 ## 添加husky hooks
 
 ```bish
 Add a hook:
-npx husky add .husky/pre-commit "yarn lint-staged"
+npx husky add .husky/pre-commit "pnpm lint-staged"
 git add .husky/pre-commit
 ```
 
 ## 运行
 
 ```bish
-yarn dev
+pnpm dev
 ```
 
 
