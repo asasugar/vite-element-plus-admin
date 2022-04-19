@@ -1,6 +1,6 @@
 {
   "name": "vite-element-plus-admin",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dev": "vite",
