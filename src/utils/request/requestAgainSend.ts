@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-30 17:08:58
+ * @LastEditTime: 2022-04-19 17:38:28
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -32,8 +32,9 @@ export function againRequest(err: { config: IAxiosRequestConfig }, axios: AxiosI
   config.__retryCount += 1;
 
   // 延时处理
-  const backoff = new Promise(function (resolve) {
-    setTimeout(function () {
+  const backoff = new Promise(resolve => {
+    const t = setTimeout(() => {
+      if (t) clearTimeout(t);
       resolve(true);
     }, config.retryDelay || 1000);
   });
