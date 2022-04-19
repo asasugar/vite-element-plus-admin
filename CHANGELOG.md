@@ -2,6 +2,69 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.8...v0.0.9) (2022-04-19)
+
+
+### Features
+
+* 🎸 编辑角色 ([ac4e8e1](https://github.com/asasugar/vite-element-plus-admin/commit/ac4e8e161682e47d51cde57e83d4d3f9cb0ca567))
+* 🎸 编辑角色 ([fa6fed7](https://github.com/asasugar/vite-element-plus-admin/commit/fa6fed71f75ddd9e7fd089dd8560e4023d1e73f1))
+* 🎸 导出表格数据到excel ([719e2d7](https://github.com/asasugar/vite-element-plus-admin/commit/719e2d7717849be99107160788a1950e5959692f))
+* 🎸 完善角色管理页 ([ede1d0e](https://github.com/asasugar/vite-element-plus-admin/commit/ede1d0e63b9807a87429a7f88070095c51280e50))
+* 🎸 完善角色管理页面 ([ce171e3](https://github.com/asasugar/vite-element-plus-admin/commit/ce171e39205d5bca1eb5da1538e48a7bce35fd7a))
+* 🎸 新增用户角色表单 ([7be42d2](https://github.com/asasugar/vite-element-plus-admin/commit/7be42d2605e752228bccdbeaf2c7d89cf5706e88))
+* 🎸 选中指定的表格项导出excel ([3d0f23c](https://github.com/asasugar/vite-element-plus-admin/commit/3d0f23cb5653f08945e2ce48b07c2295286b63ed))
+* 🎸 用户管理新增、编辑 ([10a99b7](https://github.com/asasugar/vite-element-plus-admin/commit/10a99b76db368e7e811f51ca98094dbdfcb478f0))
+* 🎸 用户管理暂存 ([1b310dc](https://github.com/asasugar/vite-element-plus-admin/commit/1b310dc8c670fb5827671a0c0cf571079a748e1f))
+* 🎸 add autoprefixer ([dbcb7cc](https://github.com/asasugar/vite-element-plus-admin/commit/dbcb7cc5bbf26eb22dd27cb7a41c252552eebb8c))
+* 🎸 add json-edit ([b2fc07a](https://github.com/asasugar/vite-element-plus-admin/commit/b2fc07aba077a82161ba635fde35d5fd5bae0049))
+* 🎸 add new pages ([afb1ced](https://github.com/asasugar/vite-element-plus-admin/commit/afb1cedbab783ab1df01cc0d4b28e9bf45721e1d))
+* 🎸 add tableTabs to keep alive ([c465eff](https://github.com/asasugar/vite-element-plus-admin/commit/c465eff03134dc7fa9352ff89c1850b8b556b4f3))
+* 🎸 table add loading animate ([c72fe16](https://github.com/asasugar/vite-element-plus-admin/commit/c72fe164796b37c5df2b77d5404dc52257445155))
+
+
+### Bug Fixes
+
+* 🐛 bug fix ([3615252](https://github.com/asasugar/vite-element-plus-admin/commit/3615252e969b790e0dafe6ec9a45c3ec9e84fe9f))
+* 🐛 bug fix ([eac75de](https://github.com/asasugar/vite-element-plus-admin/commit/eac75de24e3c1c5790f9ed8e9293696f2140742c))
+* 🐛 bug fix ([25d3f6a](https://github.com/asasugar/vite-element-plus-admin/commit/25d3f6ab49402df4cebecc9e54f324fbc9310864))
+* 🐛 eslint auto fix ([2eae3e8](https://github.com/asasugar/vite-element-plus-admin/commit/2eae3e8197e579aef57409f0de97716019f6a35b))
+* 🐛 fix reload page menu options lose ([c015a8f](https://github.com/asasugar/vite-element-plus-admin/commit/c015a8fd03ff67964bbbe7fc54d01a0749c62d42))
+* 🐛 To fix 'dependencies updated, reloading page...' ([906d00d](https://github.com/asasugar/vite-element-plus-admin/commit/906d00d5ca733201f5495b07890c12a1e08a9223))
+
+
+### Performance Improvements
+
+* ⚡️ 打包优化 ([4bd851a](https://github.com/asasugar/vite-element-plus-admin/commit/4bd851a901b7198aa009a79a9263e1c6c5e5563d))
+
+
+### Docs
+
+* ✏️ update readme ([33cfd15](https://github.com/asasugar/vite-element-plus-admin/commit/33cfd1519c9b717a4190210bbebec8461fd17266))
+
+
+### Styling
+
+* 💄 404 pages add style ([0b5724c](https://github.com/asasugar/vite-element-plus-admin/commit/0b5724c64b1f21fd2146bab027d573e30ea190d2))
+* 💄 eslint auto fix ([0692a9e](https://github.com/asasugar/vite-element-plus-admin/commit/0692a9e91ff2848b94ca5eac7f521088ef26fc33))
+* 💄 eslint fix ([b90c905](https://github.com/asasugar/vite-element-plus-admin/commit/b90c9058f37f4f960bf45482f017cf767e4c3ddc))
+
+
+### Code Refactoring
+
+* 💡 isEqual refactor ([013d8f5](https://github.com/asasugar/vite-element-plus-admin/commit/013d8f5c6e9c4d4e0ca0d99890f14b6664dd8b97))
+* 💡 store声明文件修改 ([63778c6](https://github.com/asasugar/vite-element-plus-admin/commit/63778c6d2994d4c5763089584bc1e4e134707d22))
+* 💡 ts 声明文件命名优化 ([494e444](https://github.com/asasugar/vite-element-plus-admin/commit/494e4448203b0d563e2a957fe437603419109476))
+* 💡 ts类型声明改造 ([8cd40d0](https://github.com/asasugar/vite-element-plus-admin/commit/8cd40d04467a934485981894a2bbd17ccdcfbb89))
+* 💡 use pinia, remove vuex ([8a1256b](https://github.com/asasugar/vite-element-plus-admin/commit/8a1256be190bdc3ad13662d5428c61a1a1c72784))
+
+
+### CI
+
+* 🎡 升级vite版本 ([cdfbed5](https://github.com/asasugar/vite-element-plus-admin/commit/cdfbed5c42d2028d101ef47370abc9a5c2b3806d))
+* 🎡 add @vitejs/plugin-legacy for supported ie11 ([64eaafb](https://github.com/asasugar/vite-element-plus-admin/commit/64eaafbada5181c52329b34f1b201284a539ddbe))
+* 🎡 CI build 优化 ([0c7b724](https://github.com/asasugar/vite-element-plus-admin/commit/0c7b724ddbdc8b3a8b8ae50a9dbb047af94e2a1b))
+
 ### [0.0.8](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.7...v0.0.8) (2022-02-22)
 
 
