@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-19 16:43:44
+ * @LastEditTime: 2022-04-19 21:34:29
  */
 import { loadEnv, PluginOption, UserConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -100,17 +100,18 @@ const Config: UserConfig = {
         }
       }
     },
-    minify: 'terser', // 默认为 Esbuild，它比 terser 快 20-40 倍，压缩率差 1%-2%
-    terserOptions: {
-      compress: {
-        drop_console: true, //打包时删除console
-        drop_debugger: true, //打包时删除 debugger
-        pure_funcs: ['console.log']
-      },
-      output: {
-        comments: true // 去掉注释内容
-      }
-    }
+    minify: 'esbuild' // 默认为 Esbuild，它比 terser 快 20-40 倍，压缩率差 1%-2%
+    // mini: 'terser' 时可用，且需将Top-level await改造成自执行函数
+    // terserOptions: {
+    //   compress: {
+    //     drop_console: true, //打包时删除console
+    //     drop_debugger: true, //打包时删除 debugger
+    //     pure_funcs: ['console.log']
+    //   },
+    //   output: {
+    //     comments: true // 去掉注释内容
+    //   }
+    // }
   },
   preview: {
     host: true
