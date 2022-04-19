@@ -10,16 +10,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Editor directories and files
-.idea
-
-# .vscode
-*.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
 
 # rollup-plugin-visualizer files
 stats.html
