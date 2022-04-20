@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:37
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-20 18:11:00
+ * @LastEditTime: 2022-04-20 18:15:38
 -->
 <template>
   <el-card class="card-wrapper" :body-style="{ padding: '12px 12px 2px 12px' }">
@@ -17,18 +17,19 @@
     </template>
     <el-tree-v2 :data="data" :props="props" show-checkbox :height="500" />
     <div class="mt20 mb20">
-      <el-button class="button" type="primary">保存</el-button>
+      <el-button class="button" type="primary" @click="handleSaveAuth">保存</el-button>
     </div>
   </el-card>
 </template>
 <script lang="ts" setup>
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { systemService } from '@/services';
 import { IRoutes } from '#/vue-router';
 import { ITree } from './typing';
 import { ref } from 'vue';
 
 const route = useRoute();
+const router = useRouter();
 
 const props = {
   value: 'value',
@@ -61,6 +62,10 @@ const normalizeaTreeData: (data: IRoutes[]) => any = (data: IRoutes[]) => {
   const routes = await systemService.getRoute();
   data.value = normalizeaTreeData(routes?.[0]?.children);
 })();
+
+const handleSaveAuth = () => {
+  router.back();
+};
 </script>
 
 <style lang="less" scoped></style>
