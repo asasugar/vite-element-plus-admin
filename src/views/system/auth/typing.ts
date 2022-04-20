@@ -1,9 +1,6 @@
 // types
-export interface IProduct {
-  roleName: string;
-  roleValue: string;
-  sortId: number;
-  status: boolean;
-  createTime: number;
-  remark: string;
+export interface ITree {
+  value: string;
+  label: string;
+  children?: ITree[];
 }

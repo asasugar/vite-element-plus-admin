@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-12 18:30:48
+ * @LastEditTime: 2022-04-20 16:56:06
 -->
 <template>
   <el-card
@@ -46,9 +46,12 @@
       </el-table-column>
       <el-table-column prop="createTime" sortable label="创建时间" />
       <el-table-column prop="remark" label="备注" />
-      <el-table-column label="操作">
+      <el-table-column label="操作" width="240">
         <template #default="scope">
           <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
+          <el-button size="small" type="primary" @click="handleEditAuth(scope.row)"
+            >权限配置</el-button
+          >
           <el-popconfirm
             title="确定删除该角色？"
             icon-color="red"
@@ -135,6 +138,11 @@ const handleInsert = () => {
 const handleEdit = (item: IRole) => {
   if (!item) return;
   router.push({ name: 'SystemRoleEdit', params: { data: JSON.stringify(item) } });
+};
+
+const handleEditAuth = (item: IRole) => {
+  if (!item) return;
+  router.push({ name: 'SystemAuth', params: { role: JSON.stringify(item.role) } });
 };
 
 const handleDel = (sortId: number | undefined) => {
