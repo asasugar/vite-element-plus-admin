@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-19 11:04:34
+ * @LastEditTime: 2022-04-22 16:57:42
 -->
 <template>
   <el-card
@@ -16,9 +16,7 @@
         <span>用户管理</span>
         <div class="flex center">
           <el-button type="primary" @click="handleInsert">新增用户</el-button>
-          <el-button v-if="filterTableData?.length" type="primary" @click="handleExportExcel"
-            >导出excel</el-button
-          >
+          <el-button type="primary" @click="handleExportExcel">导出excel</el-button>
           <el-input v-model="search" class="ml10" placeholder="User to search" />
         </div>
       </div>
@@ -79,6 +77,7 @@ import { userService } from '@/services';
 import { IPage, TableInstance } from '#/global';
 import { IUser } from './typing';
 import Json2excel from 'custom-json2excel';
+import { ElMessage } from 'element-plus';
 
 const router = useRouter();
 const route = useRoute();
@@ -121,33 +120,37 @@ const handleSelectionChange = (val: IUser[]) => {
 };
 
 const handleExportExcel = () => {
-  const keyMap = {
-    userName: '用户名',
-    email: '邮箱',
-    role: '角色',
-    createTime: '创建时间'
-  };
-  const orderedKey = ['id', 'role', 'email', 'createTime'];
-  const scope = {
-    role: 'value'
-  };
+  if (multipleSelection.value?.length) {
+    const keyMap = {
+      userName: '用户名',
+      email: '邮箱',
+      role: '角色',
+      createTime: '创建时间'
+    };
+    const orderedKey = ['id', 'role', 'email', 'createTime'];
+    const scope = {
+      role: 'value'
+    };
 
-  const json2excel = new Json2excel({
-    data: multipleSelection.value,
-    orderedKey,
-    keyMap,
-    scope,
-    onStart: () => {
-      console.log('开始');
-    },
-    onSuccess: () => {
-      console.log('成功');
-    },
-    onError: err => {
-      console.log(err);
-    }
-  });
-  json2excel.generate();
+    const json2excel = new Json2excel({
+      data: multipleSelection.value,
+      orderedKey,
+      keyMap,
+      scope,
+      onStart: () => {
+        console.log('开始');
+      },
+      onSuccess: () => {
+        console.log('成功');
+      },
+      onError: err => {
+        console.log(err);
+      }
+    });
+    json2excel.generate();
+  } else {
+    ElMessage({ message: '请勾选需要导出的数据！', type: 'warning' });
+  }
 };
 
 const handleEdit = (item: IUser) => {

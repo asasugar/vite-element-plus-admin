@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-20 16:56:06
+ * @LastEditTime: 2022-04-22 16:58:04
 -->
 <template>
   <el-card
@@ -16,16 +16,19 @@
         <span>角色管理</span>
         <div class="flex center">
           <el-button type="primary" @click="handleInsert">新增角色</el-button>
+          <el-button type="primary" @click="handleExportExcel">导出excel</el-button>
           <el-input v-model="search" class="ml10" placeholder="Role to search" />
         </div>
       </div>
     </template>
     <el-table
+      ref="multipleTableRef"
       v-loading="loading"
       :data="filterTableData"
       border
       highlight-current-row
       style="width: 100%"
+      @selection-change="handleSelectionChange"
     >
       <el-table-column prop="role" label="角色名称">
         <template #default="scope">
@@ -82,9 +85,11 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+import Json2excel from 'custom-json2excel';
 import { userService } from '@/services';
 import { IRole } from './typing';
-import { IPage } from '#/global';
+import { IPage, TableInstance } from '#/global';
+import { ElMessage } from 'element-plus';
 
 const router = useRouter();
 const route = useRoute();
@@ -96,6 +101,8 @@ const pageNum = ref<number>(1);
 const pageSize = ref<number>(10);
 const totalNum = ref<number>(0);
 const loading = ref(true);
+const multipleTableRef = ref<TableInstance>();
+const multipleSelection = ref<IRole[]>([]);
 
 const getRoleList = async (pageNum: number, pageSize: number) => {
   loading.value = true;
@@ -125,10 +132,49 @@ const handleSizeChange = (val: number) => {
 
   console.log(`${val} items per page`);
 };
+
 const handleCurrentChange = (val: number) => {
   pageNum.value = val;
   getRoleList(pageNum.value, pageSize.value);
   console.log(`current page: ${val}`);
+};
+
+const handleSelectionChange = (val: IRole[]) => {
+  multipleSelection.value = val;
+};
+
+const handleExportExcel = () => {
+  if (multipleSelection.value?.length) {
+    const keyMap = {
+      userName: '用户名',
+      email: '邮箱',
+      role: '角色',
+      createTime: '创建时间'
+    };
+    const orderedKey = ['id', 'role', 'email', 'createTime'];
+    const scope = {
+      role: 'value'
+    };
+
+    const json2excel = new Json2excel({
+      data: multipleSelection.value,
+      orderedKey,
+      keyMap,
+      scope,
+      onStart: () => {
+        console.log('开始');
+      },
+      onSuccess: () => {
+        console.log('成功');
+      },
+      onError: err => {
+        console.log(err);
+      }
+    });
+    json2excel.generate();
+  } else {
+    ElMessage({ message: '请勾选需要导出的数据！', type: 'warning' });
+  }
 };
 
 const handleInsert = () => {
