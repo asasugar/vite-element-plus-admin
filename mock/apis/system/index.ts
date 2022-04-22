@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-20 16:50:48
+ * @LastEditTime: 2022-04-22 17:06:29
  */
 export default [
   // 看板数据
@@ -165,6 +165,14 @@ export default [
                 meta: {
                   title: '权限管理'
                 }
+              },
+              {
+                name: 'SystemPassword',
+                path: '/system/password',
+                component: 'views/system/password/index',
+                meta: {
+                  title: '修改密码'
+                }
               }
             ]
           }
@@ -252,6 +260,12 @@ export default [
                 name: 'SystemRole',
                 path: '/system/role',
                 title: '角色管理'
+              },
+              {
+                sortId: '4-3',
+                name: 'SystemPassword',
+                path: '/system/password',
+                title: '修改密码'
               }
             ]
           }

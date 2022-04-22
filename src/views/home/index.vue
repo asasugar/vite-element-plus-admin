@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-12 18:02:06
+ * @LastEditTime: 2022-04-22 17:45:49
 -->
 <template>
   <el-container class="layout-container">
@@ -43,6 +43,7 @@
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item @click="handleLogout">注销</el-dropdown-item>
+                <el-dropdown-item @click="handleEditPassword">修改密码</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
@@ -204,6 +205,11 @@ const handleLogout = async () => {
   if (content) {
     router.replace({ name: 'Login' });
   }
+};
+
+// 修改密码
+const handleEditPassword = () => {
+  router.push({ name: 'SystemPassword' });
 };
 
 // 去二级菜单页

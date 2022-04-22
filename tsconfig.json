@@ -19,22 +19,11 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "skipLibCheck": true,
-    "lib": [
-      "esnext",
-      "dom"
-    ],
-    "types": [
-      "vite/client",
-      "element-plus/global",
-      "node",
-    ],
+    "lib": ["esnext", "dom"],
+    "types": ["vite/client", "element-plus/global", "node"],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "#/*": [
-        "./types/*"
-      ]
+      "@/*": ["./src/*"],
+      "#/*": ["./types/*"]
     }
   },
   "include": [
@@ -51,8 +40,5 @@
     "auto-imports.d.ts",
     "components.d.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "exclude": ["node_modules", "dist"]
 }
