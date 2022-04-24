@@ -1,9 +1,9 @@
 <!--
- * @Description: 
+ * @Description: 数字动画
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 10:58:34
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-14 11:31:05
+ * @LastEditTime: 2022-04-22 17:59:08
 -->
 <template>
   <span :style="{ color }">{{ value }}</span>

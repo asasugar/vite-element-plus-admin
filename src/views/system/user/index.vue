@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-22 16:57:42
+ * @LastEditTime: 2022-04-24 18:18:23
 -->
 <template>
   <el-card
@@ -18,6 +18,7 @@
           <el-button type="primary" @click="handleInsert">新增用户</el-button>
           <el-button type="primary" @click="handleExportExcel">导出excel</el-button>
           <el-input v-model="search" class="ml10" placeholder="User to search" />
+          <AsTableSettings @onRefresh="handleRefresh" @onSize="handleCommand" />
         </div>
       </div>
     </template>
@@ -26,6 +27,7 @@
       v-loading="loading"
       :data="filterTableData"
       border
+      :size="size"
       highlight-current-row
       style="width: 100%"
       @selection-change="handleSelectionChange"
@@ -78,11 +80,13 @@ import { IPage, TableInstance } from '#/global';
 import { IUser } from './typing';
 import Json2excel from 'custom-json2excel';
 import { ElMessage } from 'element-plus';
+import AsTableSettings from '@/components/table-settings';
 
 const router = useRouter();
 const route = useRoute();
 
-const tableData = ref<IUser[]>();
+const tableData = ref<IUser[]>([]);
+const size = ref<string>('default');
 const search = ref<string>('');
 const currentPage = ref<number>(1);
 const pageNum = ref<number>(1);
@@ -117,6 +121,27 @@ const handleInsert = () => {
 
 const handleSelectionChange = (val: IUser[]) => {
   multipleSelection.value = val;
+};
+
+const reset = () => {
+  tableData.value.length = 0;
+  search.value = '';
+  currentPage.value = 1;
+  pageNum.value = 1;
+  pageSize.value = 10;
+  totalNum.value = 0;
+  loading.value = true;
+  multipleSelection.value.length = 0;
+};
+
+const handleRefresh = () => {
+  reset();
+  getUserList(pageNum.value, pageSize.value);
+};
+
+const handleCommand = (command: string) => {
+  if (size.value === command || !command) return;
+  size.value = command;
 };
 
 const handleExportExcel = () => {
