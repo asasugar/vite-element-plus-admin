@@ -3,72 +3,67 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-24 18:18:23
+ * @LastEditTime: 2022-04-29 11:33:01
 -->
 <template>
-  <el-card
-    v-if="route.name === 'SystemUser'"
-    class="card-wrapper"
-    :body-style="{ padding: '12px 12px 2px 12px' }"
-  >
-    <template #header>
-      <div class="flex between verticalcenter">
-        <span>用户管理</span>
-        <div class="flex center">
-          <el-button type="primary" @click="handleInsert">新增用户</el-button>
-          <el-button type="primary" @click="handleExportExcel">导出excel</el-button>
-          <el-input v-model="search" class="ml10" placeholder="User to search" />
-          <AsTableSettings @onRefresh="handleRefresh" @onSize="handleCommand" />
-        </div>
+  <as-page-wrapper v-if="route.name === 'SystemUser'" header-title="用户管理">
+    <template #extra>
+      <div class="flex center">
+        <el-button type="primary" @click="handleInsert">新增用户</el-button>
+        <el-button type="primary" @click="handleExportExcel">导出excel</el-button>
+        <el-input v-model="search" class="ml10" placeholder="User to search" />
+        <AsTableSettings @onRefresh="handleRefresh" @onSize="handleCommand" />
       </div>
     </template>
-    <el-table
-      ref="multipleTableRef"
-      v-loading="loading"
-      :data="filterTableData"
-      border
-      :size="size"
-      highlight-current-row
-      style="width: 100%"
-      @selection-change="handleSelectionChange"
-    >
-      <el-table-column type="selection" width="55" />
-      <el-table-column prop="id" label="序号" width="55" />
-      <el-table-column prop="userName" label="用户名" width="180" />
-      <el-table-column prop="email" sortable label="邮箱" />
-      <el-table-column prop="createTime" sortable label="创建时间" />
-      <el-table-column prop="role" label="角色">
-        <template #default="scope">
-          <span class="pl10">{{ scope.row.role.value }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作">
-        <template #default="scope">
-          <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-          <el-popconfirm
-            title="确定删除该用户？"
-            icon-color="red"
-            @confirm="handleDel(scope.row.id)"
-          >
-            <template #reference>
-              <el-button size="small" type="danger">删除</el-button>
-            </template>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
-    </el-table>
-    <el-pagination
-      v-model:currentPage="currentPage"
-      v-model:page-size="pageSize"
-      class="text-right mt20 mb20"
-      background
-      :page-sizes="[10, 20, 30, 40, 50, 100]"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="totalNum"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-    />
-  </el-card>
+    <template #bodyContent>
+      <el-table
+        ref="multipleTableRef"
+        v-loading="loading"
+        :data="filterTableData"
+        border
+        :size="size"
+        highlight-current-row
+        style="width: 100%"
+        @selection-change="handleSelectionChange"
+      >
+        <el-table-column type="selection" width="55" />
+        <el-table-column prop="id" label="序号" width="55" />
+        <el-table-column prop="userName" label="用户名" width="180" />
+        <el-table-column prop="email" sortable label="邮箱" />
+        <el-table-column prop="createTime" sortable label="创建时间" />
+        <el-table-column prop="role" label="角色">
+          <template #default="scope">
+            <span class="pl10">{{ scope.row.role.value }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作">
+          <template #default="scope">
+            <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
+            <el-popconfirm
+              title="确定删除该用户？"
+              icon-color="red"
+              @confirm="handleDel(scope.row.id)"
+            >
+              <template #reference>
+                <el-button size="small" type="danger">删除</el-button>
+              </template>
+            </el-popconfirm>
+          </template>
+        </el-table-column>
+      </el-table>
+      <el-pagination
+        v-model:currentPage="currentPage"
+        v-model:page-size="pageSize"
+        class="text-right mt20 mb20"
+        background
+        :page-sizes="[10, 20, 30, 40, 50, 100]"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="totalNum"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      />
+    </template>
+  </as-page-wrapper>
   <!-- 新增或者编辑用户子路由 -->
   <router-view v-else> </router-view>
 </template>
@@ -80,6 +75,7 @@ import { IPage, TableInstance } from '#/global';
 import { IUser } from './typing';
 import Json2excel from 'custom-json2excel';
 import { ElMessage } from 'element-plus';
+import { AsPageWrapper } from '@/containers/page-wrapper';
 import AsTableSettings from '@/components/table-settings';
 
 const router = useRouter();

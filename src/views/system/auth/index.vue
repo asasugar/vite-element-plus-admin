@@ -3,27 +3,27 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:37
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-20 18:15:38
+ * @LastEditTime: 2022-04-29 11:27:55
 -->
 <template>
-  <el-card class="card-wrapper" :body-style="{ padding: '12px 12px 2px 12px' }">
-    <template #header>
-      <div class="flex between verticalcenter">
-        <span>权限管理</span>
-        <el-link href="https://github.com/asasugar?tab=repositories" :underline="false">
-          <el-button class="button" type="text">{{ role?.value }}</el-button>
-        </el-link>
+  <as-page-wrapper header-title="权限管理">
+    <template #extra>
+      <el-link href="https://github.com/asasugar?tab=repositories" :underline="false">
+        <el-button class="button" type="text">{{ role?.value }}</el-button>
+      </el-link>
+    </template>
+    <template #bodyContent>
+      <el-tree-v2 :data="data" :props="props" show-checkbox :height="500" />
+      <div class="mt20 mb20">
+        <el-button class="button" type="primary" @click="handleSaveAuth">保存</el-button>
       </div>
     </template>
-    <el-tree-v2 :data="data" :props="props" show-checkbox :height="500" />
-    <div class="mt20 mb20">
-      <el-button class="button" type="primary" @click="handleSaveAuth">保存</el-button>
-    </div>
-  </el-card>
+  </as-page-wrapper>
 </template>
 <script lang="ts" setup>
 import { useRoute, useRouter } from 'vue-router';
 import { systemService } from '@/services';
+import { AsPageWrapper } from '@/containers/page-wrapper';
 import { IRoutes } from '#/vue-router';
 import { ITree } from './typing';
 import { ref } from 'vue';
@@ -67,5 +67,3 @@ const handleSaveAuth = () => {
   router.back();
 };
 </script>
-
-<style lang="less" scoped></style>

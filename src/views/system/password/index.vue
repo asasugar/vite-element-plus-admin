@@ -3,69 +3,67 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:37
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-22 17:43:15
+ * @LastEditTime: 2022-04-29 11:29:04
 -->
 <template>
-  <el-card class="card-wrapper" :body-style="{ padding: '12px 12px 2px 12px' }">
-    <template #header>
-      <div class="flex between verticalcenter">
-        <span>修改密码</span>
-      </div>
-    </template>
-    <el-form
-      ref="ruleFormRef"
-      :model="ruleForm"
-      :rules="rules"
-      label-width="auto"
-      class="rule-form"
-    >
-      <el-row :gutter="10">
-        <el-col :span="8">
-          <el-form-item label="旧密码" prop="oldPassword">
-            <el-input
-              v-model="ruleForm.oldPassword"
-              show-password
-              type="password"
-              placeholder="请输入"
-              clearable
-            ></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="8">
-          <el-form-item label="新密码" prop="newPassword">
-            <el-input
-              v-model="ruleForm.newPassword"
-              show-password
-              type="password"
-              placeholder="请输入"
-              clearable
-            ></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="8">
-          <el-form-item label="确认新密码" prop="againNewPassword">
-            <el-input
-              v-model="ruleForm.againNewPassword"
-              show-password
-              type="password"
-              placeholder="请输入"
-              clearable
-            ></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
+  <as-page-wrapper header-title="修改密码">
+    <template #bodyContent>
+      <el-form
+        ref="ruleFormRef"
+        :model="ruleForm"
+        :rules="rules"
+        label-width="auto"
+        class="rule-form"
+      >
+        <el-row :gutter="10">
+          <el-col :span="8">
+            <el-form-item label="旧密码" prop="oldPassword">
+              <el-input
+                v-model="ruleForm.oldPassword"
+                show-password
+                type="password"
+                placeholder="请输入"
+                clearable
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="新密码" prop="newPassword">
+              <el-input
+                v-model="ruleForm.newPassword"
+                show-password
+                type="password"
+                placeholder="请输入"
+                clearable
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="确认新密码" prop="againNewPassword">
+              <el-input
+                v-model="ruleForm.againNewPassword"
+                show-password
+                type="password"
+                placeholder="请输入"
+                clearable
+              ></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
-      <el-form-item>
-        <el-button type="primary" @click="submitForm(ruleFormRef)">保存</el-button>
-        <el-button @click="resetForm(ruleFormRef)">重置</el-button>
-      </el-form-item>
-    </el-form>
-  </el-card>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm(ruleFormRef)">保存</el-button>
+          <el-button @click="resetForm(ruleFormRef)">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </template>
+  </as-page-wrapper>
 </template>
 <script lang="ts" setup>
 import { ref, reactive } from 'vue';
 import { FormInstance } from '#/global';
 import { ElNotification } from 'element-plus';
+import { AsPageWrapper } from '@/containers/page-wrapper';
 
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = ref({
@@ -130,5 +128,3 @@ const resetForm = (formEl: FormInstance | undefined) => {
   formEl.resetFields();
 };
 </script>
-
-<style lang="less" scoped></style>
