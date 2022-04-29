@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-07 15:54:59
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-07 17:33:45
+ * @LastEditTime: 2022-04-29 16:48:41
 -->
 <template>
   <ul class="grid">
@@ -23,7 +23,6 @@ const props = defineProps({
 <style lang="less" scoped>
 .grid {
   overflow: hidden;
-  list-style: none;
   padding: 0 !important;
   border-top: 1px solid var(--el-border-color-base);
   border-left: 1px solid var(--el-border-color-base);

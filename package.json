@@ -28,6 +28,7 @@
     "mockjs": "^1.1.0",
     "pinia": "^2.0.13",
     "qs": "^6.10.3",
+    "resize-observer-polyfill": "^1.5.1",
     "three": "^0.137.5",
     "vditor": "^3.8.11",
     "vue": "^3.2.25",

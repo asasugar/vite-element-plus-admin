@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:37
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 11:29:04
+ * @LastEditTime: 2022-04-29 15:17:58
 -->
 <template>
   <as-page-wrapper header-title="修改密码">
@@ -61,7 +61,6 @@
 </template>
 <script lang="ts" setup>
 import { ref, reactive } from 'vue';
-import { FormInstance } from '#/global';
 import { ElNotification } from 'element-plus';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 

@@ -3,9 +3,9 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-24 19:53:32
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-10 09:42:44
+ * @LastEditTime: 2022-04-29 15:30:00
  */
-import { isValidMap } from './index';
+import { isValidMap } from './is';
 
 export function setStorage(key: string, value: any) {
   if (isValidMap(value)) {

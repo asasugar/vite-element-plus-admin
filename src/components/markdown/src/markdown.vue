@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-18 14:02:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-12 16:35:44
+ * @LastEditTime: 2022-04-29 15:16:25
 -->
 <template>
   <div ref="wrapRef"></div>
@@ -20,7 +20,6 @@ import { shallowRef, ref, unref, nextTick, watch, onBeforeUnmount, onDeactivated
 import { useMountedOrActivated } from '@/hooks/core';
 import Vditor from 'vditor';
 import 'vditor/dist/index.css';
-import type { Nullable } from '#/global';
 
 const props = defineProps({
   height: { type: Number, default: 360 },

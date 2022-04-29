@@ -3,11 +3,11 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-19 17:38:28
+ * @LastEditTime: 2022-04-29 15:32:53
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { isJsonStr } from '@/utils';
+import { isJsonStr } from '@/utils/is';
 import { AxiosInstance } from 'axios';
 import { IAxiosRequestConfig } from '#/axios';
 

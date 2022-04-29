@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:26:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-19 11:00:14
+ * @LastEditTime: 2022-04-29 15:17:52
 -->
 <template>
   <div class="login">
@@ -49,7 +49,6 @@ import { setToken } from '@/utils/token';
 import { useUserStore } from '@/pinia';
 import AsMousemovePanel from '@/components/mousemove-panel';
 import { FormItemRule } from 'element-plus/es/components/form/src/form.type';
-import { FormInstance } from '#/global';
 import { IForm } from './typing';
 
 const router = useRouter();

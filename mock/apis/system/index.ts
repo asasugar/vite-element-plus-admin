@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 11:00:53
+ * @LastEditTime: 2022-04-29 15:47:25
  */
 export default [
   // 看板数据
@@ -108,6 +108,22 @@ export default [
                 component: 'views/feat/download/index',
                 meta: {
                   title: '文件下载'
+                }
+              },
+              {
+                name: 'FeatWatermask',
+                path: '/feat/watermask',
+                component: 'views/feat/watermask/index',
+                meta: {
+                  title: '水印'
+                }
+              },
+              {
+                name: 'FeatCopy',
+                path: '/feat/copy',
+                component: 'views/feat/copy/index',
+                meta: {
+                  title: '水印'
                 }
               },
               {
@@ -262,6 +278,18 @@ export default [
                 name: 'FeatDownload',
                 path: '/feat/download',
                 title: '文件下载'
+              },
+              {
+                sortId: '4-2',
+                name: 'FeatWatermask',
+                path: '/feat/watermask',
+                title: '水印'
+              },
+              {
+                sortId: '4-3',
+                name: 'FeatCopy',
+                path: '/feat/copy',
+                title: '剪切板'
               }
             ]
           },

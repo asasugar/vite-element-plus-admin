@@ -3,52 +3,9 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 14:36:27
+ * @LastEditTime: 2022-04-29 15:33:10
  */
-
-import { TargetContext } from '#/global';
-
-/**
- * @description 判断一个字符串是否为JSON字符串
- * @export
- * @param {string} str
- * @returns {*}  {boolean}
- */
-export function isJsonStr(str: string) {
-  if (typeof str == 'string') {
-    try {
-      const obj = JSON.parse(str);
-      if (typeof obj === 'object' && obj) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      console.log('error：' + str + '!!!' + e);
-      return false;
-    }
-  }
-}
-
-/**
- * @description 判断是否对象
- * @export
- * @param {object} [obj]
- * @returns {*}  {boolean}
- */
-export function isObject(obj?: object) {
-  return typeof obj === 'object' && obj !== null;
-}
-
-/**
- * @description 判断是否是复杂类型
- * @export
- * @param {*} map
- * @returns {*}  {boolean}
- */
-export function isValidMap(map: any) {
-  return Array.isArray(map) || isObject(map);
-}
+import { isObject, isArray, isValidMap } from './is';
 
 /**
  * @description 动态import
@@ -70,7 +27,7 @@ export function dynamicImport(component: string) {
 export function equalArrays(array: any[], other: any[]): boolean {
   if (array.length !== other.length) return false;
   for (let i = 0, l = array.length; i < l; i++) {
-    if (Array.isArray(array[i]) && Array.isArray(other[i])) {
+    if (isArray(array[i]) && isArray(other[i])) {
       if (!equalArrays(array[i], other[i])) return false;
     } else if (isObject(array[i]) && isObject(other[i])) {
       if (!equalObjects(array[i], other[i])) return false;
@@ -94,7 +51,7 @@ export function equalObjects(object: { [x: string]: any }, other: { [x: string]:
     )
       return false;
     else if (typeof object[prop] !== typeof other[prop]) return false;
-    if (Array.isArray(object[prop]) && Array.isArray(other[prop])) {
+    if (isArray(object[prop]) && isArray(other[prop])) {
       if (!equalArrays(object[prop], other[prop])) return false;
     } else if (isObject(object[prop]) && isObject(other[prop])) {
       if (!equalObjects(object[prop], other[prop])) return false;
@@ -112,7 +69,7 @@ export function equalObjects(object: { [x: string]: any }, other: { [x: string]:
 export function isEqual(value: any, other: any): boolean {
   // 复杂类型
   if (isValidMap(value) && isValidMap(other)) {
-    if (Array.isArray(value) && Array.isArray(other)) {
+    if (isArray(value) && isArray(other)) {
       return equalArrays(value, other);
     } else if (isObject(value) && isObject(other)) {
       return equalObjects(value, other);

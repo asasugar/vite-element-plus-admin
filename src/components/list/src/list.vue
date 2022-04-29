@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 22:49:02
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-15 14:57:44
+ * @LastEditTime: 2022-04-29 16:48:35
 -->
 <template>
   <div :class="classString">
@@ -72,7 +72,6 @@ provide('prefixCls', prefixCls);
   &-items {
     margin: 0;
     padding: 0;
-    list-style: none;
   }
 
   &-header {

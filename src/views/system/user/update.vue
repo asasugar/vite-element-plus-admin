@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-11 17:22:54
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-11 18:34:17
+ * @LastEditTime: 2022-04-29 15:18:07
 -->
 <template>
   <as-page-wrapper header-title="新增用户">
@@ -73,7 +73,6 @@ import { useRoute } from 'vue-router';
 import { userService } from '@/services';
 import { ComponentSize } from 'element-plus/lib/utils/types';
 import { IRole } from '../role/typing';
-import { FormInstance } from '#/global';
 import { IUserInsert } from './typing';
 
 const route = useRoute();

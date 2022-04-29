@@ -31,6 +31,7 @@ specifiers:
   postcss: ^8.4.12
   prettier: ^2.5.1
   qs: ^6.10.3
+  resize-observer-polyfill: ^1.5.1
   rollup: ^2.70.2
   rollup-plugin-visualizer: ^5.5.4
   standard-version: ^9.3.2
@@ -59,6 +60,7 @@ dependencies:
   mockjs: 1.1.0
   pinia: 2.0.13_typescript@4.6.3+vue@3.2.33
   qs: 6.10.3
+  resize-observer-polyfill: 1.5.1
   three: 0.137.5
   vditor: 3.8.13
   vue: 3.2.33
@@ -3369,6 +3371,10 @@ packages:
     resolution: {integrity: sha1-jGStX9MNqxyXbiNE/+f3kqam30I=}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /resize-observer-polyfill/1.5.1:
+    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
+    dev: false
 
   /resolve-from/4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}

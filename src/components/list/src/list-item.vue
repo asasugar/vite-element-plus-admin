@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 22:49:18
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-15 14:17:16
+ * @LastEditTime: 2022-04-29 16:48:27
 -->
 <template>
   <div v-bind="{ ...restAttrs }" :class="[`${pre}-item`, className]">
@@ -99,7 +99,6 @@ const getShowExtra = computed(() => props.extras?.length || slots.extras);
       margin-left: 48px;
       padding: 0;
       font-size: 14px;
-      list-style: none;
 
       & > :deep(*) {
         position: relative;

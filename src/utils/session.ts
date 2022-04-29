@@ -3,9 +3,9 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-24 19:53:32
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-01-25 10:03:46
+ * @LastEditTime: 2022-04-29 15:29:55
  */
-import { isValidMap } from './index';
+import { isValidMap } from './is';
 
 export function setSession(key: string, value: any) {
   if (isValidMap(value)) {

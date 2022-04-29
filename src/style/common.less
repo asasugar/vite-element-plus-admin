@@ -1,4 +1,4 @@
-@import "default.less";
+@import 'initialize.less';
 
 // font-size
 each(range(8, 70, 1), {
@@ -200,14 +200,14 @@ each(range(0, 100, 5), {
     justify-content: center;
     align-items: center;
   }
-  
+
   &.verticalstart {
     align-items: flex-start;
   }
   &.verticalcenter {
     align-items: center;
   }
-  
+
   &.verticalend {
     align-items: flex-end;
   }
@@ -215,15 +215,15 @@ each(range(0, 100, 5), {
   &.hoscenter {
     justify-content: center;
   }
-  
+
   &.column {
     flex-direction: column;
   }
-  
+
   &.between {
     justify-content: space-between;
   }
-  
+
   &.around {
     justify-content: space-around;
   }
@@ -237,8 +237,6 @@ each(range(0, 100, 5), {
     flex-wrap: wrap;
   }
 }
-
-
 
 .flex__item {
   flex: 1;

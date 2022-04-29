@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-07 15:54:59
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 11:07:48
+ * @LastEditTime: 2022-04-29 16:46:24
 -->
 <template>
   <div class="alert-info">
@@ -31,7 +31,6 @@ defineProps({
   font-size: @font-size-base;
   font-variant: tabular-nums;
   line-height: @line-height-base;
-  list-style: none;
   font-feature-settings: tnum;
   position: relative;
   display: flex;

@@ -3,9 +3,8 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-29 11:42:36
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 14:37:11
+ * @LastEditTime: 2022-04-29 15:17:06
  */
-import { Nullable } from '#/global';
 /**
  * @description: base64 to blob
  */

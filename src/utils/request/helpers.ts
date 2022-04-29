@@ -3,10 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-30 16:01:52
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-31 10:36:48
+ * @LastEditTime: 2022-04-29 15:32:47
  */
 import Qs from 'qs';
-import { isJsonStr } from '@/utils';
+import { isJsonStr } from '@/utils/is';
 import { IAxiosRequestConfig } from '#/axios';
 import { AxiosRequestConfig } from 'axios';
 /**

@@ -3,11 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-29 11:41:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 14:37:05
+ * @LastEditTime: 2022-04-29 15:44:31
  */
 
 import { openWindow } from '../index';
-import { TargetContext } from '#/global';
 import { dataURLtoBlob, urlToBase64 } from './base64Conver';
 
 /**

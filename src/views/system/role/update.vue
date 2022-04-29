@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-08 17:29:15
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-11 18:23:08
+ * @LastEditTime: 2022-04-29 15:18:04
 -->
 <template>
   <as-page-wrapper header-title="新增角色">
@@ -63,7 +63,6 @@ import { AsPageWrapper } from '@/containers/page-wrapper';
 import { useRoute } from 'vue-router';
 import { ComponentSize } from 'element-plus/lib/utils/types';
 import { IRole } from './typing';
-import { FormInstance } from '#/global';
 
 const route = useRoute();
 
