@@ -72,5 +72,6 @@
       "source.fixAll.eslint": true,
       "source.fixAll.stylelint": true
     }
-  }
+  },
+  "editor.maxTokenizationLineLength": 100000
 }

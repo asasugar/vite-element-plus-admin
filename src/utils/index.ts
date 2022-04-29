@@ -3,8 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-08 18:39:39
+ * @LastEditTime: 2022-04-29 14:36:27
  */
+
+import { TargetContext } from '#/global';
 
 /**
  * @description 判断一个字符串是否为JSON字符串
@@ -119,4 +121,17 @@ export function isEqual(value: any, other: any): boolean {
   }
   // 简单类型
   return value === other;
+}
+
+export function openWindow(
+  url: string,
+  opt?: { target?: TargetContext | string; noopener?: boolean; noreferrer?: boolean }
+) {
+  const { target = '__blank', noopener = true, noreferrer = true } = opt || {};
+  const feature: string[] = [];
+
+  noopener && feature.push('noopener=yes');
+  noreferrer && feature.push('noreferrer=yes');
+
+  window.open(url, target, feature.join(','));
 }

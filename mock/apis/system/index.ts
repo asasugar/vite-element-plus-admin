@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-22 17:06:29
+ * @LastEditTime: 2022-04-29 11:00:53
  */
 export default [
   // 看板数据
@@ -100,6 +100,14 @@ export default [
                 component: 'views/threejs/vr-room/index',
                 meta: {
                   title: 'VR看房'
+                }
+              },
+              {
+                name: 'FeatDownload',
+                path: '/feat/download',
+                component: 'views/feat/download/index',
+                meta: {
+                  title: '文件下载'
                 }
               },
               {
@@ -245,24 +253,38 @@ export default [
           },
           {
             sortId: '4',
+            name: 'Feat',
+            path: '',
+            title: '功能',
+            children: [
+              {
+                sortId: '4-1',
+                name: 'FeatDownload',
+                path: '/feat/download',
+                title: '文件下载'
+              }
+            ]
+          },
+          {
+            sortId: '5',
             name: 'System',
             path: '',
             title: '系统管理',
             children: [
               {
-                sortId: '4-1',
+                sortId: '5-1',
                 name: 'SystemUser',
                 path: '/system/user',
                 title: '用户管理'
               },
               {
-                sortId: '4-2',
+                sortId: '5-2',
                 name: 'SystemRole',
                 path: '/system/role',
                 title: '角色管理'
               },
               {
-                sortId: '4-3',
+                sortId: '5-3',
                 name: 'SystemPassword',
                 path: '/system/password',
                 title: '修改密码'
