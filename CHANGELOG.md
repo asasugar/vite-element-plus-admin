@@ -2,6 +2,51 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.11](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.9...v0.0.11) (2022-04-29)
+
+
+### Features
+
+* 🎸 导出excel增加数据判断 ([06ad5f0](https://github.com/asasugar/vite-element-plus-admin/commit/06ad5f0673eee9bfcc535b67ee65a9480a6ad9c2))
+* 🎸 新增角色路由权限配置 ([fd5fed5](https://github.com/asasugar/vite-element-plus-admin/commit/fd5fed5a0f4cb68e87fb91c1e0b9b23edf6ca456))
+* 🎸 add decorate methods ([e1813bd](https://github.com/asasugar/vite-element-plus-admin/commit/e1813bd5ae0a9a59188052b63c03074eb2eb296b))
+* 🎸 added change password page ([59e0074](https://github.com/asasugar/vite-element-plus-admin/commit/59e00742d9be07635cf3c00d8cbe65ff25a72853))
+* 🎸 added debounce decorate method ([d82f8ee](https://github.com/asasugar/vite-element-plus-admin/commit/d82f8eea03bd16d3c7dbda66c452d41a7609c2a5))
+* 🎸 added download feat ([d7ba6a8](https://github.com/asasugar/vite-element-plus-admin/commit/d7ba6a8fa2948091a144075a78a174e8e8a391b8))
+* 🎸 added table-settings component ([7345c45](https://github.com/asasugar/vite-element-plus-admin/commit/7345c45e4cbcaaaf8e95d1f7ea8983e8b90b1f0b))
+* 🎸 save auth ([3de24f5](https://github.com/asasugar/vite-element-plus-admin/commit/3de24f50b7a1dc20ff7cce701bab1c60bb4a0549))
+
+
+### Bug Fixes
+
+* 🐛 修复切换分析页时销量图表不展示bug ([d377f5c](https://github.com/asasugar/vite-element-plus-admin/commit/d377f5cec141247acc9e8e192f306fa47ea906a8))
+* 🐛 default-passive-events fix warn @Chrome51 ([b64bd58](https://github.com/asasugar/vite-element-plus-admin/commit/b64bd58b5ad002741379840ca81480e3778462ac))
+
+
+### Others
+
+* 🤖 feat .vscode ([df6acf9](https://github.com/asasugar/vite-element-plus-admin/commit/df6acf9a2f793e3801296988df21fee1a426436f))
+* 🤖 remove babel.config.js ([0de2f29](https://github.com/asasugar/vite-element-plus-admin/commit/0de2f29515884d753727f841f1d263bfe2524127))
+* 🤖 vite@2.9.2 type unknown env as any ([1442898](https://github.com/asasugar/vite-element-plus-admin/commit/1442898dee345bfebb254895d8148495c519883c))
+* 🤖 vite@2.9.2 type unknown env as any ([e257b44](https://github.com/asasugar/vite-element-plus-admin/commit/e257b44bf92296abdf2f9e9d703fde3036521de9))
+* **release:** 0.0.10 ([5694135](https://github.com/asasugar/vite-element-plus-admin/commit/5694135fa9c5e2a677ca48f1cf3bc9402a80b121))
+
+
+### CI
+
+* 🎡 修复pnpm不兼容predeploy钩子 ([b3c0d1a](https://github.com/asasugar/vite-element-plus-admin/commit/b3c0d1ad2bf77871b1c4d5edcf3cc38d9253ca7f))
+* 🎡 yarn => pnpm ([a725279](https://github.com/asasugar/vite-element-plus-admin/commit/a725279732ff0abfdd276e78ca5ad9e5ef853d39))
+
+
+### Docs
+
+* ✏️ update throttle desc ([cddbfc4](https://github.com/asasugar/vite-element-plus-admin/commit/cddbfc4524524ac75abf7336b391e20e327f4eef))
+
+
+### Styling
+
+* 💄 系统管理页面布局调整 ([2a27cac](https://github.com/asasugar/vite-element-plus-admin/commit/2a27cace2625afb8bc7dc75f78ba24f4e6d75925))
+
 ### 0.0.10 (2022-04-19)
 
 
