@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 11:31:21
+ * @LastEditTime: 2022-04-29 18:20:28
 -->
 <template>
   <as-page-wrapper v-if="route.name === 'SystemRole'" header-title="角色管理">
@@ -85,7 +85,7 @@ import { useRouter, useRoute } from 'vue-router';
 import Json2excel from 'custom-json2excel';
 import { userService } from '@/services';
 import { IRole } from './typing';
-import { IPage, TableInstance } from '#/global';
+import { IPage } from '#/global';
 import { ElMessage } from 'element-plus';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import AsTableSettings from '@/components/table-settings';

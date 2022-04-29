@@ -11,7 +11,7 @@ declare module 'vue' {
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup'];
+    ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElCollapse: typeof import('element-plus/es')['ElCollapse']
@@ -22,39 +22,39 @@ declare module 'vue' {
     ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
     ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu']
     ElEmpty: typeof import('element-plus/es')['ElEmpty']
-    ElForm: typeof import('element-plus/es')['ElForm'];
-    ElFormItem: typeof import('element-plus/es')['ElFormItem'];
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElLink: typeof import('element-plus/es')['ElLink']
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
-    ElOption: typeof import('element-plus/es')['ElOption'];
-    ElPagination: typeof import('element-plus/es')['ElPagination'];
-    ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm'];
-    ElRadioButton: typeof import('element-plus/es')['ElRadioButton'];
-    ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup'];
+    ElOption: typeof import('element-plus/es')['ElOption']
+    ElPagination: typeof import('element-plus/es')['ElPagination']
+    ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
+    ElRadioButton: typeof import('element-plus/es')['ElRadioButton']
+    ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
-    ElSelect: typeof import('element-plus/es')['ElSelect'];
+    ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
     ElSkeletonItem: typeof import('element-plus/es')['ElSkeletonItem']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
-    ElSwitch: typeof import('element-plus/es')['ElSwitch'];
-    ElTable: typeof import('element-plus/es')['ElTable'];
-    ElTableColumn: typeof import('element-plus/es')['ElTableColumn'];
+    ElSwitch: typeof import('element-plus/es')['ElSwitch']
+    ElTable: typeof import('element-plus/es')['ElTable']
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
-    ElTag: typeof import('element-plus/es')['ElTag'];
-    ElTooltip: typeof import('element-plus/es')['ElTooltip'];
-    ElTreeV2: typeof import('element-plus/es')['ElTreeV2'];
+    ElTag: typeof import('element-plus/es')['ElTag']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    ElTreeV2: typeof import('element-plus/es')['ElTreeV2']
     InfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']
     JsonEditor: typeof import('./../src/components/json-editor/src/json-editor.vue')['default']
     List: typeof import('./../src/components/list/src/list.vue')['default']
     ListItem: typeof import('./../src/components/list/src/list-item.vue')['default']
     ListItemMeta: typeof import('./../src/components/list/src/list-item-meta.vue')['default']
-    Loading: typeof import('element-plus/es')['ElLoadingDirective'];
+    Loading: typeof import('element-plus/es')['ElLoadingDirective']
     Markdown: typeof import('./../src/components/markdown/src/markdown.vue')['default']
     Panel: typeof import('./../src/components/mousemove-panel/src/panel.vue')['default']
     TableSettings: typeof import('./../src/components/table-settings/src/table-settings.vue')['default']
