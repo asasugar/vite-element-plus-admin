@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-18 13:55:50
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-18 18:41:54
+ * @LastEditTime: 2022-05-05 22:13:02
  */
 module.exports = {
   parser: 'vue-eslint-parser',
@@ -43,7 +43,7 @@ module.exports = {
     'vue/multi-word-component-names': [
       'error',
       {
-        ignores: ['Markdown']
+        ignores: ['Markdown', 'index']
       }
     ],
     '@typescript-eslint/no-unused-vars': 'error'

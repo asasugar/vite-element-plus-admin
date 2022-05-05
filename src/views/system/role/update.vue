@@ -3,10 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-08 17:29:15
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 15:18:04
+ * @LastEditTime: 2022-05-05 21:56:33
 -->
 <template>
-  <as-page-wrapper header-title="新增角色">
+  <as-page-wrapper :header-title="headerTitle">
     <template #bodyContent>
       <div class="pb20">
         <el-radio-group v-model="size" class="mr20">
@@ -58,18 +58,20 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue';
+import { reactive, ref, onUnmounted } from 'vue';
 import { AsPageWrapper } from '@/containers/page-wrapper';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import { setStorage, getStorage, removeStorage } from '@/utils/storage';
 import { ComponentSize } from 'element-plus/lib/utils/types';
 import { IRole } from './typing';
 
 const route = useRoute();
+const router = useRouter();
 
 const size = ref<ComponentSize>('default');
 const labelPosition = ref('right');
 const ruleFormRef = ref<FormInstance>();
-let ruleForm = reactive<IRole>({
+let ruleForm = ref<IRole>({
   role: {
     key: '',
     value: ''
@@ -77,23 +79,33 @@ let ruleForm = reactive<IRole>({
   status: true,
   remark: ''
 });
+const headerTitle = ref<string>('');
+const storageFormDetail = getStorage('roleFormDetail');
+
 if (
   route.name === 'SystemRoleEdit' &&
   route?.params?.data &&
   typeof route.params.data === 'string'
 ) {
-  ruleForm = JSON.parse(route.params.data) as IRole;
+  headerTitle.value = '编辑角色';
+  ruleForm.value = reactive(JSON.parse(route.params.data) as IRole);
+  setStorage('roleFormDetail', ruleForm.value);
+} else if (route.name === 'SystemRoleEdit' && storageFormDetail) {
+  headerTitle.value = '编辑用户';
+  ruleForm.value = storageFormDetail;
+} else {
+  headerTitle.value = '新增角色';
 }
 
 const rules = reactive({
-  roleValue: [
+  'role.value': [
     {
       required: true,
       message: '请输入角色名称',
       trigger: 'blur'
     }
   ],
-  roleKey: [
+  'role.key': [
     {
       required: true,
       message: '请输入角色值',
@@ -107,6 +119,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
   formEl.validate((valid: boolean) => {
     if (valid) {
       console.log('submit!');
+      router.replace({ name: 'SystemRole' });
     } else {
       console.log('error submit!');
       return false;
@@ -118,6 +131,10 @@ const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.resetFields();
 };
+
+onUnmounted(() => {
+  removeStorage('roleFormDetail');
+});
 </script>
 <style lang="less" scoped>
 .rule-form {

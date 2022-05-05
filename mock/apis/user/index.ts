@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-12 18:19:38
+ * @LastEditTime: 2022-05-05 15:59:29
  */
 import * as Mock from 'mockjs';
 import { IConfig, IUserType } from '../../typing';
@@ -120,7 +120,7 @@ export default [
         const { list } = Mock.mock({
           [`list|${pageSize}`]: [
             {
-              'sortId|+1': (pageNum - 1) * pageSize + 1,
+              'id|+1': (pageNum - 1) * pageSize + 1,
               status: Random.boolean(),
               role: '@prole',
               createTime: Random.datetime(),
@@ -142,7 +142,7 @@ export default [
         const { list } = Mock.mock({
           [`list|${total}`]: [
             {
-              'sortId|+1': 1,
+              'id|+1': 1,
               status: Random.boolean(),
               role: '@prole',
               createTime: Random.datetime(),

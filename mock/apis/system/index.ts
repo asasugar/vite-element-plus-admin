@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 15:47:25
+ * @LastEditTime: 2022-05-05 22:14:19
  */
 export default [
   // 看板数据
@@ -129,11 +129,17 @@ export default [
               {
                 name: 'SystemUser',
                 path: '/system/user',
-                component: 'views/system/user/index',
-                meta: {
-                  title: '用户管理'
-                },
+                component: 'views/routerView/index',
+                redirect: '/system/user/list',
                 children: [
+                  {
+                    name: 'SystemUserList',
+                    path: 'list',
+                    component: 'views/system/user/list',
+                    meta: {
+                      title: '用户管理'
+                    }
+                  },
                   {
                     name: 'SystemUserInsert',
                     path: 'insert',
@@ -157,11 +163,17 @@ export default [
               {
                 name: 'SystemRole',
                 path: '/system/role',
-                component: 'views/system/role/index',
-                meta: {
-                  title: '角色管理'
-                },
+                component: 'views/routerView/index',
+                redirect: '/system/role/list',
                 children: [
+                  {
+                    name: 'SystemRoleList',
+                    path: 'list',
+                    component: 'views/system/role/list',
+                    meta: {
+                      title: '角色管理'
+                    }
+                  },
                   {
                     name: 'SystemRoleInsert',
                     path: 'insert',

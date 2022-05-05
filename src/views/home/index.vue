@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-22 17:45:49
+ * @LastEditTime: 2022-05-05 21:14:27
 -->
 <template>
   <el-container class="layout-container">
@@ -103,7 +103,6 @@ const menuOption = ref<IMenu>({
   defaultActive: '1-1',
   menu: []
 });
-
 const { userinfo } = storeToRefs(useUser);
 const breadcrumb = ref<string[]>([]);
 const editableTabsValue = ref(route.path);
@@ -117,6 +116,13 @@ onBeforeRouteUpdate(to => {
       defaultOpeneds: menuOption.value.defaultOpeneds,
       defaultActive: menuOption.value.defaultActive
     });
+  } else {
+    const index = breadcrumb.value.findIndex(i => i === to?.meta?.title);
+    const storageBreadcrumb = getStorage('breadcrumb');
+    if (index > -1) {
+      breadcrumb.value = storageBreadcrumb?.slice(0, index + 1);
+      index !== storageBreadcrumb?.length - 1 && setStorage('breadcrumb', breadcrumb.value);
+    }
   }
 });
 const handleTabClick = ({ index }: { index: string | undefined }) => {
@@ -158,6 +164,8 @@ const _renderDefaultMenuActive = (menu: IMenuItem[], sortId?: string, title?: st
     (function recursiveFn(list: IMenuItem[], id?: string, text?: string) {
       list.some(item => {
         if (item.name === route.name) {
+          console.log(2);
+
           nextTick(() => {
             menuOption.value.defaultOpeneds = [`${id ? id : item.sortId}`];
             menuOption.value.defaultActive = item.sortId;
@@ -181,7 +189,13 @@ const _renderDefaultMenuActive = (menu: IMenuItem[], sortId?: string, title?: st
     })(menu, sortId, title);
     if (!isFindInMenu) {
       nextTick(() => {
-        breadcrumb.value = getStorage('breadcrumb');
+        const storageBreadcrumb = getStorage('breadcrumb');
+        const index = storageBreadcrumb?.findIndex((i: string) => i === route?.meta?.title);
+        console.log(3, index);
+        if (index > -1) {
+          breadcrumb.value = storageBreadcrumb?.slice(0, index + 1);
+          index !== storageBreadcrumb?.length - 1 && setStorage('breadcrumb', breadcrumb.value);
+        }
         menuOption.value.defaultOpeneds = getStorage('menuOption')?.defaultOpeneds;
         menuOption.value.defaultActive = getStorage('menuOption')?.defaultActive;
       });

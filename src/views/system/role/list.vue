@@ -1,17 +1,17 @@
 <!--
- * @Description: 用户管理
+ * @Description: 角色管理
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
- * @Date: 2022-02-25 17:56:01
+ * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 18:20:40
+ * @LastEditTime: 2022-05-05 18:33:01
 -->
 <template>
-  <as-page-wrapper v-if="route.name === 'SystemUser'" header-title="用户管理">
+  <as-page-wrapper header-title="角色管理">
     <template #extra>
       <div class="flex center">
-        <el-button type="primary" @click="handleInsert">新增用户</el-button>
+        <el-button type="primary" @click="handleInsert">新增角色</el-button>
         <el-button type="primary" @click="handleExportExcel">导出excel</el-button>
-        <el-input v-model="search" class="ml10" placeholder="User to search" />
+        <el-input v-model="search" class="ml10" placeholder="Role to search" />
         <AsTableSettings @onRefresh="handleRefresh" @onSize="handleCommand" />
       </div>
     </template>
@@ -27,20 +27,33 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" />
-        <el-table-column prop="id" label="序号" width="55" />
-        <el-table-column prop="userName" label="用户名" width="180" />
-        <el-table-column prop="email" sortable label="邮箱" />
-        <el-table-column prop="createTime" sortable label="创建时间" />
-        <el-table-column prop="role" label="角色">
+        <el-table-column prop="id" label="序号" width="80" sortable />
+        <el-table-column prop="role" label="角色名称">
           <template #default="scope">
             <span class="pl10">{{ scope.row.role.value }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column prop="role" label="角色值">
+          <template #default="scope">
+            <span class="pl10">{{ scope.row.role.key }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="status" label="状态">
+          <template #default="scope">
+            <el-switch v-model="scope.row.status" disabled></el-switch>
+            <span class="pl10">{{ scope.row.status ? '启用' : '禁用' }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="createTime" sortable label="创建时间" />
+        <el-table-column prop="remark" label="备注" />
+        <el-table-column label="操作" width="240">
           <template #default="scope">
             <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
+            <el-button size="small" type="primary" @click="handleEditAuth(scope.row)"
+              >权限配置</el-button
+            >
             <el-popconfirm
-              title="确定删除该用户？"
+              title="确定删除该角色？"
               icon-color="red"
               @confirm="handleDel(scope.row.id)"
             >
@@ -64,24 +77,21 @@
       />
     </template>
   </as-page-wrapper>
-  <!-- 新增或者编辑用户子路由 -->
-  <router-view v-else> </router-view>
 </template>
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
-import { userService } from '@/services';
-import { IPage } from '#/global';
-import { IUser } from './typing';
+import { computed, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import Json2excel from 'custom-json2excel';
+import { userService } from '@/services';
+import { IRole } from './typing';
+import { IPage } from '#/global';
 import { ElMessage } from 'element-plus';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import AsTableSettings from '@/components/table-settings';
 
 const router = useRouter();
-const route = useRoute();
 
-const tableData = ref<IUser[]>([]);
+const tableData = ref<IRole[]>([]);
 const size = ref<string>('default');
 const search = ref<string>('');
 const currentPage = ref<number>(1);
@@ -90,11 +100,11 @@ const pageSize = ref<number>(10);
 const totalNum = ref<number>(0);
 const loading = ref(true);
 const multipleTableRef = ref<TableInstance>();
-const multipleSelection = ref<IUser[]>([]);
+const multipleSelection = ref<IRole[]>([]);
 
-const getUserList = async (pageNum: number, pageSize: number) => {
+const getRoleList = async (pageNum: number, pageSize: number) => {
   loading.value = true;
-  const { total, content } = await userService.getUserList<IPage>({
+  const { total, content } = await userService.getRoleList<IPage>({
     pageNum,
     pageSize
   });
@@ -102,20 +112,32 @@ const getUserList = async (pageNum: number, pageSize: number) => {
   totalNum.value = total;
   tableData.value = content;
 };
-getUserList(pageNum.value, pageSize.value);
+getRoleList(pageNum.value, pageSize.value);
 
-const filterTableData = computed(
-  () =>
-    tableData?.value?.filter(
-      data => !search.value || data.userName.toLowerCase().includes(search.value.toLowerCase())
-    ) ?? []
+const filterTableData = computed(() =>
+  tableData?.value?.filter(
+    data =>
+      !search.value ||
+      data.role.key.toLowerCase().includes(search.value.toLowerCase()) ||
+      data.role.value.toLowerCase().includes(search.value.toLowerCase())
+  )
 );
 
-const handleInsert = () => {
-  router.push({ name: 'SystemUserInsert' });
+const handleSizeChange = (val: number) => {
+  pageNum.value = 1;
+  pageSize.value = val;
+  getRoleList(pageNum.value, pageSize.value);
+
+  console.log(`${val} items per page`);
 };
 
-const handleSelectionChange = (val: IUser[]) => {
+const handleCurrentChange = (val: number) => {
+  pageNum.value = val;
+  getRoleList(pageNum.value, pageSize.value);
+  console.log(`current page: ${val}`);
+};
+
+const handleSelectionChange = (val: IRole[]) => {
   multipleSelection.value = val;
 };
 
@@ -132,7 +154,7 @@ const reset = () => {
 
 const handleRefresh = () => {
   reset();
-  getUserList(pageNum.value, pageSize.value);
+  getRoleList(pageNum.value, pageSize.value);
 };
 
 const handleCommand = (command: string) => {
@@ -143,18 +165,22 @@ const handleCommand = (command: string) => {
 const handleExportExcel = () => {
   if (multipleSelection.value?.length) {
     const keyMap = {
-      userName: '用户名',
-      email: '邮箱',
+      id: '序号',
+      status: '状态',
       role: '角色',
-      createTime: '创建时间'
+      createTime: '创建时间',
+      remark: '备注'
     };
-    const orderedKey = ['id', 'role', 'email', 'createTime'];
+    const orderedKey = ['id', 'role', 'status', 'createTime', 'remark'];
     const scope = {
       role: 'value'
     };
-
+    const excelData = multipleSelection.value.map(i => {
+      i.status = i.status ? '启用' : '禁用';
+      return i;
+    });
     const json2excel = new Json2excel({
-      data: multipleSelection.value,
+      data: excelData,
       orderedKey,
       keyMap,
       scope,
@@ -174,27 +200,22 @@ const handleExportExcel = () => {
   }
 };
 
-const handleEdit = (item: IUser) => {
+const handleInsert = () => {
+  router.push({ name: 'SystemRoleInsert' });
+};
+
+const handleEdit = (item: IRole) => {
   if (!item) return;
-  router.push({ name: 'SystemUserEdit', params: { data: JSON.stringify(item) } });
+  router.push({ name: 'SystemRoleEdit', params: { data: JSON.stringify(item) } });
+};
+
+const handleEditAuth = (item: IRole) => {
+  if (!item) return;
+  router.push({ name: 'SystemAuth', params: { role: JSON.stringify(item.role) } });
 };
 
 const handleDel = (id: number | undefined) => {
   tableData.value = filterTableData.value?.filter(data => data.id !== id);
   return true;
-};
-
-const handleSizeChange = (val: number) => {
-  pageNum.value = 1;
-  pageSize.value = val;
-  getUserList(pageNum.value, pageSize.value);
-
-  console.log(`${val} items per page`);
-};
-
-const handleCurrentChange = (val: number) => {
-  pageNum.value = val;
-  getUserList(pageNum.value, pageSize.value);
-  console.log(`current page: ${val}`);
 };
 </script>
