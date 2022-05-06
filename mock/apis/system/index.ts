@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-06 14:39:07
+ * @LastEditTime: 2022-05-06 17:25:47
  */
 export default [
   // 看板数据
@@ -390,13 +390,13 @@ export default [
                     sortId: '4-4-1',
                     name: 'FeatExcelImport',
                     path: '/feat/excel/import',
-                    title: '导入'
+                    title: 'Excel导入'
                   },
                   {
                     sortId: '4-4-2',
                     name: 'FeatExcelExport',
                     path: '/feat/excel/export',
-                    title: '导出'
+                    title: 'Excel导出'
                   }
                 ]
               }

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-19 21:34:29
+ * @LastEditTime: 2022-05-06 14:52:19
  */
 import { loadEnv, PluginOption, UserConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -14,6 +14,7 @@ import viteCompression from 'vite-plugin-compression';
 import postCssPurge from '@fullhuman/postcss-purgecss';
 import vueSetupExtend from 'vite-plugin-vue-setup-extend';
 import legacy from '@vitejs/plugin-legacy'; // To supported IE11
+import vueJsx from '@vitejs/plugin-vue-jsx';
 import { pathResolve } from './utils';
 
 const vuePath = /\.vue(\?.+)?$/;
@@ -52,6 +53,7 @@ const Config: UserConfig = {
   },
   plugins: [
     vue(),
+    vueJsx(),
     Components({
       extensions: ['vue', 'md'],
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],

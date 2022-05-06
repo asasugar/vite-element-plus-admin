@@ -3,41 +3,11 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-06 14:43:10
+ * @LastEditTime: 2022-05-06 18:31:06
 -->
 <template>
   <el-container class="layout-container">
-    <el-aside width="200px">
-      <el-scrollbar>
-        <el-menu
-          unique-opened
-          :default-openeds="menuOption.defaultOpeneds"
-          :default-active="menuOption.defaultActive"
-        >
-          <el-sub-menu v-for="item in menuOption.menu" :key="item.sortId" :index="item.sortId">
-            <template #title>{{ item.title }}</template>
-            <template v-if="item.children">
-              <template v-for="subItem in item.children" :key="subItem.sortId">
-                <el-sub-menu v-if="subItem.children" :index="subItem.sortId">
-                  <template #title>{{ subItem.title }}</template>
-                  <el-menu-item
-                    v-for="lastItem in subItem.children"
-                    :key="lastItem.sortId"
-                    :index="lastItem.sortId"
-                    @click="handleToMenu(item, lastItem)"
-                    >{{ lastItem.title }}</el-menu-item
-                  >
-                </el-sub-menu>
-                <el-menu-item v-else :index="subItem.sortId" @click="handleToMenu(item, subItem)">
-                  {{ subItem.title }}
-                </el-menu-item>
-              </template>
-            </template>
-          </el-sub-menu>
-        </el-menu>
-      </el-scrollbar>
-    </el-aside>
-
+    <home-aside :menu-option="menuOption" @onJumpMenu="handleToMenu" />
     <el-container>
       <el-header class="home-header flex center between pos-r f12 color-black">
         <el-breadcrumb separator="/">
@@ -99,6 +69,7 @@ import { ITab, IMenu, IMenuItem } from './typing';
 import { storeToRefs } from 'pinia';
 import { useGlobalStore, useUserStore } from '@/pinia';
 import { routes } from '@/router';
+import HomeAside from './components/home-aside';
 
 const useGlobal = useGlobalStore();
 const useUser = useUserStore();
@@ -172,8 +143,6 @@ const _renderDefaultMenuActive = (menu: IMenuItem[], sortId?: string, title?: st
     (function recursiveFn(list: IMenuItem[], id?: string, text?: string) {
       list.some(item => {
         if (item.name === route.name) {
-          console.log(2);
-
           nextTick(() => {
             menuOption.value.defaultOpeneds = [`${id ? id : item.sortId}`];
             menuOption.value.defaultActive = item.sortId;
@@ -199,7 +168,6 @@ const _renderDefaultMenuActive = (menu: IMenuItem[], sortId?: string, title?: st
       nextTick(() => {
         const storageBreadcrumb = getStorage('breadcrumb');
         const index = storageBreadcrumb?.findIndex((i: string) => i === route?.meta?.title);
-        console.log(3, index);
         if (index > -1) {
           breadcrumb.value = storageBreadcrumb?.slice(0, index + 1);
           index !== storageBreadcrumb?.length - 1 && setStorage('breadcrumb', breadcrumb.value);
@@ -240,6 +208,7 @@ const handleToMenu = (
   subItem: { title: string; sortId: string; name: string; path: string }
 ) => {
   breadcrumb.value = [item.title];
+  menuOption.value.menu;
   menuOption.value.defaultOpeneds = [item.sortId];
   menuOption.value.defaultActive = subItem.sortId;
   if (subItem.title && subItem.path) {
