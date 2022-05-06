@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-08 17:29:15
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-05 21:56:33
+ * @LastEditTime: 2022-05-06 11:05:55
 -->
 <template>
   <as-page-wrapper :header-title="headerTitle">
@@ -119,7 +119,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
   formEl.validate((valid: boolean) => {
     if (valid) {
       console.log('submit!');
-      router.replace({ name: 'SystemRole' });
+      router.back();
     } else {
       console.log('error submit!');
       return false;
