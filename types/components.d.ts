@@ -48,7 +48,6 @@ declare module 'vue' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
-    ElTreeV2: typeof import('element-plus/es')['ElTreeV2']
     InfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']
     JsonEditor: typeof import('./../src/components/json-editor/src/json-editor.vue')['default']
     List: typeof import('./../src/components/list/src/list.vue')['default']

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:37
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 11:27:55
+ * @LastEditTime: 2022-05-06 14:40:04
 -->
 <template>
   <as-page-wrapper header-title="权限管理">
@@ -45,6 +45,7 @@ if (route?.params?.role && typeof route.params.role === 'string') {
 
 const normalizeaTreeData: (data: IRoutes[]) => any = (data: IRoutes[]) => {
   if (data?.length) {
+    console.log(111, data);
     return data.map(i => {
       if (i?.children?.length) {
         i.children = normalizeaTreeData(i.children);

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-05 22:14:19
+ * @LastEditTime: 2022-05-06 14:39:07
  */
 export default [
   // 看板数据
@@ -61,154 +61,231 @@ export default [
             redirect: '/dashboard/analysis',
             children: [
               {
-                name: 'DashboardAnalysis',
-                path: '/dashboard/analysis',
-                component: 'views/dashboard/analysis/index',
-                meta: {
-                  title: '分析页'
-                }
-              },
-              {
-                name: 'DashboardWorkspace',
-                path: '/dashboard/workspace',
-                component: 'views/dashboard/workspace/index',
-                meta: {
-                  title: '工作台'
-                }
-              },
-              {
-                name: 'ComponentMarkdown',
-                path: '/component/markdown',
-                component: 'views/component/markdown/index',
-                meta: {
-                  title: 'Markdown 演示',
-                  keepAlive: true
-                }
-              },
-              {
-                name: 'ComponentJSON',
-                path: '/component/json',
-                component: 'views/component/json-edit/index',
-                meta: {
-                  title: 'JSON编辑器 演示',
-                  keepAlive: true
-                }
-              },
-              {
-                name: 'ThreejsVrRoom',
-                path: '/threejs/vrRoom',
-                component: 'views/threejs/vr-room/index',
-                meta: {
-                  title: 'VR看房'
-                }
-              },
-              {
-                name: 'FeatDownload',
-                path: '/feat/download',
-                component: 'views/feat/download/index',
-                meta: {
-                  title: '文件下载'
-                }
-              },
-              {
-                name: 'FeatWatermask',
-                path: '/feat/watermask',
-                component: 'views/feat/watermask/index',
-                meta: {
-                  title: '水印'
-                }
-              },
-              {
-                name: 'FeatCopy',
-                path: '/feat/copy',
-                component: 'views/feat/copy/index',
-                meta: {
-                  title: '水印'
-                }
-              },
-              {
-                name: 'SystemUser',
-                path: '/system/user',
+                name: 'Dashboard',
+                path: '/dashboard',
                 component: 'views/routerView/index',
-                redirect: '/system/user/list',
+                meta: {
+                  title: '看板'
+                },
+                redirect: '/dashboard/analysis',
                 children: [
                   {
-                    name: 'SystemUserList',
-                    path: 'list',
-                    component: 'views/system/user/list',
+                    name: 'DashboardAnalysis',
+                    path: 'analysis',
+                    component: 'views/dashboard/analysis/index',
                     meta: {
-                      title: '用户管理'
+                      title: '分析页'
                     }
                   },
                   {
-                    name: 'SystemUserInsert',
-                    path: 'insert',
-                    component: 'views/system/user/update',
+                    name: 'DashboardWorkspace',
+                    path: 'workspace',
+                    component: 'views/dashboard/workspace/index',
                     meta: {
-                      title: '新增用户',
+                      title: '工作台'
+                    }
+                  }
+                ]
+              },
+              {
+                name: 'Component',
+                path: '/component',
+                component: 'views/routerView/index',
+                meta: {
+                  title: '组件'
+                },
+                redirect: '/component/markdown',
+                children: [
+                  {
+                    name: 'ComponentMarkdown',
+                    path: 'markdown',
+                    component: 'views/component/markdown/index',
+                    meta: {
+                      title: 'Markdown 演示',
                       keepAlive: true
                     }
                   },
                   {
-                    name: 'SystemUserEdit',
-                    path: 'edit',
-                    component: 'views/system/user/update',
+                    name: 'ComponentJSON',
+                    path: 'json',
+                    component: 'views/component/json-edit/index',
                     meta: {
-                      title: '编辑用户',
+                      title: 'JSON编辑器 演示',
                       keepAlive: true
                     }
                   }
                 ]
               },
               {
-                name: 'SystemRole',
-                path: '/system/role',
+                name: 'Threejs',
+                path: '/threejs',
                 component: 'views/routerView/index',
-                redirect: '/system/role/list',
+                meta: {
+                  title: 'three.js应用'
+                },
+                redirect: '/threejs/vrRoom',
                 children: [
                   {
-                    name: 'SystemRoleList',
-                    path: 'list',
-                    component: 'views/system/role/list',
+                    name: 'ThreejsVrRoom',
+                    path: 'vrRoom',
+                    component: 'views/threejs/vr-room/index',
                     meta: {
-                      title: '角色管理'
-                    }
-                  },
-                  {
-                    name: 'SystemRoleInsert',
-                    path: 'insert',
-                    component: 'views/system/role/update',
-                    meta: {
-                      title: '新增角色',
-                      keepAlive: true
-                    }
-                  },
-                  {
-                    name: 'SystemRoleEdit',
-                    path: 'edit',
-                    component: 'views/system/role/update',
-                    meta: {
-                      title: '编辑角色',
-                      keepAlive: true
+                      title: 'VR看房'
                     }
                   }
                 ]
               },
               {
-                name: 'SystemAuth',
-                path: '/system/auth',
-                component: 'views/system/auth/index',
+                name: 'Feat',
+                path: '/feat',
+                component: 'views/routerView/index',
                 meta: {
-                  title: '权限管理'
-                }
+                  title: '功能'
+                },
+                children: [
+                  {
+                    name: 'FeatDownload',
+                    path: 'download',
+                    component: 'views/feat/download/index',
+                    meta: {
+                      title: '文件下载'
+                    }
+                  },
+                  {
+                    name: 'FeatWatermask',
+                    path: 'watermask',
+                    component: 'views/feat/watermask/index',
+                    meta: {
+                      title: '水印'
+                    }
+                  },
+                  {
+                    name: 'FeatCopy',
+                    path: 'copy',
+                    component: 'views/feat/copy/index',
+                    meta: {
+                      title: '剪切板'
+                    }
+                  },
+                  {
+                    name: 'FeatExcel',
+                    path: 'excel',
+                    component: 'views/routerView/index',
+                    children: [
+                      {
+                        name: 'FeatExcelImport',
+                        path: 'import',
+                        component: 'views/feat/excel/import',
+                        meta: {
+                          title: 'Excel导入'
+                        }
+                      },
+                      {
+                        name: 'FeatExcelExport',
+                        path: 'export',
+                        component: 'views/feat/excel/export',
+                        meta: {
+                          title: 'Excel导出'
+                        }
+                      }
+                    ]
+                  }
+                ]
               },
               {
-                name: 'SystemPassword',
-                path: '/system/password',
-                component: 'views/system/password/index',
+                name: 'System',
+                path: '/system',
+                component: 'views/routerView/index',
                 meta: {
-                  title: '修改密码'
-                }
+                  title: '系统管理'
+                },
+                redirect: '/system/user',
+                children: [
+                  {
+                    name: 'SystemUser',
+                    path: 'user',
+                    component: 'views/routerView/index',
+                    redirect: '/system/user/list',
+                    children: [
+                      {
+                        name: 'SystemUserList',
+                        path: 'list',
+                        component: 'views/system/user/list',
+                        meta: {
+                          title: '用户管理'
+                        }
+                      },
+                      {
+                        name: 'SystemUserInsert',
+                        path: 'insert',
+                        component: 'views/system/user/update',
+                        meta: {
+                          title: '新增用户',
+                          keepAlive: true
+                        }
+                      },
+                      {
+                        name: 'SystemUserEdit',
+                        path: 'edit',
+                        component: 'views/system/user/update',
+                        meta: {
+                          title: '编辑用户',
+                          keepAlive: true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    name: 'SystemRole',
+                    path: 'role',
+                    component: 'views/routerView/index',
+                    redirect: '/system/role/list',
+                    children: [
+                      {
+                        name: 'SystemRoleList',
+                        path: 'list',
+                        component: 'views/system/role/list',
+                        meta: {
+                          title: '角色管理'
+                        }
+                      },
+                      {
+                        name: 'SystemRoleInsert',
+                        path: 'insert',
+                        component: 'views/system/role/update',
+                        meta: {
+                          title: '新增角色',
+                          keepAlive: true
+                        }
+                      },
+                      {
+                        name: 'SystemRoleEdit',
+                        path: 'edit',
+                        component: 'views/system/role/update',
+                        meta: {
+                          title: '编辑角色',
+                          keepAlive: true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    name: 'SystemAuth',
+                    path: 'auth',
+                    component: 'views/system/auth/index',
+                    meta: {
+                      title: '权限管理'
+                    }
+                  },
+                  {
+                    name: 'SystemPassword',
+                    path: 'password',
+                    component: 'views/system/password/index',
+                    meta: {
+                      title: '修改密码'
+                    }
+                  }
+                ]
               }
             ]
           }
@@ -302,6 +379,26 @@ export default [
                 name: 'FeatCopy',
                 path: '/feat/copy',
                 title: '剪切板'
+              },
+              {
+                sortId: '4-4',
+                name: 'FeatExcel',
+                path: '',
+                title: 'Excel',
+                children: [
+                  {
+                    sortId: '4-4-1',
+                    name: 'FeatExcelImport',
+                    path: '/feat/excel/import',
+                    title: '导入'
+                  },
+                  {
+                    sortId: '4-4-2',
+                    name: 'FeatExcelExport',
+                    path: '/feat/excel/export',
+                    title: '导出'
+                  }
+                ]
               }
             ]
           },

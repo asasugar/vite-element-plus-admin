@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-05 21:14:27
+ * @LastEditTime: 2022-05-06 14:43:10
 -->
 <template>
   <el-container class="layout-container">
@@ -17,13 +17,21 @@
           <el-sub-menu v-for="item in menuOption.menu" :key="item.sortId" :index="item.sortId">
             <template #title>{{ item.title }}</template>
             <template v-if="item.children">
-              <el-menu-item
-                v-for="subItem in item.children"
-                :key="subItem.sortId"
-                :index="subItem.sortId"
-                @click="handleToMenu(item, subItem)"
-                >{{ subItem.title }}</el-menu-item
-              >
+              <template v-for="subItem in item.children" :key="subItem.sortId">
+                <el-sub-menu v-if="subItem.children" :index="subItem.sortId">
+                  <template #title>{{ subItem.title }}</template>
+                  <el-menu-item
+                    v-for="lastItem in subItem.children"
+                    :key="lastItem.sortId"
+                    :index="lastItem.sortId"
+                    @click="handleToMenu(item, lastItem)"
+                    >{{ lastItem.title }}</el-menu-item
+                  >
+                </el-sub-menu>
+                <el-menu-item v-else :index="subItem.sortId" @click="handleToMenu(item, subItem)">
+                  {{ subItem.title }}
+                </el-menu-item>
+              </template>
             </template>
           </el-sub-menu>
         </el-menu>
