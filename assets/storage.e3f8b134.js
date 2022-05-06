@@ -1,0 +1,1 @@
+import{i as r}from"./index.b32c07a6.js";function s(o,t){if(r(t)){const e=JSON.stringify(t);window.localStorage.setItem(o,e)}else window.localStorage.setItem(o,t)}function i(o){const t=window.localStorage.getItem(o);return t&&JSON.parse(t)}function n(o){window.localStorage.removeItem(o)}export{i as g,n as r,s};
