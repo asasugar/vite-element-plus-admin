@@ -1,16 +1,16 @@
 <!--
  * @Description: Excel 导入
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
- * @Date: 2022-04-29 17:18:03
+ * @Date: 2022-05-06 17:18:03
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-07 11:22:16
+ * @LastEditTime: 2022-05-07 11:28:30
 -->
 <template>
   <AsPageWrapper header-title="Excel 导入演示">
     <template #extra>
       <div class="flex center">
         <AsImportExcel date-format="YYYY-MM-DD" @success="loadDataSuccess">
-          <el-button type="primary">导入excel</el-button>
+          <el-button type="primary">导入Excel</el-button>
         </AsImportExcel>
       </div>
     </template>

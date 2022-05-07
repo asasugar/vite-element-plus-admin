@@ -1,15 +1,15 @@
 <!--
  * @Description: Excel 导出
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
- * @Date: 2022-04-29 17:18:03
+ * @Date: 2022-05-06 17:18:03
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-07 10:16:12
+ * @LastEditTime: 2022-05-07 11:28:22
 -->
 <template>
   <AsPageWrapper header-title="Excel 导出演示">
     <template #extra>
       <div class="flex center">
-        <el-button type="primary" @click="handleExportExcel">导出excel</el-button>
+        <el-button type="primary" @click="handleExportExcel">导出Excel</el-button>
       </div>
     </template>
     <template #bodyContent>
