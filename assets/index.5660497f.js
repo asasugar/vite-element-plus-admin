@@ -1,1 +1,0 @@
-import{_ as o}from"./index.b32c07a6.js";import{r,o as t,a as n}from"./element-plus.bb9cf41c.js";import"./mockjs.05fd93aa.js";const c={};function _(a,s){const e=r("router-view");return t(),n(e)}var f=o(c,[["render",_]]);export{f as default};

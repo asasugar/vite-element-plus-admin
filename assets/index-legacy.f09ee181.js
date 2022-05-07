@@ -1,1 +1,0 @@
-System.register(["./index-legacy.2c3c3750.js","./element-plus-legacy.eee3e80a.js","./mockjs-legacy.c425f079.js"],(function(e){"use strict";var t,n,c,r;return{setters:[function(e){t=e._},function(e){n=e.r,c=e.o,r=e.a},function(){}],execute:function(){e("default",t({},[["render",function(e,t){var u=n("router-view");return c(),r(u)}]]))}}}));
