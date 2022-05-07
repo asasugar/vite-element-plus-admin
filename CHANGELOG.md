@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.12](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.11...v0.0.12) (2022-05-07)
+
+
+### Features
+
+* 🎸 added copy & watermask feat ([3dc821c](https://github.com/asasugar/vite-element-plus-admin/commit/3dc821cbf550703e75fd99fdda9ffb6f0689b7d9))
+* 🎸 added Excel feat ([3e51e2f](https://github.com/asasugar/vite-element-plus-admin/commit/3e51e2f8ccd9b6da2f7a5ba0e5dda478bbdec4c7))
+
+
+### Bug Fixes
+
+* 🐛 编辑角色保存回退上一页 ([71bb673](https://github.com/asasugar/vite-element-plus-admin/commit/71bb6733fbcb2a1319ff991d3bc96b9eba317354))
+* 🐛 面包屑逻辑修复&表单编辑无反应修复 ([718015b](https://github.com/asasugar/vite-element-plus-admin/commit/718015b6fac2383410b2d64db9ce946a58a9bf11))
+* 🐛 fixed code by eslint ([99ba34a](https://github.com/asasugar/vite-element-plus-admin/commit/99ba34ace21f5268733fb471e5cf943170b1cf83))
+
+
+### CI
+
+* 🎡 use sh publish github pages ([83bb502](https://github.com/asasugar/vite-element-plus-admin/commit/83bb5026526980c7fabf35447e3e846472b0f846))
+
+
+### Others
+
+* 🤖 unplugin-vue-components d.ts ([b1db158](https://github.com/asasugar/vite-element-plus-admin/commit/b1db158a55435d791c5497eb6c9400cc34ed2412))
+* 🤖 Update vscode extensions.json ([0f2633f](https://github.com/asasugar/vite-element-plus-admin/commit/0f2633fe1d04c36b855c5a7c361c9cabe7280d55))
+
+
+### Code Refactoring
+
+* 💡 路由树结构重构 ([24ac2c2](https://github.com/asasugar/vite-element-plus-admin/commit/24ac2c27f98e4e456b684fb0cab4121904c78b0e))
+* 💡 首页左侧菜单栏tsx重构 ([3f07e46](https://github.com/asasugar/vite-element-plus-admin/commit/3f07e461e9c8b24128dcfb1ceb7e3ee5bcecb254))
+
 ### [0.0.11](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.9...v0.0.11) (2022-04-29)
 
 
