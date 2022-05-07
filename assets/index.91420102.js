@@ -1,1 +1,0 @@
-import{_ as r}from"./index.4e016d8e.js";import{r as e,o as t,a as n}from"./element-plus.e37410dc.js";import"./mockjs.433dc591.js";import"./dayjs.3c03974b.js";const c={};function _(a,s){const o=e("router-view");return t(),n(o)}var u=r(c,[["render",_]]);export{u as default};
