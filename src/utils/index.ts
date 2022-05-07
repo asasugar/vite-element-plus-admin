@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 15:33:10
+ * @LastEditTime: 2022-05-07 10:37:05
  */
 import { isObject, isArray, isValidMap } from './is';
 
@@ -38,11 +38,11 @@ export function equalArrays(array: any[], other: any[]): boolean {
 
 /**
  * @description 对比对象是否相等
- * @param {{ [x: string]: any; }} object
- * @param {{ [x: string]: any; }} other
+ * @param {TObject} object
+ * @param {TObject} other
  * @returns {boolean}
  */
-export function equalObjects(object: { [x: string]: any }, other: { [x: string]: any }): boolean {
+export function equalObjects(object: TObject, other: TObject): boolean {
   if (Object.keys(object).length !== Object.keys(other).length) return false;
   for (const prop in object) {
     if (

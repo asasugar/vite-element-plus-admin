@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-06 14:52:19
+ * @LastEditTime: 2022-05-07 10:33:12
  */
 import { loadEnv, PluginOption, UserConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -98,7 +98,9 @@ const Config: UserConfig = {
           'element-plus': ['element-plus'],
           echarts: ['echarts'],
           mockjs: ['mockjs'],
-          three: ['three']
+          three: ['three'],
+          xlsx: ['xlsx'],
+          dayjs: ['dayjs']
         }
       }
     },

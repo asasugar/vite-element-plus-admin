@@ -6,3 +6,5 @@ declare type Nullable<T> = T | null;
 declare type FormInstance = InstanceType<typeof ElForm>;
 
 declare type TableInstance = InstanceType<typeof ElTable>;
+
+declare type TObject = { [x: string]: any };

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-30 17:37:49
+ * @LastEditTime: 2022-05-07 10:37:40
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Axios, { AxiosResponse } from 'axios';
@@ -51,7 +51,7 @@ function setCacheItem(key: string, value: any) {
 const _CACHES = {};
 // 使用Proxy代理
 const cacheHandler = {
-  get: function (target: { [x: string]: any }, key: string) {
+  get: function (target: TObject, key: string) {
     let value = target[key];
     console.log(`${key} 被读取`, value);
     if (options.storage && !value) {
@@ -59,7 +59,7 @@ const cacheHandler = {
     }
     return value;
   },
-  set: function (target: { [x: string]: any }, key: string, value: any) {
+  set: function (target: TObject, key: string, value: any) {
     console.log(`${key} 被设置为 ${JSON.stringify(value)}`);
     target[key] = value;
     if (options.storage) {

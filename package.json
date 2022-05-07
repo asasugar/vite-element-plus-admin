@@ -21,6 +21,7 @@
     "@vueuse/core": "^7.6.2",
     "axios": "^0.25.0",
     "custom-json2excel": "^3.1.5",
+    "dayjs": "^1.11.2",
     "default-passive-events": "^2.0.0",
     "echarts": "^5.2.2",
     "element-plus": "^1.3.0-beta.5",
@@ -32,7 +33,8 @@
     "vditor": "^3.8.11",
     "vue": "^3.2.25",
     "vue-json-pretty": "^2.0.6",
-    "vue-router": "4"
+    "vue-router": "4",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.1.3",
