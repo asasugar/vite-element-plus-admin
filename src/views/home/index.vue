@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-06 18:31:06
+ * @LastEditTime: 2022-05-10 10:25:34
 -->
 <template>
   <el-container class="layout-container">
@@ -127,6 +127,7 @@ const handleTabRemove = (paneName: string) => {
     breadcrumb.value = prevTab.breadcrumb;
     menuOption.value.defaultOpeneds = prevTab.defaultOpeneds;
     menuOption.value.defaultActive = prevTab.defaultActive;
+    router.back();
   } else {
     // 删除tabs为0时，重置跳回首页
     menuOption.value.defaultOpeneds = ['1'];
