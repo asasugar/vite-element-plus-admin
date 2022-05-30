@@ -3,13 +3,12 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-24 19:50:56
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-12 14:59:21
+ * @LastEditTime: 2022-05-30 15:34:54
  */
-import { RouteRecordRaw } from 'vue-router';
-import { ElLoading } from 'element-plus';
+import { TComponent, TModules } from '#/vue-router';
 import { systemService } from '@/services';
-import { TComponent } from '#/vue-router';
-
+import { ElLoading } from 'element-plus';
+import { RouteRecordRaw } from 'vue-router';
 /**
  * 标准化动态路由 [import.meta.glob]
  */
@@ -37,7 +36,7 @@ export const getViewComponent = (): TComponent => {
   const viewKeys = Object.keys(modules).filter(key => !key.includes(COMPONENTS_KEY));
   viewKeys.forEach(key => {
     const routeKey = key.replace(BEFOREFIX, '').replace(AFTERFIX, '');
-    components[routeKey] = modules[key];
+    components[routeKey] = modules[key] as TModules;
   });
   return components;
 };
