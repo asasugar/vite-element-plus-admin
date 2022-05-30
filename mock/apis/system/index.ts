@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-06 17:25:47
+ * @LastEditTime: 2022-05-30 17:32:51
  */
 export default [
   // 看板数据
@@ -111,6 +111,15 @@ export default [
                     component: 'views/component/json-edit/index',
                     meta: {
                       title: 'JSON编辑器 演示',
+                      keepAlive: true
+                    }
+                  },
+                  {
+                    name: 'ComponentRich',
+                    path: 'rich',
+                    component: 'views/component/rich-edit/index',
+                    meta: {
+                      title: '富文本编辑器 演示',
                       keepAlive: true
                     }
                   }
@@ -339,6 +348,12 @@ export default [
                 name: 'ComponentJSON',
                 path: '/component/json',
                 title: 'JSON编辑器 演示'
+              },
+              {
+                sortId: '2-3',
+                name: 'ComponentRich',
+                path: '/component/rich',
+                title: '富文本编辑器 演示'
               }
             ]
           },

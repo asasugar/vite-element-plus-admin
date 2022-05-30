@@ -3,23 +3,26 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-18 14:02:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 15:16:25
+ * @LastEditTime: 2022-05-30 18:06:34
 -->
 <template>
   <div ref="wrapRef"></div>
 </template>
-<script lang="ts">
-export default {
-  inheritAttrs: false
-};
-</script>
-
 <script lang="ts" setup>
-import { Ref, useAttrs } from 'vue';
-import { shallowRef, ref, unref, nextTick, watch, onBeforeUnmount, onDeactivated } from 'vue';
 import { useMountedOrActivated } from '@/hooks/core';
 import Vditor from 'vditor';
 import 'vditor/dist/index.css';
+import {
+  nextTick,
+  onBeforeUnmount,
+  onDeactivated,
+  Ref,
+  ref,
+  shallowRef,
+  unref,
+  useAttrs,
+  watch
+} from 'vue';
 
 const props = defineProps({
   height: { type: Number, default: 360 },

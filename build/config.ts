@@ -3,18 +3,18 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-07 10:33:12
+ * @LastEditTime: 2022-05-30 19:12:32
  */
-import { loadEnv, PluginOption, UserConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import Components from 'unplugin-vue-components/vite';
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-import visualizer from 'rollup-plugin-visualizer'; // To fix 'dependencies updated, reloading page...'
-import viteCompression from 'vite-plugin-compression';
 import postCssPurge from '@fullhuman/postcss-purgecss';
-import vueSetupExtend from 'vite-plugin-vue-setup-extend';
 import legacy from '@vitejs/plugin-legacy'; // To supported IE11
+import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import visualizer from 'rollup-plugin-visualizer'; // To fix 'dependencies updated, reloading page...'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import Components from 'unplugin-vue-components/vite';
+import { loadEnv, PluginOption, UserConfig } from 'vite';
+import viteCompression from 'vite-plugin-compression';
+import vueSetupExtend from 'vite-plugin-vue-setup-extend';
 import { pathResolve } from './utils';
 
 const vuePath = /\.vue(\?.+)?$/;
@@ -23,9 +23,11 @@ const Config: UserConfig = {
   server: {
     port: 9999,
     fs: {
-      strict: true // yarn link 调试时候设置为false
-    }
+      strict: true // link 调试时候设置为false
+    },
+    hmr: true
   },
+  force: true,
   css: {
     preprocessorOptions: {
       less: {

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-18 14:02:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-25 17:12:02
+ * @LastEditTime: 2022-05-30 18:06:58
 -->
 <template>
   <el-row :gutter="10">
@@ -27,14 +27,8 @@
     </el-col>
   </el-row>
 </template>
-<script lang="ts">
-export default {
-  inheritAttrs: false
-};
-</script>
-
 <script lang="ts" setup>
-import { ref, useAttrs, computed } from 'vue';
+import { computed, ref, useAttrs } from 'vue';
 import VueJsonPretty from 'vue-json-pretty';
 import 'vue-json-pretty/lib/styles.css';
 const inputValue = ref<string>(
