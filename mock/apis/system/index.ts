@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-30 17:32:51
+ * @LastEditTime: 2022-05-31 10:57:09
  */
 export default [
   // 看板数据
@@ -88,36 +88,36 @@ export default [
                 ]
               },
               {
-                name: 'Component',
-                path: '/component',
+                name: 'Editor',
+                path: '/editor',
                 component: 'views/routerView/index',
                 meta: {
-                  title: '组件'
+                  title: '编辑器'
                 },
-                redirect: '/component/markdown',
+                redirect: '/editor/markdown',
                 children: [
                   {
-                    name: 'ComponentMarkdown',
+                    name: 'EditorMarkdown',
                     path: 'markdown',
-                    component: 'views/component/markdown/index',
+                    component: 'views/editor/markdown/index',
                     meta: {
                       title: 'Markdown 演示',
                       keepAlive: true
                     }
                   },
                   {
-                    name: 'ComponentJSON',
+                    name: 'EditorJSON',
                     path: 'json',
-                    component: 'views/component/json-edit/index',
+                    component: 'views/editor/json-edit/index',
                     meta: {
                       title: 'JSON编辑器 演示',
                       keepAlive: true
                     }
                   },
                   {
-                    name: 'ComponentRich',
+                    name: 'EditorRich',
                     path: 'rich',
-                    component: 'views/component/rich-edit/index',
+                    component: 'views/editor/rich-edit/index',
                     meta: {
                       title: '富文本编辑器 演示',
                       keepAlive: true
@@ -333,26 +333,26 @@ export default [
           },
           {
             sortId: '2',
-            name: 'Component',
+            name: 'Editor',
             path: '',
-            title: '组件演示',
+            title: '编辑器演示',
             children: [
               {
                 sortId: '2-1',
-                name: 'ComponentMarkdown',
-                path: '/component/markdown',
+                name: 'EditorMarkdown',
+                path: '/editor/markdown',
                 title: 'Markdown 演示'
               },
               {
                 sortId: '2-2',
-                name: 'ComponentJSON',
-                path: '/component/json',
+                name: 'EditorJSON',
+                path: '/editor/json',
                 title: 'JSON编辑器 演示'
               },
               {
                 sortId: '2-3',
-                name: 'ComponentRich',
-                path: '/component/rich',
+                name: 'EditorRich',
+                path: '/editor/rich',
                 title: '富文本编辑器 演示'
               }
             ]

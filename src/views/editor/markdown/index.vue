@@ -33,10 +33,10 @@
   </as-page-wrapper>
 </template>
 
-<script lang="ts" setup name="ComponentMarkdown">
-import { ref, unref, watch } from 'vue';
-import { AsPageWrapper } from '@/containers/page-wrapper';
+<script lang="ts" setup name="EditorMarkdown">
 import { AsMarkdown, MarkDownActionType } from '@/components/markdown';
+import { AsPageWrapper } from '@/containers/page-wrapper';
+import { ref, unref, watch } from 'vue';
 
 const markDownRef = ref<Nullable<MarkDownActionType>>(null);
 

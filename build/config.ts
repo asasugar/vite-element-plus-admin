@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-30 19:12:32
+ * @LastEditTime: 2022-05-31 10:30:46
  */
 import postCssPurge from '@fullhuman/postcss-purgecss';
 import legacy from '@vitejs/plugin-legacy'; // To supported IE11
