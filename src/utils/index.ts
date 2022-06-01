@@ -3,9 +3,9 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-07 10:37:05
+ * @LastEditTime: 2022-05-31 16:46:33
  */
-import { isObject, isArray, isValidMap } from './is';
+import { isArray, isObject, isValidMap } from './is';
 
 /**
  * @description 动态import
@@ -61,12 +61,13 @@ export function equalObjects(object: TObject, other: TObject): boolean {
 }
 
 /**
- * @description 深度对比两个值是否相等
+ * @description 深度对比数组/对象是否相等
  * @param {any} value
  * @param {any} other
  * @returns {boolean}  {}
  */
 export function isEqual(value: any, other: any): boolean {
+  if (!value || !other) return false;
   // 复杂类型
   if (isValidMap(value) && isValidMap(other)) {
     if (isArray(value) && isArray(other)) {
@@ -77,7 +78,7 @@ export function isEqual(value: any, other: any): boolean {
     return false;
   }
   // 简单类型
-  return value === other;
+  return JSON.parse(JSON.stringify(value)) === JSON.parse(JSON.stringify(other));
 }
 
 export function openWindow(

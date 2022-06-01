@@ -3,18 +3,18 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-31 10:30:46
+ * @LastEditTime: 2022-06-01 17:31:31
  */
-import postCssPurge from '@fullhuman/postcss-purgecss';
-import legacy from '@vitejs/plugin-legacy'; // To supported IE11
-import vue from '@vitejs/plugin-vue';
-import vueJsx from '@vitejs/plugin-vue-jsx';
-import visualizer from 'rollup-plugin-visualizer'; // To fix 'dependencies updated, reloading page...'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-import Components from 'unplugin-vue-components/vite';
 import { loadEnv, PluginOption, UserConfig } from 'vite';
 import viteCompression from 'vite-plugin-compression';
+import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 import vueSetupExtend from 'vite-plugin-vue-setup-extend';
+import visualizer from 'rollup-plugin-visualizer';
+import legacy from '@vitejs/plugin-legacy'; // To supported IE11
+import Components from 'unplugin-vue-components/vite';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import postCssPurge from '@fullhuman/postcss-purgecss';
 import { pathResolve } from './utils';
 
 const vuePath = /\.vue(\?.+)?$/;
