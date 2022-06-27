@@ -1,8 +1,8 @@
 import { createApp } from 'vue';
-import App from '@/App.vue';
 import { setupRouter } from '@/router';
 import { setupGlobDirectives } from '@/directives';
 import { setupPinia, useUserStore } from '@/pinia';
+import App from '@/App.vue';
 import 'default-passive-events';
 import '@/style/common.less';
 import 'element-plus/es/components/message/style/css';
