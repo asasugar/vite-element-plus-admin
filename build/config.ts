@@ -3,20 +3,17 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-10-12 17:52:21
+ * @LastEditTime: 2022-10-12 18:32:22
  */
 import { loadEnv, splitVendorChunkPlugin, type PluginOption, type UserConfig } from 'vite';
 import viteCompression from 'vite-plugin-compression';
-import vue from '@vitejs/plugin-vue2';
+import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import vueSetupExtend from 'vite-plugin-vue-setup-extend';
 import visualizer from 'rollup-plugin-visualizer';
-import legacy from '@vitejs/plugin-legacy'; // To supported IE11
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import postCssPurge from '@fullhuman/postcss-purgecss';
-import browserslistToEsbuild from 'browserslist-to-esbuild';
-import SupportedBrowsers from 'vite-plugin-browserslist-useragent';
 import { pathResolve } from './utils';
 
 const vuePath = /\.vue(\?.+)?$/;
@@ -63,7 +60,6 @@ const Config: UserConfig = {
       resolvers: [ElementPlusResolver()],
       dts: 'types/components.d.ts'
     }),
-    viteCompression(), // gzip压缩
     postCssPurge({
       // 移除未使用的css
       contentFunction: sourceInputFile => {
@@ -85,16 +81,12 @@ const Config: UserConfig = {
       ]
     }) as unknown as PluginOption,
     vueSetupExtend(),
-    legacy({
-      // Plugin does not use browserslistrc https://github.com/vitejs/vite/issues/2476
-      modernPolyfills: true,
-      renderLegacyChunks: false
-    }),
     splitVendorChunkPlugin(),
-    SupportedBrowsers()
+    viteCompression() // gzip压缩
   ],
   build: {
-    target: browserslistToEsbuild(),
+    target: 'esnext',
+    cssTarget: 'chrome79',
     reportCompressedSize: false, // 禁用 gzip 压缩大小报告, 提高构建速度
     rollupOptions: {
       output: {
