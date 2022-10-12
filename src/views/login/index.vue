@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:26:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 15:17:52
+ * @LastEditTime: 2022-10-12 11:36:07
 -->
 <template>
   <div class="login">
@@ -43,12 +43,12 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
 import { ElNotification } from 'element-plus';
+import type { FormItemRule } from 'element-plus';
 import { useRouter } from 'vue-router';
 import { userService } from '@/services';
 import { setToken } from '@/utils/token';
 import { useUserStore } from '@/pinia';
 import AsMousemovePanel from '@/components/mousemove-panel';
-import { FormItemRule } from 'element-plus/es/components/form/src/form.type';
 import { IForm } from './typing';
 
 const router = useRouter();

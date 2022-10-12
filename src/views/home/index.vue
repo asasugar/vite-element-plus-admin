@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-10 10:25:34
+ * @LastEditTime: 2022-10-12 11:34:44
 -->
 <template>
   <el-container class="layout-container">
@@ -70,6 +70,7 @@ import { storeToRefs } from 'pinia';
 import { useGlobalStore, useUserStore } from '@/pinia';
 import { routes } from '@/router';
 import HomeAside from './components/home-aside';
+import type { TabPanelName } from 'element-plus';
 
 const useGlobal = useGlobalStore();
 const useUser = useUserStore();
@@ -117,7 +118,7 @@ const handleTabClick = ({ index }: { index: string | undefined }) => {
   router.push({ path: tab.path });
 };
 
-const handleTabRemove = (paneName: string) => {
+const handleTabRemove = (paneName: TabPanelName) => {
   const tabs = editableTabs.value;
   editableTabs.value = tabs.filter(tab => tab.path !== paneName);
   const length = editableTabs.value.length;

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-11 17:22:54
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-05 21:56:58
+ * @LastEditTime: 2022-10-12 11:47:42
 -->
 <template>
   <as-page-wrapper :header-title="headerTitle">
@@ -72,7 +72,7 @@ import { AsPageWrapper } from '@/containers/page-wrapper';
 import { useRoute, useRouter } from 'vue-router';
 import { userService } from '@/services';
 import { setStorage, getStorage, removeStorage } from '@/utils/storage';
-import { ComponentSize } from 'element-plus/lib/utils/types';
+import type { ComponentSize } from 'element-plus';
 import { IRole } from '../role/typing';
 import { IUserInsert } from './typing';
 

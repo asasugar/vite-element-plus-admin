@@ -3,11 +3,11 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-06-01 17:31:31
+ * @LastEditTime: 2022-10-12 17:52:21
  */
-import { loadEnv, PluginOption, UserConfig } from 'vite';
+import { loadEnv, splitVendorChunkPlugin, type PluginOption, type UserConfig } from 'vite';
 import viteCompression from 'vite-plugin-compression';
-import vue from '@vitejs/plugin-vue';
+import vue from '@vitejs/plugin-vue2';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import vueSetupExtend from 'vite-plugin-vue-setup-extend';
 import visualizer from 'rollup-plugin-visualizer';
@@ -15,6 +15,8 @@ import legacy from '@vitejs/plugin-legacy'; // To supported IE11
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import postCssPurge from '@fullhuman/postcss-purgecss';
+import browserslistToEsbuild from 'browserslist-to-esbuild';
+import SupportedBrowsers from 'vite-plugin-browserslist-useragent';
 import { pathResolve } from './utils';
 
 const vuePath = /\.vue(\?.+)?$/;
@@ -27,7 +29,6 @@ const Config: UserConfig = {
     },
     hmr: true
   },
-  force: true,
   css: {
     preprocessorOptions: {
       less: {
@@ -85,14 +86,15 @@ const Config: UserConfig = {
     }) as unknown as PluginOption,
     vueSetupExtend(),
     legacy({
-      // for ie11
-      targets: ['ie >= 11'],
-      additionalLegacyPolyfills: ['regenerator-runtime/runtime']
-    })
+      // Plugin does not use browserslistrc https://github.com/vitejs/vite/issues/2476
+      modernPolyfills: true,
+      renderLegacyChunks: false
+    }),
+    splitVendorChunkPlugin(),
+    SupportedBrowsers()
   ],
   build: {
-    target: 'esnext',
-    cssTarget: 'chrome61',
+    target: browserslistToEsbuild(),
     reportCompressedSize: false, // 禁用 gzip 压缩大小报告, 提高构建速度
     rollupOptions: {
       output: {
@@ -129,12 +131,12 @@ export function getConfig({ command, mode }: { command: string; mode: string }) 
   Config.base = loadEnv(mode, process.cwd()).VITE_REPO_URL;
   Config.clearScreen = mode === 'production';
   if (mode === 'analyzer') {
-    Config.plugins?.push({
-      ...visualizer({
+    Config.plugins?.push(
+      visualizer({
         gzipSize: true,
         open: true
-      })
-    });
+      }) as PluginOption
+    );
   }
   return Config;
 }

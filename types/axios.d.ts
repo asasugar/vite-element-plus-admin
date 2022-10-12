@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-29 15:00:08
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-30 18:04:38
+ * @LastEditTime: 2022-10-12 15:27:23
  */
 
 export type Method =
@@ -43,5 +43,5 @@ export interface IResult<T = any> {
 }
 
 export interface IResponseHandle {
-  [x: number | string]: (response: AxiosResponse) => Promise<IResult>;
+  [x: number | string]: (response: AxiosResponse) => Promise<AxiosResponse<any, any> | IResult>;
 }

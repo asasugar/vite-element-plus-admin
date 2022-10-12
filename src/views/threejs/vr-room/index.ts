@@ -66,7 +66,7 @@ export default class VrRoom {
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(60, containerWidth / containerHeight, 1, 1000);
     const mesh = new THREE.Mesh(
-      new THREE.SphereBufferGeometry(500, 32, 16),
+      new THREE.BufferGeometry(),
       new THREE.MeshBasicMaterial({ map: texture })
     );
     mesh.geometry.scale(-1, 1, 1);

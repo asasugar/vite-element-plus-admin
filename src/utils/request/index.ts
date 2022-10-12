@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-30 18:20:43
+ * @LastEditTime: 2022-10-12 15:34:21
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -94,8 +94,8 @@ axios.interceptors.response.use(
       againRequest(error, axios);
     }
     // 请求缓存处理方式
-    if (Axios.isCancel(error) && error.message.data && error.message.data.config.cache) {
-      return Promise.resolve(error.message.data.data.result); // 返回结果数据,根据实际业务配置
+    if (Axios.isCancel(error) && (error?.message as any)?.data?.config?.cache) {
+      return Promise.resolve((error?.message as any)?.data?.data?.result); // 返回结果数据,根据实际业务配置
     }
     return Promise.reject(error);
   }

@@ -40,12 +40,7 @@ module.exports = {
   },
   rules: {
     'vue/script-setup-uses-vars': 'error',
-    'vue/multi-word-component-names': [
-      'error',
-      {
-        ignores: ['Markdown', 'index']
-      }
-    ],
+    'vue/multi-word-component-names': 'off',
     '@typescript-eslint/no-unused-vars': 'error'
   }
 };

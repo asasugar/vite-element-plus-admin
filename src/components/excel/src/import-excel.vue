@@ -128,7 +128,7 @@ export default defineComponent({
     /**
      * @description: 触发选择文件管理器
      */
-    function handleInputClick(e: Event) {
+    function handleInputClick(e: { target: HTMLInputElement }): Event | undefined {
       const files = e && (e.target as HTMLInputElement).files;
       const rawFile = files && files[0]; // only setting files[0]
       if (!rawFile) return;
@@ -137,9 +137,10 @@ export default defineComponent({
     /**
      * @description: 点击上传按钮
      */
-    function handleUpload() {
+    function handleUpload(): MouseEvent | undefined {
       const inputRefDom = unref(inputRef);
-      inputRefDom && inputRefDom.click();
+      inputRefDom?.click();
+      return;
     }
     return { handleUpload, handleInputClick, inputRef };
   }

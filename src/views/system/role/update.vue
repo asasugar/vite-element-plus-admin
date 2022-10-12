@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-08 17:29:15
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-06 11:05:55
+ * @LastEditTime: 2022-10-12 11:46:53
 -->
 <template>
   <as-page-wrapper :header-title="headerTitle">
@@ -62,7 +62,7 @@ import { reactive, ref, onUnmounted } from 'vue';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { useRoute, useRouter } from 'vue-router';
 import { setStorage, getStorage, removeStorage } from '@/utils/storage';
-import { ComponentSize } from 'element-plus/lib/utils/types';
+import type { ComponentSize } from 'element-plus';
 import { IRole } from './typing';
 
 const route = useRoute();

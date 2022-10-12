@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 10:58:34
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-22 17:59:08
+ * @LastEditTime: 2022-10-12 11:46:31
 -->
 <template>
   <span :style="{ color }">{{ value }}</span>
@@ -101,7 +101,7 @@ function run() {
     duration: props.duration,
     onFinished: () => emit('onFinished'),
     onStarted: () => emit('onStarted'),
-    ...(props.useEasing ? { transition: TransitionPresets[props.transition] } : {})
+    ...(props.useEasing ? { transition: (TransitionPresets as any)[props.transition] } : {})
   });
 }
 function formatNumber(num: number | string) {

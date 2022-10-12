@@ -15,11 +15,13 @@ setupGlobDirectives(app); // 注册自定义指令
 setupRouter(app); // 注册路由（静态+动态）
 setupPinia(app); // 注册Pinia
 
-const { user } = await SDK.init();
-if (user) {
-  // 刷新时初始化存储用户信息至pinia
-  const useUser = useUserStore();
-  useUser.updateUserinfo(user);
-}
+(async () => {
+  const { user } = await SDK.init();
+  if (user) {
+    // 刷新时初始化存储用户信息至pinia
+    const useUser = useUserStore();
+    useUser.updateUserinfo(user);
+  }
+})();
 
 app.mount('#app');

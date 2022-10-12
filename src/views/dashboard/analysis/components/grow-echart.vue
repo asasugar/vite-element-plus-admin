@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-20 16:38:36
+ * @LastEditTime: 2022-10-12 11:31:00
 -->
 <template>
   <el-tabs v-model="tabPane" type="card" class="bg-white mt20" @tab-click="handleClickTab">
@@ -20,6 +20,7 @@ import { ref, onMounted } from 'vue';
 import type { Ref } from 'vue';
 import { useECharts, isExist } from '@/hooks/useECharts';
 import { option1, option2 } from './data';
+import type { TabsPaneContext } from 'element-plus';
 
 const props = defineProps({
   width: {
@@ -46,8 +47,8 @@ onMounted(() => {
 });
 
 // 点击切换图表为第二张的时候，渲染第二张图表
-const handleClickTab = (e: { props: { name: string } }) => {
-  const { name } = e.props;
+const handleClickTab = (pane: TabsPaneContext) => {
+  const { name } = pane.props;
   if (name === '2' && chartRef2.value) {
     let isexist = isExist(chartRef2.value);
     if (!isexist) {
