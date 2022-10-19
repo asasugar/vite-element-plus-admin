@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.13](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.12...v0.0.13) (2022-10-19)
+
+
+### Features
+
+* 🎸 Added utils cache ([5b1614d](https://github.com/asasugar/vite-element-plus-admin/commit/5b1614d6ded30130eff31d0025f9b858962cc592))
+* 🎸 Feat rich editor comp ([af8d617](https://github.com/asasugar/vite-element-plus-admin/commit/af8d61750db480bca88dc784e218e027a1843db4))
+
+
+### Bug Fixes
+
+* 🐛 关闭前一个路由tab会退上一个路由 ([0fd8421](https://github.com/asasugar/vite-element-plus-admin/commit/0fd8421f3268ae27b3009245fa134cd58dd41ce1))
+* 🐛 Fix isEqual Fn ([433afd7](https://github.com/asasugar/vite-element-plus-admin/commit/433afd7a83503d69c1a5ee2b97bfb0882691db0d))
+
+
+### Styling
+
+* 💄 文案调整 ([cd5dd57](https://github.com/asasugar/vite-element-plus-admin/commit/cd5dd577f7a579d3491605745b0cc5b1c9f5ad3a))
+
+
+### Docs
+
+* ✏️ Updates ([334405b](https://github.com/asasugar/vite-element-plus-admin/commit/334405b795b48d7130cae6aaaaabf6659a6b47fb))
+
+
+### Others
+
+* 🤖 upgrade to vite v3 ([e6d72e9](https://github.com/asasugar/vite-element-plus-admin/commit/e6d72e90443672d836352bee91e7049154acf9c6))
+
+
+### Code Refactoring
+
+* 💡 remove @vitejs/plugin-legacy ([4f92e51](https://github.com/asasugar/vite-element-plus-admin/commit/4f92e510dad71f12206d86d448c7162fe40af21b))
+* 💡 Updates Editor Page ([80fd975](https://github.com/asasugar/vite-element-plus-admin/commit/80fd9752a3272ca466577a3b4abce9dd7eac83e5))
+
+
+### CI
+
+* 🎡 打包配置拆分 ([7940c0f](https://github.com/asasugar/vite-element-plus-admin/commit/7940c0f846f0e7c7d87e9d2ff5140e9ff675c6df))
+* 🎡 add AutoImport ([4cdeca2](https://github.com/asasugar/vite-element-plus-admin/commit/4cdeca2338335bb33b2217a64ebdf69c8259c316))
+* 🎡 Update ci config & dependencies ([8f202de](https://github.com/asasugar/vite-element-plus-admin/commit/8f202ded17a95330d400ee361473cc6362fea55f))
+
 ### [0.0.12](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.11...v0.0.12) (2022-05-07)
 
 
