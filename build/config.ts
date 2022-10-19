@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-21 17:19:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-10-12 18:32:22
+ * @LastEditTime: 2022-10-14 18:44:21
  */
 import { loadEnv, splitVendorChunkPlugin, type PluginOption, type UserConfig } from 'vite';
 import viteCompression from 'vite-plugin-compression';
@@ -11,6 +11,9 @@ import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import vueSetupExtend from 'vite-plugin-vue-setup-extend';
 import visualizer from 'rollup-plugin-visualizer';
+import Icons from 'unplugin-icons/vite';
+import IconsResolver from 'unplugin-icons/resolver';
+import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import postCssPurge from '@fullhuman/postcss-purgecss';
@@ -19,6 +22,7 @@ import { pathResolve } from './utils';
 const vuePath = /\.vue(\?.+)?$/;
 
 const Config: UserConfig = {
+  root: process.cwd(),
   server: {
     port: 9999,
     fs: {
@@ -54,11 +58,42 @@ const Config: UserConfig = {
   plugins: [
     vue(),
     vueJsx(),
+    AutoImport({
+      // Auto import functions from Vue, e.g. ref, reactive, toRef...
+      // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
+      imports: ['vue'],
+
+      // Auto import functions from Element Plus, e.g. ElMessage, ElMessageBox... (with style)
+      // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
+      resolvers: [
+        ElementPlusResolver(),
+
+        // Auto import icon components
+        // 自动导入图标组件
+        IconsResolver({
+          prefix: 'Icon'
+        })
+      ],
+
+      dts: 'types/auto-imports.d.ts'
+    }),
     Components({
       extensions: ['vue', 'md'],
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        // Auto register icon components
+        // 自动注册图标组件
+        IconsResolver({
+          enabledCollections: ['ep']
+        }),
+        // Auto register Element Plus components
+        // 自动导入 Element Plus 组件
+        ElementPlusResolver()
+      ],
       dts: 'types/components.d.ts'
+    }),
+    Icons({
+      autoInstall: true
     }),
     postCssPurge({
       // 移除未使用的css
@@ -114,7 +149,8 @@ const Config: UserConfig = {
     // }
   },
   preview: {
-    host: true
+    host: true,
+    port: 5001
   }
 };
 export function getConfig({ command, mode }: { command: string; mode: string }) {

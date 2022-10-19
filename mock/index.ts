@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:46:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-31 11:47:46
+ * @LastEditTime: 2022-10-14 17:03:58
  */
 import * as Mock from 'mockjs';
 import { IConfig, IType } from './typing';
@@ -28,6 +28,7 @@ export function mockXHR() {
   }
 
   let i: IType;
+  console.log(111, import.meta.env.VITE_BASE_URL, import.meta.env.VITE_REPO_URL);
   for (i of apis) {
     // 生成mock模拟api
     Mock.mock(

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-10-12 11:34:44
+ * @LastEditTime: 2022-10-14 18:43:44
 -->
 <template>
   <el-container class="layout-container">
@@ -17,7 +17,7 @@
         </el-breadcrumb>
         <div class="home-toolbar color-gray3">
           <el-dropdown>
-            <setting class="mr10 color-gray3" />
+            <i-ep-setting class="mr10 color-gray3" />
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item @click="handleLogout">注销</el-dropdown-item>
@@ -62,7 +62,6 @@
 <script lang="ts" setup>
 import { ref, nextTick } from 'vue';
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router';
-import { Setting } from '@element-plus/icons-vue';
 import { userService, systemService } from '@/services';
 import { setStorage, getStorage } from '@/utils/storage';
 import { ITab, IMenu, IMenuItem } from './typing';

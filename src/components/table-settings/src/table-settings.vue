@@ -3,19 +3,19 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 10:58:34
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-24 18:11:14
+ * @LastEditTime: 2022-10-19 16:57:15
 -->
 <template>
   <div class="table-settings flex verticalcenter">
     <div class="divider-vertical"></div>
     <el-tooltip effect="dark" content="刷新" placement="top">
       <p class="flex verticalcenter">
-        <refresh color="#333" class="icon" @click="handleRefresh" />
+        <i-ep-refresh color="#333" class="icon" @click="handleRefresh" />
       </p>
     </el-tooltip>
     <el-tooltip effect="dark" content="密度" placement="top">
       <el-dropdown trigger="click" @command="handleCommand">
-        <sunny color="#333" class="icon" />
+        <i-ep-sunny color="#333" class="icon" />
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item command="default">默认</el-dropdown-item>
@@ -28,8 +28,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { Refresh, Sunny } from '@element-plus/icons-vue';
-
 const emit = defineEmits(['onRefresh', 'onSize']);
 
 const handleRefresh = () => {
@@ -43,6 +41,7 @@ const handleCommand = (command: string) => {
 <style lang="less" scoped>
 .table-settings {
   padding: 0 5px;
+
   .divider-vertical {
     height: 0.9em;
     margin-left: 8px;
@@ -51,6 +50,7 @@ const handleCommand = (command: string) => {
     border-top: 0;
     border-left: 1px solid rgba(0, 0, 0, 0.06);
   }
+
   .icon {
     width: 20px;
     height: 20px;

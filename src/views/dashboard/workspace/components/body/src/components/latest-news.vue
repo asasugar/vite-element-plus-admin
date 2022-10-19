@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-08 22:18:38
+ * @LastEditTime: 2022-10-19 17:04:14
 -->
 <template>
   <el-card class="card-wrapper" :body-style="{ padding: '0' }">
@@ -52,21 +52,22 @@
               />
             </template>
             <template #actions>
-              <span class="flex center color-inherit">
-                <star />
-                <span class="pl5">152</span>
-              </span>
-              <el-divider direction="vertical"></el-divider>
-              <span class="flex center color-inherit">
-                <camera />
-                <span class="pl5">152</span>
-              </span>
-
-              <el-divider direction="vertical"></el-divider>
-              <span class="flex center color-inherit">
-                <chat-dot-round />
-                <span class="pl5">2</span>
-              </span>
+              <div class="flex verticalcenter">
+                <div class="flex center color-inherit">
+                  <i-ep-star />
+                  <span class="pl5">152</span>
+                </div>
+                <el-divider direction="vertical"></el-divider>
+                <div class="flex center color-inherit">
+                  <i-ep-camera />
+                  <span class="pl5">152</span>
+                </div>
+                <el-divider direction="vertical"></el-divider>
+                <div class="flex center color-inherit">
+                  <i-ep-chat-dot-round />
+                  <span class="pl5">2</span>
+                </div>
+              </div>
             </template>
           </as-list-item>
         </template>
@@ -81,7 +82,6 @@
   </el-card>
 </template>
 <script lang="ts" setup>
-import { Star, Camera, ChatDotRound } from '@element-plus/icons-vue';
 import { AsList, AsListItem, AsListItemMeta } from '@/components/list';
 import { INews } from '../../typing';
 
@@ -97,6 +97,7 @@ defineProps<Props>();
 .card-wrapper {
   border: none;
 }
+
 .card-wrapper--item {
   :deep(.el-card__header) {
     border-bottom: none;
