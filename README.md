@@ -61,12 +61,14 @@ pnpm dev
 
 # 特别感谢
 
-- vue@^3.2.25
-- vite@^2.9.5
+- vue@3
+- vite@3
 - pinia@^2.0.13
 - vue-router@4
-- element-plus@1.3.0-beta.5
+- element-plus@2
 - vue-vben-admin(UI 参考)
+
+不定时使用 npm-check-updates 更新最新依赖
 
 # 注意事项
 
