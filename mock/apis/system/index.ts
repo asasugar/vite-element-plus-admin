@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-31 10:57:09
+ * @LastEditTime: 2022-11-23 16:08:44
  */
 export default [
   // 看板数据
@@ -295,6 +295,32 @@ export default [
                     }
                   }
                 ]
+              },
+              {
+                name: 'Introduce',
+                path: '/introduce',
+                component: 'views/routerView/index',
+                meta: {
+                  title: '介绍'
+                },
+                children: [
+                  {
+                    name: 'IntroduceProject',
+                    path: 'project',
+                    component: 'views/introduce/project/index',
+                    meta: {
+                      title: '关于项目'
+                    }
+                  },
+                  {
+                    name: 'IntroduceSelf',
+                    path: 'self',
+                    component: 'views/introduce/self/index',
+                    meta: {
+                      title: '关于我'
+                    }
+                  }
+                ]
               }
             ]
           }
@@ -440,6 +466,26 @@ export default [
                 name: 'SystemPassword',
                 path: '/system/password',
                 title: '修改密码'
+              }
+            ]
+          },
+          {
+            sortId: '6',
+            name: 'Introduce',
+            path: '',
+            title: '介绍',
+            children: [
+              {
+                sortId: '6-1',
+                name: 'IntroduceProject',
+                path: '/introduce/project',
+                title: '项目介绍'
+              },
+              {
+                sortId: '6-2',
+                name: 'IntroduceSelf',
+                path: '/introduce/self',
+                title: '关于我'
               }
             ]
           }
