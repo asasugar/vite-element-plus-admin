@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.14](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.13...v0.0.14) (2022-11-23)
+
+
+### Features
+
+* 🎸 Feat introduce ([b4d4240](https://github.com/asasugar/vite-element-plus-admin/commit/b4d4240acef6676cec8d826f081f0c637f15fe35))
+
+
+### Docs
+
+* ✏️ Update docs ([fb1d850](https://github.com/asasugar/vite-element-plus-admin/commit/fb1d85071fa4d39bbc957b580e2c68d13af1d50a))
+
+
+### CI
+
+* 🎡 add deploy script ([fb24c66](https://github.com/asasugar/vite-element-plus-admin/commit/fb24c663990d6e6d544d8df4d7731bc2aa645fcf))
+* 🎡 eslint ignore auto-imports.d.ts components.d.ts ([d951ea1](https://github.com/asasugar/vite-element-plus-admin/commit/d951ea1453923b516d7ef37f83fdadf4e19a3b32))
+
 ### [0.0.13](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.12...v0.0.13) (2022-10-19)
 
 
