@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-11-23 16:08:44
+ * @LastEditTime: 2022-11-24 17:55:24
  */
 export default [
   // 看板数据
@@ -198,6 +198,14 @@ export default [
                         }
                       }
                     ]
+                  },
+                  {
+                    name: 'FeatTeleport',
+                    path: 'teleport',
+                    component: 'views/feat/teleport/index',
+                    meta: {
+                      title: 'useTeleport演示'
+                    }
                   }
                 ]
               },
@@ -440,6 +448,12 @@ export default [
                     title: 'Excel导出'
                   }
                 ]
+              },
+              {
+                sortId: '4-5',
+                name: 'FeatTeleport',
+                path: '/feat/teleport',
+                title: 'useTeleport演示'
               }
             ]
           },
