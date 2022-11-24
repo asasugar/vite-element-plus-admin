@@ -15,7 +15,7 @@
 <script lang="ts">
 import { defineComponent, ref, unref } from 'vue';
 import * as XLSX from 'xlsx';
-import { dayUtil } from '@/utils/dayUtil';
+import { dayUtil } from '@/utils/day-util';
 import type { IExcelData } from './typing';
 export default defineComponent({
   name: 'ImportExcel',

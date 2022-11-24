@@ -3,11 +3,11 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-29 15:34:25
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 18:00:11
+ * @LastEditTime: 2022-11-24 15:58:01
  */
 import { getCurrentInstance, onBeforeUnmount, ref, Ref, shallowRef, unref } from 'vue';
 import { useThrottleFn } from '@vueuse/core';
-import { addResizeListener, removeResizeListener } from '@/utils/resizeObEvent';
+import { addResizeListener, removeResizeListener } from '@/utils/resize-ob-event';
 import { isDef } from '@/utils/is';
 
 const domSymbol = Symbol('watermask-dom');

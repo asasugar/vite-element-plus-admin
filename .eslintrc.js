@@ -41,6 +41,7 @@ module.exports = {
   rules: {
     'vue/script-setup-uses-vars': 'error',
     'vue/multi-word-component-names': 'off',
+    'vue/prefer-import-from-vue': 'warn',
     '@typescript-eslint/no-unused-vars': 'error'
   }
 };
