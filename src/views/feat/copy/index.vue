@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-29 17:18:03
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 17:56:22
+ * @LastEditTime: 2022-11-24 15:16:52
 -->
 <template>
   <AsPageWrapper header-title="剪切版">
@@ -17,7 +17,7 @@
 </template>
 <script lang="ts" setup>
 import { ref, unref } from 'vue';
-import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
+import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { ElMessage } from 'element-plus';
 

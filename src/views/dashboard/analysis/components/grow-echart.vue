@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-10-12 11:31:00
+ * @LastEditTime: 2022-11-24 15:18:41
 -->
 <template>
   <el-tabs v-model="tabPane" type="card" class="bg-white mt20" @tab-click="handleClickTab">
@@ -18,7 +18,7 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
 import type { Ref } from 'vue';
-import { useECharts, isExist } from '@/hooks/useECharts';
+import { useECharts, isExist } from '@/hooks/use-echarts';
 import { option1, option2 } from './data';
 import type { TabsPaneContext } from 'element-plus';
 

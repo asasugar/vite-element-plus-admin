@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-29 15:03:12
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 18:02:04
+ * @LastEditTime: 2022-11-24 15:19:23
 -->
 <template>
   <AsPageWrapper header-title="水印示例">
@@ -28,7 +28,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { AsCollapseMain } from '@/containers/page-main';
-import { useWatermask } from '@/hooks/useWatermask';
+import { useWatermask } from '@/hooks/use-watermask';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { ElMessage } from 'element-plus';
 
