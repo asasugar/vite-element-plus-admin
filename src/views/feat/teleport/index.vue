@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-11-24 17:30:47
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-11-24 18:19:26
+ * @LastEditTime: 2022-11-24 18:30:47
 -->
 <template>
   <AsPageWrapper header-title="useTeleport演示">
@@ -12,7 +12,7 @@
         <el-button type="primary" @click="showTeleport"> show </el-button>
         <el-button type="primary" @click="hideTeleport"> hide </el-button>
         <el-button type="primary" @click="toggleTeleport"> toggle </el-button>
-        <vnode-template :vnodes="renderTeleport"></vnode-template>
+        <as-vnode-template :vnodes="renderTeleport"></as-vnode-template>
       </div>
     </template>
   </AsPageWrapper>
@@ -21,7 +21,7 @@
 import { ref } from 'vue';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { useTeleport } from '@/hooks/use-teleport';
-import VnodeTemplate from '@/components/vnode-template';
+import AsVnodeTemplate from '@/components/vnode-template';
 
 const AXIOM = 'Teleport text!';
 const appendToBody = ref<boolean>(true);
