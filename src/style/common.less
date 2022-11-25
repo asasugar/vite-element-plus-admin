@@ -279,3 +279,20 @@ each(range(0, 100, 5), {
   width: 12px;
   height: 12px;
 }
+
+// css实现防抖效果
+@keyframes throttle {
+  from {
+    pointer-events: none;
+  }
+  to {
+    pointer-events: all;
+  }
+}
+
+.throttle {
+  animation: throttle 1s step-end forwards; // 时间设置长短自己控制
+  &:active {
+    animation: none;
+  }
+}
