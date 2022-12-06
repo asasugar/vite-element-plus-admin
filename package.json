@@ -18,12 +18,12 @@
     "src/**/*.{js,ts,vue}": "pnpm lint"
   },
   "dependencies": {
+    "@asasugar-use/custom-json2excel": "^3.1.7",
     "@element-plus/icons-vue": "^2.0.10",
     "@vueup/vue-quill": "1.0.0-beta.10",
     "@vueuse/core": "^9.3.0",
     "axios": "^1.1.2",
     "crypto-js": "^4.1.1",
-    "custom-json2excel": "^3.1.5",
     "dayjs": "^1.11.5",
     "default-passive-events": "^2.0.0",
     "echarts": "^5.4.0",

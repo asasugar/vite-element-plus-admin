@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-05 18:33:01
+ * @LastEditTime: 2022-12-06 17:30:39
 -->
 <template>
   <as-page-wrapper header-title="角色管理">
@@ -81,7 +81,7 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import Json2excel from 'custom-json2excel';
+import Json2excel from '@asasugar-use/custom-json2excel';
 import { userService } from '@/services';
 import { IRole } from './typing';
 import { IPage } from '#/global';

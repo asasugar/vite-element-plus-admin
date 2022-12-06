@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-05 18:38:25
+ * @LastEditTime: 2022-12-06 17:30:47
 -->
 <template>
   <as-page-wrapper header-title="用户管理">
@@ -71,7 +71,7 @@ import { useRouter } from 'vue-router';
 import { userService } from '@/services';
 import { IPage } from '#/global';
 import { IUser } from './typing';
-import Json2excel from 'custom-json2excel';
+import Json2excel from '@asasugar-use/custom-json2excel';
 import { ElMessage } from 'element-plus';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import AsTableSettings from '@/components/table-settings';

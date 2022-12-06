@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-05-06 17:18:03
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-07 11:28:22
+ * @LastEditTime: 2022-12-06 17:30:19
 -->
 <template>
   <AsPageWrapper header-title="Excel 导出演示">
@@ -35,7 +35,7 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue';
-import Json2excel from 'custom-json2excel';
+import Json2excel from '@asasugar-use/custom-json2excel';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { userService } from '@/services';
 import { IPage } from '#/global';
