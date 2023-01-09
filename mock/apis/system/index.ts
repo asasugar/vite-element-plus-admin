@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-11-24 17:55:24
+ * @LastEditTime: 2022-12-08 17:07:29
  */
 export default [
   // 看板数据
@@ -329,6 +329,24 @@ export default [
                     }
                   }
                 ]
+              },
+              {
+                name: 'Fun',
+                path: '/fun',
+                component: 'views/routerView/index',
+                meta: {
+                  title: '开心一刻'
+                },
+                children: [
+                  {
+                    name: 'FunSheep',
+                    path: 'sheep',
+                    component: 'views/fun/sheep/index',
+                    meta: {
+                      title: '🐑了个🐑'
+                    }
+                  }
+                ]
               }
             ]
           }
@@ -500,6 +518,20 @@ export default [
                 name: 'IntroduceSelf',
                 path: '/introduce/self',
                 title: '关于我'
+              }
+            ]
+          },
+          {
+            sortId: '7',
+            name: 'Fun',
+            path: '',
+            title: '开心一刻',
+            children: [
+              {
+                sortId: '7-1',
+                name: 'FunSheep',
+                path: '/fun/sheep',
+                title: '🐑了个🐑'
               }
             ]
           }

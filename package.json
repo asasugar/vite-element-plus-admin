@@ -44,7 +44,7 @@
     "@iconify-json/ep": "^1.1.8",
     "@types/crypto-js": "^4.1.1",
     "@types/mockjs": "^1.0.7",
-    "@types/node": "^18.8.4",
+    "@types/node": "^18.11.18",
     "@types/qs": "^6.9.7",
     "@types/three": "^0.144.0",
     "@typescript-eslint/eslint-plugin": "^5.40.0",

@@ -128,9 +128,9 @@ export default defineComponent({
     /**
      * @description: 触发选择文件管理器
      */
-    function handleInputClick(e: { target: HTMLInputElement }): Event | undefined {
-      const files = e && (e.target as HTMLInputElement).files;
-      const rawFile = files && files[0]; // only setting files[0]
+    function handleInputClick(e: Event) {
+      const files = (e?.target as unknown as { files: File[] })?.files;
+      const rawFile = files?.[0]; // only setting files[0]
       if (!rawFile) return;
       upload(rawFile);
     }
