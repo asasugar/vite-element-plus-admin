@@ -7,9 +7,9 @@ specifiers:
   '@iconify-json/ep': ^1.1.8
   '@types/crypto-js': ^4.1.1
   '@types/mockjs': ^1.0.7
-  '@types/node': 18.11.18
+  '@types/node': ^18.11.18
   '@types/qs': ^6.9.7
-  '@types/three': ^0.144.0
+  '@types/three': ^0.137.0
   '@typescript-eslint/eslint-plugin': ^5.40.0
   '@typescript-eslint/parser': ^5.40.0
   '@vitejs/plugin-vue': ^3.1.2
@@ -85,7 +85,7 @@ devDependencies:
   '@types/mockjs': registry.npmmirror.com/@types/mockjs/1.0.7
   '@types/node': registry.npmmirror.com/@types/node/18.11.18
   '@types/qs': registry.npmmirror.com/@types/qs/6.9.7
-  '@types/three': registry.npmmirror.com/@types/three/0.144.0
+  '@types/three': registry.npmmirror.com/@types/three/0.137.0
   '@typescript-eslint/eslint-plugin': registry.npmmirror.com/@typescript-eslint/eslint-plugin/5.40.0_25sstg4uu2sk4pm7xcyzuov7xq
   '@typescript-eslint/parser': registry.npmmirror.com/@typescript-eslint/parser/5.40.0_z4bbprzjrhnsfa24uvmcbu7f5q
   '@vitejs/plugin-vue': registry.npmmirror.com/@vitejs/plugin-vue/3.1.2_vite@3.1.7+vue@3.2.40
@@ -840,24 +840,16 @@ packages:
     version: 6.9.7
     dev: true
 
-  registry.npmmirror.com/@types/three/0.144.0:
-    resolution: {integrity: sha512-psvEs6q5rLN50jUYZ3D4pZMfxTbdt3A243blt0my7/NcL6chaCZpHe2csbCtx0SOD9fI/XnF3wnVUAYZGqCSYg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/three/-/three-0.144.0.tgz}
+  registry.npmmirror.com/@types/three/0.137.0:
+    resolution: {integrity: sha512-Xc5EAlfYmgrCLI/VlSVqiRJAtzhWF0Rw2jSq48nqJy+Hcb5sfDOXyfZn1+RNcHyi9l8CeCAXCZygO8IyeOJVEA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/three/-/three-0.137.0.tgz}
     name: '@types/three'
-    version: 0.144.0
-    dependencies:
-      '@types/webxr': registry.npmmirror.com/@types/webxr/0.5.0
+    version: 0.137.0
     dev: true
 
   registry.npmmirror.com/@types/web-bluetooth/0.0.15:
     resolution: {integrity: sha512-w7hEHXnPMEZ+4nGKl/KDRVpxkwYxYExuHOYXyzIzCDzEZ9ZCGMAewulr9IqJu2LR4N37fcnb1XVeuZ09qgOxhA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/web-bluetooth/-/web-bluetooth-0.0.15.tgz}
     name: '@types/web-bluetooth'
     version: 0.0.15
-
-  registry.npmmirror.com/@types/webxr/0.5.0:
-    resolution: {integrity: sha512-IUMDPSXnYIbEO2IereEFcgcqfDREOgmbGqtrMpVPpACTU6pltYLwHgVkrnYv0XhWEcjio9sYEfIEzgn3c7nDqA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/webxr/-/webxr-0.5.0.tgz}
-    name: '@types/webxr'
-    version: 0.5.0
-    dev: true
 
   registry.npmmirror.com/@typescript-eslint/eslint-plugin/5.40.0_25sstg4uu2sk4pm7xcyzuov7xq:
     resolution: {integrity: sha512-FIBZgS3DVJgqPwJzvZTuH4HNsZhHMa9SjxTKAZTlMsPw/UzpEjcf9f4dfgDJEHjK+HboUJo123Eshl6niwEm/Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.40.0.tgz}

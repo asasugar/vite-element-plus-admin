@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:14:27
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-12 18:05:11
+ * @LastEditTime: 2023-01-09 19:02:58
 -->
 <template>
   <as-page-wrapper>
@@ -21,36 +21,36 @@
   </as-page-wrapper>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
 import { projectService, systemService } from '@/services';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import WorkSpaceHeader from './components/header';
 import WorkSpaceBody from './components/body';
-import { IPage } from '#/global';
+import type { Page } from '#/global';
 
-const projectList = ref([]);
-const navList = ref([]);
-const newsList = ref([]);
-const loading = ref<boolean>(true);
+let projectList = $ref([]);
+let navList = $ref([]);
+let newsList = $ref([]);
+let loading = $ref<boolean>(true);
+
 const getProjectList = async () => {
-  const { content } = await projectService.getProjectList<IPage>({
+  const { content } = await projectService.getProjectList<Page>({
     pageNum: 1,
     pageSize: 9
   });
-  projectList.value = content;
+  projectList = content;
 };
 const getQuickNavList = async () => {
   const content = await systemService.getQuickNavList();
-  navList.value = content;
+  navList = content;
 };
 const getLatestNews = async () => {
   const content = await systemService.getLatestNews();
-  newsList.value = content;
+  newsList = content;
 };
 getProjectList();
 getQuickNavList();
 getLatestNews();
-loading.value = false;
+loading = false;
 </script>
 
 <style lang="less" scoped>

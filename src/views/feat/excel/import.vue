@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-05-06 17:18:03
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-07 11:28:30
+ * @LastEditTime: 2023-01-09 20:25:06
 -->
 <template>
   <AsPageWrapper header-title="Excel 导入演示">
@@ -40,11 +40,11 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { AsPageWrapper } from '@/containers/page-wrapper';
-import { AsImportExcel, IExcelData } from '@/components/excel';
+import { AsImportExcel, type ExcelData } from '@/components/excel';
 import type { IExcelTableData } from './typing';
 const tableListRef = ref<IExcelTableData[]>([]);
 
-const loadDataSuccess = (excelDataList: IExcelData[]) => {
+const loadDataSuccess = (excelDataList: ExcelData[]) => {
   tableListRef.value = [];
   for (const excelData of excelDataList) {
     const {

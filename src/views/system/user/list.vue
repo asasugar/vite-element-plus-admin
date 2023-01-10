@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-12-06 17:30:47
+ * @LastEditTime: 2023-01-09 19:14:00
 -->
 <template>
   <as-page-wrapper header-title="用户管理">
@@ -66,45 +66,44 @@
   </as-page-wrapper>
 </template>
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { userService } from '@/services';
-import { IPage } from '#/global';
-import { IUser } from './typing';
 import Json2excel from '@asasugar-use/custom-json2excel';
 import { ElMessage } from 'element-plus';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import AsTableSettings from '@/components/table-settings';
+import type { Page } from '#/global';
+import type { User } from './typing';
 
 const router = useRouter();
 
-const tableData = ref<IUser[]>([]);
-const size = ref<string>('default');
-const search = ref<string>('');
-const currentPage = ref<number>(1);
-const pageNum = ref<number>(1);
-const pageSize = ref<number>(10);
-const totalNum = ref<number>(0);
-const loading = ref(true);
-const multipleTableRef = ref<TableInstance>();
-const multipleSelection = ref<IUser[]>([]);
+let tableData = $ref<User[]>([]);
+let size = $ref<string>('default');
+let search = $ref<string>('');
+let currentPage = $ref<number>(1);
+let pageNum = 1;
+let pageSize = $ref<number>(10);
+let totalNum = $ref<number>(0);
+let loading = $ref(true);
+let multipleTableRef = $ref<TableInstance>();
+let multipleSelection = $ref<User[]>([]);
 
 const getUserList = async (pageNum: number, pageSize: number) => {
-  loading.value = true;
-  const { total, content } = await userService.getUserList<IPage>({
+  loading = true;
+  const { total, content } = await userService.getUserList<Page>({
     pageNum,
     pageSize
   });
-  loading.value = false;
-  totalNum.value = total;
-  tableData.value = content;
+  loading = false;
+  totalNum = total;
+  tableData = content;
 };
-getUserList(pageNum.value, pageSize.value);
+getUserList(pageNum, pageSize);
 
-const filterTableData = computed(
+const filterTableData = $computed(
   () =>
-    tableData?.value?.filter(
-      data => !search.value || data.userName.toLowerCase().includes(search.value.toLowerCase())
+    tableData?.filter(
+      data => !search || data.userName.toLowerCase().includes(search.toLowerCase())
     ) ?? []
 );
 
@@ -112,33 +111,33 @@ const handleInsert = () => {
   router.push({ name: 'SystemUserInsert' });
 };
 
-const handleSelectionChange = (val: IUser[]) => {
-  multipleSelection.value = val;
+const handleSelectionChange = (val: User[]) => {
+  multipleSelection = val;
 };
 
 const reset = () => {
-  tableData.value.length = 0;
-  search.value = '';
-  currentPage.value = 1;
-  pageNum.value = 1;
-  pageSize.value = 10;
-  totalNum.value = 0;
-  loading.value = true;
-  multipleSelection.value.length = 0;
+  tableData.length = 0;
+  search = '';
+  currentPage = 1;
+  pageNum = 1;
+  pageSize = 10;
+  totalNum = 0;
+  loading = true;
+  multipleSelection.length = 0;
 };
 
 const handleRefresh = () => {
   reset();
-  getUserList(pageNum.value, pageSize.value);
+  getUserList(pageNum, pageSize);
 };
 
 const handleCommand = (command: string) => {
-  if (size.value === command || !command) return;
-  size.value = command;
+  if (size === command || !command) return;
+  size = command;
 };
 
 const handleExportExcel = () => {
-  if (multipleSelection.value?.length) {
+  if (multipleSelection?.length) {
     const keyMap = {
       id: '序号',
       userName: '用户名',
@@ -152,7 +151,7 @@ const handleExportExcel = () => {
     };
 
     const json2excel = new Json2excel({
-      data: multipleSelection.value,
+      data: multipleSelection,
       orderedKey,
       keyMap,
       scope,
@@ -172,27 +171,27 @@ const handleExportExcel = () => {
   }
 };
 
-const handleEdit = (item: IUser) => {
+const handleEdit = (item: User) => {
   if (!item) return;
   router.push({ name: 'SystemUserEdit', params: { data: JSON.stringify(item) } });
 };
 
 const handleDel = (id: number | undefined) => {
-  tableData.value = filterTableData.value?.filter(data => data.id !== id);
+  tableData = filterTableData?.filter(data => data.id !== id);
   return true;
 };
 
 const handleSizeChange = (val: number) => {
-  pageNum.value = 1;
-  pageSize.value = val;
-  getUserList(pageNum.value, pageSize.value);
+  pageNum = 1;
+  pageSize = val;
+  getUserList(pageNum, pageSize);
 
   console.log(`${val} items per page`);
 };
 
 const handleCurrentChange = (val: number) => {
-  pageNum.value = val;
-  getUserList(pageNum.value, pageSize.value);
+  pageNum = val;
+  getUserList(pageNum, pageSize);
   console.log(`current page: ${val}`);
 };
 </script>

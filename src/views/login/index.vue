@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:26:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-10-12 11:36:07
+ * @LastEditTime: 2023-01-09 20:34:11
 -->
 <template>
   <div class="login">
@@ -41,7 +41,6 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue';
 import { ElNotification } from 'element-plus';
 import type { FormItemRule } from 'element-plus';
 import { useRouter } from 'vue-router';
@@ -49,34 +48,34 @@ import { userService } from '@/services';
 import { setToken } from '@/utils/token';
 import { useUserStore } from '@/pinia';
 import AsMousemovePanel from '@/components/mousemove-panel';
-import { IForm } from './typing';
+import type { LoginForm } from './typing';
 
 const router = useRouter();
-const ruleFormRef = ref<FormInstance>();
-const ruleForm: IForm = reactive({
+const ruleFormRef = $ref<FormInstance>();
+const ruleForm: LoginForm = $ref({
   username: 'admin',
   password: '123456'
 });
 
-const rules = reactive({
+const rules = $ref({
   username: [{ required: 'true', message: '账户不能为空', trigger: 'blur' }],
   password: [{ required: 'true', message: '密码不能为空', trigger: 'blur' }]
 }) as Partial<Record<string, FormItemRule | FormItemRule[]>>;
 
-const isLoading = ref<boolean>(false);
+let isLoading = $ref<boolean>(false);
 const useUser = useUserStore();
 
 // 登录
 const submitForm = () => {
-  isLoading.value = true;
-  ruleFormRef?.value?.validate(async (valid: any) => {
+  isLoading = true;
+  ruleFormRef?.validate(async (valid: any) => {
     if (valid) {
       const { username, password } = ruleForm;
       const content = await userService.loginAction({
         username,
         password
       });
-      isLoading.value = false;
+      isLoading = false;
       if (content) {
         ElNotification({
           title: '登录成功',
@@ -90,7 +89,7 @@ const submitForm = () => {
         });
       }
     } else {
-      isLoading.value = false;
+      isLoading = false;
       console.log('error submit!!');
       return false;
     }

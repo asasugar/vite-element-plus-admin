@@ -3,11 +3,12 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-29 11:41:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 15:44:31
+ * @LastEditTime: 2023-01-09 17:54:53
  */
 
 import { openWindow } from '../index';
 import { dataURLtoBlob, urlToBase64 } from './base64Conver';
+import type { TargetContext } from '#/global';
 
 /**
  * Download online pictures

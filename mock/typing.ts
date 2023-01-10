@@ -1,18 +1,18 @@
-import type { IUserInfo } from '#/store';
+import type { UserInfo } from '@/pinia/modules/user/typing';
 
-export interface IConfig {
+export interface MockConfig {
   body: any;
   method: string;
   type: string;
   url: string;
 }
 
-export interface IType {
+export interface MockType {
   url: string;
   type?: string;
   response: any;
 }
 
 export type IUserType = {
-  [x: string]: IUserInfo;
+  [x: string]: UserInfo;
 };

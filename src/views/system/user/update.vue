@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-11 17:22:54
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-10-12 11:47:42
+ * @LastEditTime: 2023-01-10 10:50:46
 -->
 <template>
   <as-page-wrapper :header-title="headerTitle">
@@ -67,22 +67,24 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onUnmounted } from 'vue';
+import { onUnmounted } from 'vue';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { useRoute, useRouter } from 'vue-router';
 import { userService } from '@/services';
 import { setStorage, getStorage, removeStorage } from '@/utils/storage';
 import type { ComponentSize } from 'element-plus';
-import { IRole } from '../role/typing';
-import { IUserInsert } from './typing';
+import type { RoleItem } from '../role/typing';
+import type { UserInsert } from './typing';
+import type { EpPropMergeType } from 'element-plus/es/utils';
 
 const route = useRoute();
 const router = useRouter();
 
-const size = ref<ComponentSize>('default');
-const labelPosition = ref('right');
-const ruleFormRef = ref<FormInstance>();
-let ruleForm = ref<IUserInsert>({
+const size = $ref<ComponentSize>('default');
+const labelPosition: EpPropMergeType<StringConstructor, 'right' | 'left' | 'top', unknown> =
+  $ref('right');
+const ruleFormRef = $ref<FormInstance>();
+let ruleForm = $ref<UserInsert>({
   userName: '',
   role: {
     key: '',
@@ -90,24 +92,24 @@ let ruleForm = ref<IUserInsert>({
   },
   email: ''
 });
-const headerTitle = ref<string>('');
+let headerTitle = $ref<string>('');
 const storageFormDetail = getStorage('userFormDetail');
 if (
   route.name === 'SystemUserEdit' &&
   route?.params?.data &&
   typeof route.params.data === 'string'
 ) {
-  headerTitle.value = '编辑用户';
-  ruleForm.value = JSON.parse(route.params.data) as IUserInsert;
-  setStorage('userFormDetail', ruleForm.value);
+  headerTitle = '编辑用户';
+  ruleForm = JSON.parse(route.params.data) as UserInsert;
+  setStorage('userFormDetail', ruleForm);
 } else if (route.name === 'SystemUserEdit' && storageFormDetail) {
-  headerTitle.value = '编辑用户';
-  ruleForm.value = storageFormDetail;
+  headerTitle = '编辑用户';
+  ruleForm = storageFormDetail;
 } else {
-  headerTitle.value = '新增用户';
+  headerTitle = '新增用户';
 }
 
-const rules = reactive({
+const rules = $ref({
   userName: [
     {
       required: true,
@@ -130,11 +132,10 @@ const rules = reactive({
     }
   ]
 });
-const roleList = ref<IRole[]>([]);
+let roleList = $ref<RoleItem[]>([]);
 const getRoleList = async () => {
   const { content } = await userService.getRoleList({});
-  // totalNum.value = total;
-  roleList.value = content;
+  roleList = content;
 };
 getRoleList();
 

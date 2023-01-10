@@ -1,6 +1,6 @@
 // types
-export interface ITree {
+export interface AuthTree {
   value: string;
   label: string;
-  children?: ITree[];
+  children?: AuthTree[];
 }

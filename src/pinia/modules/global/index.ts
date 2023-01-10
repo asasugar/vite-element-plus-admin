@@ -1,9 +1,7 @@
 import { defineStore } from 'pinia';
 import { RouteRecordRaw } from 'vue-router';
+import type { GlobalState } from './typing';
 
-interface GlobalState {
-  keepAliveInclude: string[];
-}
 const useGlobalStore = defineStore({
   id: 'global', // id必填，且需要唯一
   state: (): GlobalState => {

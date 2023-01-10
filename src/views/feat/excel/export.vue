@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-05-06 17:18:03
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-12-06 17:30:19
+ * @LastEditTime: 2023-01-09 19:06:30
 -->
 <template>
   <AsPageWrapper header-title="Excel 导出演示">
@@ -34,28 +34,28 @@
   </AsPageWrapper>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
 import Json2excel from '@asasugar-use/custom-json2excel';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { userService } from '@/services';
-import { IPage } from '#/global';
-import { IUser } from '@/views/system/user/typing';
+import type { Page } from '#/global';
+import type { User } from '@/views/system/user/typing';
 
-const tableData = ref<IUser[]>([]);
-const pageNum = ref<number>(1);
-const pageSize = ref<number>(10);
-const loading = ref(true);
+let tableData = $ref<User[]>([]);
+let loading = $ref(true);
+
+const pageNum = 1;
+const pageSize = 10;
 
 const getUserList = async (pageNum: number, pageSize: number) => {
-  loading.value = true;
-  const { content } = await userService.getUserList<IPage>({
+  loading = true;
+  const { content }: { content: User[] } = await userService.getUserList<Page>({
     pageNum,
     pageSize
   });
-  loading.value = false;
-  tableData.value = content;
+  loading = false;
+  tableData = content;
 };
-getUserList(pageNum.value, pageSize.value);
+getUserList(pageNum, pageSize);
 
 const handleExportExcel = () => {
   const keyMap = {
@@ -71,7 +71,7 @@ const handleExportExcel = () => {
   };
 
   const json2excel = new Json2excel({
-    data: tableData.value,
+    data: tableData,
     orderedKey,
     keyMap,
     scope,

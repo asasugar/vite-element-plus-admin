@@ -3,10 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-07 11:18:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-29 14:47:12
+ * @LastEditTime: 2023-01-09 19:25:13
  */
 import * as Mock from 'mockjs';
-import { IConfig } from '../../typing';
+import type { MockConfig } from '../../typing';
 
 const Random = Mock.Random;
 Random.extend({
@@ -38,7 +38,7 @@ export default [
   {
     url: 'project/getProjectList',
     type: 'get',
-    response: (config: IConfig) => {
+    response: (config: MockConfig) => {
       const { list } = Mock.mock({
         'list|22-100': [
           {
@@ -77,7 +77,7 @@ export default [
   {
     url: 'project/getRepositoryList',
     type: 'get',
-    response: (config: IConfig) => {
+    response: (config: MockConfig) => {
       const { list } = Mock.mock({
         'list|22-100': [
           {

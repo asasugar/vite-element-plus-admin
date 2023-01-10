@@ -3,11 +3,11 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-07 10:37:40
+ * @LastEditTime: 2023-01-09 18:15:04
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Axios, { AxiosResponse } from 'axios';
-import { IAxiosRequestConfig } from '#/axios';
+import Axios from 'axios';
+import type { AxiosOptions } from '#/axios';
 import { generateReqKey } from './helpers';
 
 const options = {
@@ -51,7 +51,7 @@ function setCacheItem(key: string, value: any) {
 const _CACHES = {};
 // 使用Proxy代理
 const cacheHandler = {
-  get: function (target: TObject, key: string) {
+  get: function (target: AnyObject, key: string) {
     let value = target[key];
     console.log(`${key} 被读取`, value);
     if (options.storage && !value) {
@@ -59,7 +59,7 @@ const cacheHandler = {
     }
     return value;
   },
-  set: function (target: TObject, key: string, value: any) {
+  set: function (target: AnyObject, key: string, value: any) {
     console.log(`${key} 被设置为 ${JSON.stringify(value)}`);
     target[key] = value;
     if (options.storage) {
@@ -70,7 +70,7 @@ const cacheHandler = {
 };
 const CACHES = new Proxy(_CACHES, cacheHandler);
 
-export function requestInterceptor(config: IAxiosRequestConfig) {
+export function requestInterceptor(config: AxiosOptions) {
   // 开启缓存则保存请求结果和cancel 函数
   if (config.cache) {
     const data = CACHES[`${generateReqKey(config)}`];
@@ -90,9 +90,9 @@ export function requestInterceptor(config: IAxiosRequestConfig) {
   }
 }
 
-export function responseInterceptor(response: AxiosResponse<any, any>) {
+export function responseInterceptor(response: { config: AxiosOptions; data: { code: number } }) {
   // 返回的code === 200 时候才会缓存下来,可根据实际业务配置
-  if ((response?.config as IAxiosRequestConfig)?.cache && response?.data?.code === 200) {
+  if (response?.config?.cache && response?.data?.code === 200) {
     const data = {
       expire: getNowTime(),
       data: response

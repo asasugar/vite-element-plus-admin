@@ -1,10 +1,3 @@
-<!--
- * @Description: 新增/编辑用户角色
- * @Author: Xiongjie.Xue(xxj95719@gmail.com)
- * @Date: 2022-03-08 17:29:15
- * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-10-12 11:46:53
--->
 <template>
   <as-page-wrapper :header-title="headerTitle">
     <template #bodyContent>
@@ -58,20 +51,22 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onUnmounted } from 'vue';
+import { onUnmounted } from 'vue';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { useRoute, useRouter } from 'vue-router';
 import { setStorage, getStorage, removeStorage } from '@/utils/storage';
 import type { ComponentSize } from 'element-plus';
-import { IRole } from './typing';
+import type { RoleItem } from './typing';
+import type { EpPropMergeType } from 'element-plus/es/utils';
 
 const route = useRoute();
 const router = useRouter();
 
-const size = ref<ComponentSize>('default');
-const labelPosition = ref('right');
-const ruleFormRef = ref<FormInstance>();
-let ruleForm = ref<IRole>({
+const size = $ref<ComponentSize>('default');
+const labelPosition: EpPropMergeType<StringConstructor, 'right' | 'left' | 'top', unknown> =
+  $ref('right');
+const ruleFormRef = $ref<FormInstance>();
+let ruleForm = $ref<RoleItem>({
   role: {
     key: '',
     value: ''
@@ -79,7 +74,7 @@ let ruleForm = ref<IRole>({
   status: true,
   remark: ''
 });
-const headerTitle = ref<string>('');
+let headerTitle = $ref<string>('');
 const storageFormDetail = getStorage('roleFormDetail');
 
 if (
@@ -87,17 +82,17 @@ if (
   route?.params?.data &&
   typeof route.params.data === 'string'
 ) {
-  headerTitle.value = '编辑角色';
-  ruleForm.value = reactive(JSON.parse(route.params.data) as IRole);
-  setStorage('roleFormDetail', ruleForm.value);
+  headerTitle = '编辑角色';
+  ruleForm = JSON.parse(route.params.data);
+  setStorage('roleFormDetail', ruleForm);
 } else if (route.name === 'SystemRoleEdit' && storageFormDetail) {
-  headerTitle.value = '编辑用户';
-  ruleForm.value = storageFormDetail;
+  headerTitle = '编辑用户';
+  ruleForm = storageFormDetail;
 } else {
-  headerTitle.value = '新增角色';
+  headerTitle = '新增角色';
 }
 
-const rules = reactive({
+const rules = $ref({
   'role.value': [
     {
       required: true,

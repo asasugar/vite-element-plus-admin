@@ -1,4 +1,4 @@
-export interface IExcelData<T = any> {
+export interface ExcelData<T = any> {
   header: string[];
   results: T[];
   meta: { sheetName: string };

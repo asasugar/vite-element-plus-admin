@@ -1,5 +1,5 @@
 // types
-export interface IForm {
+export interface LoginForm {
   username: string;
   password: string;
 }

@@ -64,12 +64,12 @@ import { ref, nextTick } from 'vue';
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router';
 import { userService, systemService } from '@/services';
 import { setStorage, getStorage } from '@/utils/storage';
-import { ITab, IMenu, IMenuItem } from './typing';
 import { storeToRefs } from 'pinia';
 import { useGlobalStore, useUserStore } from '@/pinia';
 import { routes } from '@/router';
 import HomeAside from './components/home-aside';
 import type { TabPanelName } from 'element-plus';
+import type { HomeTabInfo, HomeMenuInfo, HomeMenuItem } from './typing';
 
 const useGlobal = useGlobalStore();
 const useUser = useUserStore();
@@ -77,7 +77,7 @@ const router = useRouter();
 const route = useRoute();
 useGlobal.keepAliveAction(routes);
 const { keepAliveInclude } = storeToRefs(useGlobal);
-const menuOption = ref<IMenu>({
+const menuOption = ref<HomeMenuInfo>({
   defaultOpeneds: ['1'],
   defaultActive: '1-1',
   menu: []
@@ -85,7 +85,7 @@ const menuOption = ref<IMenu>({
 const { userinfo } = storeToRefs(useUser);
 const breadcrumb = ref<string[]>([]);
 const editableTabsValue = ref(route.path);
-const editableTabs = ref<ITab[]>([]);
+const editableTabs = ref<HomeTabInfo[]>([]);
 onBeforeRouteUpdate(to => {
   if (typeof to?.meta?.title === 'string' && !breadcrumb.value.includes(to?.meta?.title)) {
     breadcrumb.value.push(to.meta.title);
@@ -138,10 +138,10 @@ const handleTabRemove = (paneName: TabPanelName) => {
 };
 
 // 刷新时渲染选中的菜单项
-const _renderDefaultMenuActive = (menu: IMenuItem[], sortId?: string, title?: string) => {
+const _renderDefaultMenuActive = (menu: HomeMenuItem[], sortId?: string, title?: string) => {
   if (route.name) {
     let isFindInMenu = false;
-    (function recursiveFn(list: IMenuItem[], id?: string, text?: string) {
+    (function recursiveFn(list: HomeMenuItem[], id?: string, text?: string) {
       list.some(item => {
         if (item.name === route.name) {
           nextTick(() => {

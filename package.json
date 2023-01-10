@@ -46,7 +46,7 @@
     "@types/mockjs": "^1.0.7",
     "@types/node": "^18.11.18",
     "@types/qs": "^6.9.7",
-    "@types/three": "^0.144.0",
+    "@types/three": "^0.137.0",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "@vitejs/plugin-vue": "^3.1.2",

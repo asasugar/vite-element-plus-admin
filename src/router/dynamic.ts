@@ -5,15 +5,16 @@
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
  * @LastEditTime: 2022-05-30 15:34:54
  */
-import { TComponent, TModules } from '#/vue-router';
 import { systemService } from '@/services';
 import { ElLoading } from 'element-plus';
 import { RouteRecordRaw } from 'vue-router';
+import type { RouteComponent, RouteModules } from '#/vue-router';
+
 /**
  * 标准化动态路由 [import.meta.glob]
  */
 export const normalizeaRoutesUseGlob = (routes: RouteRecordRaw[]): RouteRecordRaw[] => {
-  const components: TComponent = getViewComponent();
+  const components: RouteComponent = getViewComponent();
   return routes.map(item => {
     if (item.path && item.component) {
       if (typeof item.component === 'string') {
@@ -26,17 +27,17 @@ export const normalizeaRoutesUseGlob = (routes: RouteRecordRaw[]): RouteRecordRa
     return item;
   });
 };
-export const getViewComponent = (): TComponent => {
+export const getViewComponent = (): RouteComponent => {
   const modules = import.meta.glob('../views/**/*.vue');
   const COMPONENTS_KEY = 'components'; // 过滤views文件下components命名的文件夹
   const BEFOREFIX = '../';
   const AFTERFIX = '.vue';
-  const components: TComponent = {};
+  const components: RouteComponent = {};
 
   const viewKeys = Object.keys(modules).filter(key => !key.includes(COMPONENTS_KEY));
   viewKeys.forEach(key => {
     const routeKey = key.replace(BEFOREFIX, '').replace(AFTERFIX, '');
-    components[routeKey] = modules[key] as TModules;
+    components[routeKey] = modules[key] as RouteModules;
   });
   return components;
 };

@@ -1,12 +1,12 @@
 import { defineComponent, PropType } from 'vue';
 import { ElAside, ElMenu, ElSubMenu, ElMenuItem } from 'element-plus';
 import 'element-plus/es/components/menu/style/css';
-import { IMenu, IMenuItem } from '../typing';
+import type { HomeMenuInfo, HomeMenuItem } from '../typing';
 
 export default defineComponent({
   props: {
     menuOption: {
-      type: Object as PropType<IMenu>,
+      type: Object as PropType<HomeMenuInfo>,
       default: {
         defaultOpeneds: ['1'],
         defaultActive: '1-1',
@@ -16,10 +16,10 @@ export default defineComponent({
   },
   emits: ['onJumpMenu'],
   setup(props, { emit }) {
-    const handleRouter = (object: IMenuItem | undefined, item: IMenuItem) => {
+    const handleRouter = (object: HomeMenuItem | undefined, item: HomeMenuItem) => {
       emit('onJumpMenu', object, item);
     };
-    const recursiveFn = (object: IMenuItem | undefined, children: IMenuItem[]) => {
+    const recursiveFn = (object: HomeMenuItem | undefined, children: HomeMenuItem[]) => {
       if (children?.length) {
         return children.map(item => {
           if (item.children) {

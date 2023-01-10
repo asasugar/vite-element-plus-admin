@@ -3,11 +3,12 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-05 15:59:29
+ * @LastEditTime: 2023-01-09 19:38:10
  */
 import * as Mock from 'mockjs';
-import { IConfig, IUserType } from '../../typing';
-import type { IUserInfo } from '#/store';
+import type { MockConfig, IUserType } from '../../typing';
+import type { UserInfo } from '@/pinia/modules/user/typing';
+
 const Random = Mock.Random;
 
 Random.extend({
@@ -31,7 +32,7 @@ const users: IUserType = {
   }
 };
 
-const userinfo: IUserInfo = {
+const userinfo: UserInfo = {
   token: users['admin'].token,
   username: 'admin',
   avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'
@@ -41,7 +42,7 @@ export default [
   {
     url: 'user/login',
     type: 'post',
-    response: (config: IConfig) => {
+    response: (config: MockConfig) => {
       const index = Object.keys(users).indexOf(config.body.username);
       if (index !== -1) {
         if (config.body.password == 123456) {
@@ -84,7 +85,7 @@ export default [
   {
     url: 'user/getBaseUserInfo',
     type: 'get',
-    response: (config: IConfig) => {
+    response: (config: MockConfig) => {
       if (config.body) {
         if (config.body.token === userinfo.token) {
           return {
@@ -112,7 +113,7 @@ export default [
   {
     url: 'user/getRoleList',
     type: 'get',
-    response: (config: IConfig) => {
+    response: (config: MockConfig) => {
       const { pageNum, pageSize } = config.body;
       const total = 200;
 
@@ -167,7 +168,7 @@ export default [
   {
     url: 'user/getUserList',
     type: 'get',
-    response: (config: IConfig) => {
+    response: (config: MockConfig) => {
       const { pageNum, pageSize } = config.body;
       const total = 200;
       if (pageNum && pageSize) {

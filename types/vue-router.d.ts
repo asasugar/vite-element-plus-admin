@@ -3,19 +3,19 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-29 15:00:08
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-31 11:26:26
+ * @LastEditTime: 2023-01-10 10:58:43
  */
-export type TModules = () => Promise<{ [key: string]: any }>;
+export type RouteModules = () => Promise<AnyObject>;
 
-export type TComponent = Record<string, TModules>;
+export type RouteComponent = Record<string, RouteModules>;
 
-export interface IRoutes {
+export interface RouteInfo {
   path: string;
-  component: string | TModules;
+  component: string | RouteModules;
   redirect?: string;
   name?: string;
   meta?: {
     title: string;
   };
-  children?: IRoutes[];
+  children?: RouteInfo[];
 }

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-29 15:03:12
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-11-24 15:19:23
+ * @LastEditTime: 2023-01-09 20:25:49
 -->
 <template>
   <AsPageWrapper header-title="水印示例">
@@ -26,22 +26,21 @@
   </AsPageWrapper>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
 import { AsCollapseMain } from '@/containers/page-main';
 import { useWatermask } from '@/hooks/use-watermask';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { ElMessage } from 'element-plus';
 
-const watermaskValue = ref<string>('');
+const watermaskValue = $ref<string>('');
 
 const { setWatermask, clear } = useWatermask();
 
 const handleSetWatermask = () => {
-  if (!watermaskValue.value) {
+  if (!watermaskValue) {
     ElMessage({ message: `请输入水印文本！`, type: 'warning' });
     return;
   }
-  setWatermask(watermaskValue.value);
+  setWatermask(watermaskValue);
 };
 </script>
 

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-12-06 17:30:39
+ * @LastEditTime: 2023-01-09 19:11:31
 -->
 <template>
   <as-page-wrapper header-title="角色管理">
@@ -79,91 +79,90 @@
   </as-page-wrapper>
 </template>
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import Json2excel from '@asasugar-use/custom-json2excel';
 import { userService } from '@/services';
-import { IRole } from './typing';
-import { IPage } from '#/global';
 import { ElMessage } from 'element-plus';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import AsTableSettings from '@/components/table-settings';
+import type { RoleItem, RoleResult } from './typing';
+import type { Page } from '#/global';
 
 const router = useRouter();
 
-const tableData = ref<IRole[]>([]);
-const size = ref<string>('default');
-const search = ref<string>('');
-const currentPage = ref<number>(1);
-const pageNum = ref<number>(1);
-const pageSize = ref<number>(10);
-const totalNum = ref<number>(0);
-const loading = ref(true);
-const multipleTableRef = ref<TableInstance>();
-const multipleSelection = ref<IRole[]>([]);
+let tableData = $ref<RoleItem[]>([]);
+let size = $ref<string>('default');
+let search = $ref<string>('');
+let currentPage = $ref<number>(1);
+let pageNum = 1;
+let pageSize = $ref<number>(10);
+let totalNum = $ref<number>(0);
+let loading = $ref(true);
+let multipleTableRef = $ref<TableInstance>();
+let multipleSelection = $ref<RoleItem[]>([]);
 
 const getRoleList = async (pageNum: number, pageSize: number) => {
-  loading.value = true;
-  const { total, content } = await userService.getRoleList<IPage>({
+  loading = true;
+  const { total, content }: RoleResult = await userService.getRoleList<Page>({
     pageNum,
     pageSize
   });
-  loading.value = false;
-  totalNum.value = total;
-  tableData.value = content;
+  loading = false;
+  totalNum = total;
+  tableData = content;
 };
-getRoleList(pageNum.value, pageSize.value);
+getRoleList(pageNum, pageSize);
 
-const filterTableData = computed(() =>
-  tableData?.value?.filter(
+const filterTableData = $computed(() =>
+  tableData?.filter(
     data =>
-      !search.value ||
-      data.role.key.toLowerCase().includes(search.value.toLowerCase()) ||
-      data.role.value.toLowerCase().includes(search.value.toLowerCase())
+      !search ||
+      data.role.key.toLowerCase().includes(search.toLowerCase()) ||
+      data.role.value.toLowerCase().includes(search.toLowerCase())
   )
 );
 
 const handleSizeChange = (val: number) => {
-  pageNum.value = 1;
-  pageSize.value = val;
-  getRoleList(pageNum.value, pageSize.value);
+  pageNum = 1;
+  pageSize = val;
+  getRoleList(pageNum, pageSize);
 
   console.log(`${val} items per page`);
 };
 
 const handleCurrentChange = (val: number) => {
-  pageNum.value = val;
-  getRoleList(pageNum.value, pageSize.value);
+  pageNum = val;
+  getRoleList(pageNum, pageSize);
   console.log(`current page: ${val}`);
 };
 
-const handleSelectionChange = (val: IRole[]) => {
-  multipleSelection.value = val;
+const handleSelectionChange = (val: RoleItem[]) => {
+  multipleSelection = val;
 };
 
 const reset = () => {
-  tableData.value.length = 0;
-  search.value = '';
-  currentPage.value = 1;
-  pageNum.value = 1;
-  pageSize.value = 10;
-  totalNum.value = 0;
-  loading.value = true;
-  multipleSelection.value.length = 0;
+  tableData.length = 0;
+  search = '';
+  currentPage = 1;
+  pageNum = 1;
+  pageSize = 10;
+  totalNum = 0;
+  loading = true;
+  multipleSelection.length = 0;
 };
 
 const handleRefresh = () => {
   reset();
-  getRoleList(pageNum.value, pageSize.value);
+  getRoleList(pageNum, pageSize);
 };
 
 const handleCommand = (command: string) => {
-  if (size.value === command || !command) return;
-  size.value = command;
+  if (size === command || !command) return;
+  size = command;
 };
 
 const handleExportExcel = () => {
-  if (multipleSelection.value?.length) {
+  if (multipleSelection?.length) {
     const keyMap = {
       id: '序号',
       status: '状态',
@@ -175,7 +174,7 @@ const handleExportExcel = () => {
     const scope = {
       role: 'value'
     };
-    const excelData = multipleSelection.value.map(i => {
+    const excelData = multipleSelection.map(i => {
       i.status = i.status ? '启用' : '禁用';
       return i;
     });
@@ -204,18 +203,18 @@ const handleInsert = () => {
   router.push({ name: 'SystemRoleInsert' });
 };
 
-const handleEdit = (item: IRole) => {
+const handleEdit = (item: RoleItem) => {
   if (!item) return;
   router.push({ name: 'SystemRoleEdit', params: { data: JSON.stringify(item) } });
 };
 
-const handleEditAuth = (item: IRole) => {
+const handleEditAuth = (item: RoleItem) => {
   if (!item) return;
   router.push({ name: 'SystemAuth', params: { role: JSON.stringify(item.role) } });
 };
 
 const handleDel = (id: number | undefined) => {
-  tableData.value = filterTableData.value?.filter(data => data.id !== id);
+  tableData = filterTableData?.filter(data => data.id !== id);
   return true;
 };
 </script>

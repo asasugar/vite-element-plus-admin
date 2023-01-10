@@ -1,4 +1,4 @@
-export interface IRole {
+export interface RoleItem {
   id?: number;
   role: {
     key: string;
@@ -7,4 +7,9 @@ export interface IRole {
   status: boolean | string;
   remark: string;
   createTime?: number;
+}
+
+export interface RoleResult {
+  total: number;
+  content: RoleItem[];
 }

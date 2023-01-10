@@ -16,7 +16,7 @@
 import { defineComponent, ref, unref } from 'vue';
 import * as XLSX from 'xlsx';
 import { dayUtil } from '@/utils/day-util';
-import type { IExcelData } from './typing';
+import type { ExcelData } from './typing';
 export default defineComponent({
   name: 'ImportExcel',
   props: {
@@ -59,7 +59,7 @@ export default defineComponent({
      * @description: 获得excel数据
      */
     function getExcelData(workbook: XLSX.WorkBook) {
-      const excelData: IExcelData[] = [];
+      const excelData: ExcelData[] = [];
       const { dateFormat, timeZone } = props;
       for (const sheetName of workbook.SheetNames) {
         const worksheet = workbook.Sheets[sheetName];
@@ -67,8 +67,8 @@ export default defineComponent({
         let results = XLSX.utils.sheet_to_json(worksheet, {
           raw: true,
           dateNF: dateFormat //Not worked
-        }) as TObject[];
-        results = results.map((row: TObject) => {
+        }) as AnyObject[];
+        results = results.map((row: AnyObject) => {
           for (let field in row) {
             if (row[field] instanceof Date) {
               if (timeZone === 8) {

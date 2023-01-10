@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-29 15:00:08
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-10-12 15:27:23
+ * @LastEditTime: 2023-01-10 11:26:40
  */
 
 export type Method =
@@ -22,26 +22,20 @@ export type Method =
   | 'patch'
   | 'PATCH';
 
-export interface IAxiosRequestConfig {
+export interface AxiosOptions {
   url: string;
   method?: Method;
   cancelRequest?: boolean;
-  cancelToken?: any;
+  cancelToken?: string | AxiosStatic.CancelToken;
   cache?: boolean;
   setExpireTime?: Date;
   retry?: number;
   __retryCount?: number;
   retryDelay?: number;
   data?: any;
-  params?: any;
+  params?: AnyObject;
 }
 
-export interface IResult<T = any> {
-  result: T;
-  code: number;
-  success: boolean;
-}
-
-export interface IResponseHandle {
-  [x: number | string]: (response: AxiosResponse) => Promise<AxiosResponse<any, any> | IResult>;
+export interface AxiosResponse {
+  [x: number | string]: (response: AxiosResponse) => Promise<AxiosResponse<any, any> | AxiosResult>;
 }

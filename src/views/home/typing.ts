@@ -1,23 +1,23 @@
 // types
-export interface ICommon {
+export interface HomeCommonInfo {
   title: string;
   path: string;
 }
 
-export interface ITab extends ICommon {
+export interface HomeTabInfo extends HomeCommonInfo {
   defaultOpeneds: string[];
   defaultActive: string;
   breadcrumb: string[];
 }
 
-export interface IMenuItem extends ICommon {
+export interface HomeMenuItem extends HomeCommonInfo {
   sortId: string;
   name: string;
-  children?: IMenuItem[];
+  children?: HomeMenuItem[];
 }
 
-export interface IMenu {
+export interface HomeMenuInfo {
   defaultOpeneds: string[];
   defaultActive: string;
-  menu: IMenuItem[];
+  menu: HomeMenuItem[];
 }

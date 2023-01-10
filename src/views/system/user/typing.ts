@@ -1,4 +1,6 @@
-export interface IUserInsert {
+export interface User {
+  id: number;
+  createTime: number;
   role: {
     key: string;
     value: string;
@@ -7,7 +9,4 @@ export interface IUserInsert {
   email: string;
 }
 
-export interface IUser extends IUserInsert {
-  id: number;
-  createTime: number;
-}
+export type UserInsert = Omit<User, 'id' | 'createTime'>;

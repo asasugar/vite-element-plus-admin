@@ -3,8 +3,9 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-31 16:46:33
+ * @LastEditTime: 2023-01-09 17:54:47
  */
+import type { TargetContext } from '#/global';
 import { isArray, isObject, isValidMap } from './is';
 
 /**
@@ -38,11 +39,11 @@ export function equalArrays(array: any[], other: any[]): boolean {
 
 /**
  * @description 对比对象是否相等
- * @param {TObject} object
- * @param {TObject} other
+ * @param {AnyObject} object
+ * @param {AnyObject} other
  * @returns {boolean}
  */
-export function equalObjects(object: TObject, other: TObject): boolean {
+export function equalObjects(object: AnyObject, other: AnyObject): boolean {
   if (Object.keys(object).length !== Object.keys(other).length) return false;
   for (const prop in object) {
     if (

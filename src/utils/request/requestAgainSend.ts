@@ -3,20 +3,20 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 15:32:53
+ * @LastEditTime: 2023-01-09 17:57:28
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { isJsonStr } from '@/utils/is';
 import { AxiosInstance } from 'axios';
-import { IAxiosRequestConfig } from '#/axios';
+import type { AxiosOptions } from '#/axios';
 
 /**
  * @param {失败信息} err
  * @param {实例化的单例} axios
  * @returns
  */
-export function againRequest(err: { config: IAxiosRequestConfig }, axios: AxiosInstance) {
+export function againRequest(err: { config: AxiosOptions }, axios: AxiosInstance) {
   const config = err.config;
   // config.retry 具体接口配置的重发次数
   if (!config || !config.retry) return Promise.reject(err);

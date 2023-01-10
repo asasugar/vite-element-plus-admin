@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-10-12 15:34:21
+ * @LastEditTime: 2023-01-09 17:57:18
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -16,11 +16,11 @@ import {
   responseInterceptor as cacheResInterceptor
 } from './requestCache';
 import { ElMessage } from 'element-plus';
-import { IResponseHandle, IAxiosRequestConfig } from '#/axios';
+import type { AxiosResponse, AxiosOptions } from '#/axios';
 
 // 返回结果处理
 // 自定义约定接口返回{code: xxx, result: xxx, message:'err message'},根据api模拟，具体可根据业务调整
-const responseHandle: IResponseHandle = {
+const responseHandle: AxiosResponse = {
   200: response => {
     return Promise.resolve(response.data);
   },
@@ -67,9 +67,9 @@ axios.interceptors.request.use(
       alert('不允许的请求方法：' + config.method);
     }
     // pendding 中的请求，后续请求不发送（由于存放的peddingMap 的key 和参数有关，所以放在参数处理之后）
-    addPendingRequest(config as IAxiosRequestConfig); // 把当前请求信息添加到pendingRequest对象中
+    addPendingRequest(config as AxiosOptions); // 把当前请求信息添加到pendingRequest对象中
     //  请求缓存
-    cacheReqInterceptor(config as IAxiosRequestConfig);
+    cacheReqInterceptor(config as AxiosOptions);
     return config;
   },
   error => {
@@ -81,8 +81,8 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   response => {
     // 响应正常时候就从pendingRequest对象中移除请求
-    removePendingRequest(response.config as IAxiosRequestConfig);
-    cacheResInterceptor(response);
+    removePendingRequest(response.config as AxiosOptions);
+    cacheResInterceptor(response as { config: AxiosOptions; data: { code: number } });
     return (responseHandle[response.data.code] || responseHandle['default'])(response);
   },
   error => {

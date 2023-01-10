@@ -3,15 +3,12 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 14:47:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 15:17:01
+ * @LastEditTime: 2023-01-09 19:36:20
  */
 
 import { defineStore } from 'pinia';
-import type { IUserInfo } from '#/store';
+import type { UserInfo, UserState } from './typing';
 
-interface UserState {
-  userinfo: Nullable<IUserInfo>;
-}
 const useUserStore = defineStore({
   id: 'user',
   state: (): UserState => {
@@ -20,7 +17,7 @@ const useUserStore = defineStore({
     };
   },
   actions: {
-    updateUserinfo(userinfo: IUserInfo) {
+    updateUserinfo(userinfo: UserInfo) {
       this.userinfo = userinfo;
     }
   }

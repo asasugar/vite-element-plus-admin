@@ -1,7 +1,7 @@
 import { encrypt, decrypt } from './crypt';
 import packageJson from '../../package.json';
 
-interface IConfig {
+interface CacheConfig {
   type: 'localStorage' | 'sessionStorage';
   prefix: string;
   expire: number;
@@ -35,7 +35,7 @@ interface IConfig {
 // 清空 clearStorage
 
 //定义参数 类型 window.localStorage,window.sessionStorage,
-const config: IConfig = {
+const config: CacheConfig = {
   type: 'localStorage', // 本地存储类型 localStorage/sessionStorage
   prefix: `${packageJson.name}_${packageJson.version}`, // 名称前缀 建议：项目名 + 项目版本
   expire: 1, //过期时间 单位：秒

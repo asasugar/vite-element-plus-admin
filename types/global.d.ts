@@ -3,7 +3,9 @@ declare module '*.json' {
   export default value;
 }
 
-export interface IPage {
+export interface Page {
   pageNum: number;
   pageSize: number;
 }
+
+export type TargetContext = '_self' | '_blank';

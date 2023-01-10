@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-11-23 16:04:07
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-11-23 16:52:01
+ * @LastEditTime: 2023-01-09 20:29:47
 -->
 <template>
   <AsPageWrapper>
@@ -63,7 +63,7 @@
 <script lang="ts" setup>
 import { AsPageWrapper } from '@/containers/page-wrapper';
 
-const hobbyList = ref<string[]>(['New technology', 'Car', 'LOL']);
+const hobbyList = $ref<string[]>(['New technology', 'Car', 'LOL']);
 </script>
 
 <style lang="less" scoped></style>
