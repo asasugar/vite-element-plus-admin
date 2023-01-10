@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-18 14:59:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 15:17:11
+ * @LastEditTime: 2023-01-10 17:27:06
 -->
 <template>
   <as-page-wrapper header-title="Markdown 组件演示">
@@ -36,9 +36,9 @@
 <script lang="ts" setup name="EditorMarkdown">
 import { AsMarkdown, MarkDownActionType } from '@/components/markdown';
 import { AsPageWrapper } from '@/containers/page-wrapper';
-import { ref, unref, watch } from 'vue';
+import { watch } from 'vue';
 
-const markDownRef = ref<Nullable<MarkDownActionType>>(null);
+const markDownRef = $ref<Nullable<MarkDownActionType>>(null);
 
 const markdownCache =
   window.localStorage.getItem('markdown') ??
@@ -47,33 +47,30 @@ const markdownCache =
 # content
 `;
 
-const valueRef = ref(markdownCache);
-const cardContent = ref<string>('');
+let valueRef = $ref(markdownCache);
+let cardContent = $ref<string>('');
 
 const handleChange = (v: string) => {
-  valueRef.value = v;
+  valueRef = v;
 };
 
 const toggleTheme = (theme: 'dark' | 'classic') => {
-  const instance = unref(markDownRef);
-
-  if (!instance) return;
-  const vditor = instance?.getVditor();
+  if (!markDownRef) return;
+  const vditor = markDownRef?.getVditor();
   vditor?.setTheme(theme);
 };
 
 const onMd2html = async (mdtext: string) => {
-  const instance = unref(markDownRef);
-  if (!instance) return;
-  cardContent.value = await instance?.md2html(mdtext);
+  if (!markDownRef) return;
+  cardContent = await markDownRef?.md2html(mdtext);
 };
 
 const handleClear = () => {
-  valueRef.value = '';
+  valueRef = '';
 };
 
 watch(
-  [valueRef, markDownRef],
+  [$$(valueRef), $$(markDownRef)],
   currValue => {
     !currValue.includes(null) && onMd2html(currValue[0]);
   },

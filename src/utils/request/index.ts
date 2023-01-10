@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 17:57:18
+ * @LastEditTime: 2023-01-10 13:51:30
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -16,23 +16,23 @@ import {
   responseInterceptor as cacheResInterceptor
 } from './requestCache';
 import { ElMessage } from 'element-plus';
-import type { AxiosResponse, AxiosOptions } from '#/axios';
+import type { AxiosOptions, AxiosResCode, AxiosResponseHandle } from '#/axios';
 
 // 返回结果处理
 // 自定义约定接口返回{code: xxx, result: xxx, message:'err message'},根据api模拟，具体可根据业务调整
-const responseHandle: AxiosResponse = {
-  200: response => {
+const responseHandle: AxiosResponseHandle = {
+  200: (response: { data: AnyObject }) => {
     return Promise.resolve(response.data);
   },
-  201: response => {
+  201: (response: { data: { message?: string } }) => {
     ElMessage({ message: `参数异常:${response.data.message}`, type: 'warning' });
     return Promise.resolve(response.data);
   },
-  404: (response: { data: any }) => {
+  404: (response: { data: AnyObject }) => {
     ElMessage({ message: '接口地址不存在', type: 'error' });
     return Promise.reject(response.data);
   },
-  default: (response: { data: { message: any } }) => {
+  default: (response: { data: { message?: string } }) => {
     ElMessage({ message: response.data.message || '操作失败', type: 'error' });
     return Promise.reject(response.data);
   }
@@ -83,7 +83,8 @@ axios.interceptors.response.use(
     // 响应正常时候就从pendingRequest对象中移除请求
     removePendingRequest(response.config as AxiosOptions);
     cacheResInterceptor(response as { config: AxiosOptions; data: { code: number } });
-    return (responseHandle[response.data.code] || responseHandle['default'])(response);
+    const code: AxiosResCode = response.data.code;
+    return ((code && responseHandle[code]) || responseHandle['default'])(response);
   },
   error => {
     // 从pending 列表中移除请求

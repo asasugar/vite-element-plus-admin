@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 14:00:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-31 10:14:53
+ * @LastEditTime: 2023-01-10 18:21:54
  */
 import { apiGetProjectList, apiGetRepositoryList } from '@/apis/project';
 class ProjectService {
@@ -12,7 +12,7 @@ class ProjectService {
    * @param data
    * @returns {Object}
    */
-  async getProjectList<T>(data: T) {
+  async getProjectList<T, U>(data: T): Promise<U | null> {
     const { success, result } = await apiGetProjectList(data);
     if (success) return result;
     return null;

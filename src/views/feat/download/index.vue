@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-29 10:45:02
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 14:42:27
+ * @LastEditTime: 2023-01-10 17:33:55
 -->
 <template>
   <as-page-wrapper header-title="文件下载">
@@ -18,7 +18,6 @@
   </as-page-wrapper>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { AsAlertInfo } from '@/containers/alert-info';
 import {
@@ -28,9 +27,9 @@ import {
   downloadByOnlineUrl
 } from '@/utils/file';
 import imgBase64 from './imgBase64';
-import { IDownload, TFileType } from './typing';
+import type { DownloadInfo, FileType } from './typing';
 
-const downloadList = ref<IDownload[]>([
+const downloadList = $ref<DownloadInfo[]>([
   { message: '根据后台接口文件流下载', buttonValue: '文件流下载', type: 'fileStream' },
   { message: '根据文件地址下载文件', buttonValue: '文件地址下载', type: 'fileUrl' },
   { message: 'base64流下载', buttonValue: 'base64流下载', type: 'base64Stream' },
@@ -41,7 +40,7 @@ const downloadList = ref<IDownload[]>([
   }
 ]);
 
-const handleDownload = (type: TFileType) => {
+const handleDownload = (type: FileType) => {
   if (!type) return;
   const map = {
     fileStream: () => downloadByStream('text content', 'testName.txt'),

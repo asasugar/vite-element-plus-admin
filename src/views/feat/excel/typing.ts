@@ -1,4 +1,4 @@
-export interface IExcelTableData {
+export interface ExcelTableData {
   title: string;
   columns?: AnyObject[];
   dataSource?: AnyObject[];

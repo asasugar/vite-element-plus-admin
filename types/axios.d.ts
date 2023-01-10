@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-29 15:00:08
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 11:26:40
+ * @LastEditTime: 2023-01-10 13:50:40
  */
 
 export type Method =
@@ -36,6 +36,15 @@ export interface AxiosOptions {
   params?: AnyObject;
 }
 
-export interface AxiosResponse {
-  [x: number | string]: (response: AxiosResponse) => Promise<AxiosResponse<any, any> | AxiosResult>;
+export interface AxiosResult<T = null> {
+  result: T;
+  code: number;
+  success: boolean;
 }
+
+export type AxiosResCode = 200 | 201 | 404 | 'default';
+
+export type AxiosResponseHandle = Record<
+  AxiosResCode,
+  (response: AxiosResponse) => Promise<AxiosResponse<any, any> | AxiosResult>
+>;

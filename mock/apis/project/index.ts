@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-07 11:18:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 19:25:13
+ * @LastEditTime: 2023-01-10 16:41:13
  */
 import * as Mock from 'mockjs';
 import type { MockConfig } from '../../typing';
@@ -60,7 +60,7 @@ export default [
           result: {
             pageNum,
             pageSize,
-            content: newDataList,
+            list: newDataList,
             total
           },
           code: 200
@@ -96,7 +96,7 @@ export default [
           result: {
             pageNum,
             pageSize,
-            content: newDataList,
+            list: newDataList,
             total
           },
           code: 200
@@ -107,7 +107,7 @@ export default [
           result: {
             pageNum: 1,
             pageSize: total,
-            content: list,
+            list,
             total
           },
           code: 200

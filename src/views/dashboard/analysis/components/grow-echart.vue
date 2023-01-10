@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-11-24 15:18:41
+ * @LastEditTime: 2023-01-10 15:22:36
 -->
 <template>
   <el-tabs v-model="tabPane" type="card" class="bg-white mt20" @tab-click="handleClickTab">
@@ -16,8 +16,7 @@
   </el-tabs>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
-import type { Ref } from 'vue';
+import { onMounted } from 'vue';
 import { useECharts, isExist } from '@/hooks/use-echarts';
 import { option1, option2 } from './data';
 import type { TabsPaneContext } from 'element-plus';
@@ -32,16 +31,16 @@ const props = defineProps({
     default: '450px'
   }
 });
-const tabPane = ref<string>('1');
-const chartRef1 = ref<Ref<HTMLDivElement>>();
-const chartRef2 = ref<Ref<HTMLDivElement>>();
+const tabPane = $ref<string>('1');
+const chartRef1 = $ref();
+const chartRef2 = $ref();
 
 onMounted(() => {
   // 初始化第一张图表
-  if (chartRef1.value) {
-    let isexist = isExist(chartRef1.value);
+  if (chartRef1) {
+    let isexist = isExist(chartRef1);
     if (!isexist) {
-      useECharts(chartRef1.value, option1);
+      useECharts(chartRef1, option1);
     }
   }
 });
@@ -49,10 +48,10 @@ onMounted(() => {
 // 点击切换图表为第二张的时候，渲染第二张图表
 const handleClickTab = (pane: TabsPaneContext) => {
   const { name } = pane.props;
-  if (name === '2' && chartRef2.value) {
-    let isexist = isExist(chartRef2.value);
+  if (name === '2' && chartRef2) {
+    let isexist = isExist(chartRef2);
     if (!isexist) {
-      useECharts(chartRef2.value, option2);
+      useECharts(chartRef2, option2);
     }
   }
 };

@@ -3,11 +3,11 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-10-14 18:43:44
+ * @LastEditTime: 2023-01-10 18:01:50
 -->
 <template>
   <el-container class="layout-container">
-    <home-aside :menu-option="menuOption" @onJumpMenu="handleToMenu" />
+    <home-aside :menu-option="menuOption" @goMenu="handleToMenu" />
     <el-container>
       <el-header class="home-header flex center between pos-r f12 color-black">
         <el-breadcrumb separator="/">
@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, nextTick } from 'vue';
+import { nextTick } from 'vue';
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router';
 import { userService, systemService } from '@/services';
 import { setStorage, getStorage } from '@/utils/storage';
@@ -77,62 +77,62 @@ const router = useRouter();
 const route = useRoute();
 useGlobal.keepAliveAction(routes);
 const { keepAliveInclude } = storeToRefs(useGlobal);
-const menuOption = ref<HomeMenuInfo>({
+let menuOption = $ref<HomeMenuInfo>({
   defaultOpeneds: ['1'],
   defaultActive: '1-1',
   menu: []
 });
 const { userinfo } = storeToRefs(useUser);
-const breadcrumb = ref<string[]>([]);
-const editableTabsValue = ref(route.path);
-const editableTabs = ref<HomeTabInfo[]>([]);
+let breadcrumb = $ref<string[]>([]);
+let editableTabsValue = $ref(route.path);
+let editableTabs = $ref<HomeTabInfo[]>([]);
 onBeforeRouteUpdate(to => {
-  if (typeof to?.meta?.title === 'string' && !breadcrumb.value.includes(to?.meta?.title)) {
-    breadcrumb.value.push(to.meta.title);
+  if (typeof to?.meta?.title === 'string' && !breadcrumb.includes(to?.meta?.title)) {
+    breadcrumb.push(to.meta.title);
     // 存储最新面包屑，左侧菜单选中项，用于刷新时回显
-    setStorage('breadcrumb', breadcrumb.value);
+    setStorage('breadcrumb', breadcrumb);
     setStorage('menuOption', {
-      defaultOpeneds: menuOption.value.defaultOpeneds,
-      defaultActive: menuOption.value.defaultActive
+      defaultOpeneds: menuOption.defaultOpeneds,
+      defaultActive: menuOption.defaultActive
     });
   } else {
-    const index = breadcrumb.value.findIndex(i => i === to?.meta?.title);
+    const index = breadcrumb.findIndex(i => i === to?.meta?.title);
     const storageBreadcrumb = getStorage('breadcrumb');
     if (index > -1) {
-      breadcrumb.value = storageBreadcrumb?.slice(0, index + 1);
-      index !== storageBreadcrumb?.length - 1 && setStorage('breadcrumb', breadcrumb.value);
+      breadcrumb = storageBreadcrumb?.slice(0, index + 1);
+      index !== storageBreadcrumb?.length - 1 && setStorage('breadcrumb', breadcrumb);
     }
   }
 });
 const handleTabClick = ({ index }: { index: string | undefined }) => {
   if (!index) return;
 
-  const tab = editableTabs.value[~~index];
+  const tab = editableTabs[~~index];
   if (!tab) return;
 
-  editableTabsValue.value = tab.path;
-  menuOption.value.defaultOpeneds = tab.defaultOpeneds;
-  menuOption.value.defaultActive = tab.defaultActive;
-  breadcrumb.value = tab.breadcrumb;
+  editableTabsValue = tab.path;
+  menuOption.defaultOpeneds = tab.defaultOpeneds;
+  menuOption.defaultActive = tab.defaultActive;
+  breadcrumb = tab.breadcrumb;
   router.push({ path: tab.path });
 };
 
 const handleTabRemove = (paneName: TabPanelName) => {
-  const tabs = editableTabs.value;
-  editableTabs.value = tabs.filter(tab => tab.path !== paneName);
-  const length = editableTabs.value.length;
+  const tabs = editableTabs;
+  editableTabs = tabs.filter(tab => tab.path !== paneName);
+  const length = editableTabs.length;
   if (length) {
-    const prevTab = editableTabs.value[length - 1];
-    editableTabsValue.value = prevTab.path;
-    breadcrumb.value = prevTab.breadcrumb;
-    menuOption.value.defaultOpeneds = prevTab.defaultOpeneds;
-    menuOption.value.defaultActive = prevTab.defaultActive;
+    const prevTab = editableTabs[length - 1];
+    editableTabsValue = prevTab.path;
+    breadcrumb = prevTab.breadcrumb;
+    menuOption.defaultOpeneds = prevTab.defaultOpeneds;
+    menuOption.defaultActive = prevTab.defaultActive;
     router.back();
   } else {
     // 删除tabs为0时，重置跳回首页
-    menuOption.value.defaultOpeneds = ['1'];
-    menuOption.value.defaultActive = '1-1';
-    breadcrumb.value = ['Dashboard', '分析页'];
+    menuOption.defaultOpeneds = ['1'];
+    menuOption.defaultActive = '1-1';
+    breadcrumb = ['Dashboard', '分析页'];
     router.push({ path: '/dashboard/analysis' });
   }
 };
@@ -145,16 +145,16 @@ const _renderDefaultMenuActive = (menu: HomeMenuItem[], sortId?: string, title?:
       list.some(item => {
         if (item.name === route.name) {
           nextTick(() => {
-            menuOption.value.defaultOpeneds = [`${id ? id : item.sortId}`];
-            menuOption.value.defaultActive = item.sortId;
-            breadcrumb.value = text ? [text, item.title] : [item.title];
+            menuOption.defaultOpeneds = [`${id ? id : item.sortId}`];
+            menuOption.defaultActive = item.sortId;
+            breadcrumb = text ? [text, item.title] : [item.title];
             // push tab分页栏
-            editableTabs.value.push({
+            editableTabs.push({
               title: route.meta.title as string,
               path: route.path,
-              defaultOpeneds: menuOption.value.defaultOpeneds,
-              defaultActive: menuOption.value.defaultActive,
-              breadcrumb: breadcrumb.value
+              defaultOpeneds: menuOption.defaultOpeneds,
+              defaultActive: menuOption.defaultActive,
+              breadcrumb: breadcrumb
             });
           });
           isFindInMenu = true;
@@ -170,11 +170,11 @@ const _renderDefaultMenuActive = (menu: HomeMenuItem[], sortId?: string, title?:
         const storageBreadcrumb = getStorage('breadcrumb');
         const index = storageBreadcrumb?.findIndex((i: string) => i === route?.meta?.title);
         if (index > -1) {
-          breadcrumb.value = storageBreadcrumb?.slice(0, index + 1);
-          index !== storageBreadcrumb?.length - 1 && setStorage('breadcrumb', breadcrumb.value);
+          breadcrumb = storageBreadcrumb?.slice(0, index + 1);
+          index !== storageBreadcrumb?.length - 1 && setStorage('breadcrumb', breadcrumb);
         }
-        menuOption.value.defaultOpeneds = getStorage('menuOption')?.defaultOpeneds;
-        menuOption.value.defaultActive = getStorage('menuOption')?.defaultActive;
+        menuOption.defaultOpeneds = getStorage('menuOption')?.defaultOpeneds;
+        menuOption.defaultActive = getStorage('menuOption')?.defaultActive;
       });
     }
   }
@@ -184,7 +184,7 @@ const _renderDefaultMenuActive = (menu: HomeMenuItem[], sortId?: string, title?:
 // 获取菜单列表
 (async function getMenu() {
   const content = await systemService.getMenu();
-  menuOption.value.menu = content;
+  menuOption.menu = content;
   if (content) {
     _renderDefaultMenuActive(content);
   }
@@ -208,19 +208,19 @@ const handleToMenu = (
   item: { title: string; sortId: string },
   subItem: { title: string; sortId: string; name: string; path: string }
 ) => {
-  breadcrumb.value = [item.title];
-  menuOption.value.menu;
-  menuOption.value.defaultOpeneds = [item.sortId];
-  menuOption.value.defaultActive = subItem.sortId;
+  breadcrumb = [item.title];
+  menuOption.menu;
+  menuOption.defaultOpeneds = [item.sortId];
+  menuOption.defaultActive = subItem.sortId;
   if (subItem.title && subItem.path) {
-    let isExist = !!editableTabs.value.find(i => i.title === subItem.title);
-    editableTabsValue.value = subItem.path;
+    let isExist = !!editableTabs.find(i => i.title === subItem.title);
+    editableTabsValue = subItem.path;
     if (!isExist) {
-      editableTabs.value.push({
+      editableTabs.push({
         title: subItem.title,
-        defaultOpeneds: menuOption.value.defaultOpeneds,
-        defaultActive: menuOption.value.defaultActive,
-        breadcrumb: breadcrumb.value,
+        defaultOpeneds: menuOption.defaultOpeneds,
+        defaultActive: menuOption.defaultActive,
+        breadcrumb: breadcrumb,
         path: subItem.path
       });
     }

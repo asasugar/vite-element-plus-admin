@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:14:27
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 19:02:58
+ * @LastEditTime: 2023-01-10 17:14:46
 -->
 <template>
   <as-page-wrapper>
@@ -26,27 +26,27 @@ import { AsPageWrapper } from '@/containers/page-wrapper';
 import WorkSpaceHeader from './components/header';
 import WorkSpaceBody from './components/body';
 import type { Page } from '#/global';
+import type { ProjectResult, NavResult, NewsResult } from './typing';
 
-let projectList = $ref([]);
-let navList = $ref([]);
-let newsList = $ref([]);
+let projectList: ProjectResult['list'] = $ref([]);
+let navList: NavResult = $ref([]);
+let newsList: NewsResult = $ref([]);
 let loading = $ref<boolean>(true);
 
 const getProjectList = async () => {
-  const { content } = await projectService.getProjectList<Page>({
+  const content = await projectService.getProjectList<Page, ProjectResult>({
     pageNum: 1,
     pageSize: 9
   });
-  projectList = content;
+  projectList = content?.list ?? [];
 };
 const getQuickNavList = async () => {
-  const content = await systemService.getQuickNavList();
-  navList = content;
+  navList = (await systemService.getQuickNavList<NavResult>()) ?? [];
 };
 const getLatestNews = async () => {
-  const content = await systemService.getLatestNews();
-  newsList = content;
+  newsList = (await systemService.getLatestNews<NewsResult>()) ?? [];
 };
+
 getProjectList();
 getQuickNavList();
 getLatestNews();

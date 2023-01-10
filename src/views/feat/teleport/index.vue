@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-11-24 17:30:47
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-11-25 15:39:55
+ * @LastEditTime: 2023-01-10 17:36:47
 -->
 <template>
   <AsPageWrapper header-title="useTeleport演示">
@@ -18,19 +18,18 @@
   </AsPageWrapper>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { useTeleport } from '@/hooks/use-teleport';
 import AsVnodeTemplate from '@/components/vnode-template';
 
 const AXIOM = 'Teleport text!';
-const appendToBody = ref<boolean>(true);
+let appendToBody = $ref<boolean>(true);
 const { showTeleport, hideTeleport, renderTeleport } = useTeleport(
   () => h('div', AXIOM),
-  appendToBody
+  $$(appendToBody)
 );
 const toggleTeleport = () => {
-  appendToBody.value = !appendToBody.value;
+  appendToBody = !appendToBody;
 };
 </script>
 

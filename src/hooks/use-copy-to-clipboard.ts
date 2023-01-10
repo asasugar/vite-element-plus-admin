@@ -3,9 +3,9 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-29 15:22:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 15:33:48
+ * @LastEditTime: 2023-01-10 17:52:17
  */
-import { ref, watch } from 'vue';
+import { watch } from 'vue';
 
 import { isDef } from '@/utils/is';
 interface Options {
@@ -14,20 +14,18 @@ interface Options {
 export function useCopyToClipboard(initial?: string) {
   const clipboardRef = ref(initial || '');
   const isSuccessRef = ref(false);
-  const copiedRef = ref(false);
 
   watch(
     clipboardRef,
     (str?: string) => {
       if (isDef(str)) {
-        copiedRef.value = true;
         isSuccessRef.value = copyTextToClipboard(str);
       }
     },
     { immediate: !!initial, flush: 'sync' }
   );
 
-  return { clipboardRef, isSuccessRef, copiedRef };
+  return { clipboardRef, isSuccessRef };
 }
 
 export function copyTextToClipboard(input: string, { target = document.body }: Options = {}) {

@@ -3,13 +3,13 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 10:58:34
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-10-12 11:46:31
+ * @LastEditTime: 2023-01-10 18:19:32
 -->
 <template>
-  <span :style="{ color }">{{ value }}</span>
+  <span :style="{ color }">{{ number }}</span>
 </template>
 <script lang="ts" setup>
-import { ref, computed, watchEffect, unref, onMounted, watch } from 'vue';
+import { computed, watchEffect, onMounted, watch } from 'vue';
 import { useTransition, TransitionPresets } from '@vueuse/core';
 
 const props = defineProps({
@@ -76,12 +76,12 @@ const props = defineProps({
 
 const emit = defineEmits(['onStarted', 'onFinished']);
 
-const source = ref(props.startVal);
-const disabled = ref(false);
-let outputValue = useTransition(source);
-const value = computed(() => formatNumber(unref(outputValue)));
+let source = $ref(props.startVal);
+let disabled = $ref(false);
+let outputValue = useTransition($$(source));
+const number = computed(() => formatNumber(outputValue.value));
 watchEffect(() => {
-  source.value = props.startVal;
+  source = props.startVal;
 });
 watch([() => props.startVal, () => props.endVal], () => {
   if (props.autoplay) {
@@ -93,10 +93,10 @@ onMounted(() => {
 });
 function start() {
   run();
-  source.value = props.endVal;
+  source = props.endVal;
 }
 function run() {
-  outputValue = useTransition(source, {
+  outputValue = useTransition($$(source), {
     disabled,
     duration: props.duration,
     onFinished: () => emit('onFinished'),

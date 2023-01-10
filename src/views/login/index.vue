@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:26:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 20:34:11
+ * @LastEditTime: 2023-01-10 18:03:49
 -->
 <template>
   <div class="login">
@@ -42,27 +42,27 @@
 
 <script lang="ts" setup>
 import { ElNotification } from 'element-plus';
-import type { FormItemRule } from 'element-plus';
 import { useRouter } from 'vue-router';
 import { userService } from '@/services';
 import { setToken } from '@/utils/token';
 import { useUserStore } from '@/pinia';
 import AsMousemovePanel from '@/components/mousemove-panel';
+import type { FormItemRule } from 'element-plus';
+import type { Arrayable } from 'element-plus/es/utils';
 import type { LoginForm } from './typing';
 
 const router = useRouter();
+let isLoading = $ref<boolean>(false);
 const ruleFormRef = $ref<FormInstance>();
-const ruleForm: LoginForm = $ref({
+const ruleForm = $ref<LoginForm>({
   username: 'admin',
   password: '123456'
 });
-
-const rules = $ref({
+const rules = $$({
   username: [{ required: 'true', message: '账户不能为空', trigger: 'blur' }],
   password: [{ required: 'true', message: '密码不能为空', trigger: 'blur' }]
-}) as Partial<Record<string, FormItemRule | FormItemRule[]>>;
+}) as Partial<Record<string, Arrayable<FormItemRule>>>;
 
-let isLoading = $ref<boolean>(false);
 const useUser = useUserStore();
 
 // 登录

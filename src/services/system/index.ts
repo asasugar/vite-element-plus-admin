@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 14:00:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-12 09:52:41
+ * @LastEditTime: 2023-01-10 17:12:52
  */
 import {
   apiGetAnalysis,
@@ -46,7 +46,7 @@ class SystemService {
    * 获取快捷导航列表
    * @returns {Array}
    */
-  async getQuickNavList() {
+  async getQuickNavList<T>(): Promise<T | null> {
     const { success, result } = await apiGetQuickNavList();
     if (success) return result;
     return null;
@@ -55,7 +55,7 @@ class SystemService {
    * 获取最新动态
    * @returns {Array}
    */
-  async getLatestNews() {
+  async getLatestNews<T>(): Promise<T | null> {
     const { success, result } = await apiGetLatestNews();
     if (success) return result;
     return null;

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-05-06 17:18:03
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 20:25:06
+ * @LastEditTime: 2023-01-10 17:56:19
 -->
 <template>
   <AsPageWrapper header-title="Excel 导入演示">
@@ -15,9 +15,9 @@
       </div>
     </template>
     <template #bodyContent>
-      <template v-if="tableListRef.length">
+      <template v-if="tableList.length">
         <el-table
-          v-for="(table, index) in tableListRef"
+          v-for="(table, index) in tableList"
           :key="index"
           border
           highlight-current-row
@@ -38,14 +38,13 @@
   </AsPageWrapper>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { AsImportExcel, type ExcelData } from '@/components/excel';
-import type { IExcelTableData } from './typing';
-const tableListRef = ref<IExcelTableData[]>([]);
+import type { ExcelTableData } from './typing';
 
+let tableList = $ref<ExcelTableData[]>([]);
 const loadDataSuccess = (excelDataList: ExcelData[]) => {
-  tableListRef.value = [];
+  tableList = [];
   for (const excelData of excelDataList) {
     const {
       header,
@@ -56,7 +55,7 @@ const loadDataSuccess = (excelDataList: ExcelData[]) => {
     for (const title of header) {
       columns.push({ title, dataIndex: title });
     }
-    tableListRef.value.push({ title: sheetName, dataSource: results, columns });
+    tableList.push({ title: sheetName, dataSource: results, columns });
   }
 };
 </script>

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-18 14:02:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-30 18:06:58
+ * @LastEditTime: 2023-01-10 17:29:28
 -->
 <template>
   <el-row :gutter="10">
@@ -28,14 +28,14 @@
   </el-row>
 </template>
 <script lang="ts" setup>
-import { computed, ref, useAttrs } from 'vue';
+import { useAttrs } from 'vue';
 import VueJsonPretty from 'vue-json-pretty';
 import 'vue-json-pretty/lib/styles.css';
-const inputValue = ref<string>(
+const inputValue = $ref<string>(
   `{"name": "BeJson","url": "http://www.xxx.com","page": 88,"isNonProfit": true,"address": {"street": "科技园路.", "city": "江苏苏州","country": "中国"},"links": [{"name": "Google","url": "http://www.xxx.com"},{"name": "Baidu","url": "http://www.xxx.com"}]}`
 );
-const jsonData = computed(() => {
-  return JSON.parse(inputValue.value);
+const jsonData = $computed(() => {
+  return JSON.parse(inputValue);
 });
 const attrs = useAttrs();
 </script>

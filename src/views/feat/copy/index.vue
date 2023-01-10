@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-29 17:18:03
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-11-24 15:16:52
+ * @LastEditTime: 2023-01-10 17:53:51
 -->
 <template>
   <AsPageWrapper header-title="剪切版">
@@ -16,22 +16,21 @@
   </AsPageWrapper>
 </template>
 <script lang="ts" setup>
-import { ref, unref } from 'vue';
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { ElMessage } from 'element-plus';
 
-const copyValue = ref<string>('');
+const copyValue = $ref<string>('');
 
-const { clipboardRef, copiedRef } = useCopyToClipboard();
+let { clipboardRef, isSuccessRef } = useCopyToClipboard();
 const handleCopy = () => {
-  const value = unref(copyValue);
-  if (!value) {
+  if (!copyValue) {
     ElMessage({ message: `请输入要拷贝的内容！`, type: 'warning' });
     return;
   }
-  clipboardRef.value = value;
-  if (unref(copiedRef)) {
+  clipboardRef.value = copyValue;
+
+  if (isSuccessRef.value) {
     ElMessage({ message: `copy success！`, type: 'success' });
   }
 };

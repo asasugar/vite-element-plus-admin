@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-08 22:22:19
+ * @LastEditTime: 2023-01-10 16:19:33
 -->
 <template>
   <el-card class="card-wrapper" :body-style="{ padding: '12px 12px 2px 12px' }">
@@ -17,7 +17,7 @@
     </template>
     <el-skeleton animated :loading="loading">
       <el-row :gutter="10">
-        <el-col v-for="item in data" :key="item.sortId" :span="8">
+        <el-col v-for="item in projectList" :key="item.sortId" :span="8">
           <el-card shadow="hover" class="card-wrapper--item mb10">
             <template #header>
               <div class="flex verticalcenter">
@@ -37,12 +37,17 @@
   </el-card>
 </template>
 <script lang="ts" setup>
-import { IProject } from '../../typing';
-
-interface Props {
-  data?: IProject[];
-  loading?: boolean;
-}
+type Props = {
+  loading: boolean;
+  projectList?: {
+    sortId: string;
+    sortName: string;
+    icon: string;
+    name: string;
+    desc: string;
+    editTime: string;
+  }[];
+};
 
 defineProps<Props>();
 </script>

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-10-19 17:07:27
+ * @LastEditTime: 2023-01-10 16:19:24
 -->
 <template>
   <el-card>
@@ -14,7 +14,7 @@
     </template>
     <el-skeleton animated :loading="loading">
       <as-grid>
-        <as-grid-item v-for="item in data" :key="item.name">
+        <as-grid-item v-for="item in navList" :key="item.name">
           <div class="flex column center hp100 nav-card">
             <i-ep-home-filled
               v-if="item.name === 'Home'"
@@ -53,11 +53,14 @@
 </template>
 <script lang="ts" setup>
 import { AsGrid, AsGridItem } from '@/containers/grid';
-import { INav } from '../../typing';
-interface Props {
-  data?: INav[];
-  loading?: boolean;
-}
+
+type Props = {
+  loading: boolean;
+  navList?: {
+    name: string;
+    title: string;
+  }[];
+};
 defineProps<Props>();
 </script>
 

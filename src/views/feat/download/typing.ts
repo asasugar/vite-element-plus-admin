@@ -1,7 +1,7 @@
-export type TFileType = 'fileStream' | 'fileUrl' | 'base64Stream' | 'imgUrl';
+export type FileType = 'fileStream' | 'fileUrl' | 'base64Stream' | 'imgUrl';
 
-export interface IDownload {
+export interface DownloadInfo {
   message: string;
   buttonValue: string;
-  type: TFileType;
+  type: FileType;
 }

@@ -14,10 +14,10 @@ export default defineComponent({
       }
     }
   },
-  emits: ['onJumpMenu'],
+  emits: ['goMenu'],
   setup(props, { emit }) {
     const handleRouter = (object: HomeMenuItem | undefined, item: HomeMenuItem) => {
-      emit('onJumpMenu', object, item);
+      emit('goMenu', object, item);
     };
     const recursiveFn = (object: HomeMenuItem | undefined, children: HomeMenuItem[]) => {
       if (children?.length) {

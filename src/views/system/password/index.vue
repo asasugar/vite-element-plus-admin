@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:37
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 15:17:58
+ * @LastEditTime: 2023-01-10 18:05:20
 -->
 <template>
   <as-page-wrapper header-title="修改密码">
@@ -60,12 +60,11 @@
   </as-page-wrapper>
 </template>
 <script lang="ts" setup>
-import { ref, reactive } from 'vue';
 import { ElNotification } from 'element-plus';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 
-const ruleFormRef = ref<FormInstance>();
-const ruleForm = ref({
+const ruleFormRef = $ref<FormInstance>();
+let ruleForm = $ref({
   oldPassword: '',
   newPassword: '',
   againNewPassword: ''
@@ -75,14 +74,14 @@ const checkAgainPassword = (_rule: any, value: any, callback: any) => {
   if (!value) {
     return callback(new Error('不能为空'));
   }
-  if (value !== ruleForm.value.newPassword) {
+  if (value !== ruleForm.newPassword) {
     callback(new Error('两次输入密码不一致'));
   } else {
     callback();
   }
 };
 
-const rules = reactive({
+const rules = $ref({
   oldPassword: [
     {
       required: true,

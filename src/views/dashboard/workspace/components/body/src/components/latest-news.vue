@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-10-19 17:04:14
+ * @LastEditTime: 2023-01-10 16:18:12
 -->
 <template>
   <el-card class="card-wrapper" :body-style="{ padding: '0' }">
@@ -26,7 +26,7 @@
           <el-skeleton-item variant="image" style="width: 272px; height: 168px; margin: 0 20px" />
         </div>
       </template>
-      <as-list :data-source="data">
+      <as-list :data-source="newsList">
         <template #header>
           <div>
             <b>as list vue</b>
@@ -83,12 +83,17 @@
 </template>
 <script lang="ts" setup>
 import { AsList, AsListItem, AsListItemMeta } from '@/components/list';
-import { INews } from '../../typing';
 
-interface Props {
-  data?: INews[];
-  loading?: boolean;
-}
+type Props = {
+  loading: boolean;
+  newsList?: {
+    href: string;
+    title: string;
+    avatar: string;
+    description: string;
+    content: string;
+  }[];
+};
 
 defineProps<Props>();
 </script>
