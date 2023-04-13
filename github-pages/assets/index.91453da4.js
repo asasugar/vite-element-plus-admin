@@ -1,1 +1,0 @@
-import"./index.vue_vue_type_script_setup_true_lang.351c8f0f.js";import{_}from"./index.vue_vue_type_script_setup_true_lang.351c8f0f.js";import"./index.de691d82.js";import"./element-plus.dee36745.js";import"./mockjs.f3824721.js";/* empty css                  */export{_ as default};

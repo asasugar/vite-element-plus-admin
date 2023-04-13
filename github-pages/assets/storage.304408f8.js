@@ -1,1 +1,0 @@
-import{h as r}from"./index.de691d82.js";function s(o,t){if(r(t)){const e=JSON.stringify(t);window.localStorage.setItem(o,e)}else window.localStorage.setItem(o,t)}function n(o){const t=window.localStorage.getItem(o);return t&&JSON.parse(t)}function i(o){window.localStorage.removeItem(o)}export{n as g,i as r,s};
