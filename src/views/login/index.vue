@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:26:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 18:03:49
+ * @LastEditTime: 2023-04-12 18:17:22
 -->
 <template>
   <div class="login">
@@ -52,30 +52,30 @@ import type { Arrayable } from 'element-plus/es/utils';
 import type { LoginForm } from './typing';
 
 const router = useRouter();
-let isLoading = $ref<boolean>(false);
-const ruleFormRef = $ref<FormInstance>();
-const ruleForm = $ref<LoginForm>({
+const isLoading = ref<boolean>(false);
+const ruleFormRef = ref<FormInstance>();
+const ruleForm = ref<LoginForm>({
   username: 'admin',
   password: '123456'
 });
-const rules = $$({
-  username: [{ required: 'true', message: '账户不能为空', trigger: 'blur' }],
-  password: [{ required: 'true', message: '密码不能为空', trigger: 'blur' }]
-}) as Partial<Record<string, Arrayable<FormItemRule>>>;
+const rules = reactive<Partial<Record<string, Arrayable<FormItemRule>>>>({
+  username: [{ required: true, message: '账户不能为空', trigger: 'blur' }],
+  password: [{ required: true, message: '密码不能为空', trigger: 'blur' }]
+});
 
 const useUser = useUserStore();
 
 // 登录
 const submitForm = () => {
-  isLoading = true;
-  ruleFormRef?.validate(async (valid: any) => {
+  isLoading.value = true;
+  ruleFormRef.value?.validate(async (valid: any) => {
     if (valid) {
-      const { username, password } = ruleForm;
+      const { username, password } = ruleForm.value;
       const content = await userService.loginAction({
         username,
         password
       });
-      isLoading = false;
+      isLoading.value = false;
       if (content) {
         ElNotification({
           title: '登录成功',
@@ -89,7 +89,7 @@ const submitForm = () => {
         });
       }
     } else {
-      isLoading = false;
+      isLoading.value = false;
       console.log('error submit!!');
       return false;
     }

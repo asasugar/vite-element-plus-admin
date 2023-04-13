@@ -20,15 +20,15 @@ import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { ElMessage } from 'element-plus';
 
-const copyValue = $ref<string>('');
+const copyValue = ref<string>('');
+const { clipboardRef, isSuccessRef } = useCopyToClipboard();
 
-let { clipboardRef, isSuccessRef } = useCopyToClipboard();
 const handleCopy = () => {
-  if (!copyValue) {
+  if (!copyValue.value) {
     ElMessage({ message: `请输入要拷贝的内容！`, type: 'warning' });
     return;
   }
-  clipboardRef.value = copyValue;
+  clipboardRef.value = copyValue.value;
 
   if (isSuccessRef.value) {
     ElMessage({ message: `copy success！`, type: 'success' });

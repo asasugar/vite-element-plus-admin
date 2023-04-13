@@ -40,20 +40,20 @@ import { userService } from '@/services';
 import type { Page } from '#/global';
 import type { User } from '@/views/system/user/typing';
 
-let tableData = $ref<User[]>([]);
-let loading = $ref(true);
+const tableData = ref<User[]>([]);
+const loading = ref<boolean>(true);
 
 const pageNum = 1;
 const pageSize = 10;
 
 const getUserList = async (pageNum: number, pageSize: number) => {
-  loading = true;
+  loading.value = true;
   const { content }: { content: User[] } = await userService.getUserList<Page>({
     pageNum,
     pageSize
   });
-  loading = false;
-  tableData = content;
+  loading.value = false;
+  tableData.value = content;
 };
 getUserList(pageNum, pageSize);
 
@@ -71,7 +71,7 @@ const handleExportExcel = () => {
   };
 
   const json2excel = new Json2excel({
-    data: tableData,
+    data: tableData.value,
     orderedKey,
     keyMap,
     scope,

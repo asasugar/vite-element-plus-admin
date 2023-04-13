@@ -19,6 +19,7 @@
 import { onMounted } from 'vue';
 import { useECharts, isExist } from '@/hooks/use-echarts';
 import { option1, option2 } from './data';
+import type { Ref } from 'vue';
 import type { TabsPaneContext } from 'element-plus';
 
 const props = defineProps({
@@ -31,16 +32,16 @@ const props = defineProps({
     default: '450px'
   }
 });
-const tabPane = $ref<string>('1');
-const chartRef1 = $ref();
-const chartRef2 = $ref();
+const tabPane = ref<string>('1');
+const chartRef1 = ref<Ref<HTMLDivElement>>();
+const chartRef2 = ref<Ref<HTMLDivElement>>();
 
 onMounted(() => {
   // 初始化第一张图表
-  if (chartRef1) {
-    let isexist = isExist(chartRef1);
+  if (chartRef1.value) {
+    let isexist = isExist(chartRef1.value);
     if (!isexist) {
-      useECharts(chartRef1, option1);
+      useECharts(chartRef1.value, option1);
     }
   }
 });
@@ -48,10 +49,10 @@ onMounted(() => {
 // 点击切换图表为第二张的时候，渲染第二张图表
 const handleClickTab = (pane: TabsPaneContext) => {
   const { name } = pane.props;
-  if (name === '2' && chartRef2) {
-    let isexist = isExist(chartRef2);
+  if (name === '2' && chartRef2.value) {
+    let isexist = isExist(chartRef2.value);
     if (!isexist) {
-      useECharts(chartRef2, option2);
+      useECharts(chartRef2.value, option2);
     }
   }
 };

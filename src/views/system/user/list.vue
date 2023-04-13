@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 19:14:00
+ * @LastEditTime: 2023-04-13 15:42:04
 -->
 <template>
   <as-page-wrapper header-title="用户管理">
@@ -77,33 +77,33 @@ import type { User } from './typing';
 
 const router = useRouter();
 
-let tableData = $ref<User[]>([]);
-let size = $ref<string>('default');
-let search = $ref<string>('');
-let currentPage = $ref<number>(1);
+const tableData = ref<User[]>([]);
+const size = ref<string>('default');
+const search = ref<string>('');
+const currentPage = ref<number>(1);
+const pageSize = ref<number>(10);
+const totalNum = ref<number>(0);
+const loading = ref<boolean>(true);
+const multipleTableRef = ref<TableInstance>();
+const multipleSelection = ref<User[]>([]);
 let pageNum = 1;
-let pageSize = $ref<number>(10);
-let totalNum = $ref<number>(0);
-let loading = $ref(true);
-let multipleTableRef = $ref<TableInstance>();
-let multipleSelection = $ref<User[]>([]);
 
 const getUserList = async (pageNum: number, pageSize: number) => {
-  loading = true;
+  loading.value = true;
   const { total, content } = await userService.getUserList<Page>({
     pageNum,
     pageSize
   });
-  loading = false;
-  totalNum = total;
-  tableData = content;
+  loading.value = false;
+  totalNum.value = total;
+  tableData.value = content;
 };
-getUserList(pageNum, pageSize);
+getUserList(pageNum, pageSize.value);
 
-const filterTableData = $computed(
+const filterTableData = computed(
   () =>
-    tableData?.filter(
-      data => !search || data.userName.toLowerCase().includes(search.toLowerCase())
+    tableData.value?.filter(
+      data => !search.value || data.userName.toLowerCase().includes(search.value.toLowerCase())
     ) ?? []
 );
 
@@ -112,32 +112,32 @@ const handleInsert = () => {
 };
 
 const handleSelectionChange = (val: User[]) => {
-  multipleSelection = val;
+  multipleSelection.value = val;
 };
 
 const reset = () => {
-  tableData.length = 0;
-  search = '';
-  currentPage = 1;
+  tableData.value.length = 0;
+  search.value = '';
+  currentPage.value = 1;
   pageNum = 1;
-  pageSize = 10;
-  totalNum = 0;
-  loading = true;
-  multipleSelection.length = 0;
+  pageSize.value = 10;
+  totalNum.value = 0;
+  loading.value = true;
+  multipleSelection.value.length = 0;
 };
 
 const handleRefresh = () => {
   reset();
-  getUserList(pageNum, pageSize);
+  getUserList(pageNum, pageSize.value);
 };
 
 const handleCommand = (command: string) => {
-  if (size === command || !command) return;
-  size = command;
+  if (size.value === command || !command) return;
+  size.value = command;
 };
 
 const handleExportExcel = () => {
-  if (multipleSelection?.length) {
+  if (multipleSelection.value?.length) {
     const keyMap = {
       id: '序号',
       userName: '用户名',
@@ -151,7 +151,7 @@ const handleExportExcel = () => {
     };
 
     const json2excel = new Json2excel({
-      data: multipleSelection,
+      data: multipleSelection.value,
       orderedKey,
       keyMap,
       scope,
@@ -177,21 +177,21 @@ const handleEdit = (item: User) => {
 };
 
 const handleDel = (id: number | undefined) => {
-  tableData = filterTableData?.filter(data => data.id !== id);
+  tableData.value = filterTableData.value?.filter(data => data.id !== id);
   return true;
 };
 
 const handleSizeChange = (val: number) => {
   pageNum = 1;
-  pageSize = val;
-  getUserList(pageNum, pageSize);
+  pageSize.value = val;
+  getUserList(pageNum, pageSize.value);
 
   console.log(`${val} items per page`);
 };
 
 const handleCurrentChange = (val: number) => {
   pageNum = val;
-  getUserList(pageNum, pageSize);
+  getUserList(pageNum, pageSize.value);
   console.log(`current page: ${val}`);
 };
 </script>

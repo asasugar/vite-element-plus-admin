@@ -38,7 +38,7 @@ import { AsMarkdown, MarkDownActionType } from '@/components/markdown';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { watch } from 'vue';
 
-const markDownRef = $ref<Nullable<MarkDownActionType>>(null);
+const markDownRef = ref<Nullable<MarkDownActionType>>(null);
 
 const markdownCache =
   window.localStorage.getItem('markdown') ??
@@ -47,30 +47,32 @@ const markdownCache =
 # content
 `;
 
-let valueRef = $ref(markdownCache);
-let cardContent = $ref<string>('');
+const valueRef = ref(markdownCache);
+const cardContent = ref<string>('');
 
 const handleChange = (v: string) => {
-  valueRef = v;
+  valueRef.value = v;
 };
 
 const toggleTheme = (theme: 'dark' | 'classic') => {
-  if (!markDownRef) return;
-  const vditor = markDownRef?.getVditor();
+  const instance = unref(markDownRef);
+  if (!instance) return;
+  const vditor = instance?.getVditor();
   vditor?.setTheme(theme);
 };
 
 const onMd2html = async (mdtext: string) => {
-  if (!markDownRef) return;
-  cardContent = await markDownRef?.md2html(mdtext);
+  const instance = unref(markDownRef);
+  if (!instance) return;
+  cardContent.value = await instance?.md2html(mdtext);
 };
 
 const handleClear = () => {
-  valueRef = '';
+  valueRef.value = '';
 };
 
 watch(
-  [$$(valueRef), $$(markDownRef)],
+  [valueRef, markDownRef],
   currValue => {
     !currValue.includes(null) && onMd2html(currValue[0]);
   },

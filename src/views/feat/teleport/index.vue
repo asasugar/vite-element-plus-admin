@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-11-24 17:30:47
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 17:36:47
+ * @LastEditTime: 2023-04-12 18:12:57
 -->
 <template>
   <AsPageWrapper header-title="useTeleport演示">
@@ -23,13 +23,13 @@ import { useTeleport } from '@/hooks/use-teleport';
 import AsVnodeTemplate from '@/components/vnode-template';
 
 const AXIOM = 'Teleport text!';
-let appendToBody = $ref<boolean>(true);
+const appendToBody = ref<boolean>(true);
 const { showTeleport, hideTeleport, renderTeleport } = useTeleport(
   () => h('div', AXIOM),
-  $$(appendToBody)
+  appendToBody
 );
 const toggleTeleport = () => {
-  appendToBody = !appendToBody;
+  appendToBody.value = !appendToBody.value;
 };
 </script>
 

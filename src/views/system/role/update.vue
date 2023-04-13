@@ -62,11 +62,11 @@ import type { EpPropMergeType } from 'element-plus/es/utils';
 const route = useRoute();
 const router = useRouter();
 
-const size = $ref<ComponentSize>('default');
-const labelPosition: EpPropMergeType<StringConstructor, 'right' | 'left' | 'top', unknown> =
-  $ref('right');
-const ruleFormRef = $ref<FormInstance>();
-let ruleForm = $ref<RoleItem>({
+const size = ref<ComponentSize>('default');
+const labelPosition =
+  ref<EpPropMergeType<StringConstructor, 'right' | 'left' | 'top', unknown>>('right');
+const ruleFormRef = ref<FormInstance>();
+const ruleForm = ref<RoleItem>({
   role: {
     key: '',
     value: ''
@@ -74,7 +74,7 @@ let ruleForm = $ref<RoleItem>({
   status: true,
   remark: ''
 });
-let headerTitle = $ref<string>('');
+const headerTitle = ref<string>('');
 const storageFormDetail = getStorage('roleFormDetail');
 
 if (
@@ -82,17 +82,17 @@ if (
   route?.params?.data &&
   typeof route.params.data === 'string'
 ) {
-  headerTitle = '编辑角色';
-  ruleForm = JSON.parse(route.params.data);
+  headerTitle.value = '编辑角色';
+  ruleForm.value = JSON.parse(route.params.data);
   setStorage('roleFormDetail', ruleForm);
 } else if (route.name === 'SystemRoleEdit' && storageFormDetail) {
-  headerTitle = '编辑用户';
-  ruleForm = storageFormDetail;
+  headerTitle.value = '编辑用户';
+  ruleForm.value = storageFormDetail;
 } else {
-  headerTitle = '新增角色';
+  headerTitle.value = '新增角色';
 }
 
-const rules = $ref({
+const rules = reactive({
   'role.value': [
     {
       required: true,

@@ -63,7 +63,7 @@
 <script lang="ts" setup>
 import { AsPageWrapper } from '@/containers/page-wrapper';
 
-const hobbyList = $ref<string[]>(['New technology', 'Car', 'LOL']);
+const hobbyList = reactive<string[]>(['New technology', 'Car', 'LOL']);
 </script>
 
 <style lang="less" scoped></style>

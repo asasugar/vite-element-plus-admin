@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-29 15:03:12
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 20:25:49
+ * @LastEditTime: 2023-04-12 18:30:36
 -->
 <template>
   <AsPageWrapper header-title="水印示例">
@@ -31,16 +31,16 @@ import { useWatermask } from '@/hooks/use-watermask';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { ElMessage } from 'element-plus';
 
-const watermaskValue = $ref<string>('');
+const watermaskValue = ref<string>('');
 
 const { setWatermask, clear } = useWatermask();
 
 const handleSetWatermask = () => {
-  if (!watermaskValue) {
+  if (!watermaskValue.value) {
     ElMessage({ message: `请输入水印文本！`, type: 'warning' });
     return;
   }
-  setWatermask(watermaskValue);
+  setWatermask(watermaskValue.value);
 };
 </script>
 

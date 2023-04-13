@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:37
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 20:45:50
+ * @LastEditTime: 2023-04-12 18:47:24
 -->
 <template>
   <as-page-wrapper header-title="权限管理">
@@ -29,7 +29,7 @@ const props = {
   label: 'label',
   children: 'children'
 };
-let authTree = $ref<AuthTree[]>();
+const authTree = ref<AuthTree[]>();
 
 const normalizeaTreeData: (data: RouteInfo[]) => any = (data: RouteInfo[]) => {
   if (data?.length) {
@@ -48,7 +48,7 @@ const normalizeaTreeData: (data: RouteInfo[]) => any = (data: RouteInfo[]) => {
 };
 (async function () {
   const routes = await systemService.getRoute();
-  authTree = normalizeaTreeData(routes?.[0]?.children);
+  authTree.value = normalizeaTreeData(routes?.[0]?.children);
 })();
 
 const handleSaveAuth = () => {

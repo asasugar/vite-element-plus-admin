@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-11 17:22:54
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 10:50:46
+ * @LastEditTime: 2023-04-13 15:41:05
 -->
 <template>
   <as-page-wrapper :header-title="headerTitle">
@@ -80,11 +80,11 @@ import type { EpPropMergeType } from 'element-plus/es/utils';
 const route = useRoute();
 const router = useRouter();
 
-const size = $ref<ComponentSize>('default');
-const labelPosition: EpPropMergeType<StringConstructor, 'right' | 'left' | 'top', unknown> =
-  $ref('right');
-const ruleFormRef = $ref<FormInstance>();
-let ruleForm = $ref<UserInsert>({
+const size = ref<ComponentSize>('default');
+const labelPosition =
+  ref<EpPropMergeType<StringConstructor, 'right' | 'left' | 'top', unknown>>('right');
+const ruleFormRef = ref<FormInstance>();
+const ruleForm = ref<UserInsert>({
   userName: '',
   role: {
     key: '',
@@ -92,24 +92,24 @@ let ruleForm = $ref<UserInsert>({
   },
   email: ''
 });
-let headerTitle = $ref<string>('');
+const headerTitle = ref<string>('');
 const storageFormDetail = getStorage('userFormDetail');
 if (
   route.name === 'SystemUserEdit' &&
   route?.params?.data &&
   typeof route.params.data === 'string'
 ) {
-  headerTitle = '编辑用户';
-  ruleForm = JSON.parse(route.params.data) as UserInsert;
+  headerTitle.value = '编辑用户';
+  ruleForm.value = JSON.parse(route.params.data) as UserInsert;
   setStorage('userFormDetail', ruleForm);
 } else if (route.name === 'SystemUserEdit' && storageFormDetail) {
-  headerTitle = '编辑用户';
-  ruleForm = storageFormDetail;
+  headerTitle.value = '编辑用户';
+  ruleForm.value = storageFormDetail;
 } else {
-  headerTitle = '新增用户';
+  headerTitle.value = '新增用户';
 }
 
-const rules = $ref({
+const rules = reactive({
   userName: [
     {
       required: true,
@@ -132,10 +132,10 @@ const rules = $ref({
     }
   ]
 });
-let roleList = $ref<RoleItem[]>([]);
+const roleList = ref<RoleItem[]>([]);
 const getRoleList = async () => {
   const { content } = await userService.getRoleList({});
-  roleList = content;
+  roleList.value = content;
 };
 getRoleList();
 

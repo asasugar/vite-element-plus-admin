@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:14:27
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 15:06:33
+ * @LastEditTime: 2023-04-12 18:22:33
 -->
 <template>
   <div class="p20">
@@ -17,13 +17,13 @@ import GrowEChart from './components/grow-echart.vue';
 
 import { systemService } from '@/services';
 
-let loading = $ref(true);
+const loading = ref<boolean>(true);
 
-let analysis = $ref({});
+const analysis = ref({});
 
 const getAnalysis = async () => {
-  analysis = await systemService.getAnalysis();
-  loading = false;
+  analysis.value = await systemService.getAnalysis();
+  loading.value = false;
 };
 getAnalysis();
 </script>

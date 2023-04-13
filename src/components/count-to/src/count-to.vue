@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 10:58:34
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 18:19:32
+ * @LastEditTime: 2023-04-12 17:56:25
 -->
 <template>
   <span :style="{ color }">{{ number }}</span>
@@ -76,12 +76,12 @@ const props = defineProps({
 
 const emit = defineEmits(['onStarted', 'onFinished']);
 
-let source = $ref(props.startVal);
-let disabled = $ref(false);
-let outputValue = useTransition($$(source));
+const source = ref(props.startVal);
+const disabled = ref(false);
+let outputValue = useTransition(source);
 const number = computed(() => formatNumber(outputValue.value));
 watchEffect(() => {
-  source = props.startVal;
+  source.value = props.startVal;
 });
 watch([() => props.startVal, () => props.endVal], () => {
   if (props.autoplay) {
@@ -93,10 +93,10 @@ onMounted(() => {
 });
 function start() {
   run();
-  source = props.endVal;
+  source.value = props.endVal;
 }
 function run() {
-  outputValue = useTransition($$(source), {
+  outputValue = useTransition(source, {
     disabled,
     duration: props.duration,
     onFinished: () => emit('onFinished'),

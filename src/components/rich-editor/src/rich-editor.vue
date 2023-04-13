@@ -29,6 +29,6 @@ import { QuillEditor } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import { useAttrs } from 'vue';
 
-const richContent = $ref('');
+const richContent = ref<string>('');
 const attrs = useAttrs();
 </script>

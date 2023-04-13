@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:37
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 18:05:20
+ * @LastEditTime: 2023-04-12 18:49:05
 -->
 <template>
   <as-page-wrapper header-title="修改密码">
@@ -63,8 +63,8 @@
 import { ElNotification } from 'element-plus';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 
-const ruleFormRef = $ref<FormInstance>();
-let ruleForm = $ref({
+const ruleFormRef = ref<FormInstance>();
+const ruleForm = reactive({
   oldPassword: '',
   newPassword: '',
   againNewPassword: ''
@@ -81,7 +81,7 @@ const checkAgainPassword = (_rule: any, value: any, callback: any) => {
   }
 };
 
-const rules = $ref({
+const rules = reactive({
   oldPassword: [
     {
       required: true,

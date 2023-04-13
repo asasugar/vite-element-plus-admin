@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-05-06 17:18:03
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 17:56:19
+ * @LastEditTime: 2023-04-12 18:28:43
 -->
 <template>
   <AsPageWrapper header-title="Excel 导入演示">
@@ -42,9 +42,9 @@ import { AsPageWrapper } from '@/containers/page-wrapper';
 import { AsImportExcel, type ExcelData } from '@/components/excel';
 import type { ExcelTableData } from './typing';
 
-let tableList = $ref<ExcelTableData[]>([]);
+const tableList = reactive<ExcelTableData[]>([]);
 const loadDataSuccess = (excelDataList: ExcelData[]) => {
-  tableList = [];
+  tableList.length = 0;
   for (const excelData of excelDataList) {
     const {
       header,

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-12-08 17:08:51
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 17:14:59
+ * @LastEditTime: 2023-04-12 18:40:05
 -->
 
 <template>
@@ -99,7 +99,7 @@
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import SheepCard from './sheep-card';
 
-let option = $ref({
+const option = reactive({
   x: 6,
   y: 4,
   z: 8,
@@ -107,13 +107,13 @@ let option = $ref({
   maxCardTypeNum: 11,
   maxPickNum: 3
 });
-let step = $ref(0);
-let result = $ref(false);
-let cardList: SheepCard[] = $ref([]);
-let penddingList: SheepCard[] = $ref([]); // 暂存中的消除卡片列表
-let clearList: SheepCard[] = $ref([]); // 已消除卡片列表
-let pickList: SheepCard[] = $ref([]); // 取出的卡片列表
-const tools = $ref({
+const step = ref<number>(0);
+const result = ref<boolean>(false);
+const cardList = ref<SheepCard[]>([]);
+const penddingList = ref<SheepCard[]>([]); // 暂存中的消除卡片列表
+const clearList = ref<SheepCard[]>([]); // 已消除卡片列表
+const pickList = ref<SheepCard[]>([]); // 取出的卡片列表
+const tools = reactive({
   pick: true,
   rand: true
 });
@@ -140,10 +140,10 @@ const handleRandCard = () => {
     return;
   }
   tools.rand = false;
-  const length = cardList.length;
-  cardList?.forEach((item: SheepCard) => {
+  const length = cardList.value.length;
+  cardList.value?.forEach((item: SheepCard) => {
     const randNum = Math.floor(length * Math.random());
-    const newItem: SheepCard = cardList[randNum];
+    const newItem: SheepCard = cardList.value[randNum];
     let temp;
     temp = item.style.left;
     item.style.left = newItem.style.left;
@@ -162,7 +162,7 @@ const handleRandCard = () => {
     newItem.z = temp;
   });
 
-  cardList.sort((a: { z: number }, b: { z: number }) => a.z - b.z);
+  cardList.value.sort((a: { z: number }, b: { z: number }) => a.z - b.z);
   calcCover();
 };
 
@@ -174,16 +174,16 @@ const handlePickCard = () => {
     return false;
   }
   tools.pick = false;
-  pickList = penddingList.slice(0, option.maxPickNum);
+  pickList.value = penddingList.value.slice(0, option.maxPickNum);
   setTimeout(() => {
-    pickList.forEach((item: SheepCard, index: number) => {
+    pickList.value.forEach((item: SheepCard, index: number) => {
       item.style.top = '70%';
       item.style.left = leftOffset.value + index * SheepCard.X * 2 + 'px';
       calcValueList[item.val]--;
     });
   }, 0);
-  penddingList = penddingList.slice(option.maxPickNum);
-  penddingList.forEach((item: SheepCard, index: number) => {
+  penddingList.value = penddingList.value.slice(option.maxPickNum);
+  penddingList.value.forEach((item: SheepCard, index: number) => {
     item.style.top = '90%';
     item.style.left = leftOffset.value + index * SheepCard.X * 2 + 'px';
   });
@@ -293,18 +293,18 @@ const getCardList = ({
     }
   }
   initCardIList.reverse();
-  cardList = initCardIList;
+  cardList.value = initCardIList;
 };
 
 /**
  * @description: 生成游戏
  */
 const initGame = () => {
-  step = 1;
+  step.value = 1;
   getCardList(option);
-  penddingList = [];
-  clearList = [];
-  pickList = [];
+  penddingList.value = [];
+  clearList.value = [];
+  pickList.value = [];
   tools.pick = true;
   tools.rand = true;
   setCardValue({ maxCardTypeNum: Number(option.maxCardTypeNum) });
@@ -321,7 +321,7 @@ const setCardValue = ({ maxCardTypeNum }: { maxCardTypeNum: number }) => {
   const valStack = new Array(maxCardTypeNum);
   calcValueList = new Array(maxCardTypeNum + 1).fill(0);
   // 给卡片设置值
-  cardList.forEach(item => {
+  cardList.value?.forEach(item => {
     const value = Math.ceil(Math.random() * maxCardTypeNum);
     if (valStack[value]) {
       valStack[value].push(item);
@@ -356,8 +356,8 @@ const calcCover = () => {
   }
 
   // 从后往前，后面的层数高
-  for (let i = cardList.length - 1; i >= 0; i--) {
-    const item = cardList[i];
+  for (let i = cardList.value.length - 1; i >= 0; i--) {
+    const item = cardList.value[i];
     const { x, y } = item;
     if (coverMap[y][x]) {
       item.cover = true;
@@ -377,9 +377,9 @@ const calcCover = () => {
   }
 };
 const handleClickPickCard = (item: SheepCard) => {
-  cardList.push(item);
-  const index = pickList.indexOf(item);
-  pickList = pickList.slice(0, index).concat(pickList.slice(index + 1));
+  cardList.value.push(item);
+  const index = pickList.value.indexOf(item);
+  pickList.value = pickList.value.slice(0, index).concat(pickList.value.slice(index + 1));
   handleClickCard(item);
 };
 
@@ -387,51 +387,51 @@ const handleClickPickCard = (item: SheepCard) => {
  * @description: 消除3个一样的卡片
  */
 const handleRemoveThreeCard = () => {
-  penddingList.some(item => {
+  penddingList.value.some(item => {
     if (calcValueList[item.val] === 3) {
-      penddingList.forEach(newItem => {
+      penddingList.value.forEach(newItem => {
         if (newItem.val === item.val) {
-          clearList.push(newItem);
+          clearList.value.push(newItem);
         }
       });
       setTimeout(() => {
-        clearList.forEach(item => {
+        clearList.value.forEach(item => {
           item.style.left = leftOffset.value - 60 + 'px';
         });
       }, 300);
 
-      penddingList = penddingList.filter(newItem => {
+      penddingList.value = penddingList.value.filter(newItem => {
         return newItem.val !== item.val;
       });
-      penddingList.forEach((item, index) => {
+      penddingList.value.forEach((item, index) => {
         item.style.top = '90%';
         item.style.left = leftOffset.value + index * SheepCard.X * 2 + 'px';
       });
       calcValueList[item.val] = 0;
-      if (cardList.length === 0) {
-        step = 2;
-        result = true;
+      if (cardList.value.length === 0) {
+        step.value = 2;
+        result.value = true;
       }
     }
   });
 
-  if (penddingList.length >= 7) {
-    step = 2;
-    result = false;
+  if (penddingList.value.length >= 7) {
+    step.value = 2;
+    result.value = false;
   }
 };
 // 点击卡片
 const handleClickCard = (item: SheepCard) => {
   timer && clearTimeout(timer);
   handleRemoveThreeCard();
-  penddingList.push(item);
-  const index = cardList.indexOf(item);
-  cardList = cardList.slice(0, index).concat(cardList.slice(index + 1));
+  penddingList.value.push(item);
+  const index = cardList.value.indexOf(item);
+  cardList.value = cardList.value.slice(0, index).concat(cardList.value.slice(index + 1));
   calcCover();
   calcValueList[item.val]++;
   setTimeout(() => {
     item.style.top = '90%';
-    item.style.left = leftOffset.value + (penddingList.length - 1) * SheepCard.X * 2 + 'px';
+    item.style.left = leftOffset.value + (penddingList.value.length - 1) * SheepCard.X * 2 + 'px';
   }, 0);
 
   timer = setTimeout(() => {
@@ -444,7 +444,7 @@ const handleStartGame = () => {
 };
 // 设置
 const handleSetGame = () => {
-  step = 0;
+  step.value = 0;
 };
 // 重来
 const handleRePlay = () => {

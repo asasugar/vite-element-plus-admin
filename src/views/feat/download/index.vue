@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-29 10:45:02
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 17:33:55
+ * @LastEditTime: 2023-04-12 18:27:05
 -->
 <template>
   <as-page-wrapper header-title="文件下载">
@@ -29,7 +29,7 @@ import {
 import imgBase64 from './imgBase64';
 import type { DownloadInfo, FileType } from './typing';
 
-const downloadList = $ref<DownloadInfo[]>([
+const downloadList = reactive<DownloadInfo[]>([
   { message: '根据后台接口文件流下载', buttonValue: '文件流下载', type: 'fileStream' },
   { message: '根据文件地址下载文件', buttonValue: '文件地址下载', type: 'fileUrl' },
   { message: 'base64流下载', buttonValue: 'base64流下载', type: 'base64Stream' },

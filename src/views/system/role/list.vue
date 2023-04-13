@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 19:11:31
+ * @LastEditTime: 2023-04-13 15:33:14
 -->
 <template>
   <as-page-wrapper header-title="角色管理">
@@ -90,79 +90,79 @@ import type { Page } from '#/global';
 
 const router = useRouter();
 
-let tableData = $ref<RoleItem[]>([]);
-let size = $ref<string>('default');
-let search = $ref<string>('');
-let currentPage = $ref<number>(1);
+const tableData = ref<RoleItem[]>([]);
+const size = ref<string>('default');
+const search = ref<string>('');
+const currentPage = ref<number>(1);
+const pageSize = ref<number>(10);
+const totalNum = ref<number>(0);
+const loading = ref<boolean>(true);
+const multipleTableRef = ref<TableInstance>();
+const multipleSelection = ref<RoleItem[]>([]);
 let pageNum = 1;
-let pageSize = $ref<number>(10);
-let totalNum = $ref<number>(0);
-let loading = $ref(true);
-let multipleTableRef = $ref<TableInstance>();
-let multipleSelection = $ref<RoleItem[]>([]);
 
 const getRoleList = async (pageNum: number, pageSize: number) => {
-  loading = true;
+  loading.value = true;
   const { total, content }: RoleResult = await userService.getRoleList<Page>({
     pageNum,
     pageSize
   });
-  loading = false;
-  totalNum = total;
-  tableData = content;
+  loading.value = false;
+  totalNum.value = total;
+  tableData.value = content;
 };
-getRoleList(pageNum, pageSize);
+getRoleList(pageNum, pageSize.value);
 
-const filterTableData = $computed(() =>
-  tableData?.filter(
+const filterTableData = computed(() =>
+  tableData.value?.filter(
     data =>
-      !search ||
-      data.role.key.toLowerCase().includes(search.toLowerCase()) ||
-      data.role.value.toLowerCase().includes(search.toLowerCase())
+      !search.value ||
+      data.role.key.toLowerCase().includes(search.value.toLowerCase()) ||
+      data.role.value.toLowerCase().includes(search.value.toLowerCase())
   )
 );
 
 const handleSizeChange = (val: number) => {
   pageNum = 1;
-  pageSize = val;
-  getRoleList(pageNum, pageSize);
+  pageSize.value = val;
+  getRoleList(pageNum, pageSize.value);
 
   console.log(`${val} items per page`);
 };
 
 const handleCurrentChange = (val: number) => {
   pageNum = val;
-  getRoleList(pageNum, pageSize);
+  getRoleList(pageNum, pageSize.value);
   console.log(`current page: ${val}`);
 };
 
 const handleSelectionChange = (val: RoleItem[]) => {
-  multipleSelection = val;
+  multipleSelection.value = val;
 };
 
 const reset = () => {
-  tableData.length = 0;
-  search = '';
-  currentPage = 1;
+  tableData.value.length = 0;
+  search.value = '';
+  currentPage.value = 1;
   pageNum = 1;
-  pageSize = 10;
-  totalNum = 0;
-  loading = true;
-  multipleSelection.length = 0;
+  pageSize.value = 10;
+  totalNum.value = 0;
+  loading.value = true;
+  multipleSelection.value.length = 0;
 };
 
 const handleRefresh = () => {
   reset();
-  getRoleList(pageNum, pageSize);
+  getRoleList(pageNum, pageSize.value);
 };
 
 const handleCommand = (command: string) => {
-  if (size === command || !command) return;
-  size = command;
+  if (size.value === command || !command) return;
+  size.value = command;
 };
 
 const handleExportExcel = () => {
-  if (multipleSelection?.length) {
+  if (multipleSelection.value?.length) {
     const keyMap = {
       id: '序号',
       status: '状态',
@@ -174,7 +174,7 @@ const handleExportExcel = () => {
     const scope = {
       role: 'value'
     };
-    const excelData = multipleSelection.map(i => {
+    const excelData = multipleSelection.value.map(i => {
       i.status = i.status ? '启用' : '禁用';
       return i;
     });
@@ -214,7 +214,7 @@ const handleEditAuth = (item: RoleItem) => {
 };
 
 const handleDel = (id: number | undefined) => {
-  tableData = filterTableData?.filter(data => data.id !== id);
+  tableData.value = filterTableData.value?.filter(data => data.id !== id);
   return true;
 };
 </script>
