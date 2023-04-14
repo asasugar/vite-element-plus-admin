@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.18](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.17...v0.0.18) (2023-04-14)
+
+
+### Features
+
+* 🎸 新增github-pages文件夹用于部署静态服务 ([f3ec0b4](https://github.com/asasugar/vite-element-plus-admin/commit/f3ec0b4b0bedbf07ac0d8130956fcbf5b7049d24))
+* 🎸 Feat element plus comp declare ([3ada6bc](https://github.com/asasugar/vite-element-plus-admin/commit/3ada6bc2cdfdd6927843c57a21ad06414bc1640c))
+
+
+### Bug Fixes
+
+* 🐛 Remove $ & add 'github-pages' to eslint ignore ([c3a3cb0](https://github.com/asasugar/vite-element-plus-admin/commit/c3a3cb04c356258a2b8e8ce57e32947273ea738f))
+
+
+### Code Refactoring
+
+* 💡 同步官方废弃响应式语法糖 ([2eb3d2e](https://github.com/asasugar/vite-element-plus-admin/commit/2eb3d2ec3447a77d944e4c3a9b6f020fc74f6600))
+
+
+### CI
+
+* 🎡 Add ignore github-pages ([13d5ee5](https://github.com/asasugar/vite-element-plus-admin/commit/13d5ee5f1a8b290fe7ee5ac9450bce4f026ee245))
+* 🎡 Update gh-pages.sh ([15463d8](https://github.com/asasugar/vite-element-plus-admin/commit/15463d8caa56f746da6932fc4feea4432a74e321))
+* 🎡 Update sh ([aa680ba](https://github.com/asasugar/vite-element-plus-admin/commit/aa680ba4ee8745ca689bcb374b1d31cba76e0ea6))
+
 ### [0.0.17](https://github.com/asasugar/vite-element-plus-admin/compare/v0.0.16...v0.0.17) (2023-01-10)
 
 
