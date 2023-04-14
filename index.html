@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/vite-element-plus-admin/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+  <script type="module" crossorigin src="/vite-element-plus-admin/assets/index.c622b150.js"></script>
+  <link rel="modulepreload" crossorigin href="/vite-element-plus-admin/assets/element-plus.dee36745.js">
+  <link rel="modulepreload" crossorigin href="/vite-element-plus-admin/assets/mockjs.f3824721.js">
+  <link rel="stylesheet" href="/vite-element-plus-admin/assets/index.c8468fa3.css">
+</head>
+
+<body>
+  <div id="app"></div>
+  
+</body>
+
+<script>
+  (function () {
+    var redirect = sessionStorage.redirect;
+    delete sessionStorage.redirect;
+    if (redirect && redirect != location.href) {
+      history.replaceState(null, null, redirect);
+    }
+  })();
+</script>
+
+</html>
