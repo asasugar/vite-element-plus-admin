@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-13 15:33:14
+ * @LastEditTime: 2023-04-18 17:23:49
 -->
 <template>
   <as-page-wrapper header-title="角色管理">
@@ -12,7 +12,7 @@
         <el-button type="primary" @click="handleInsert">新增角色</el-button>
         <el-button type="primary" @click="handleExportExcel">导出excel</el-button>
         <el-input v-model="search" class="ml10" placeholder="Role to search" />
-        <AsTableSettings @onRefresh="handleRefresh" @onSize="handleCommand" />
+        <AsTableSettings @onRefresh="handleRefresh" @on-size="handleCommand" />
       </div>
     </template>
     <template #bodyContent>
@@ -87,11 +87,13 @@ import { AsPageWrapper } from '@/containers/page-wrapper';
 import AsTableSettings from '@/components/table-settings';
 import type { RoleItem, RoleResult } from './typing';
 import type { Page } from '#/global';
+import type { EpPropMergeType } from 'element-plus/es/utils';
 
 const router = useRouter();
 
 const tableData = ref<RoleItem[]>([]);
-const size = ref<string>('default');
+const size =
+  ref<EpPropMergeType<StringConstructor, '' | 'default' | 'small' | 'large', never>>('default');
 const search = ref<string>('');
 const currentPage = ref<number>(1);
 const pageSize = ref<number>(10);
@@ -156,7 +158,9 @@ const handleRefresh = () => {
   getRoleList(pageNum, pageSize.value);
 };
 
-const handleCommand = (command: string) => {
+const handleCommand = (
+  command: EpPropMergeType<StringConstructor, 'default' | 'small' | 'large', never>
+) => {
   if (size.value === command || !command) return;
   size.value = command;
 };

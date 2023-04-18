@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-13 15:42:04
+ * @LastEditTime: 2023-04-18 17:22:47
 -->
 <template>
   <as-page-wrapper header-title="用户管理">
@@ -74,11 +74,13 @@ import { AsPageWrapper } from '@/containers/page-wrapper';
 import AsTableSettings from '@/components/table-settings';
 import type { Page } from '#/global';
 import type { User } from './typing';
+import type { EpPropMergeType } from 'element-plus/es/utils';
 
 const router = useRouter();
 
 const tableData = ref<User[]>([]);
-const size = ref<string>('default');
+const size =
+  ref<EpPropMergeType<StringConstructor, '' | 'default' | 'small' | 'large', never>>('default');
 const search = ref<string>('');
 const currentPage = ref<number>(1);
 const pageSize = ref<number>(10);
@@ -131,7 +133,9 @@ const handleRefresh = () => {
   getUserList(pageNum, pageSize.value);
 };
 
-const handleCommand = (command: string) => {
+const handleCommand = (
+  command: EpPropMergeType<StringConstructor, '' | 'default' | 'small' | 'large', never>
+) => {
   if (size.value === command || !command) return;
   size.value = command;
 };
