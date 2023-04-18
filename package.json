@@ -11,8 +11,7 @@
     "lint": "eslint . --fix --ext .js,.ts,.vue",
     "log": "standard-version",
     "prepare": "husky install",
-    "lint-staged": "lint-staged",
-    "github-pages": "/bin/bash gh-pages.sh"
+    "lint-staged": "lint-staged"
   },
   "lint-staged": {
     "src/**/*.{js,ts,vue}": "pnpm lint"

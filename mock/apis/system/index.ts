@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-18 17:44:36
+ * @LastEditTime: 2023-04-18 17:49:16
  */
 export default [
   // 看板数据
@@ -74,7 +74,7 @@ export default [
                     path: 'analysis',
                     component: 'views/dashboard/analysis/index',
                     meta: {
-                      title: '分析页test'
+                      title: '分析页'
                     }
                   },
                   {
