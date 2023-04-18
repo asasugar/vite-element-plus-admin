@@ -19,4 +19,3 @@ export interface RouteInfo {
   };
   children?: RouteInfo[];
 }
-
