@@ -24,7 +24,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "#/*": ["./types/*"]
-    }
+    },
+    "isolatedModules": true
   },
   "include": [
     "src/**/*.ts",

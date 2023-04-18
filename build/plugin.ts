@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-10-19 17:28:25
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-12 17:53:21
+ * @LastEditTime: 2023-04-18 11:17:42
  */
 
 import { splitVendorChunkPlugin, type PluginOption } from 'vite';

@@ -3,7 +3,7 @@
   "version": "0.0.18",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "dev": "vite",
+    "dev": "tsc --noEmit --watch && vite",
     "build": "vue-tsc --noEmit && vite build",
     "build:debug": "vue-tsc --noEmit && vite build --debug",
     "preview": "vite preview",
@@ -69,7 +69,7 @@
     "unplugin-auto-import": "^0.11.2",
     "unplugin-icons": "^0.14.11",
     "unplugin-vue-components": "^0.22.8",
-    "vite": "3.1.7",
+    "vite": "4.2.1",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-vue-setup-extend": "^0.4.0",
     "vue-eslint-parser": "^9.1.0",
