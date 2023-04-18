@@ -2,9 +2,9 @@
 name: Deploy static content to Pages
 
 on:
-  # 仅在推送到vite-element-plus-admin分支时运行。
+  # 仅在推送到默认分支时运行。
   push:
-    branches: ['vite-element-plus-admin']
+    branches: ['master']
 
   # 这个选项可以使你手动在 Action tab 页面触发工作流
   workflow_dispatch:
@@ -40,7 +40,7 @@ jobs:
           node-version: 18
           cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
       - name: Build
         run: pnpm build
       - name: Copy
