@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:37
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-12 18:47:24
+ * @LastEditTime: 2023-04-24 17:57:26
 -->
 <template>
   <as-page-wrapper header-title="权限管理">
@@ -19,8 +19,8 @@
 import { useRouter } from 'vue-router';
 import { systemService } from '@/services';
 import { AsPageWrapper } from '@/containers/page-wrapper';
-import type { RouteInfo } from '#/vue-router';
 import type { AuthTree } from './typing';
+import type { ApiGetRouteRes } from '@/apis/system/typing';
 
 const router = useRouter();
 
@@ -31,16 +31,16 @@ const props = {
 };
 const authTree = ref<AuthTree[]>();
 
-const normalizeaTreeData: (data: RouteInfo[]) => any = (data: RouteInfo[]) => {
+const normalizeaTreeData = (data?: ApiGetRouteRes): AuthTree[] => {
   if (data?.length) {
-    return data.map(i => {
+    return data.map((i: any) => {
       if (i?.children?.length) {
         i.children = normalizeaTreeData(i.children);
       }
       return {
         value: i.name,
         label: i.meta?.title ?? i.name,
-        children: i.children
+        children: i.children as AuthTree['children']
       };
     });
   }

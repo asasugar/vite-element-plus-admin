@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 14:00:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 18:42:38
+ * @LastEditTime: 2023-04-25 14:08:54
  */
 import { getToken } from '@/utils/token';
 
@@ -14,6 +14,8 @@ import {
   apiGetRoleList,
   apiGetUserList
 } from '@/apis/user';
+import type { Page } from '#/global';
+import type { ApiLoginData } from '@/apis/user/typing';
 class UserService {
   // 初始化返回用户信息
   init() {
@@ -23,10 +25,10 @@ class UserService {
   }
   /**
    * 登录
-   * @param data
-   * @returns
+   * @param {ApiLoginData} data
+   * @return {Promise<Nullable<ApiGetBaseUserInfoRes>>}
    */
-  async loginAction(data: object) {
+  async loginAction(data: ApiLoginData) {
     const { success, result } = await apiLogin(data, {
       cache: true
     });
@@ -35,41 +37,47 @@ class UserService {
   }
   /**
    * 注销
-   * @returns {Boolean}
+   * @returns {Promise<Nullable<ApiLogoutRes>>}
    */
   async logoutAction() {
     const { success, result } = await apiLogout();
+
     if (success) return result;
     return null;
   }
   /**
    * 获取用户信息
-   * @returns {Boolean}
+   * @returns {Promise<AxiosResult<Nullable<ApiGetBaseUserInfoRes>>>}
    */
   async getBaseUserInfo() {
+    const token = getToken();
+    if (!token) return null;
     const { success, result } = await apiGetBaseUserInfo({
-      token: getToken()
+      token
     });
+
     if (success) return result;
     return null;
   }
   /**
    * 获取角色列表
-   * @param data
-   * @returns {Array}
+   * @param {Page} data
+   * @returns {Promise<AxiosResult<Nullable<ApiGetRoleListRes>>>}
    */
-  async getRoleList<T>(data: T) {
+  async getRoleList(data?: Page) {
     const { success, result } = await apiGetRoleList(data);
+
     if (success) return result;
     return null;
   }
   /**
    * 获取用户列表
-   * @param data
-   * @returns {Array}
+   * @param {Page} data
+   * @returns {Promise<AxiosResult<Nullable<ApiGetUserListRes>>>}
    */
-  async getUserList<T>(data: T) {
+  async getUserList(data: Page) {
     const { success, result } = await apiGetUserList(data);
+
     if (success) return result;
     return null;
   }

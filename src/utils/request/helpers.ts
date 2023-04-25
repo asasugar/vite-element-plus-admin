@@ -3,17 +3,18 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-30 16:01:52
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 17:56:55
+ * @LastEditTime: 2023-04-24 15:46:14
  */
 import Qs from 'qs';
 import { isJsonStr } from '@/utils/is';
-import type { AxiosOptions } from '#/axios';
+import type { CustomAxiosRequestConfig } from '#/axios';
+
 /**
  * @description 用于根据当前请求的信息，生成请求 Key；
- * @param {AxiosOptions} config
+ * @param {CustomAxiosRequestConfig} config
  * @returns {*}
  */
-export function generateReqKey(config: AxiosOptions) {
+export function generateReqKey(config: CustomAxiosRequestConfig) {
   // 响应的时候，response.config 中的data 是一个JSON字符串，所以需要转换一下
   if (typeof config?.data === 'string') {
     if (isJsonStr(config.data)) {

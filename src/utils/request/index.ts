@@ -3,11 +3,12 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 13:51:30
+ * @LastEditTime: 2023-04-24 17:08:45
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import Axios, { AxiosInstance } from 'axios';
+import Axios from 'axios';
+import type { AxiosInstance, AxiosError, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 import { getToken } from '@/utils/token';
 import { addPendingRequest, removePendingRequest } from './cancelRepeatRquest'; // 取消重复请求
 import { againRequest } from './requestAgainSend'; // 请求重发
@@ -15,30 +16,9 @@ import {
   requestInterceptor as cacheReqInterceptor,
   responseInterceptor as cacheResInterceptor
 } from './requestCache';
-import { ElMessage } from 'element-plus';
-import type { AxiosOptions, AxiosResCode, AxiosResponseHandle } from '#/axios';
+import type { CustomAxiosRequestConfig } from '#/axios';
 
-// 返回结果处理
-// 自定义约定接口返回{code: xxx, result: xxx, message:'err message'},根据api模拟，具体可根据业务调整
-const responseHandle: AxiosResponseHandle = {
-  200: (response: { data: AnyObject }) => {
-    return Promise.resolve(response.data);
-  },
-  201: (response: { data: { message?: string } }) => {
-    ElMessage({ message: `参数异常:${response.data.message}`, type: 'warning' });
-    return Promise.resolve(response.data);
-  },
-  404: (response: { data: AnyObject }) => {
-    ElMessage({ message: '接口地址不存在', type: 'error' });
-    return Promise.reject(response.data);
-  },
-  default: (response: { data: { message?: string } }) => {
-    ElMessage({ message: response.data.message || '操作失败', type: 'error' });
-    return Promise.reject(response.data);
-  }
-};
-
-const axios: AxiosInstance = Axios.create({
+const instance: AxiosInstance = Axios.create({
   baseURL: `${import.meta.env.VITE_BASE_URL}${import.meta.env.VITE_REPO_URL}` || '',
   timeout: 50000,
   headers: {
@@ -49,8 +29,8 @@ const axios: AxiosInstance = Axios.create({
 });
 
 // 添加请求拦截器
-axios.interceptors.request.use(
-  config => {
+instance.interceptors.request.use(
+  (config: InternalAxiosRequestConfig) => {
     if (
       config?.method?.toLocaleLowerCase() === 'post' ||
       config?.method?.toLocaleLowerCase() === 'put'
@@ -67,32 +47,33 @@ axios.interceptors.request.use(
       alert('不允许的请求方法：' + config.method);
     }
     // pendding 中的请求，后续请求不发送（由于存放的peddingMap 的key 和参数有关，所以放在参数处理之后）
-    addPendingRequest(config as AxiosOptions); // 把当前请求信息添加到pendingRequest对象中
+    addPendingRequest(config as CustomAxiosRequestConfig); // 把当前请求信息添加到pendingRequest对象中
     //  请求缓存
-    cacheReqInterceptor(config as AxiosOptions);
+    cacheReqInterceptor(config as CustomAxiosRequestConfig);
     return config;
   },
-  error => {
+  (error: AxiosError) => {
     return Promise.reject(error);
   }
 );
 
 // 添加响应拦截器
-axios.interceptors.response.use(
-  response => {
+instance.interceptors.response.use(
+  (response: AxiosResponse) => {
     // 响应正常时候就从pendingRequest对象中移除请求
-    removePendingRequest(response.config as AxiosOptions);
-    cacheResInterceptor(response as { config: AxiosOptions; data: { code: number } });
-    const code: AxiosResCode = response.data.code;
-    return ((code && responseHandle[code]) || responseHandle['default'])(response);
+    removePendingRequest(response.config as CustomAxiosRequestConfig);
+    cacheResInterceptor(response);
+
+    // return response.data
+    return response;
   },
-  error => {
+  (error: AxiosError) => {
     // 从pending 列表中移除请求
-    removePendingRequest(error.config || {});
+    removePendingRequest((error.config as CustomAxiosRequestConfig) || {});
     // 需要特殊处理请求被取消的情况
     if (!Axios.isCancel(error)) {
       // 请求重发
-      againRequest(error, axios);
+      againRequest(error, instance);
     }
     // 请求缓存处理方式
     if (Axios.isCancel(error) && (error?.message as any)?.data?.config?.cache) {
@@ -101,4 +82,5 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-export default axios;
+
+export default instance;

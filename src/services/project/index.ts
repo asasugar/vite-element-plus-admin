@@ -3,16 +3,18 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 14:00:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 18:21:54
+ * @LastEditTime: 2023-04-24 16:55:59
  */
 import { apiGetProjectList, apiGetRepositoryList } from '@/apis/project';
+import type { Page } from '#/global';
+
 class ProjectService {
   /**
    * 看板数据
    * @param data
    * @returns {Object}
    */
-  async getProjectList<T, U>(data: T): Promise<U | null> {
+  async getProjectList(data: Page) {
     const { success, result } = await apiGetProjectList(data);
     if (success) return result;
     return null;
@@ -22,7 +24,7 @@ class ProjectService {
    * @param data
    * @returns {Object}
    */
-  async getRepositoryList<T>(data: T) {
+  async getRepositoryList(data: any) {
     const { success, result } = await apiGetRepositoryList(data);
     if (success) return result;
     return null;

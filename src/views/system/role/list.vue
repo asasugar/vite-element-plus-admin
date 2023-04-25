@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-18 17:23:49
+ * @LastEditTime: 2023-04-25 14:28:25
 -->
 <template>
   <as-page-wrapper header-title="角色管理">
@@ -85,13 +85,13 @@ import { userService } from '@/services';
 import { ElMessage } from 'element-plus';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import AsTableSettings from '@/components/table-settings';
-import type { RoleItem, RoleResult } from './typing';
-import type { Page } from '#/global';
+import { useRoleStore } from '@/pinia';
 import type { EpPropMergeType } from 'element-plus/es/utils';
+import type { RoleContent, ApiGetRoleListRes } from '@/apis/user/typing';
 
 const router = useRouter();
 
-const tableData = ref<RoleItem[]>([]);
+const tableData = ref<ApiGetRoleListRes['content']>([]);
 const size =
   ref<EpPropMergeType<StringConstructor, '' | 'default' | 'small' | 'large', never>>('default');
 const search = ref<string>('');
@@ -100,18 +100,21 @@ const pageSize = ref<number>(10);
 const totalNum = ref<number>(0);
 const loading = ref<boolean>(true);
 const multipleTableRef = ref<TableInstance>();
-const multipleSelection = ref<RoleItem[]>([]);
+const multipleSelection = ref<ApiGetRoleListRes['content']>([]);
 let pageNum = 1;
 
 const getRoleList = async (pageNum: number, pageSize: number) => {
   loading.value = true;
-  const { total, content }: RoleResult = await userService.getRoleList<Page>({
+  const content = await userService.getRoleList({
     pageNum,
     pageSize
   });
-  loading.value = false;
-  totalNum.value = total;
-  tableData.value = content;
+  if (content) {
+    const { total, content: tableContent } = content;
+    loading.value = false;
+    totalNum.value = total;
+    tableData.value = tableContent;
+  }
 };
 getRoleList(pageNum, pageSize.value);
 
@@ -138,7 +141,7 @@ const handleCurrentChange = (val: number) => {
   console.log(`current page: ${val}`);
 };
 
-const handleSelectionChange = (val: RoleItem[]) => {
+const handleSelectionChange = (val: ApiGetRoleListRes['content']) => {
   multipleSelection.value = val;
 };
 
@@ -179,7 +182,7 @@ const handleExportExcel = () => {
       role: 'value'
     };
     const excelData = multipleSelection.value.map(i => {
-      i.status = i.status ? '启用' : '禁用';
+      i.status = i.status ? '启用' : ('禁用' as any);
       return i;
     });
     const json2excel = new Json2excel({
@@ -207,14 +210,19 @@ const handleInsert = () => {
   router.push({ name: 'SystemRoleInsert' });
 };
 
-const handleEdit = (item: RoleItem) => {
+const handleEdit = (item: RoleContent) => {
   if (!item) return;
-  router.push({ name: 'SystemRoleEdit', params: { data: JSON.stringify(item) } });
+  const { setUpdateRoleItem } = useRoleStore();
+  setUpdateRoleItem(item);
+  router.push({ name: 'SystemRoleEdit' });
 };
 
-const handleEditAuth = (item: RoleItem) => {
+const handleEditAuth = (item: RoleContent) => {
   if (!item) return;
-  router.push({ name: 'SystemAuth', params: { role: JSON.stringify(item.role) } });
+
+  const { setRoleAuth } = useRoleStore();
+  setRoleAuth(item.role);
+  router.push({ name: 'SystemAuth' });
 };
 
 const handleDel = (id: number | undefined) => {

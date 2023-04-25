@@ -1,12 +1,3 @@
-export interface User {
-  id: number;
-  createTime: number;
-  role: {
-    key: string;
-    value: string;
-  };
-  userName: string;
-  email: string;
-}
+import type { UserContent } from '@/apis/user/typing';
 
-export type UserInsert = Omit<User, 'id' | 'createTime'>;
+export type UserInsert = Omit<UserContent, 'id' | 'createTime'>;

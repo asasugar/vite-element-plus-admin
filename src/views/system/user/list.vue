@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-18 17:22:47
+ * @LastEditTime: 2023-04-25 13:55:55
 -->
 <template>
   <as-page-wrapper header-title="用户管理">
@@ -72,13 +72,13 @@ import Json2excel from '@asasugar-use/custom-json2excel';
 import { ElMessage } from 'element-plus';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import AsTableSettings from '@/components/table-settings';
-import type { Page } from '#/global';
-import type { User } from './typing';
+import { useUserStore } from '@/pinia';
 import type { EpPropMergeType } from 'element-plus/es/utils';
+import type { UserContent, ApiGetUserListRes } from '@/apis/user/typing';
 
 const router = useRouter();
 
-const tableData = ref<User[]>([]);
+const tableData = ref<ApiGetUserListRes['content']>([]);
 const size =
   ref<EpPropMergeType<StringConstructor, '' | 'default' | 'small' | 'large', never>>('default');
 const search = ref<string>('');
@@ -87,18 +87,21 @@ const pageSize = ref<number>(10);
 const totalNum = ref<number>(0);
 const loading = ref<boolean>(true);
 const multipleTableRef = ref<TableInstance>();
-const multipleSelection = ref<User[]>([]);
+const multipleSelection = ref<ApiGetUserListRes['content']>([]);
 let pageNum = 1;
 
 const getUserList = async (pageNum: number, pageSize: number) => {
   loading.value = true;
-  const { total, content } = await userService.getUserList<Page>({
+  const content = await userService.getUserList({
     pageNum,
     pageSize
   });
-  loading.value = false;
-  totalNum.value = total;
-  tableData.value = content;
+  if (content) {
+    const { total, content: tableContent } = content;
+    loading.value = false;
+    totalNum.value = total;
+    tableData.value = tableContent;
+  }
 };
 getUserList(pageNum, pageSize.value);
 
@@ -113,7 +116,7 @@ const handleInsert = () => {
   router.push({ name: 'SystemUserInsert' });
 };
 
-const handleSelectionChange = (val: User[]) => {
+const handleSelectionChange = (val: ApiGetUserListRes['content']) => {
   multipleSelection.value = val;
 };
 
@@ -175,9 +178,11 @@ const handleExportExcel = () => {
   }
 };
 
-const handleEdit = (item: User) => {
+const handleEdit = (item: UserContent) => {
   if (!item) return;
-  router.push({ name: 'SystemUserEdit', params: { data: JSON.stringify(item) } });
+  const { setUpdateUserItem } = useUserStore();
+  setUpdateUserItem(item);
+  router.push({ name: 'SystemUserEdit' });
 };
 
 const handleDel = (id: number | undefined) => {

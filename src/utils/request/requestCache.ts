@@ -3,12 +3,12 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 18:15:04
+ * @LastEditTime: 2023-04-24 15:15:17
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Axios from 'axios';
-import type { AxiosOptions } from '#/axios';
 import { generateReqKey } from './helpers';
+import type { CustomAxiosRequestConfig, CustomAxiosResponse } from '#/axios';
 
 const options = {
   storage: true, // 是否开启loclastorage缓存
@@ -70,7 +70,7 @@ const cacheHandler = {
 };
 const CACHES = new Proxy(_CACHES, cacheHandler);
 
-export function requestInterceptor(config: AxiosOptions) {
+export function requestInterceptor(config: CustomAxiosRequestConfig) {
   // 开启缓存则保存请求结果和cancel 函数
   if (config.cache) {
     const data = CACHES[`${generateReqKey(config)}`];
@@ -90,7 +90,7 @@ export function requestInterceptor(config: AxiosOptions) {
   }
 }
 
-export function responseInterceptor(response: { config: AxiosOptions; data: { code: number } }) {
+export function responseInterceptor(response: CustomAxiosResponse) {
   // 返回的code === 200 时候才会缓存下来,可根据实际业务配置
   if (response?.config?.cache && response?.data?.code === 200) {
     const data = {

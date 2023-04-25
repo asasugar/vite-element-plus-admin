@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-10-19 17:28:25
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-18 11:17:42
+ * @LastEditTime: 2023-04-25 14:12:25
  */
 
 import { splitVendorChunkPlugin, type PluginOption } from 'vite';
@@ -30,7 +30,7 @@ export default function getPlugins({ command, mode }: { command: string; mode: s
     AutoImport({
       // Auto import functions from Vue, e.g. ref, reactive, toRef...
       // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
-      imports: ['vue'],
+      imports: ['vue', 'vue-router', 'pinia'],
 
       // Auto import functions from Element Plus, e.g. ElMessage, ElMessageBox... (with style)
       // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)

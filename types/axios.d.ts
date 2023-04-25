@@ -3,48 +3,37 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-03-29 15:00:08
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 13:50:40
+ * @LastEditTime: 2023-04-24 16:28:56
  */
+import type { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
-export type Method =
-  | 'get'
-  | 'GET'
-  | 'delete'
-  | 'DELETE'
-  | 'head'
-  | 'HEAD'
-  | 'options'
-  | 'OPTIONS'
-  | 'post'
-  | 'POST'
-  | 'put'
-  | 'PUT'
-  | 'patch'
-  | 'PATCH';
+export type Method = 'get' | 'delete' | 'head' | 'options' | 'post' | 'put' | 'patch';
 
-export interface AxiosOptions {
-  url: string;
-  method?: Method;
+export interface RequestExtendsOptions {
   cancelRequest?: boolean;
-  cancelToken?: string | AxiosStatic.CancelToken;
   cache?: boolean;
   setExpireTime?: Date;
   retry?: number;
   __retryCount?: number;
   retryDelay?: number;
-  data?: any;
-  params?: AnyObject;
 }
 
-export interface AxiosResult<T = null> {
-  result: T;
-  code: number;
-  success: boolean;
+export type CustomAxiosRequestConfig = RequestExtendsOptions & InternalAxiosRequestConfig;
+
+export interface CustomAxiosResponse<D = any> extends AxiosResponse<D> {
+  config: CustomAxiosRequestConfig;
 }
 
 export type AxiosResCode = 200 | 201 | 404 | 'default';
 
+export interface AxiosResult<T = null> {
+  result: T;
+  success: boolean;
+  code?: AxiosResCode;
+  message?: string;
+}
+
 export type AxiosResponseHandle = Record<
   AxiosResCode,
-  (response: AxiosResponse) => Promise<AxiosResponse<any, any> | AxiosResult>
+  (response: CustomAxiosResponse<AxiosResult>) => Promise<AxiosResult>
 >;

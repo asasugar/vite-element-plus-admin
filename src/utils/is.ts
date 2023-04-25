@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-29 15:24:51
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 18:18:08
+ * @LastEditTime: 2023-04-21 18:34:38
  */
 const toString = Object.prototype.toString;
 
@@ -118,10 +118,10 @@ export function isValidMap(map: any) {
 /**
  * @description 判断一个字符串是否为JSON字符串
  * @export
- * @param {string} str
+ * @param {unknown} str
  * @returns {*}  {boolean}
  */
-export function isJsonStr(str: string) {
+export function isJsonStr(str: unknown) {
   if (isString(str)) {
     try {
       const obj = JSON.parse(str);

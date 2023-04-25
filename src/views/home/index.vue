@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-18 17:00:22
+ * @LastEditTime: 2023-04-24 18:04:40
 -->
 <template>
   <el-container class="layout-container">
@@ -69,7 +69,7 @@ import { useGlobalStore, useUserStore } from '@/pinia';
 import { routes } from '@/router';
 import HomeAside from './components/home-aside';
 import type { TabPaneName } from 'element-plus';
-import type { HomeTabInfo, HomeMenuInfo, HomeMenuItem } from './typing';
+import type { HomeTabInfo, HomeMenuInfo } from './typing';
 
 const useGlobal = useGlobalStore();
 const useUser = useUserStore();
@@ -80,7 +80,7 @@ const { keepAliveInclude } = storeToRefs(useGlobal);
 const menuOption = reactive<HomeMenuInfo>({
   defaultOpeneds: ['1'],
   defaultActive: '1-1',
-  menu: []
+  menu: null
 });
 const { userinfo } = storeToRefs(useUser);
 const breadcrumb = ref<string[]>([]);
@@ -137,11 +137,11 @@ const handleTabRemove = (paneName: TabPaneName) => {
 };
 
 // 刷新时渲染选中的菜单项
-const _renderDefaultMenuActive = (menu: HomeMenuItem[], sortId?: string, title?: string) => {
+const _renderDefaultMenuActive = (menu: HomeMenuInfo['menu'], sortId?: string, title?: string) => {
   if (route.name) {
     let isFindInMenu = false;
-    (function recursiveFn(list: HomeMenuItem[], id?: string, text?: string) {
-      list.some(item => {
+    (function recursiveFn(list, id?: string, text?: string) {
+      list?.some(item => {
         if (item.name === route.name) {
           nextTick(() => {
             menuOption.defaultOpeneds = [`${id ? id : item.sortId}`];
@@ -208,7 +208,6 @@ const handleToMenu = (
   subItem: { title: string; sortId: string; name: string; path: string }
 ) => {
   breadcrumb.value = [item.title];
-  menuOption.menu;
   menuOption.defaultOpeneds = [item.sortId];
   menuOption.defaultActive = subItem.sortId;
   if (subItem.title && subItem.path) {

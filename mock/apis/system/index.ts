@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-18 17:49:16
+ * @LastEditTime: 2023-04-25 10:19:11
  */
 export default [
   // 看板数据
@@ -274,16 +274,16 @@ export default [
                           title: '新增角色',
                           keepAlive: true
                         }
+                      },
+                      {
+                        name: 'SystemRoleEdit',
+                        path: 'edit',
+                        component: 'views/system/role/update',
+                        meta: {
+                          title: '编辑角色',
+                          keepAlive: true
+                        }
                       }
-                      // {
-                      //   name: 'SystemRoleEdit',
-                      //   path: 'edit',
-                      //   component: 'views/system/role/update',
-                      //   meta: {
-                      //     title: '编辑角色',
-                      //     keepAlive: true
-                      //   }
-                      // }
                     ]
                   },
                   {

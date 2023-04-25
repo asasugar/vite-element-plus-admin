@@ -4,7 +4,3 @@ export interface UserInfo {
   username?: string;
   avatar?: string;
 }
-
-export interface UserState {
-  userinfo: Nullable<UserInfo>;
-}

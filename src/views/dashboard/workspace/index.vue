@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:14:27
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-12 18:26:03
+ * @LastEditTime: 2023-04-24 16:56:34
 -->
 <template>
   <as-page-wrapper>
@@ -25,26 +25,26 @@ import { projectService, systemService } from '@/services';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import WorkSpaceHeader from './components/header';
 import WorkSpaceBody from './components/body';
-import type { Page } from '#/global';
-import type { ProjectResult, NavResult, NewsResult } from './typing';
+import type { ApiGetProjectRes } from '@/apis/project/typing';
+import type { ApiGetQuickNavRes, ApiGetLatestNewsRes } from '@/apis/system/typing';
 
-const projectList = ref<ProjectResult['list']>([]);
-const navList = ref<NavResult>([]);
-const newsList = ref<NewsResult>([]);
+const projectList = ref<ApiGetProjectRes['list']>([]);
+const navList = ref<ApiGetQuickNavRes>([]);
+const newsList = ref<ApiGetLatestNewsRes>([]);
 const loading = ref<boolean>(true);
 
 const getProjectList = async () => {
-  const content = await projectService.getProjectList<Page, ProjectResult>({
+  const content = await projectService.getProjectList({
     pageNum: 1,
     pageSize: 9
   });
   projectList.value = content?.list ?? [];
 };
 const getQuickNavList = async () => {
-  navList.value = (await systemService.getQuickNavList<NavResult>()) ?? [];
+  navList.value = (await systemService.getQuickNavList()) ?? [];
 };
 const getLatestNews = async () => {
-  newsList.value = (await systemService.getLatestNews<NewsResult>()) ?? [];
+  newsList.value = (await systemService.getLatestNews()) ?? [];
 };
 
 getProjectList();

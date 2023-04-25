@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-17 20:26:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-12 18:17:22
+ * @LastEditTime: 2023-04-25 14:23:13
 -->
 <template>
   <div class="login">
@@ -49,12 +49,12 @@ import { useUserStore } from '@/pinia';
 import AsMousemovePanel from '@/components/mousemove-panel';
 import type { FormItemRule } from 'element-plus';
 import type { Arrayable } from 'element-plus/es/utils';
-import type { LoginForm } from './typing';
+import type { ApiLoginData } from '@/apis/user/typing';
 
 const router = useRouter();
 const isLoading = ref<boolean>(false);
 const ruleFormRef = ref<FormInstance>();
-const ruleForm = ref<LoginForm>({
+const ruleForm = ref<ApiLoginData>({
   username: 'admin',
   password: '123456'
 });
@@ -62,8 +62,6 @@ const rules = reactive<Partial<Record<string, Arrayable<FormItemRule>>>>({
   username: [{ required: true, message: '账户不能为空', trigger: 'blur' }],
   password: [{ required: true, message: '密码不能为空', trigger: 'blur' }]
 });
-
-const useUser = useUserStore();
 
 // 登录
 const submitForm = () => {
@@ -83,7 +81,9 @@ const submitForm = () => {
           type: 'success'
         });
         setToken(content.token);
-        useUser.updateUserinfo(content);
+
+        const { updateUserinfo } = useUserStore();
+        updateUserinfo(content);
         router.replace({
           name: 'Home'
         });

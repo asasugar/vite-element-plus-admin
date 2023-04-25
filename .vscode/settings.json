@@ -74,5 +74,6 @@
     },
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.maxTokenizationLineLength": 100000
+  "editor.maxTokenizationLineLength": 100000,
+  "vue.features.codeActions.enable": false
 }

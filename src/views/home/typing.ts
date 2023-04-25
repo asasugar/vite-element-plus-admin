@@ -1,23 +1,16 @@
-// types
-export interface HomeCommonInfo {
-  title: string;
-  path: string;
-}
+import type { ApiGetMenuRes } from '@/apis/system/typing';
 
-export interface HomeTabInfo extends HomeCommonInfo {
+// types
+export interface HomeTabInfo {
   defaultOpeneds: string[];
   defaultActive: string;
   breadcrumb: string[];
-}
-
-export interface HomeMenuItem extends HomeCommonInfo {
-  sortId: string;
-  name: string;
-  children?: HomeMenuItem[];
+  title: string;
+  path: string;
 }
 
 export interface HomeMenuInfo {
   defaultOpeneds: string[];
   defaultActive: string;
-  menu: HomeMenuItem[];
+  menu: Nullable<ApiGetMenuRes>;
 }

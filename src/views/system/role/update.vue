@@ -54,9 +54,8 @@
 import { onUnmounted } from 'vue';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { useRoute, useRouter } from 'vue-router';
-import { setStorage, getStorage, removeStorage } from '@/utils/storage';
+import { useRoleStore } from '@/pinia';
 import type { ComponentSize } from 'element-plus';
-import type { RoleItem } from './typing';
 import type { EpPropMergeType } from 'element-plus/es/utils';
 
 const route = useRoute();
@@ -66,32 +65,9 @@ const size = ref<ComponentSize>('default');
 const labelPosition =
   ref<EpPropMergeType<StringConstructor, 'right' | 'left' | 'top', unknown>>('right');
 const ruleFormRef = ref<FormInstance>();
-const ruleForm = ref<RoleItem>({
-  role: {
-    key: '',
-    value: ''
-  },
-  status: true,
-  remark: ''
-});
-const headerTitle = ref<string>('');
-const storageFormDetail = getStorage('roleFormDetail');
 
-if (
-  route.name === 'SystemRoleEdit' &&
-  route?.params?.data &&
-  typeof route.params.data === 'string'
-) {
-  headerTitle.value = '编辑角色';
-  ruleForm.value = JSON.parse(route.params.data);
-  setStorage('roleFormDetail', ruleForm);
-} else if (route.name === 'SystemRoleEdit' && storageFormDetail) {
-  headerTitle.value = '编辑用户';
-  ruleForm.value = storageFormDetail;
-} else {
-  headerTitle.value = '新增角色';
-}
-
+const headerTitle = ref<string>(route.name === 'SystemRoleEdit' ? '编辑角色' : '新增角色');
+const { updateRoleItem: ruleForm } = useRoleStore();
 const rules = reactive({
   'role.value': [
     {
@@ -128,7 +104,8 @@ const resetForm = (formEl: FormInstance | undefined) => {
 };
 
 onUnmounted(() => {
-  removeStorage('roleFormDetail');
+  const roleStore = useRoleStore();
+  roleStore.$reset();
 });
 </script>
 <style lang="less" scoped>

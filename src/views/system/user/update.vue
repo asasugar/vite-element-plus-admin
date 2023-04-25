@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-11 17:22:54
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-13 15:41:05
+ * @LastEditTime: 2023-04-25 14:16:01
 -->
 <template>
   <as-page-wrapper :header-title="headerTitle">
@@ -67,15 +67,13 @@
 </template>
 
 <script lang="ts" setup>
-import { onUnmounted } from 'vue';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { useRoute, useRouter } from 'vue-router';
 import { userService } from '@/services';
-import { setStorage, getStorage, removeStorage } from '@/utils/storage';
+import { useUserStore } from '@/pinia';
 import type { ComponentSize } from 'element-plus';
-import type { RoleItem } from '../role/typing';
-import type { UserInsert } from './typing';
 import type { EpPropMergeType } from 'element-plus/es/utils';
+import type { ApiGetRoleListRes } from '@/apis/user/typing';
 
 const route = useRoute();
 const router = useRouter();
@@ -84,30 +82,9 @@ const size = ref<ComponentSize>('default');
 const labelPosition =
   ref<EpPropMergeType<StringConstructor, 'right' | 'left' | 'top', unknown>>('right');
 const ruleFormRef = ref<FormInstance>();
-const ruleForm = ref<UserInsert>({
-  userName: '',
-  role: {
-    key: '',
-    value: ''
-  },
-  email: ''
-});
-const headerTitle = ref<string>('');
-const storageFormDetail = getStorage('userFormDetail');
-if (
-  route.name === 'SystemUserEdit' &&
-  route?.params?.data &&
-  typeof route.params.data === 'string'
-) {
-  headerTitle.value = '编辑用户';
-  ruleForm.value = JSON.parse(route.params.data) as UserInsert;
-  setStorage('userFormDetail', ruleForm);
-} else if (route.name === 'SystemUserEdit' && storageFormDetail) {
-  headerTitle.value = '编辑用户';
-  ruleForm.value = storageFormDetail;
-} else {
-  headerTitle.value = '新增用户';
-}
+
+const headerTitle = ref<string>(route.name === 'SystemUserEdit' ? '编辑用户' : '新增用户');
+const { updateUserItem: ruleForm } = useUserStore();
 
 const rules = reactive({
   userName: [
@@ -132,10 +109,13 @@ const rules = reactive({
     }
   ]
 });
-const roleList = ref<RoleItem[]>([]);
+const roleList = ref<ApiGetRoleListRes['content']>([]);
 const getRoleList = async () => {
-  const { content } = await userService.getRoleList({});
-  roleList.value = content;
+  const content = await userService.getRoleList();
+  if (content) {
+    const { content: roleContent } = content;
+    roleList.value = roleContent;
+  }
 };
 getRoleList();
 
@@ -156,9 +136,9 @@ const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.resetFields();
 };
-
 onUnmounted(() => {
-  removeStorage('roleFormDetail');
+  const roleStore = useUserStore();
+  roleStore.$reset();
 });
 </script>
 <style lang="less" scoped>
