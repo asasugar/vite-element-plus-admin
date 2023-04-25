@@ -6,4 +6,6 @@ declare type TableInstance = InstanceType<typeof ElTable>;
 
 declare type Nullable<T> = T | null;
 
+declare type Objectable<T> = Nullable<T> | object;
+
 declare type AnyObject<T = string> = Record<T, any>;

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:14:27
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-12 18:22:33
+ * @LastEditTime: 2023-04-25 15:31:05
 -->
 <template>
   <div class="p20">
@@ -16,10 +16,10 @@ import GrowCard from './components/grow-card.vue';
 import GrowEChart from './components/grow-echart.vue';
 
 import { systemService } from '@/services';
-
+import type { ApiGetAnalysisDataRes } from '@/apis/system/typing';
 const loading = ref<boolean>(true);
 
-const analysis = ref({});
+const analysis = ref<Nullable<ApiGetAnalysisDataRes>>(null);
 
 const getAnalysis = async () => {
   analysis.value = await systemService.getAnalysis();

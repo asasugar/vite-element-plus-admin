@@ -3,11 +3,11 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-24 18:04:40
+ * @LastEditTime: 2023-04-25 15:37:59
 -->
 <template>
   <el-container class="layout-container">
-    <home-aside :menu-option="menuOption" @goMenu="handleToMenu" />
+    <home-aside :menu-option="menuOption" @go-menu="handleToMenu" />
     <el-container>
       <el-header class="home-header flex center between pos-r f12 color-black">
         <el-breadcrumb separator="/">

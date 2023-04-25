@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-11 17:22:54
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-25 14:16:01
+ * @LastEditTime: 2023-04-25 15:35:49
 -->
 <template>
   <as-page-wrapper :header-title="headerTitle">
@@ -72,15 +72,14 @@ import { useRoute, useRouter } from 'vue-router';
 import { userService } from '@/services';
 import { useUserStore } from '@/pinia';
 import type { ComponentSize } from 'element-plus';
-import type { EpPropMergeType } from 'element-plus/es/utils';
+import type { EpPositionType } from '#/ep';
 import type { ApiGetRoleListRes } from '@/apis/user/typing';
 
 const route = useRoute();
 const router = useRouter();
 
 const size = ref<ComponentSize>('default');
-const labelPosition =
-  ref<EpPropMergeType<StringConstructor, 'right' | 'left' | 'top', unknown>>('right');
+const labelPosition = ref<EpPositionType>('right');
 const ruleFormRef = ref<FormInstance>();
 
 const headerTitle = ref<string>(route.name === 'SystemUserEdit' ? '编辑用户' : '新增用户');

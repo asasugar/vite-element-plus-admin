@@ -1,10 +1,12 @@
+import type { EpTypeStatus } from '#/ep';
+
 export interface AnalysisInfo {
   title: string;
   value: number;
   total: number;
   color: string;
   action: string;
-  tagType: string;
+  tagType: EpTypeStatus;
 }
 
 export interface ApiGetAnalysisDataRes {

@@ -56,14 +56,13 @@ import { AsPageWrapper } from '@/containers/page-wrapper';
 import { useRoute, useRouter } from 'vue-router';
 import { useRoleStore } from '@/pinia';
 import type { ComponentSize } from 'element-plus';
-import type { EpPropMergeType } from 'element-plus/es/utils';
+import type { EpPositionType } from '#/ep';
 
 const route = useRoute();
 const router = useRouter();
 
 const size = ref<ComponentSize>('default');
-const labelPosition =
-  ref<EpPropMergeType<StringConstructor, 'right' | 'left' | 'top', unknown>>('right');
+const labelPosition = ref<EpPositionType>('right');
 const ruleFormRef = ref<FormInstance>();
 
 const headerTitle = ref<string>(route.name === 'SystemRoleEdit' ? '编辑角色' : '新增角色');

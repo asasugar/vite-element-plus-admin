@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 10:58:34
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-18 15:23:54
+ * @LastEditTime: 2023-04-25 15:32:40
 -->
 <template>
   <div class="table-settings flex verticalcenter">
@@ -28,23 +28,18 @@
   </div>
 </template>
 <script lang="ts" setup>
-import type { EpPropMergeType } from 'element-plus/es/utils';
+import type { EpSizeType } from '#/ep';
 
 const emit = defineEmits<{
   (e: 'onRefresh'): void;
-  (
-    e: 'onSize',
-    command: EpPropMergeType<StringConstructor, 'default' | 'small' | 'large', never>
-  ): number;
+  (e: 'onSize', command: EpSizeType): number;
 }>();
 
 const handleRefresh = () => {
   emit('onRefresh');
 };
 
-const handleCommand = (
-  command: EpPropMergeType<StringConstructor, 'default' | 'small' | 'large', never>
-) => {
+const handleCommand = (command: EpSizeType) => {
   emit('onSize', command);
 };
 </script>
