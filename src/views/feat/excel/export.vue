@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-05-06 17:18:03
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 19:06:30
+ * @LastEditTime: 2023-04-25 15:43:28
 -->
 <template>
   <AsPageWrapper header-title="Excel 导出演示">
@@ -37,10 +37,9 @@
 import Json2excel from '@asasugar-use/custom-json2excel';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { userService } from '@/services';
-import type { Page } from '#/global';
-import type { User } from '@/views/system/user/typing';
+import type { ApiGetUserListRes } from '@/apis/user/typing';
 
-const tableData = ref<User[]>([]);
+const tableData = ref<ApiGetUserListRes['content']>([]);
 const loading = ref<boolean>(true);
 
 const pageNum = 1;
@@ -48,12 +47,16 @@ const pageSize = 10;
 
 const getUserList = async (pageNum: number, pageSize: number) => {
   loading.value = true;
-  const { content }: { content: User[] } = await userService.getUserList<Page>({
+  const content = await userService.getUserList({
     pageNum,
     pageSize
   });
   loading.value = false;
-  tableData.value = content;
+
+  if (content) {
+    const { content: userContent } = content;
+    tableData.value = userContent;
+  }
 };
 getUserList(pageNum, pageSize);
 

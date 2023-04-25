@@ -1,5 +1,5 @@
 import type { EpTypeStatus } from '#/ep';
-
+import type { RouteModules } from '#/vue-router';
 export interface AnalysisInfo {
   title: string;
   value: number;
@@ -15,25 +15,28 @@ export interface ApiGetAnalysisDataRes {
   download: AnalysisInfo;
 }
 
-export type ApiGetRouteRes = {
+export interface RouteInfo {
   name: string;
   path: string;
-  component: string;
+  component: string | RouteModules;
   meta: {
     title: string;
     keepAlive?: boolean;
   };
   redirect: string;
-  children?: ApiGetRouteRes;
-}[];
+  children?: RouteInfo[];
+}
+export type ApiGetRouteRes = RouteInfo[];
 
-export type ApiGetMenuRes = {
+export interface MenuItemInfo {
   sortId: string;
   name: string;
   path: string;
   title: string;
-  children?: ApiGetMenuRes;
-}[];
+  children?: MenuItemInfo[];
+}
+
+export type ApiGetMenuRes = MenuItemInfo[];
 
 export interface ProjectResult {
   list: {

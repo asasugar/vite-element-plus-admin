@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-25 15:38:30
+ * @LastEditTime: 2023-04-25 15:43:56
 -->
 <template>
   <as-page-wrapper header-title="用户管理">
@@ -95,9 +95,9 @@ const getUserList = async (pageNum: number, pageSize: number) => {
     pageNum,
     pageSize
   });
+  loading.value = false;
   if (content) {
     const { total, content: tableContent } = content;
-    loading.value = false;
     totalNum.value = total;
     tableData.value = tableContent;
   }

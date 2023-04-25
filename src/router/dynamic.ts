@@ -3,16 +3,17 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-24 19:50:56
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-18 17:18:48
+ * @LastEditTime: 2023-04-25 15:53:55
  */
 import { systemService } from '@/services';
 import { ElLoading } from 'element-plus';
-import type { RouteComponent, RouteInfo, RouteModules } from '#/vue-router';
+import type { RouteComponent, RouteModules } from '#/vue-router';
+import type { RouteInfo, ApiGetRouteRes } from '@/apis/system/typing';
 
 /**
  * 标准化动态路由 [import.meta.glob]
  */
-export const normalizeaRoutesUseGlob = (routes: RouteInfo[]) => {
+export const normalizeaRoutesUseGlob = (routes: ApiGetRouteRes) => {
   const components: RouteComponent = getViewComponent();
   return routes.map((item: RouteInfo) => {
     if (item.path && item.component) {
@@ -50,7 +51,7 @@ export const registerDynamicRoutes = async () => {
     // mockjs模拟后端请求数据
     const routes = await systemService.getRoute();
     loading.close();
-    return normalizeaRoutesUseGlob(routes);
+    if (routes) return normalizeaRoutesUseGlob(routes);
   } catch (error) {
     return [];
   }
