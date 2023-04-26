@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:14:27
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-24 16:56:34
+ * @LastEditTime: 2023-04-26 14:48:13
 -->
 <template>
   <as-page-wrapper>
@@ -21,36 +21,20 @@
   </as-page-wrapper>
 </template>
 <script lang="ts" setup>
-import { projectService, systemService } from '@/services';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import WorkSpaceHeader from './components/header';
 import WorkSpaceBody from './components/body';
-import type { ApiGetProjectRes } from '@/apis/project/typing';
-import type { ApiGetQuickNavRes, ApiGetLatestNewsRes } from '@/apis/system/typing';
+import { useLoading } from '@/hooks/use-loading';
+import { useData } from './hooks/use-data';
 
-const projectList = ref<ApiGetProjectRes['list']>([]);
-const navList = ref<ApiGetQuickNavRes>([]);
-const newsList = ref<ApiGetLatestNewsRes>([]);
-const loading = ref<boolean>(true);
-
-const getProjectList = async () => {
-  const content = await projectService.getProjectList({
-    pageNum: 1,
-    pageSize: 9
-  });
-  projectList.value = content?.list ?? [];
-};
-const getQuickNavList = async () => {
-  navList.value = (await systemService.getQuickNavList()) ?? [];
-};
-const getLatestNews = async () => {
-  newsList.value = (await systemService.getLatestNews()) ?? [];
-};
+const { loading, hideLoading } = useLoading();
+const { projectList, navList, newsList, getProjectList, getQuickNavList, getLatestNews } =
+  useData();
 
 getProjectList();
 getQuickNavList();
 getLatestNews();
-loading.value = false;
+hideLoading();
 </script>
 
 <style lang="less" scoped>

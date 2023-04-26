@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-18 14:59:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 17:27:06
+ * @LastEditTime: 2023-04-26 18:36:22
 -->
 <template>
   <as-page-wrapper header-title="Markdown 组件演示">
@@ -17,12 +17,12 @@
     <template #bodyContent>
       <as-markdown
         ref="markDownRef"
-        :value="valueRef"
+        :value="mdValueRef"
         placeholder="我是占位文本"
-        @change="handleChange"
+        @change="onChange"
       />
       <el-input
-        v-model="cardContent"
+        v-model="md2htmlText"
         class="mt10"
         :rows="10"
         :autosize="{ minRows: 6, maxRows: 10 }"
@@ -36,43 +36,19 @@
 <script lang="ts" setup name="EditorMarkdown">
 import { AsMarkdown, MarkDownActionType } from '@/components/markdown';
 import { AsPageWrapper } from '@/containers/page-wrapper';
-import { watch } from 'vue';
+import { useButton } from './hooks/use-button';
+import { useMarkdown } from './hooks/use-md';
 
 const markDownRef = ref<Nullable<MarkDownActionType>>(null);
-
-const markdownCache =
-  window.localStorage.getItem('markdown') ??
-  `
-# title
-# content
-`;
-
-const valueRef = ref(markdownCache);
-const cardContent = ref<string>('');
-
-const handleChange = (v: string) => {
-  valueRef.value = v;
-};
-
-const toggleTheme = (theme: 'dark' | 'classic') => {
-  const instance = unref(markDownRef);
-  if (!instance) return;
-  const vditor = instance?.getVditor();
-  vditor?.setTheme(theme);
-};
-
-const onMd2html = async (mdtext: string) => {
-  const instance = unref(markDownRef);
-  if (!instance) return;
-  cardContent.value = await instance?.md2html(mdtext);
-};
+const { toggleTheme, onClear } = useButton(markDownRef);
+const { mdValueRef, md2htmlText, onChange, onMd2html } = useMarkdown(markDownRef);
 
 const handleClear = () => {
-  valueRef.value = '';
+  onClear(mdValueRef);
 };
 
 watch(
-  [valueRef, markDownRef],
+  [mdValueRef, markDownRef],
   currValue => {
     !currValue.includes(null) && onMd2html(currValue[0]);
   },

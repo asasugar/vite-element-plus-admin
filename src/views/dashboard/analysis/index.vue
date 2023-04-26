@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:14:27
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-25 15:31:05
+ * @LastEditTime: 2023-04-26 14:51:30
 -->
 <template>
   <div class="p20">
@@ -14,16 +14,12 @@
 <script lang="ts" setup>
 import GrowCard from './components/grow-card.vue';
 import GrowEChart from './components/grow-echart.vue';
+import { useLoading } from '@/hooks/use-loading';
+import { useData } from './hooks/use-data';
 
-import { systemService } from '@/services';
-import type { ApiGetAnalysisDataRes } from '@/apis/system/typing';
-const loading = ref<boolean>(true);
+const { loading, hideLoading } = useLoading();
+const { analysis, getAnalysis } = useData();
 
-const analysis = ref<Nullable<ApiGetAnalysisDataRes>>(null);
-
-const getAnalysis = async () => {
-  analysis.value = await systemService.getAnalysis();
-  loading.value = false;
-};
 getAnalysis();
+hideLoading();
 </script>
