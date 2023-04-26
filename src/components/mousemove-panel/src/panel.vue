@@ -3,13 +3,12 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-15 17:21:46
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-12 18:08:18
+ * @LastEditTime: 2023-04-26 11:03:45
 -->
 <template>
   <div ref="panel" class="as-panel"></div>
 </template>
 <script lang="ts" setup>
-import { onMounted, shallowRef } from 'vue';
 import { useEventListener, useThrottleFn, useMouse } from '@vueuse/core';
 
 interface Props {

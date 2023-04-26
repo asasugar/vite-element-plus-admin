@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 22:49:02
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 16:48:35
+ * @LastEditTime: 2023-04-26 10:46:31
 -->
 <template>
   <div :class="classString">
@@ -27,8 +27,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { useSlots, computed, provide } from 'vue';
-
 // types
 interface Props {
   dataSource?: any[];
@@ -45,8 +43,8 @@ const props = withDefaults(defineProps<Props>(), {
   bordered: false
 });
 const slots = useSlots();
-const getShowHeader = computed(() => !!(props.header || slots.header));
-const getShowFooter = computed(() => props.footer || slots.footer);
+const getShowHeader = computed<boolean>(() => !!(props.header || slots.header));
+const getShowFooter = computed<boolean>(() => !!(props.footer || slots.footer));
 const prefixCls = 'as-list';
 const classObj = computed(() => ({
   [`${prefixCls}`]: true,
@@ -56,10 +54,11 @@ const classObj = computed(() => ({
 }));
 const classString = {
   ...classObj.value,
-  [`${prefixCls}-something-after-last-item`]: !!getShowFooter.value
+  [`${prefixCls}-something-after-last-item`]: getShowFooter.value
 };
 provide('prefixCls', prefixCls);
 </script>
+
 <style lang="less" scoped>
 @list-prefix-cls: ~'as-list';
 .@{list-prefix-cls} {

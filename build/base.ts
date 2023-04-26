@@ -8,9 +8,7 @@
 import { loadEnv, type UserConfig } from 'vite';
 import { pathResolve } from './utils';
 
-export default function getBase({ command, mode }: { command: string; mode: string }): UserConfig {
-  console.log(`vite command: ${command}, vite mode: ${mode}`);
-
+export default function getBase({ mode }: { mode: string }): UserConfig {
   const baseConfig: UserConfig = {
     root: process.cwd(),
     base: loadEnv(mode, process.cwd()).VITE_REPO_URL, // 部署站点: 一级域名则使用 '/', 二级域名请设置 base 为 '/<REPO>/'，以此类推

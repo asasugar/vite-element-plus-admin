@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-07 15:54:59
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 16:48:41
+ * @LastEditTime: 2023-04-26 11:07:03
 -->
 <template>
   <ul class="grid">
@@ -12,11 +12,12 @@
 </template>
 
 <script lang="ts" setup>
-const props = defineProps({
-  columns: {
-    type: Number,
-    default: 3
-  }
+interface Props {
+  columns?: number;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  columns: 3
 });
 </script>
 

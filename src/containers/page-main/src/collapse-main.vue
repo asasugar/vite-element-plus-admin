@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-26 16:06:39
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 17:10:42
+ * @LastEditTime: 2023-04-26 11:07:41
 -->
 <template>
   <div class="collapse-main">
@@ -16,7 +16,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
 // types
 interface Props {
   accordion?: boolean;
@@ -26,7 +25,7 @@ interface Props {
 withDefaults(defineProps<Props>(), {
   accordion: true
 });
-const activeNames = ref(['1']);
+const activeNames = ref<string[]>(['1']);
 </script>
 
 <style lang="less" scoped>

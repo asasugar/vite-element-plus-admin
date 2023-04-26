@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 17:54:47
+ * @LastEditTime: 2023-04-26 11:39:29
  */
 import type { TargetContext } from '#/global';
 import { isArray, isObject, isValidMap } from './is';
@@ -16,7 +16,8 @@ import { isArray, isObject, isValidMap } from './is';
 export function dynamicImport(component: string) {
   const componentStr = component.replace(/^\/+/, ''), // 过滤字符串前面所有 '/' 字符
     componentPath = componentStr.replace(/\.\w+$/, ''); // 过滤掉后缀名，为了让 import 加入 .vue
-  return () => import(/* webpackChunkName: "NotFound" */ '../' + componentPath + '.vue');
+  return () =>
+    import(/* @vite-ignore */ /* webpackChunkName: "NotFound" */ '../' + componentPath + '.vue');
 }
 
 /**

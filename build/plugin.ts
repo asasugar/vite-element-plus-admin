@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-10-19 17:28:25
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-25 14:12:25
+ * @LastEditTime: 2023-04-26 11:27:15
  */
 
 import { splitVendorChunkPlugin, type PluginOption } from 'vite';
@@ -19,11 +19,9 @@ import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import postCssPurge from '@fullhuman/postcss-purgecss';
 
-export default function getPlugins({ command, mode }: { command: string; mode: string }): {
+export default function getPlugins({ mode }: { mode: string }): {
   plugins: PluginOption[];
 } {
-  console.log(`vite command: ${command}, vite mode: ${mode}`);
-
   const plugins: PluginOption[] = [
     vue(),
     vueJsx(),

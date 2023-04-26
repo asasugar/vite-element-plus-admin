@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 10:58:34
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-25 15:32:40
+ * @LastEditTime: 2023-04-26 11:04:48
 -->
 <template>
   <div class="table-settings flex verticalcenter">
@@ -30,10 +30,11 @@
 <script lang="ts" setup>
 import type { EpSizeType } from '#/ep';
 
-const emit = defineEmits<{
+interface Emits {
   (e: 'onRefresh'): void;
   (e: 'onSize', command: EpSizeType): number;
-}>();
+}
+const emit = defineEmits<Emits>();
 
 const handleRefresh = () => {
   emit('onRefresh');

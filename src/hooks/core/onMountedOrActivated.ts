@@ -1,5 +1,3 @@
-import { nextTick, onMounted, onActivated } from 'vue';
-
 export default function onMountedOrActivated(hook: () => void) {
   let mounted: boolean;
 

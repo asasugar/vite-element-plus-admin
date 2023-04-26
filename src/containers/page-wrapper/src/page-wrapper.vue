@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-26 16:06:39
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-03-09 10:29:54
+ * @LastEditTime: 2023-04-26 11:10:03
 -->
 <template>
   <div class="page-wrapper">
@@ -27,28 +27,23 @@
 </template>
 
 <script lang="ts" setup>
-import { useSlots, computed } from 'vue';
+interface Props {
+  headerTitle?: string;
+  headerContent?: string;
+  bodyPadding?: string;
+}
 
-const props = defineProps({
-  headerTitle: {
-    type: String,
-    default: ''
-  },
-  headerContent: {
-    type: String,
-    default: ''
-  },
-  bodyPadding: {
-    type: String,
-    default: '12px 12px 12px 12px'
-  }
+const props = withDefaults(defineProps<Props>(), {
+  bodyPadding: '12px 12px 12px 12px'
 });
 
 const slots = useSlots();
 
-const getShowDefaultHeader = computed(() => props.headerTitle || props.headerContent);
-const getShowHeader = computed(() => getShowDefaultHeader.value || slots?.headerContent);
-const getShowExtra = computed(() => slots?.extra);
+const getShowDefaultHeader = computed<boolean>(() => !!(props.headerTitle || props.headerContent));
+const getShowHeader = computed<boolean>(
+  () => !!(getShowDefaultHeader.value || slots?.headerContent)
+);
+const getShowExtra = computed<boolean>(() => !!slots?.extra);
 </script>
 <style lang="less" scoped>
 .page-wrapper {

@@ -7,10 +7,9 @@
  */
 import { type BuildOptions } from 'vite';
 
-export default function getBuild({ command, mode }: { command: string; mode: string }): {
+export default function getBuild(): {
   build: BuildOptions;
 } {
-  console.log(`vite command: ${command}, vite mode: ${mode}`);
   const build: BuildOptions = {
     target: 'esnext',
     cssTarget: 'chrome79',

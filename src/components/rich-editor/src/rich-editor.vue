@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-05-30 14:25:15
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 17:30:31
+ * @LastEditTime: 2023-04-26 11:04:15
 -->
 <template>
   <quill-editor
@@ -27,7 +27,6 @@
 <script lang="ts" setup>
 import { QuillEditor } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
-import { useAttrs } from 'vue';
 
 const richContent = ref<string>('');
 const attrs = useAttrs();

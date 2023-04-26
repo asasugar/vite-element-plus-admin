@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 22:49:18
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 16:48:27
+ * @LastEditTime: 2023-04-26 10:50:49
 -->
 <template>
   <div v-bind="{ ...restAttrs }" :class="[`${pre}-item`, className]">
@@ -29,24 +29,22 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { inject, ref, useAttrs, useSlots, computed } from 'vue';
-
-const props = defineProps({
+interface Props {
   // 额外内容, 通常用在展示右侧内容
-  extras: {
-    type: Array,
-    default: () => []
-  },
+  extras?: string[];
   // 列表操作组，位置在卡片底部或者最右侧
-  actions: {
-    type: Array,
-    default: () => []
-  }
+  actions?: string[];
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  extras: () => [],
+  actions: () => []
 });
 const slots = useSlots();
-const prefixCls = inject('prefixCls');
-const pre = ref(prefixCls);
 const attrs = useAttrs();
+
+const prefixCls: string | undefined = inject('prefixCls');
+const pre = ref<string | undefined>(prefixCls);
 const { class: className, ...restAttrs } = attrs;
 const getShowExtra = computed(() => props.extras?.length || slots.extras);
 </script>

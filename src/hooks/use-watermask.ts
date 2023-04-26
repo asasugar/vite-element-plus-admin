@@ -5,7 +5,7 @@
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
  * @LastEditTime: 2022-11-24 15:58:01
  */
-import { getCurrentInstance, onBeforeUnmount, ref, Ref, shallowRef, unref } from 'vue';
+import type { Ref } from 'vue';
 import { useThrottleFn } from '@vueuse/core';
 import { addResizeListener, removeResizeListener } from '@/utils/resize-ob-event';
 import { isDef } from '@/utils/is';

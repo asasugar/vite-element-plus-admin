@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-20 11:24:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-25 15:37:59
+ * @LastEditTime: 2023-04-26 11:20:26
 -->
 <template>
   <el-container class="layout-container">
@@ -71,12 +71,11 @@ import HomeAside from './components/home-aside';
 import type { TabPaneName } from 'element-plus';
 import type { HomeTabInfo, HomeMenuInfo } from './typing';
 
-const useGlobal = useGlobalStore();
+const { keepAliveInclude, keepAliveAction } = useGlobalStore();
 const useUser = useUserStore();
 const router = useRouter();
 const route = useRoute();
-useGlobal.keepAliveAction(routes);
-const { keepAliveInclude } = storeToRefs(useGlobal);
+keepAliveAction(routes);
 const menuOption = reactive<HomeMenuInfo>({
   defaultOpeneds: ['1'],
   defaultActive: '1-1',

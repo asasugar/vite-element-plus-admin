@@ -3,44 +3,50 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-18 14:02:44
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-30 18:06:34
+ * @LastEditTime: 2023-04-26 11:03:21
 -->
 <template>
   <div ref="wrapRef"></div>
 </template>
 <script lang="ts" setup>
-import { useMountedOrActivated } from '@/hooks/core';
 import Vditor from 'vditor';
+import { useMountedOrActivated } from '@/hooks/core';
 import 'vditor/dist/index.css';
-import {
-  nextTick,
-  onBeforeUnmount,
-  onDeactivated,
-  Ref,
-  ref,
-  shallowRef,
-  unref,
-  useAttrs,
-  watch
-} from 'vue';
+import type { Ref } from 'vue';
 
-const props = defineProps({
-  height: { type: Number, default: 360 },
-  value: { type: String, default: '' }
+interface Props {
+  height?: number;
+  value: string;
+}
+
+interface Emits {
+  (e: 'change', value: string): void;
+  (
+    e: 'get',
+    instance: {
+      getVditor: () => Vditor;
+    }
+  ): void;
+  (e: 'update:value', value: string): void;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  height: 360
 });
+
+const emit = defineEmits<Emits>();
 
 defineExpose({
   md2html: Vditor.md2html,
   getVditor: (): Vditor => vditorRef.value!
 });
 
-const emit = defineEmits(['change', 'get', 'update:value']);
 const attrs = useAttrs();
 
 const wrapRef = shallowRef<HTMLElement | undefined>(document.documentElement);
 const vditorRef = ref(null) as Ref<Nullable<Vditor>>;
-const initedRef = ref(false);
-const valueRef = ref(props.value || '');
+const initedRef = ref<boolean>(false);
+const valueRef = ref<string>(props.value || '');
 const instance = {
   getVditor: (): Vditor => vditorRef.value!
 };

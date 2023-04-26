@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 10:58:34
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-12 17:56:25
+ * @LastEditTime: 2023-04-26 11:30:10
 -->
 <template>
   <span :style="{ color }">{{ number }}</span>
@@ -12,74 +12,55 @@
 import { computed, watchEffect, onMounted, watch } from 'vue';
 import { useTransition, TransitionPresets } from '@vueuse/core';
 
-const props = defineProps({
-  startVal: {
-    type: Number,
-    default: 0
-  },
-  endVal: {
-    type: Number,
-    default: 2022
-  },
-  duration: {
-    type: Number,
-    default: 1500
-  },
-  autoplay: {
-    type: Boolean,
-    default: true
-  },
-  decimals: {
-    type: Number,
-    default: 0,
-    validator(value: number) {
-      return value >= 0;
-    }
-  },
-  prefix: {
-    type: String,
-    default: ''
-  },
-  suffix: {
-    type: String,
-    default: ''
-  },
-  separator: {
-    type: String,
-    default: ','
-  },
-  decimal: {
-    type: String,
-    default: '.'
-  },
+interface Props {
+  startVal: number;
+  endVal: number;
+  duration?: number;
+  autoplay?: boolean;
+  decimals?: number;
+  prefix: string;
+  suffix?: string;
+  separator?: string;
+  decimal?: string;
   /**
    * font color
    */
-  color: {
-    type: String
-  },
+  color?: string;
   /**
    * Turn on digital animation
    */
-  useEasing: {
-    type: Boolean,
-    default: true
-  },
+  useEasing?: boolean;
   /**
    * Digital animation
    */
-  transition: {
-    type: String,
-    default: 'linear'
-  }
+  transition?: string;
+}
+const props = withDefaults(defineProps<Props>(), {
+  startVal: 0,
+  endVal: 2023,
+  duration: 1500,
+  autoplay: true,
+  decimals: 0,
+  prefix: '',
+  suffix: '',
+  separator: '',
+  decimal: '',
+  /**
+   * Turn on digital animation
+   */
+  useEasing: true,
+  /**
+   * Digital animation
+   */
+  transition: 'linear'
 });
 
 const emit = defineEmits(['onStarted', 'onFinished']);
 
-const source = ref(props.startVal);
-const disabled = ref(false);
+const source = ref<number>(props.startVal);
+const disabled = ref<boolean>(false);
 let outputValue = useTransition(source);
-const number = computed(() => formatNumber(outputValue.value));
+const number = computed<string>(() => formatNumber(outputValue.value));
 watchEffect(() => {
   source.value = props.startVal;
 });
@@ -91,11 +72,12 @@ watch([() => props.startVal, () => props.endVal], () => {
 onMounted(() => {
   props.autoplay && start();
 });
-function start() {
+const start = () => {
   run();
   source.value = props.endVal;
-}
-function run() {
+};
+
+const run = () => {
   outputValue = useTransition(source, {
     disabled,
     duration: props.duration,
@@ -103,8 +85,9 @@ function run() {
     onStarted: () => emit('onStarted'),
     ...(props.useEasing ? { transition: (TransitionPresets as any)[props.transition] } : {})
   });
-}
-function formatNumber(num: number | string) {
+};
+
+const formatNumber = (num: number | string) => {
   if (!num && num !== 0) {
     return '';
   }
@@ -121,5 +104,5 @@ function formatNumber(num: number | string) {
     }
   }
   return prefix + x1 + x2 + suffix;
-}
+};
 </script>

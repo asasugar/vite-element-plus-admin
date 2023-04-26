@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 19:38:10
+ * @LastEditTime: 2023-04-26 14:04:10
  */
 import * as Mock from 'mockjs';
 import type { MockConfig, IUserType } from '../../typing';
@@ -114,32 +114,9 @@ export default [
     url: 'user/getRoleList',
     type: 'get',
     response: (config: MockConfig) => {
-      const { pageNum, pageSize } = config.body;
       const total = 200;
 
-      if (pageNum && pageSize) {
-        const { list } = Mock.mock({
-          [`list|${pageSize}`]: [
-            {
-              'id|+1': (pageNum - 1) * pageSize + 1,
-              status: Random.boolean(),
-              role: '@prole',
-              createTime: Random.datetime(),
-              remark: Random.city()
-            }
-          ]
-        });
-        return {
-          success: true,
-          result: {
-            pageNum,
-            pageSize,
-            content: list,
-            total
-          },
-          code: 200
-        };
-      } else {
+      if (!config.body) {
         const { list } = Mock.mock({
           [`list|${total}`]: [
             {
@@ -162,6 +139,30 @@ export default [
           code: 200
         };
       }
+
+      const { pageNum, pageSize } = config.body;
+
+      const { list } = Mock.mock({
+        [`list|${pageSize}`]: [
+          {
+            'id|+1': (pageNum - 1) * pageSize + 1,
+            status: Random.boolean(),
+            role: '@prole',
+            createTime: Random.datetime(),
+            remark: Random.city()
+          }
+        ]
+      });
+      return {
+        success: true,
+        result: {
+          pageNum,
+          pageSize,
+          content: list,
+          total
+        },
+        code: 200
+      };
     }
   },
   // 获取用户列表

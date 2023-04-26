@@ -1,5 +1,5 @@
 import { NOOP } from '@vue/shared';
-import { Teleport, h, onUnmounted, ref } from 'vue';
+import { Teleport } from 'vue';
 import { isClient } from '@vueuse/core';
 import { createGlobalNode, removeGlobalNode } from '@/utils/global-node';
 

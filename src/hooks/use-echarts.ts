@@ -3,10 +3,10 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-25 17:18:38
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 15:22:00
+ * @LastEditTime: 2023-04-26 11:13:41
  */
-import type { EChartsOption } from 'echarts';
 import echarts from '@/utils/echarts';
+import type { EChartsOption } from 'echarts';
 
 /**
  * @description 生成ECharts

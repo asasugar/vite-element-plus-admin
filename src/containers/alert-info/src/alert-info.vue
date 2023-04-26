@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-07 15:54:59
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-04-29 16:46:24
+ * @LastEditTime: 2023-04-26 11:05:44
 -->
 <template>
   <div class="alert-info">
@@ -12,12 +12,11 @@
 </template>
 
 <script lang="ts" setup>
-defineProps({
-  message: {
-    type: String,
-    default: ''
-  }
-});
+interface Props {
+  message: string;
+}
+
+defineProps<Props>();
 </script>
 
 <style lang="less" scoped>

@@ -3,10 +3,8 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-04-29 15:22:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 17:52:17
+ * @LastEditTime: 2023-04-26 11:15:21
  */
-import { watch } from 'vue';
-
 import { isDef } from '@/utils/is';
 interface Options {
   target?: HTMLElement;

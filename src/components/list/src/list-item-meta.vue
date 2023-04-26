@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-14 22:49:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-02-15 13:58:57
+ * @LastEditTime: 2023-04-26 10:53:04
 -->
 <template>
   <div :class="classString">
@@ -24,30 +24,24 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { inject, useSlots, computed } from 'vue';
+interface Props {
+  avatar?: string;
+  title?: string;
+  description?: string;
+}
+
+const props = defineProps<Props>();
+
 const prefixCls = inject('prefixCls');
 const classString = `${prefixCls}-item-meta`;
-const props = defineProps({
-  avatar: {
-    type: String,
-    default: ''
-  },
-  title: {
-    type: String,
-    default: ''
-  },
-  description: {
-    type: String,
-    default: ''
-  }
-});
+
 const slots = useSlots();
 
-const getShowAvatar = computed(() => props.avatar || slots.avatar);
-const getShowTitle = computed(() => props.title || slots.title);
-const getShowDescription = computed(() => props.description || slots.description);
+const getShowAvatar = computed<boolean>(() => !!(props.avatar || slots.avatar));
+const getShowTitle = computed<boolean>(() => !!(props.title || slots.title));
+const getShowDescription = computed<boolean>(() => !!(props.description || slots.description));
 </script>
-//
+
 <style lang="less" scoped>
 @list-prefix-cls: ~'as-list';
 .@{list-prefix-cls} {
