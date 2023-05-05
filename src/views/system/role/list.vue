@@ -3,14 +3,18 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:22
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-25 15:38:16
+ * @LastEditTime: 2023-05-05 10:45:32
 -->
 <template>
   <as-page-wrapper header-title="角色管理">
     <template #extra>
       <div class="flex center">
         <el-button type="primary" @click="handleInsert">新增角色</el-button>
-        <el-button type="primary" @click="handleExportExcel">导出excel</el-button>
+        <el-button
+          type="primary"
+          @click="handleExportExcel({ excelData, keyMap, orderedKey, scope })"
+          >导出excel</el-button
+        >
         <el-input v-model="search" class="ml10" placeholder="Role to search" />
         <AsTableSettings @on-refresh="handleRefresh" @on-size="handleCommand" />
       </div>
@@ -65,7 +69,7 @@
         </el-table-column>
       </el-table>
       <el-pagination
-        v-model:currentPage="currentPage"
+        v-model:currentPage="pageNum"
         v-model:page-size="pageSize"
         class="text-right mt20 mb20"
         background
@@ -80,128 +84,54 @@
 </template>
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
-import Json2excel from '@asasugar-use/custom-json2excel';
-import { userService } from '@/services';
-import { ElMessage } from 'element-plus';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import AsTableSettings from '@/components/table-settings';
 import { useRoleStore } from '@/pinia';
-import type { RoleContent, ApiGetRoleListRes } from '@/apis/user/typing';
-import type { EpSizeType } from '#/ep';
+import { useTable } from '@/hooks/use-table';
+import { useData } from './hooks/use-data';
+import type { RoleContent } from '@/apis/user/typing';
 
 const router = useRouter();
+const { loading, tableData, totalNum, getRoleList } = useData();
+const {
+  size,
+  search,
+  filterTableData,
+  multipleSelection,
+  pageNum,
+  pageSize,
+  handleCommand,
+  handleSizeChange,
+  handleCurrentChange,
+  handleSelectionChange,
+  handleRefresh,
+  handleExportExcel,
+  handleDel
+} = useTable<RoleContent>({
+  tableData,
+  totalNum,
+  getTableData: getRoleList,
+  searchFilterConditions: (data: RoleContent) =>
+    !search.value ||
+    data.role.key.toLowerCase().includes(search.value.toLowerCase()) ||
+    data.role.value.toLowerCase().includes(search.value.toLowerCase())
+});
 
-const tableData = ref<ApiGetRoleListRes['content']>([]);
-const size = ref<EpSizeType>('default');
-const search = ref<string>('');
-const currentPage = ref<number>(1);
-const pageSize = ref<number>(10);
-const totalNum = ref<number>(0);
-const loading = ref<boolean>(true);
-const multipleTableRef = ref<TableInstance>();
-const multipleSelection = ref<ApiGetRoleListRes['content']>([]);
-let pageNum = 1;
-
-const getRoleList = async (pageNum: number, pageSize: number) => {
-  loading.value = true;
-  const content = await userService.getRoleList({
-    pageNum,
-    pageSize
-  });
-  if (content) {
-    const { total, content: tableContent } = content;
-    loading.value = false;
-    totalNum.value = total;
-    tableData.value = tableContent;
-  }
+const keyMap = {
+  id: '序号',
+  status: '状态',
+  role: '角色',
+  createTime: '创建时间',
+  remark: '备注'
 };
-getRoleList(pageNum, pageSize.value);
-
-const filterTableData = computed(() =>
-  tableData.value?.filter(
-    data =>
-      !search.value ||
-      data.role.key.toLowerCase().includes(search.value.toLowerCase()) ||
-      data.role.value.toLowerCase().includes(search.value.toLowerCase())
-  )
-);
-
-const handleSizeChange = (val: number) => {
-  pageNum = 1;
-  pageSize.value = val;
-  getRoleList(pageNum, pageSize.value);
-
-  console.log(`${val} items per page`);
+const orderedKey = ['id', 'role', 'status', 'createTime', 'remark'];
+const scope = {
+  role: 'value'
 };
-
-const handleCurrentChange = (val: number) => {
-  pageNum = val;
-  getRoleList(pageNum, pageSize.value);
-  console.log(`current page: ${val}`);
-};
-
-const handleSelectionChange = (val: ApiGetRoleListRes['content']) => {
-  multipleSelection.value = val;
-};
-
-const reset = () => {
-  tableData.value.length = 0;
-  search.value = '';
-  currentPage.value = 1;
-  pageNum = 1;
-  pageSize.value = 10;
-  totalNum.value = 0;
-  loading.value = true;
-  multipleSelection.value.length = 0;
-};
-
-const handleRefresh = () => {
-  reset();
-  getRoleList(pageNum, pageSize.value);
-};
-
-const handleCommand = (command: EpSizeType) => {
-  if (size.value === command || !command) return;
-  size.value = command;
-};
-
-const handleExportExcel = () => {
-  if (multipleSelection.value?.length) {
-    const keyMap = {
-      id: '序号',
-      status: '状态',
-      role: '角色',
-      createTime: '创建时间',
-      remark: '备注'
-    };
-    const orderedKey = ['id', 'role', 'status', 'createTime', 'remark'];
-    const scope = {
-      role: 'value'
-    };
-    const excelData = multipleSelection.value.map(i => {
-      i.status = i.status ? '启用' : ('禁用' as any);
-      return i;
-    });
-    const json2excel = new Json2excel({
-      data: excelData,
-      orderedKey,
-      keyMap,
-      scope,
-      onStart: () => {
-        console.log('开始');
-      },
-      onSuccess: () => {
-        console.log('成功');
-      },
-      onError: err => {
-        console.log(err);
-      }
-    });
-    json2excel.generate();
-  } else {
-    ElMessage({ message: '请勾选需要导出的数据！', type: 'warning' });
-  }
-};
+const excelData = multipleSelection.value.map(i => {
+  i.status = i.status ? '启用' : ('禁用' as any);
+  return i;
+});
 
 const handleInsert = () => {
   router.push({ name: 'SystemRoleInsert' });
@@ -220,10 +150,5 @@ const handleEditAuth = (item: RoleContent) => {
   const { setRoleAuth } = useRoleStore();
   setRoleAuth(item.role);
   router.push({ name: 'SystemAuth' });
-};
-
-const handleDel = (id: number | undefined) => {
-  tableData.value = filterTableData.value?.filter(data => data.id !== id);
-  return true;
 };
 </script>

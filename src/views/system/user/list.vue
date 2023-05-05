@@ -3,21 +3,22 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-02-25 17:56:01
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-26 14:00:01
+ * @LastEditTime: 2023-05-05 10:22:02
 -->
 <template>
   <as-page-wrapper header-title="用户管理">
     <template #extra>
       <div class="flex center">
         <el-button type="primary" @click="handleInsert">新增用户</el-button>
-        <el-button type="primary" @click="handleExportExcel">导出excel</el-button>
+        <el-button type="primary" @click="handleExportExcel({ keyMap, orderedKey, scope })"
+          >导出excel</el-button
+        >
         <el-input v-model="search" class="ml10" placeholder="User to search" />
         <AsTableSettings @on-refresh="handleRefresh" @on-size="handleCommand" />
       </div>
     </template>
     <template #bodyContent>
       <el-table
-        ref="multipleTableRef"
         v-loading="loading"
         :data="filterTableData"
         border
@@ -52,7 +53,7 @@
         </el-table-column>
       </el-table>
       <el-pagination
-        v-model:currentPage="currentPage"
+        v-model:currentPage="pageNum"
         v-model:page-size="pageSize"
         class="text-right mt20 mb20"
         background
@@ -67,112 +68,50 @@
 </template>
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
-import { userService } from '@/services';
-import Json2excel from '@asasugar-use/custom-json2excel';
-import { ElMessage } from 'element-plus';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import AsTableSettings from '@/components/table-settings';
 import { useUserStore } from '@/pinia';
-import type { UserContent, ApiGetUserListRes } from '@/apis/user/typing';
-import type { EpSizeType } from '#/ep';
+import { useTable } from '@/hooks/use-table';
+import { useData } from './hooks/use-data';
+import type { UserContent } from '@/apis/user/typing';
 
 const router = useRouter();
 
-const tableData = ref<ApiGetUserListRes['content']>([]);
-const size = ref<EpSizeType>('default');
-const search = ref<string>('');
-const currentPage = ref<number>(1);
-const pageSize = ref<number>(10);
-const totalNum = ref<number>(0);
-const loading = ref<boolean>(true);
-const multipleTableRef = ref<TableInstance>();
-const multipleSelection = ref<ApiGetUserListRes['content']>([]);
-let pageNum = 1;
-
-const getUserList = async (pageNum: number, pageSize: number) => {
-  loading.value = true;
-  const content = await userService.getUserList({
-    pageNum,
-    pageSize
-  });
-  loading.value = false;
-  if (content) {
-    const { total, content: tableContent } = content;
-    totalNum.value = total;
-    tableData.value = tableContent;
-  }
+const keyMap = {
+  id: '序号',
+  userName: '用户名',
+  email: '邮箱',
+  role: '角色',
+  createTime: '创建时间'
 };
-getUserList(pageNum, pageSize.value);
-
-const filterTableData = computed(
-  () =>
-    tableData.value?.filter(
-      data => !search.value || data.userName.toLowerCase().includes(search.value.toLowerCase())
-    ) ?? []
-);
+const orderedKey = ['id', 'userName', 'role', 'email', 'createTime'];
+const scope = {
+  role: 'value'
+};
+const { loading, tableData, totalNum, getUserList } = useData();
+const {
+  size,
+  search,
+  filterTableData,
+  pageNum,
+  pageSize,
+  handleCommand,
+  handleSizeChange,
+  handleCurrentChange,
+  handleSelectionChange,
+  handleRefresh,
+  handleExportExcel,
+  handleDel
+} = useTable<UserContent>({
+  tableData,
+  totalNum,
+  getTableData: getUserList,
+  searchFilterConditions: (data: UserContent) =>
+    !search.value || data.userName.toLowerCase().includes(search.value.toLowerCase())
+});
 
 const handleInsert = () => {
   router.push({ name: 'SystemUserInsert' });
-};
-
-const handleSelectionChange = (val: ApiGetUserListRes['content']) => {
-  multipleSelection.value = val;
-};
-
-const reset = () => {
-  tableData.value.length = 0;
-  search.value = '';
-  currentPage.value = 1;
-  pageNum = 1;
-  pageSize.value = 10;
-  totalNum.value = 0;
-  loading.value = true;
-  multipleSelection.value.length = 0;
-};
-
-const handleRefresh = () => {
-  reset();
-  getUserList(pageNum, pageSize.value);
-};
-
-const handleCommand = (command: EpSizeType) => {
-  if (size.value === command || !command) return;
-  size.value = command;
-};
-
-const handleExportExcel = () => {
-  if (multipleSelection.value?.length) {
-    const keyMap = {
-      id: '序号',
-      userName: '用户名',
-      email: '邮箱',
-      role: '角色',
-      createTime: '创建时间'
-    };
-    const orderedKey = ['id', 'userName', 'role', 'email', 'createTime'];
-    const scope = {
-      role: 'value'
-    };
-
-    const json2excel = new Json2excel({
-      data: multipleSelection.value,
-      orderedKey,
-      keyMap,
-      scope,
-      onStart: () => {
-        console.log('开始');
-      },
-      onSuccess: () => {
-        console.log('成功');
-      },
-      onError: err => {
-        console.log(err);
-      }
-    });
-    json2excel.generate();
-  } else {
-    ElMessage({ message: '请勾选需要导出的数据！', type: 'warning' });
-  }
 };
 
 const handleEdit = (item: UserContent) => {
@@ -180,24 +119,5 @@ const handleEdit = (item: UserContent) => {
   const { setUpdateUserItem } = useUserStore();
   setUpdateUserItem(item);
   router.push({ name: 'SystemUserEdit' });
-};
-
-const handleDel = (id: number | undefined) => {
-  tableData.value = filterTableData.value?.filter(data => data.id !== id);
-  return true;
-};
-
-const handleSizeChange = (val: number) => {
-  pageNum = 1;
-  pageSize.value = val;
-  getUserList(pageNum, pageSize.value);
-
-  console.log(`${val} items per page`);
-};
-
-const handleCurrentChange = (val: number) => {
-  pageNum = val;
-  getUserList(pageNum, pageSize.value);
-  console.log(`current page: ${val}`);
 };
 </script>
