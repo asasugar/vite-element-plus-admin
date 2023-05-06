@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-05-06 17:18:03
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-25 15:43:28
+ * @LastEditTime: 2023-05-05 16:52:03
 -->
 <template>
   <AsPageWrapper header-title="Excel 导出演示">
@@ -36,29 +36,11 @@
 <script lang="ts" setup>
 import Json2excel from '@asasugar-use/custom-json2excel';
 import { AsPageWrapper } from '@/containers/page-wrapper';
-import { userService } from '@/services';
-import type { ApiGetUserListRes } from '@/apis/user/typing';
+import { useData } from '@/views/system/user/hooks/use-data';
 
-const tableData = ref<ApiGetUserListRes['content']>([]);
-const loading = ref<boolean>(true);
+const { loading, tableData, getUserList } = useData();
 
-const pageNum = 1;
-const pageSize = 10;
-
-const getUserList = async (pageNum: number, pageSize: number) => {
-  loading.value = true;
-  const content = await userService.getUserList({
-    pageNum,
-    pageSize
-  });
-  loading.value = false;
-
-  if (content) {
-    const { content: userContent } = content;
-    tableData.value = userContent;
-  }
-};
-getUserList(pageNum, pageSize);
+getUserList(1, 10);
 
 const handleExportExcel = () => {
   const keyMap = {

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 14:00:40
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-26 14:01:48
+ * @LastEditTime: 2023-05-06 10:52:55
  */
 import { getToken } from '@/utils/token';
 
@@ -65,8 +65,6 @@ class UserService {
    * @returns {Promise<AxiosResult<Nullable<ApiGetRoleListRes>>>}
    */
   async getRoleList(data?: Page) {
-    console.log(123, data);
-
     const { success, result } = await apiGetRoleList(data);
 
     if (success) return result;
@@ -78,7 +76,6 @@ class UserService {
    * @returns {Promise<AxiosResult<Nullable<ApiGetUserListRes>>>}
    */
   async getUserList(data: Page) {
-    console.log(123, data);
     const { success, result } = await apiGetUserList(data);
 
     if (success) return result;

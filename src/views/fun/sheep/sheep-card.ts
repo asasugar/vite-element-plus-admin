@@ -1,6 +1,24 @@
+/**
+ * SheepCard
+ *
+ * @class SheepCard
+ * @typedef {SheepCard}
+ */
 export default class SheepCard {
+  /**
+   * @static
+   * @type {number}
+   */
   static X = 20;
+  /**
+   * @static
+   * @type {number}
+   */
   static Y = 20;
+  /**
+   * @static
+   * @type {Record<number, { background: string }>}
+   */
   static colorType: Record<number, { background: string }> = {
     1: { background: '#FFB7DD' },
     2: { background: '#FFCCCC' },
@@ -17,6 +35,10 @@ export default class SheepCard {
     13: { background: '#CCEEFF' },
     14: { background: '#CCDDFF' }
   };
+  /**
+   * @static
+   * @type {Record<number, string>}
+   */
   static contentType: Record<number, string> = {
     1: '🥕',
     2: '✂️',
@@ -33,14 +55,46 @@ export default class SheepCard {
     13: '🪵',
     14: '🔥'
   };
+  /**
+   * @type {number}
+   */
   x: number;
+  /**
+   * @type {number}
+   */
   y: number;
+  /**
+   * @type {number}
+   */
   z: number;
+  /**
+   * @type {number}
+   */
   key: number;
+  /**
+   * @type {number}
+   */
   val: number;
+  /**
+   *
+   * @type {{ top: string; left: string; width: string; height: string }}
+   */
   style: { top: string; left: string; width: string; height: string };
+  /**
+   * @type {!string}
+   */
   content!: string;
+  /**
+   *
+   * @type {?boolean}
+   */
   cover?: boolean;
+  /**
+   * Creates an instance of SheepCard.
+   *
+   * @constructor
+   * @param {{ x: number; y: number; z: number; key: number }} { x, y, z, key }
+   */
   constructor({ x, y, z, key }: { x: number; y: number; z: number; key: number }) {
     this.x = x;
     this.y = y;
@@ -56,6 +110,9 @@ export default class SheepCard {
     };
   }
 
+  /**
+   * @param {number} val
+   */
   setValue(val: number) {
     this.val = val;
     this.content = SheepCard.contentType[val];
