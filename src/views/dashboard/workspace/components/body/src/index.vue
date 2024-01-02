@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-10 17:16:22
+ * @LastEditTime: 2024-01-02 15:10:27
 -->
 <template>
   <el-row :gutter="12">
@@ -20,8 +20,8 @@
 <script lang="ts" setup>
 import Project from './components/project.vue';
 import QuickNav from './components/quick-nav.vue';
-import LatestNews from './components/latest-news.vue';
-import DeskTop from './components/desk-top.vue';
+const LatestNews = defineAsyncComponent(() => import('./components/latest-news.vue'));
+const DeskTop = defineAsyncComponent(() => import('./components/desk-top.vue'));
 
 type Props = {
   loading: boolean;
