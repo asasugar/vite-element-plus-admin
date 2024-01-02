@@ -55,7 +55,7 @@ export function useSheep() {
   }) => {
     const cardMap = createGameMap({ x, y, z });
 
-    const initCardList = [];
+    const initCardList: SheepCard[] = [];
     let key = 0;
     for (let k = 0; k < z; k++) {
       const shrinkSpeed = 3;

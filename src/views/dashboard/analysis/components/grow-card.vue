@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-21 18:27:06
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-25 15:03:32
+ * @LastEditTime: 2024-01-02 11:02:01
 -->
 <template>
   <div class="flex">
@@ -41,11 +41,11 @@ import AsCountTo from '@/components/count-to';
 import type { ApiGetAnalysisDataRes } from '@/apis/system/typing';
 
 interface Props {
-  data: Objectable<ApiGetAnalysisDataRes>;
+  data: Nullable<ApiGetAnalysisDataRes>;
   loading: boolean;
 }
 withDefaults(defineProps<Props>(), {
-  data: () => ({}),
+  data: null,
   loading: true
 });
 </script>

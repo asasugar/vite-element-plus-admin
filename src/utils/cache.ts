@@ -1,5 +1,5 @@
-import { encrypt, decrypt } from './crypt';
 import packageJson from '../../package.json';
+import { decrypt, encrypt } from './crypt';
 
 interface CacheConfig {
   type: 'localStorage' | 'sessionStorage';
@@ -58,7 +58,7 @@ const autoRemovePrefix = (key: string) => {
 };
 
 // 设置 setStorage
-export const setStorage = (key: string, value: any, expire = 0) => {
+export const setStorage = (key: string, value: unknown, expire = 0) => {
   if (value === '' || value === null || value === undefined) {
     value = null;
   }
@@ -121,9 +121,8 @@ export const hasStorage = (key: string) => {
 // 获取所有key
 export const getStorageKeys = () => {
   const items = getStorageAll();
-  const keys: any[] = [];
-  items?.forEach(i => {
-    keys.push(i.key);
+  const keys = items?.map(i => {
+    return i.key;
   });
 
   return keys;
@@ -142,12 +141,12 @@ export const getStorageLength = () => {
 // 获取全部 getAllStorage
 export const getStorageAll = () => {
   const len = window[config.type].length; // 获取长度
-  const arr = []; // 定义数据集
+  const arr: { key: string | null; val: string | null }[] = []; // 定义数据集
   for (let i = 0; i < len; i++) {
     // 获取key 索引从0开始
     const getKey = window[config.type].key(i);
     // 获取key对应的值
-    let getVal = null;
+    let getVal: string | null = null;
     if (getKey) {
       getVal = window[config.type].getItem(getKey);
     }

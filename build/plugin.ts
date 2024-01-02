@@ -3,22 +3,22 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-10-19 17:28:25
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-26 11:27:15
+ * @LastEditTime: 2024-01-02 14:42:11
  */
 
-import { splitVendorChunkPlugin, type PluginOption } from 'vite';
-import viteCompression from 'vite-plugin-compression';
+import postCssPurge from '@fullhuman/postcss-purgecss';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import vueSetupExtend from 'vite-plugin-vue-setup-extend';
 import visualizer from 'rollup-plugin-visualizer';
-import Icons from 'unplugin-icons/vite';
-import IconsResolver from 'unplugin-icons/resolver';
 import AutoImport from 'unplugin-auto-import/vite';
-import Components from 'unplugin-vue-components/vite';
+import IconsResolver from 'unplugin-icons/resolver';
+import Icons from 'unplugin-icons/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-import postCssPurge from '@fullhuman/postcss-purgecss';
-
+import Components from 'unplugin-vue-components/vite';
+import { type PluginOption } from 'vite';
+import viteCompression from 'vite-plugin-compression';
+import vueSetupExtend from 'vite-plugin-vue-setup-extend';
+// import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 export default function getPlugins({ mode }: { mode: string }): {
   plugins: PluginOption[];
 } {
@@ -84,7 +84,6 @@ export default function getPlugins({ mode }: { mode: string }): {
       ]
     }),
     vueSetupExtend(),
-    splitVendorChunkPlugin(),
     viteCompression() // gzip压缩
   ];
   if (mode === 'analyzer') {

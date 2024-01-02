@@ -1,9 +1,8 @@
 // 在THREEjs中，渲染一个3d世界的必要因素是场景（scene）、相机（camera）、渲染器（this.renderer）。渲染出一个3d世界后，可以往里面增加各种各样的物体、光源等，形成一个3d世界。
 
-import * as THREE from 'three';
-import { useEventListener } from '@vueuse/core';
 import { throttle } from '@/utils/decorate';
-import { ReactiveVariable } from 'vue/macros';
+import { useEventListener } from '@vueuse/core';
+import * as THREE from 'three';
 
 const sceneUrlList = [
   'https://qhyxpicoss.kujiale.com/r/2019/07/01/L3D137S8ENDIADDWAYUI5L7GLUF3P3WS888_3000x4000.jpg?x-oss-process=image/resize,m_fill,w_1600,h_920/format,webp',
@@ -27,7 +26,7 @@ export default class VrRoom {
   target = '';
   refs: HTMLElement | undefined;
   throttleTime = 0;
-  constructor(target: string, refs?: ReactiveVariable<HTMLElement>) {
+  constructor(target: string, refs?: HTMLElement) {
     this.target = target;
     this.refs = refs;
     this.init();
@@ -67,7 +66,7 @@ export default class VrRoom {
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(60, containerWidth / containerHeight, 1, 1000);
 
-    const geometry = new THREE.SphereBufferGeometry(500, 32, 16);
+    const geometry = new THREE.BufferGeometry();
     const material = new THREE.MeshBasicMaterial({ map: texture });
     const mesh = new THREE.Mesh(geometry, material);
 
@@ -111,7 +110,7 @@ export default class VrRoom {
   }
 
   @throttle()
-  onDocumentMouseWheel(event: any) {
+  onDocumentMouseWheel(event) {
     this.camera.fov -= event.wheelDeltaY * 0.05;
     this.camera.updateProjectionMatrix();
     event = event || window.event;
@@ -131,7 +130,7 @@ export default class VrRoom {
   }
 
   @throttle()
-  onDocumentTouchStart(event: any) {
+  onDocumentTouchStart(event) {
     if (event?.touches?.length === 1) {
       event.preventDefault();
 
@@ -144,7 +143,7 @@ export default class VrRoom {
   }
 
   @throttle()
-  onDocumentTouchMove(event: any) {
+  onDocumentTouchMove(event) {
     if (event?.touches?.length === 1) {
       event.preventDefault();
       this.lon =

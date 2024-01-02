@@ -3,14 +3,14 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:46:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-01-09 19:25:03
+ * @LastEditTime: 2024-01-02 11:29:05
  */
 import * as Mock from 'mockjs';
-import type { MockConfig, MockType } from './typing';
 import apis from './apis';
+import type { MockConfig, MockType } from './typing';
 
 export function mockXHR() {
-  function XHRreq(response: (arg0: { body: any; method: string; url: string }) => any) {
+  function XHRreq(response) {
     return function (options: MockConfig) {
       let result = null;
       if (response instanceof Function) {

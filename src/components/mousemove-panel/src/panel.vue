@@ -63,7 +63,8 @@ onMounted(() => {
     background: v-bind('props.bgColor');
     border-radius: 50%;
     position: absolute;
-    box-shadow: 5px 5px 15px v-bind('props.boxShadowColor?.[0]'),
+    box-shadow:
+      5px 5px 15px v-bind('props.boxShadowColor?.[0]'),
       -5px -5px 15px v-bind('props.boxShadowColor?.[1]');
     animation: blow 4s linear infinite;
     -webkit-animation: blow 4s linear infinite;

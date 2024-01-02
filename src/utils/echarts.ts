@@ -3,39 +3,39 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-25 17:42:54
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-11-03 09:49:14
+ * @LastEditTime: 2024-01-02 14:32:01
  */
-import * as echarts from 'echarts/core';
+import { getInstanceByDom, graphic, init, use } from 'echarts/core';
 
 import {
   BarChart,
   LineChart,
-  PieChart,
   MapChart,
   PictorialBarChart,
+  PieChart,
   RadarChart
 } from 'echarts/charts';
 
 import {
-  TitleComponent,
-  TooltipComponent,
-  GridComponent,
-  PolarComponent,
   AriaComponent,
-  ParallelComponent,
-  LegendComponent,
-  RadarComponent,
-  ToolboxComponent,
-  DataZoomComponent,
-  VisualMapComponent,
-  TimelineComponent,
   CalendarComponent,
-  GraphicComponent
+  DataZoomComponent,
+  GraphicComponent,
+  GridComponent,
+  LegendComponent,
+  ParallelComponent,
+  PolarComponent,
+  RadarComponent,
+  TimelineComponent,
+  TitleComponent,
+  ToolboxComponent,
+  TooltipComponent,
+  VisualMapComponent
 } from 'echarts/components';
 
 import { SVGRenderer } from 'echarts/renderers';
 
-echarts.use([
+use([
   LegendComponent,
   TitleComponent,
   TooltipComponent,
@@ -59,4 +59,4 @@ echarts.use([
   GraphicComponent
 ]);
 
-export default echarts;
+export { getInstanceByDom, graphic, init };

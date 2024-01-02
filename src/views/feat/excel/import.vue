@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-05-06 17:18:03
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-12 18:28:43
+ * @LastEditTime: 2024-01-02 11:23:11
 -->
 <template>
   <AsPageWrapper header-title="Excel 导入演示">
@@ -51,7 +51,7 @@ const loadDataSuccess = (excelDataList: ExcelData[]) => {
       results,
       meta: { sheetName }
     } = excelData;
-    const columns = [];
+    const columns: { title: string; dataIndex: string }[] = [];
     for (const title of header) {
       columns.push({ title, dataIndex: title });
     }

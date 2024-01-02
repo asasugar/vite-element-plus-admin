@@ -147,7 +147,11 @@ const handleStartGame = () => {
   opacity: 1;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0px 3px 0 0 #fff, 0 8px 0 0 #ddd, 0 8px 0 2px #333, 0 0 0 2px #333;
+  box-shadow:
+    0px 3px 0 0 #fff,
+    0 8px 0 0 #ddd,
+    0 8px 0 2px #333,
+    0 0 0 2px #333;
 }
 
 .card-item:hover {
@@ -157,7 +161,11 @@ const handleStartGame = () => {
 
 .item-cover {
   pointer-events: none;
-  box-shadow: 0px 3px 0 0 #999, 0 8px 0 0 #666, 0 8px 0 2px #000, 0 0 0 2px #000;
+  box-shadow:
+    0px 3px 0 0 #999,
+    0 8px 0 0 #666,
+    0 8px 0 2px #000,
+    0 0 0 2px #000;
 }
 
 .item-cover:after {

@@ -1,7 +1,7 @@
-import { defineComponent, PropType } from 'vue';
-import { ElAside, ElMenu, ElSubMenu, ElMenuItem } from 'element-plus';
-import 'element-plus/es/components/menu/style/css';
 import type { ApiGetMenuRes, MenuItemInfo } from '@/apis/system/typing';
+import { ElAside, ElMenu, ElMenuItem, ElSubMenu } from 'element-plus';
+import 'element-plus/es/components/menu/style/css';
+import { PropType, defineComponent } from 'vue';
 import type { HomeMenuInfo } from '../typing';
 
 export default defineComponent({

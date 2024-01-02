@@ -1,4 +1,4 @@
-import echarts from '@/utils/echarts';
+import { graphic } from '@/utils/echarts';
 import type { EChartsOption } from 'echarts';
 // 指定图表的配置项和数据
 export const option1: EChartsOption = {
@@ -67,7 +67,7 @@ export const option2: EChartsOption = {
       showSymbol: false,
       areaStyle: {
         opacity: 0.8,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        color: new graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
             color: 'rgb(128, 255, 165)'
@@ -94,7 +94,7 @@ export const option2: EChartsOption = {
       showSymbol: false,
       areaStyle: {
         opacity: 0.8,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        color: new graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
             color: 'rgb(0, 221, 255)'
@@ -121,7 +121,7 @@ export const option2: EChartsOption = {
       showSymbol: false,
       areaStyle: {
         opacity: 0.8,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        color: new graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
             color: 'rgb(55, 162, 255)'
@@ -148,7 +148,7 @@ export const option2: EChartsOption = {
       showSymbol: false,
       areaStyle: {
         opacity: 0.8,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        color: new graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
             color: 'rgb(255, 0, 135)'
@@ -179,7 +179,7 @@ export const option2: EChartsOption = {
       },
       areaStyle: {
         opacity: 0.8,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        color: new graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
             color: 'rgb(255, 191, 0)'

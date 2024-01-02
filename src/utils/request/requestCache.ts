@@ -3,12 +3,12 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2021-06-09 18:09:42
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-24 15:15:17
+ * @LastEditTime: 2024-01-02 10:38:34
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { CustomAxiosRequestConfig, CustomAxiosResponse } from '#/axios';
 import Axios from 'axios';
 import { generateReqKey } from './helpers';
-import type { CustomAxiosRequestConfig, CustomAxiosResponse } from '#/axios';
 
 const options = {
   storage: true, // 是否开启loclastorage缓存
@@ -81,7 +81,7 @@ export function requestInterceptor(config: CustomAxiosRequestConfig) {
       ? (setExpireTime = config.setExpireTime)
       : (setExpireTime = options.expire);
     // 判断缓存数据是否存在 存在的话 是否过期 没过期就返回
-    if (data && getNowTime() - data.expire < setExpireTime) {
+    if (data && getNowTime() - data.expire < (setExpireTime as number)) {
       config.cancelToken = new Axios.CancelToken(cancel => {
         // cancel 函数的参数会作为 promise 的 error 被捕获
         cancel(data);

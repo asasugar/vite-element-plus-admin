@@ -40,8 +40,8 @@ export const useTeleport = (contentRenderer: () => VNode, appendToBody: Ref<bool
     return appendToBody.value !== true
       ? contentRenderer()
       : isTeleportVisible.value
-      ? [h(Teleport, { to: $el }, contentRenderer())]
-      : undefined;
+        ? [h(Teleport, { to: $el }, contentRenderer())]
+        : undefined;
   };
 
   onUnmounted(hideTeleport);

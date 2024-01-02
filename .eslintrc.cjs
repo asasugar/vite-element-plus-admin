@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-18 13:55:50
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2022-05-05 22:13:02
+ * @LastEditTime: 2024-01-02 11:30:19
  */
 module.exports = {
   parser: 'vue-eslint-parser',
@@ -42,6 +42,7 @@ module.exports = {
     'vue/script-setup-uses-vars': 'error',
     'vue/multi-word-component-names': 'off',
     'vue/prefer-import-from-vue': 'warn',
-    '@typescript-eslint/no-unused-vars': 'error'
+    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-explicit-any': 'warn'
   }
 };

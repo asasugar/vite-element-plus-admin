@@ -3,10 +3,9 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-10-19 17:29:21
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-18 11:21:05
+ * @LastEditTime: 2024-01-02 14:41:58
  */
 import { type BuildOptions } from 'vite';
-
 export default function getBuild(): {
   build: BuildOptions;
 } {
@@ -17,6 +16,7 @@ export default function getBuild(): {
     rollupOptions: {
       output: {
         manualChunks: {
+          vue: ['vue', 'vue-router', 'pinia', 'axios'],
           'element-plus': ['element-plus'],
           echarts: ['echarts'],
           mockjs: ['mockjs'],
