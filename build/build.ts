@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-10-19 17:29:21
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2024-01-02 14:41:58
+ * @LastEditTime: 2024-01-02 14:50:57
  */
 import { type BuildOptions } from 'vite';
 export default function getBuild(): {
@@ -11,7 +11,7 @@ export default function getBuild(): {
 } {
   const build: BuildOptions = {
     target: 'esnext',
-    cssTarget: 'chrome79',
+    cssTarget: 'chrome61',
     reportCompressedSize: true, // 禁用 gzip 压缩大小报告, 提高构建速度
     rollupOptions: {
       output: {
