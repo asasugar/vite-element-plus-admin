@@ -13,6 +13,13 @@
   <script type="module" src="/src/main.ts"></script>
 </body>
 
+<script type="importmap">
+  {
+    "imports": {
+      "./assets/module-[idHash].js": "./assets/module-[contentHash].js"
+    }
+  }
+</script>
 <script>
   (function () {
     var redirect = sessionStorage.redirect;
