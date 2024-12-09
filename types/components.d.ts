@@ -76,6 +76,7 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TableSettings: typeof import('./../src/components/table-settings/src/table-settings.vue')['default']
+    WangEditor: typeof import('./../src/components/wang-editor/src/wang-editor.vue')['default']
   }
   export interface ComponentCustomProperties {
     vInfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']

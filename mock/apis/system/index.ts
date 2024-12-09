@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-04-25 10:19:11
+ * @LastEditTime: 2024-12-02 11:25:25
  */
 export default [
   // 看板数据
@@ -118,6 +118,15 @@ export default [
                     name: 'EditorRich',
                     path: 'rich',
                     component: 'views/editor/rich-edit/index',
+                    meta: {
+                      title: '富文本编辑器 演示',
+                      keepAlive: true
+                    }
+                  },
+                  {
+                    name: 'EditorRich',
+                    path: 'wangEditor',
+                    component: 'views/editor/wang-editor/index',
                     meta: {
                       title: '富文本编辑器 演示',
                       keepAlive: true
@@ -406,6 +415,12 @@ export default [
                 name: 'EditorRich',
                 path: '/editor/rich',
                 title: '富文本编辑器 演示'
+              },
+              {
+                sortId: '2-4',
+                name: 'WangEditor',
+                path: '/editor/wangEditor',
+                title: 'WangEditor编辑器 演示'
               }
             ]
           },
