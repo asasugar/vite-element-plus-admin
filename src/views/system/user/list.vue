@@ -53,7 +53,7 @@
         </el-table-column>
       </el-table>
       <el-pagination
-        v-model:currentPage="pageNum"
+        v-model:current-page="pageNum"
         v-model:page-size="pageSize"
         class="text-right mt20 mb20"
         background
