@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-10-19 17:29:21
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2024-01-02 14:50:57
+ * @LastEditTime: 2025-01-13 15:47:36
  */
 import { type BuildOptions } from 'vite';
 export default function getBuild(): {
@@ -21,7 +21,6 @@ export default function getBuild(): {
           echarts: ['echarts'],
           mockjs: ['mockjs'],
           three: ['three'],
-          xlsx: ['xlsx'],
           dayjs: ['dayjs']
         }
       }

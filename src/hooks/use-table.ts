@@ -1,5 +1,5 @@
 import { ElMessage } from 'element-plus';
-import Json2excel from '@asasugar-use/custom-json2excel';
+import { JsonToExcel } from '@asasugar-use/custom-json2excel';
 import type { Ref } from 'vue';
 import type { EpSizeType } from '#/ep';
 
@@ -103,7 +103,7 @@ export function useTable<T extends AnyObject>({
     scope?: AnyObject;
   }) => {
     if (excelData?.length) {
-      const json2excel = new Json2excel({
+      const json2excel = new JsonToExcel({
         data: excelData,
         orderedKey,
         keyMap,

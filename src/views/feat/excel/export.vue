@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-05-06 17:18:03
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2023-05-05 16:52:03
+ * @LastEditTime: 2025-01-13 15:46:12
 -->
 <template>
   <AsPageWrapper header-title="Excel 导出演示">
@@ -34,7 +34,7 @@
   </AsPageWrapper>
 </template>
 <script lang="ts" setup>
-import Json2excel from '@asasugar-use/custom-json2excel';
+import { JsonToExcel } from '@asasugar-use/custom-json2excel';
 import { AsPageWrapper } from '@/containers/page-wrapper';
 import { useData } from '@/views/system/user/hooks/use-data';
 
@@ -55,7 +55,7 @@ const handleExportExcel = () => {
     role: 'value'
   };
 
-  const json2excel = new Json2excel({
+  const json2excel = new JsonToExcel({
     data: tableData.value,
     orderedKey,
     keyMap,

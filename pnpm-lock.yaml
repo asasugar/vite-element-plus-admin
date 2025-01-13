@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@asasugar-use/custom-json2excel':
-    specifier: ^3.1.7
-    version: 3.1.7
+    specifier: ^3.1.9
+    version: 3.1.9
   '@element-plus/icons-vue':
     specifier: ^2.3.1
     version: 2.3.1(vue@3.5.13)
@@ -68,9 +68,6 @@ dependencies:
   vue-router:
     specifier: ^4.2.5
     version: 4.5.0(vue@3.5.13)
-  xlsx:
-    specifier: ^0.18.5
-    version: 0.18.5
 
 devDependencies:
   '@fullhuman/postcss-purgecss':
@@ -212,8 +209,11 @@ packages:
     resolution: {integrity: sha512-+562v9k4aI80m1+VuMHehNJWLOFjBnXn3tdOitzD0il5b7smkSBal4+a3oKiQTbrwMmN/TBUMDvbdoWDehgOww==}
     dev: true
 
-  /@asasugar-use/custom-json2excel@3.1.7:
-    resolution: {integrity: sha512-QKeYKYAJL32FVJmftm525CUeE3OcJ8SVk3kFgVJmMPuxPdvklUf6+aJUcg76I+GFFlWJrqWcTVf9444IehzjfQ==}
+  /@asasugar-use/custom-json2excel@3.1.9:
+    resolution: {integrity: sha512-+t/ijNoRXe0YSIT94toGkNJ8a0Gv4ptlabsyoIibAC4p1Uqaqa4e4NpynxSSnVVtHGl0N8GPSPAB/haNFmJYfg==}
+    dependencies:
+      papaparse: 5.5.1
+      xlsx: 0.18.5
     dev: false
 
   /@babel/code-frame@7.26.2:
@@ -4253,6 +4253,10 @@ packages:
   /pako@1.0.11:
     resolution: {integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==}
     dev: true
+
+  /papaparse@5.5.1:
+    resolution: {integrity: sha512-EuEKUhyxrHVozD7g3/ztsJn6qaKse8RPfR6buNB2dMJvdtXNhcw8jccVi/LxNEY3HVrV6GO6Z4OoeCG9Iy9wpA==}
+    dev: false
 
   /parchment@1.1.4:
     resolution: {integrity: sha512-J5FBQt/pM2inLzg4hEWmzQx/8h8D0CiDxaG3vyp9rKrQRSDgBlhjdP5jQGgosEajXPSQouXGHOmVdgo7QmJuOg==}

@@ -18,7 +18,7 @@
     "src/**/*.{js,ts,vue}": "pnpm lint"
   },
   "dependencies": {
-    "@asasugar-use/custom-json2excel": "^3.1.7",
+    "@asasugar-use/custom-json2excel": "^3.1.9",
     "@element-plus/icons-vue": "^2.3.1",
     "@vueup/vue-quill": "1.2.0",
     "@vueuse/core": "^10.7.1",
@@ -38,8 +38,7 @@
     "vditor": "^3.9.8",
     "vue": "^3.4.3",
     "vue-json-pretty": "^2.3.0",
-    "vue-router": "^4.2.5",
-    "xlsx": "^0.18.5"
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
