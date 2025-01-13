@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2024-12-02 14:25:15
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2024-12-09 18:27:37
+ * @LastEditTime: 2025-01-13 16:45:25
 -->
 <template>
   <div class="as-wang-editor">
@@ -18,11 +18,8 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { Boot } from '@wangeditor/editor';
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
-import renderElemConf from './render-select';
-import { insertSelectMenuConf } from './module/selectMenu';
 
 // 编辑器实例，必须用 shallowRef
 const editorRef = shallowRef();
@@ -31,16 +28,7 @@ const editorRef = shallowRef();
 const valueHtml = ref('<p>hello</p>');
 const mode = ref('default');
 
-Boot.registerModule({
-  renderElems: [renderElemConf],
-  menus: [insertSelectMenuConf]
-});
-const toolbarConfig = {
-  insertKeys: {
-    index: 0, // 插入的位置，基于当前的 toolbarKeys
-    keys: ['insertSelectMenu']
-  }
-};
+const toolbarConfig = {};
 const editorConfig = { placeholder: '请输入内容...' };
 
 // 组件销毁时，也及时销毁编辑器

@@ -3,7 +3,7 @@
  * @Author: Xiongjie.Xue(xxj95719@gmail.com)
  * @Date: 2022-01-19 11:49:19
  * @LastEditors: Xiongjie.Xue(xxj95719@gmail.com)
- * @LastEditTime: 2024-12-02 11:25:25
+ * @LastEditTime: 2025-01-13 16:17:14
  */
 export default [
   // 看板数据
@@ -124,11 +124,11 @@ export default [
                     }
                   },
                   {
-                    name: 'EditorRich',
+                    name: 'WangEditor',
                     path: 'wangEditor',
                     component: 'views/editor/wang-editor/index',
                     meta: {
-                      title: '富文本编辑器 演示',
+                      title: 'WangEditor编辑器 演示',
                       keepAlive: true
                     }
                   }

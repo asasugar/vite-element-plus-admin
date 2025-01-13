@@ -4,6 +4,10 @@
     "esbenp.prettier-vscode",
     "mrmlnc.vscode-less",
     "MisterJ.vue-volar-extention-pack",
-    "Vue.volar"
-  ]
+    "Vue.volar",
+  ],
+  "unwantedRecommendations": [
+    "octref.vetur"
+  ],
+  // "unwantedRecommendations": ["octref.vetur"]
 }

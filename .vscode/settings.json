@@ -76,5 +76,6 @@
   },
   "editor.maxTokenizationLineLength": 100000,
   "vue.features.codeActions.enable": false,
-  "vue.codeActions.enabled": false
+  "vue.codeActions.enabled": false,
+  "vetur.format.enable": false,
 }
