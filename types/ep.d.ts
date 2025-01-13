@@ -2,7 +2,7 @@ import type { EpPropMergeType } from 'element-plus/es/utils';
 
 export type EpTypeStatus = EpPropMergeType<
   StringConstructor,
-  '' | 'success' | 'warning' | 'info' | 'danger',
+  'success' | 'warning' | 'info' | 'primary' | 'danger',
   unknown
 >;
 
